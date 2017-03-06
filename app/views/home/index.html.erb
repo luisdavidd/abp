@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<title>Timber</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+		<link rel='stylesheet' id='camera-css'  href='css/camera.css' type='text/css' media='all'>
+
+		<link rel="stylesheet" type="text/css" href="css/slicknav.css">
+		<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		
+		
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700|Open+Sans:700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="js/jquery.mobile.customized.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script> 
+		<script type="text/javascript" src="js/camera.min.js"></script>
+		<script type="text/javascript" src="js/myscript.js"></script>
+		<script src="js/sorting.js" type="text/javascript"></script>
+		<script src="js/jquery.isotope.js" type="text/javascript"></script>
+		<!--script type="text/javascript" src="js/jquery.nav.js"></script-->
+		
+
+		<script>
+			jQuery(function(){
+					jQuery('#camera_wrap_1').camera({
+					transPeriod: 500,
+					time: 3000,
+					height: '490px',
+					thumbnails: false,
+					pagination: true,
+					playPause: false,
+					loader: false,
+					navigation: false,
+					hover: false
+				});
+			});
+		</script>
+		
+	</head>
+	<body>
+    
+    <!--home start-->
+    
+    <div id="home">
+    	<div class="headerLine">
+			<div id="menuF" class="default">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-4">
+							<div>
+								<a href="#">
+									<img src="images/logo1.png">
+								</a>
+							</div>
+						</div>
+
+						<div class="col-md-8">
+							<div class="navmenu" style="text-align: center;">
+								<ul id="menu">
+									<li class="active" ><a href="#home">Home</a></li>
+									<li><%= link_to 'Ingresar', new_user_session_path %></li>
+									<li><a href="#about">About</a></li>
+									<li><a href="#project">Projects</a></li>
+									<li class="last"><a href="#contact">Contact</a></li>
+									<!--li><a href="#features">Features</a></li-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row wrap">
+					<div class="col-md-12 gallery"> 
+							<div class="camera_wrap camera_white_skin" id="camera_wrap_1">
+								<div data-thumb="" data-src="images/slides/blank.gif">
+									<div class="img-responsive camera_caption fadeFromBottom">
+										<h2>Ahora en Uninorte,</h2>
+									</div>
+								</div>
+								<div data-thumb="" data-src="images/slides/blank.gif">
+									<div class="img-responsive camera_caption fadeFromBottom">
+										<h2>Tu esfuerzo es dinero.</h2>
+									</div>
+								</div>
+								<div data-thumb="" data-src="images/slides/blank.gif">
+									<div class="img-responsive camera_caption fadeFromBottom">
+										<h2>Academic Bank Project</h2>
+									</div>
+								</div>
+							</div><!-- #camera_wrap_1 -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 project">
+					<h3 id="counter">0</h3>
+					<h4>Profesores utilizando ABP</h4>
+					<p>Con Academic Bank Project puedes impulsar el rendimiento de tu clase mas de lo que imaginas. </p>
+				</div>
+				<div class="col-md-4 project">
+					<h3 id="counter1">0</h3>
+					<h4>Alumnos de Uninorte beneficiados</h4>
+					<p>El desempeño academico de los estudiantes mejora con un sistema tan optimo como este </p>
+				</div>
+				<div class="col-md-4 project">
+					<h3 id="counter2" style="margin-left: 20px;">0</h3>
+					<h4 style="margin-left: 20px;">Universidades interesadas en ABP</h4>
+					<p>Muy pronto muchos mas estudiantes podrán beneficiarse de las bondades de Academic Bank Project</p>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 cBusiness">
+					<h3>La mejor forma de premiar el esfuerzo de tus estudiantes</h3>
+					<h4>Descubre una elegante solucion para tus problemas de bonificacion academica.</h4>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 centPic">
+					<img class="img-responsive"  src="images/bizPic.png"/>
+				</div>
+			</div>
+		</div>   
+    </div>
+    
+    <!--about start-->    
+    
+    <div id="about">
+    	<div class="line2">
+			<div class="container">
+				<div class="row Fresh">
+					<div class="col-md-4 Des">
+						<i class="fa fa-heart"></i>
+						<h4>Diseño Fresco y Limpio</h4>
+						<p>Marcado por las ultimas tendencia en el diseño de aplicaciones web</p>
+					</div>
+					<div class="col-md-4 Ver">
+						<i class="fa fa-cog"></i>
+						<h4>Interfaz intuitiva</h4>
+						<p>La intuitiva interfaz de la que hace gala Academic Bank Project aumenta la productividad de los estudiantes que hacen uso de ella</p>
+					</div>
+					<div class="col-md-4 Fully">
+						<i class="fa fa-tablet"></i>
+						<h4>Capacidades moviles</h4>
+						<p>Accede sin complicaciones a Academic Bank Project desde tu dispositivo movil. </p>
+					</div>		
+				</div>
+				<div class="row Ama">
+					<div class="col-md-12">
+					<h3>Tienes alguna pregunta? Estamos aqui para ayudar!</h3>
+					<p>Ponte en contacto con nosotros</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="contact" class="container">
+			<div class="row">
+				<div class="col-md-9 col-xs-12 forma">
+					<form>
+						<input type="text" class="col-md-6 col-xs-12 name" name='name' placeholder='Nombre *'/>
+						<input type="text" class="col-md-6 col-xs-12 Email" name='Email' placeholder='Email *'/>
+						<input type="text" class="col-md-12 col-xs-12 Subject" name='Subject' placeholder='Asunto *'/>
+						<textarea type="text" class="col-md-12 col-xs-12 Message" name='Message' placeholder='Mensaje *'></textarea>
+						<div class="cBtn col-xs-12">
+							<ul>
+								<li class="clear"><a href="#"><i class="fa fa-times"></i>Limpiar Formulario</a></li>
+								<li class="send"><a href="#"><i class="fa fa-share"></i>Enviar Mensaje</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3 col-xs-12 cont">
+					<ul>
+						<li><a href="#"><i class="fa fa-envelope"></i>AcademicBankProject@uninorte.edu.co</li></a>
+						<li><i class="fa fa-skype"></i>AcademicBankProject</li>
+						<li><a href="#"><i class="fa fa-twitter"></i>Twitter</li></a>
+						<li><a href="#"><i class="fa fa-facebook-square"></i>Facebook</li></a>
+						<li><a href="#"><i class="fa fa-dribbble"></i>Dribbble</li></a>
+						<li><a href="#"><i class="fa fa-flickr"></i>Flickr</li></a>
+						<li><a href="#"><i class="fa fa-youtube-play"></i>YouTube</li></a>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="line7">
+			<div class="container">
+				<div class="row footer">
+					<div class="col-md-12">
+						<h3>Sigue nuestras redes sociales!</h3>
+						<p>Y mantente al tanto de todas las novedades que Academic Bank Project ofrece para ti!</p>
+					</div>
+					<div class="soc col-md-12">
+						<ul>
+							<li class="soc1"><a href="#"></a></li>
+							<li class="soc2"><a href="#"></a></li>
+							<li class="soc3"><a href="#"></a></li>
+							<li class="soc4"><a href="#"></a></li>
+							<li class="soc5"><a href="#"></a></li>
+							<li class="soc6"><a href="#"></a></li>
+							<li class="soc7"><a href="#"></a></li>
+							<li class="soc8"><a href="#"></a></li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="lineBlack">
+			<div class="container">
+				<div class="row downLine">
+					<div class="col-md-12 text-right">
+						<input  id="searchPattern" type="search" placeholder="Search the Site"/><i class="glyphicon glyphicon-search" style="font-size: 13px; color:#a5a5a5;" id="iS"></i>
+					</div>
+					<div class="col-md-6 text-left copy">
+						<p>Uninorte 2017 - Luis Díaz, Juan Gómez, Sorelys Sandoval</p>
+					</div>
+					<div class="col-md-6 text-right dm">
+						<ul id="downMenu">
+							<li class="active" ><a href="#home">Home</a></li>
+							<li><%= link_to 'Ingresar', new_user_session_path %></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#project">Projects</a></li>
+							<li class="last"><a href="#contact">Contact</a></li>
+							<!--li><a href="#features">Features</a></li-->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>		
+		
+		
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8">
+	</script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.slicknav.js"></script>
+	<script src="js/calling.js"></script>
+	<script type="text/javascript" src="js/menujs.js"></script>
+	<script src="/js/scroll.js"></script>	
+	<script type="text/javascript" charset="utf-8">
+		jQuery(document).ready(function(){
+			jQuery(".pretty a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',theme:'light_square',slideshow:3000, autoplay_slideshow: true, social_tools: ''});
+			
+		});
+	</script>
+	</body>
+	
+</html>
