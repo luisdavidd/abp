@@ -1,19 +1,21 @@
-<%= devise_error_messages! %>
 
 <div class="login">
-<h2>Forgot your password?</h2>
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, class:"login-form") do |f| %>
+	<h2>Forgot your password?</h2>
+	
+	<%= form_for(resource, as: resource_name, url: password_path(resource_name), class: "login-form") do |f| %>
 
-  <div class="field">
-    <%= f.email_field :email, autofocus: true, class:"login-input", placeholder: :email %>
-  </div>
+	  <div class="field">
+	    <%= f.email_field :email, autofocus: true, class:"login-input", placeholder: :email %>
+	  </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions", class:"login-btn" %>
-  </div>
-<% end %>
-<br>
-<div class="login-form">
-<%= render "devise/shared/links" %>
-</div>
+	  <div class="actions">
+	    <%= f.submit "Send me reset password instructions", class:"login-btn" %>
+	  </div>
+
+	  <div class="login-form">
+		<%= render "devise/shared/links" %>
+	  </div>
+	<% end %>
+
+	<br>
 </div>

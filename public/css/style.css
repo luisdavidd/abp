@@ -44,7 +44,7 @@ body{
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	/* background: url(../images/sliderL.png) center center no-repeat; */
+	background: url(../images/sliderL.png) center center no-repeat; */
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -2075,7 +2075,7 @@ margin-bottom: 35px !important;
         top: -65px; 
         padding:20px 0;
         width:100%;
-		background-color: #101010!important;
+		background-color: #212f56!important;
     }
 
 /**/
