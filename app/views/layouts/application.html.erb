@@ -6,6 +6,7 @@
     <%= stylesheet_link_tag "custom.css" %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <!-- New page -->
     <link rel="stylesheet" href="/css/animate.css">
     <link rel="stylesheet" href="/css/icomoon.css">
@@ -25,20 +26,21 @@
     <link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/coin.css">
+
   </head>
 
   <body>
 	<!--    <p class="notice"><%= notice %></p>
    	<p class="alert"><%= alert %></p> -->
-    <div class="container">
+    <div class="gtco-section" style="text-align:center">
     	<%= render 'layouts/messages' %>
     </div>
     <th scope="col">
-	    <div class="container-fluid">
+	    <div class="gtco-section">
 	          <center>          
 	          <%= link_to 'Home', root_path, class: "one" %>
 	          <% if current_user %>            
-	            <label class="one"> <%= current_user.name %></label>
+	            <label style="color:black"> <%= current_user.name %></label>
 	            <%= link_to 'Logout', destroy_user_session_path, method: :delete , class: "one" %>
 	          <% else %>
 	            <%= link_to 'Login', new_user_session_path, class: "one" %>

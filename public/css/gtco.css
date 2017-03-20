@@ -8,13 +8,13 @@
 
 .gtco-nav {
   position: absolute;
-  top: 0;
+  /*top: 0;*/
   margin: 0;
   padding: 0;
   width: 100%;
   padding: 15px 0;
   z-index: 1001;
-  background:#212f56;
+  background:rgba(33, 47, 86, 0.49);
 
 }
 @media screen and (max-width: 768px) {
@@ -152,7 +152,15 @@
 .gtco-nav ul li.active > a {
   color: #fff !important;
 }
-
+#gtco-header {
+  background: #fdd035;
+}
+@media screen and (max-width: 768px) {
+  #gtco-header.gtco-cover {
+    height: inherit !important;
+    padding: 3em 0 !important;
+  }
+}
 @media screen and (max-width: 480px) {
   #gtco-header .text-left {
     text-align: center !important;
@@ -164,6 +172,110 @@
     width: 100%;
   }
 }
+#gtco-header .mt-text {
+  margin-top: 7em;
+  margin-bottom: 3em;
+}
+@media screen and (max-width: 768px) {
+  #gtco-header .mt-text {
+    margin-top: 0;
+  }
+}
+#gtco-header .intro-text-small {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: .15em;
+  display: block;
+  margin-bottom: 10px;
+}
+#gtco-header h1, #gtco-header h2 {
+  margin: 0;
+  padding: 0;
+  color: white;
+}
+#gtco-header h1 {
+  margin-bottom: 0px;
+  font-size: 59px;
+  line-height: 1;
+  font-weight: 300;
+}
+@media screen and (max-width: 768px) {
+  #gtco-header h1 {
+    font-size: 34px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+}
+#gtco-header h2 {
+  font-weight: 300;
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+#gtco-header .form-wrap {
+  position: relative;
+  width: 100%;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+#gtco-header .form-wrap .tab-menu {
+  padding: 0 !important;
+  margin: 0 0 -10px 0 !important;
+  width: 100%;
+  float: left;
+  z-index: 12;
+  position: relative;
+}
+#gtco-header .form-wrap .tab-menu li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: inline;
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+#gtco-header .form-wrap .tab-menu li a {
+  padding: 10px 20px 20px 20px;
+  float: left;
+  width: 100%;
+  display: block;
+  background: rgba(255, 255, 255, 0.5);
+  color: #1a1a1a;
+}
+#gtco-header .form-wrap .tab-menu li a:hover {
+  color: #1a1a1a;
+}
+#gtco-header .form-wrap .tab-menu li.active a {
+  display: block;
+  padding: 10px 20px 20px 20px;
+  background: #fff;
+  color: #f54c53;
+}
+#gtco-header .form-wrap .tab-menu li.gtco-first a {
+  border-top-left-radius: 7px;
+}
+#gtco-header .form-wrap .tab-menu li.gtco-second a {
+  border-top-right-radius: 7px;
+}
+#gtco-header .form-wrap .tab-content {
+  z-index: 10;
+  position: relative;
+  clear: both;
+  background: #fff;
+  padding: 30px;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+#gtco-header .form-wrap .tab-content .tab-content-inner {
+  display: none;
+}
+#gtco-header .form-wrap .tab-content .tab-content-inner.active {
+  display: block;
+}
+
 
 #gtco-header,
 #gtco-counter,
@@ -252,7 +364,7 @@
   width: 100%;
 }
 .gtco-cover a {
-  color: #17B794;
+  color: #f54c53;
 }
 .gtco-cover a:hover {
   color: white;
@@ -264,7 +376,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(29, 43, 83, 0.89);
+  background: rgba(0, 0, 0, 0.5);
 }
 .gtco-cover > .gtco-container {
   position: relative;
@@ -525,9 +637,13 @@ form label {
 #gtco-features-2,
 #gtco-products,
 #gtco-services,
-#gtco-subscribe,
+.gtco-subscribe{
+ padding: 1.5em 0;
+  clear: both;
+  position: relative;  
+}
 .gtco-section {
-  padding: 1.5em 0;
+  padding: 0 0;
   clear: both;
   position: relative;
 }
