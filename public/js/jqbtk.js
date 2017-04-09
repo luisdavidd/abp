@@ -1,5 +1,6 @@
 // jQuery Bootstrap Touch Keyboard plugin
 // By Matthew Dawkins
+
 (function($) {
     $.fn.keyboard = function(options) {
         // Settings
