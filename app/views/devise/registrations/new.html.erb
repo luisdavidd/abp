@@ -42,18 +42,18 @@
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "login-form") do |f| %>
             <%= devise_error_messages! %> <br><br>
             <div class="field">
-              <%= f.text_field :name, autofocus: true, :required => true,class:"login-input", placeholder: 'Name'  %>
+              <%= f.text_field :name, autofocus: true, :required => true,class: "login-input", placeholder: 'Name'  %>
             </div>
 
             <div class="field">
-              <%= f.text_field :last_name, autofocus: true,:required => true, class:"login-input", placeholder: 'Last Name'  %>
+              <%= f.text_field :last_name, autofocus: true,:required => true, class: "login-input", placeholder: 'Last Name'  %>
             </div>
 
             <div class="field">
-              <%= f.number_field :codigo, in: 200000000..299999999, autocomplete: "off", :required => true,class:"login-input", placeholder: 'Code' %>
+              <%= f.number_field :codigo, in: 200000000..299999999, autocomplete: "off", :required => true,class: "login-input", placeholder: 'Code' %>
             </div>
             <div class="field">
-              <%= f.email_field :email, autofocus: true, class:"login-input", placeholder: 'Uninorte E-mail'  %>
+              <%= f.email_field :email, autofocus: true, class: "login-input", placeholder: 'Uninorte E-mail'  %>
             </div>
 
             <div class="field">

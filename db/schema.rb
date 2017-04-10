@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409140353) do
+ActiveRecord::Schema.define(version: 20170410055654) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "offer_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20170409140353) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
+    t.index ["user_to"], name: "fk_transactions_2_idx", using: :btree
   end
 
   create_table "user_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -91,6 +92,10 @@ ActiveRecord::Schema.define(version: 20170409140353) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["codigo"], name: "index_users_on_codigo", unique: true, using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -103,6 +108,7 @@ ActiveRecord::Schema.define(version: 20170409140353) do
   add_foreign_key "subject_nrcs", "subjects"
   add_foreign_key "subjects", "users"
   add_foreign_key "transactions", "users"
+  add_foreign_key "transactions", "users", column: "user_to", name: "fk_transactions_2"
   add_foreign_key "user_subjects", "subjects"
   add_foreign_key "user_subjects", "users"
 end
