@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class TeacherControllerTest < ActionDispatch::IntegrationTest
+class DashboardControllerTest < ActionDispatch::IntegrationTest
   test "should get panel" do
-    get teacher_panel_url
+    get dashboard_panel_url
     assert_response :success
   end
 
