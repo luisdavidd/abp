@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
   layout 'panel_template'
   def panel
     if current_user.teacher
@@ -13,4 +14,5 @@ class DashboardController < ApplicationController
     #  format.html {render :layout => 'admineditp'}
     #end
   end
+
 end

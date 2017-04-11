@@ -1,5 +1,18 @@
 <% flash.each do |type, message| %>
-  <div class="<%= alert_class_for(type) %> alert-dismissible fade in">
+<%  case type
+      when "success"
+        clase = "alert-success"
+      when "error"
+        clase = "alert-error"
+      when "alert"
+        clase = "alert-block"
+      when "notice"
+        clase = "alert-info"
+      else
+        clase = flash_type.to_s
+    end
+%>
+  <div class="<%=clase%> alert-dismissible fade in">
     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
     <%= message %>
   </div>
