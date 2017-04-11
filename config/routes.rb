@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   get 'dashboard/panel'
   get 'dashboard/editp'
+  get 'dashboard/editStudent'
+  get 'dashboard/shopping_teacher'
+  get 'dashboard/auction_teacher'
+  
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
