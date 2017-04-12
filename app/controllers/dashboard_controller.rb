@@ -47,6 +47,7 @@ class DashboardController < ApplicationController
     @user = User.find(current_user.id)
     if @user.update(user_pass_params)  
       # Sign in the user by passing validation in case their password changed
+      sign_in @user, :bypass => true
       redirect_to dashboard_panel_path
     end
   end

@@ -11,9 +11,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    var colum_names=[]; tabla = document.getElementById("students");
-    for (var i = 0; i < tabla.rows.length+1; i++) {
-      colum_names.push(tabla.rows[1].cells[i].getAttribute("name"));
+    var colum_names=[];
+    columnas = document.getElementById("students").rows[0].cells;
+    for (var i = 0; i <columnas.length; i++) {
+      colum_names.push(columnas[i].getAttribute("name"));
     }
     console.log(colum_names)
     var events = $('#events');
@@ -23,16 +24,18 @@
             {
                 "targets": [0],
                 "visible": false,
-                "searchable": false
             }
         ]*/
     } );
 
-/*    //Add new row
+    //Add new row
+    var contador = 1;
      $('#addRow').on( 'click', function () {
-        table.row.add([0,1,2,3,4,5]).draw(false);
+        //table.row.add([contador,1,2,3,4,5]).draw(false); //ERROR PORQUE DESAPARECE LA COLUMNA PARA HTML
+        console.log('contador: ',contador)
+        contador += 1;        
     } );
-    //---------*/
+    //---------
 
       var sw = true;
       var input;
@@ -83,7 +86,7 @@
                 indexo = document.getElementById("students").rows[row+1].cells[0].innerText;
                 inputo = input;
                 modified = colum_names[columna];
-                console.log(columna)
+                console.log('fila:',row, 'columna:',columna, 'index:',indexo)
                 $.ajax({
                   type: 'GET',
                   url: 'update',
@@ -109,13 +112,13 @@
 <table class="display responsive" id="students" style="width:100%">
   <thead>
     <tr>
-      <th style="display:none"></th>
+      <th style="display:none" name="id"></th>
       <!-- <th>Id</th> -->
-      <th>Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Budget</th> 
-      <th>Code</th> 
+      <th name="name">Name</th>
+      <th name="last_name">Last Name</th>
+      <th name="email">Email</th>
+      <th name="saldo">Budget</th> 
+      <th name="codigo">Code</th> 
     </tr>
   </thead>
 
@@ -124,11 +127,11 @@
       <tr>
         <td style="display:none;" id="zero"><%= user.id %></td>
         <!-- <td id="userid"><%= user.id %></td> -->
-        <td name="name"><%= user.name %></td>
-        <td name="last_name"><%= user.last_name %></td>
-        <td name="email"><%= user.email %></td>
-        <td name="saldo"><%= user.saldo %></td>
-        <td name="codigo"><%= user.codigo %></td>
+        <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.saldo %></td>
+        <td><%= user.codigo %></td>
         
       </tr>
     <% end %>

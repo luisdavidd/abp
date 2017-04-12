@@ -13,8 +13,10 @@
   </ul>
 </li>
 
-
-<!-- 
-TO DO!!!
-	No se está conservando el focus en el link seleccionado
- -->
+<script type="text/javascript">
+ $('li').click(function(e) {
+        e.preventDefault();
+        $('li').removeClass('active');
+        $(this).addClass('active');
+    });
+</script>
