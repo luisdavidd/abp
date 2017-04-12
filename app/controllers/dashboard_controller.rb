@@ -10,9 +10,26 @@ class DashboardController < ApplicationController
   end
 
   def editp
-  	#respond_to do |format|
+    #respond_to do |format|
     #  format.html {render :layout => 'admineditp'}
     #end
   end
+
+  def editStudent
+    if current_user.teacher
+      @users = User.where(teacher: '0')
+      render 'editStudent'
+    else
+      render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found 
+    end
+  end
+
+  def update
+   @user =  User.where({ :id => params[:index]})
+   @user.update({params[:column] => params[:new]})
+   render :json => @user
+   
+  end
+
 
 end

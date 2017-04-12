@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'dashboard/editStudent'
   get 'dashboard/shopping_teacher'
   get 'dashboard/auction_teacher'
+  get 'dashboard/update', to: 'dashboard#update'
   
   devise_for :users
   devise_scope :user do
