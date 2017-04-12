@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'dashboard/shopping_teacher'
   get 'dashboard/auction_teacher'
   get 'dashboard/update', to: 'dashboard#update'
+  post 'dashboard/update_image'
+  post 'dashboard/update_password'
   
   devise_for :users
   devise_scope :user do

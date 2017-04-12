@@ -28,8 +28,38 @@ class DashboardController < ApplicationController
    @user =  User.where({ :id => params[:index]})
    @user.update({params[:column] => params[:new]})
    render :json => @user
-   
   end
 
+  def update_image
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      # Sign in the user by passing validation in case their password changed
+       
+      redirect_to dashboard_panel_path
+    else
+      respond_to do |format|
+        format.html { redirect_to dashboard_editp_path, alert: 'Ha ocurrido un error al actualizar tu perfil. Intenta de nuevo.' }
+      end
+    end
+  end
+
+  def update_password
+    @user = User.find(current_user.id)
+    if @user.update(user_pass_params)  
+      # Sign in the user by passing validation in case their password changed
+      redirect_to dashboard_panel_path
+    end
+  end
+
+  private
+
+  def user_params
+    # NOTE: Using `strong_parameters` gem
+    params.require(:user).permit(:avatar)
+  end
+
+  def user_pass_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
 
 end

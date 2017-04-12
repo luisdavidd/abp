@@ -54,7 +54,7 @@
       <div class="row" style="padding:450px;background-color:#fff;align-content:center">
 
         <div class="col-md-8">
-          <div class="login">
+          <div class="login" id="#login_form">
             
 
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"login-form") do |f| %>
@@ -148,6 +148,8 @@
             vali = textarea.value;
           }
       }
+
+      //$('#login_form').reload(document.URL +  '#login_form');
 
     </script>
     
