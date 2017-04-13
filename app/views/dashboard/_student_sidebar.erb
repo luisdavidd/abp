@@ -11,3 +11,12 @@
     <li><a href="#">Link in level 2</a></li>
   </ul>
 </li>
+
+<script type="text/javascript">
+$('li').each(function(){
+    if(window.location.href.indexOf($(this).find('a:first').attr('href'))>-1)
+    {
+    $(this).addClass('active').siblings().removeClass('active');
+    }
+});
+</script>

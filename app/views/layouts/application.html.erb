@@ -35,20 +35,6 @@
     <div class="gtco-section" style="text-align:center">
     	<%= render 'layouts/messages' %>
     </div>
-    <th scope="col">
-	    <div class="gtco-section">
-	          <center>          
-	          <%= link_to 'Home', root_path, class: "one" %>
-	          <% if current_user %>            
-	            <label style="color:black"> <%= current_user.name %></label>
-	            <%= link_to 'Logout', destroy_user_session_path, method: :delete , class: "one" %>
-	          <% else %>
-	            <%= link_to 'Login', new_user_session_path, class: "one" %>
-	          <% end %>  
-	          
-	          </center>
-	    </div>
-	</th>
     <%= yield %> 
   </body>
 </html>

@@ -70,17 +70,17 @@ ActiveRecord::Schema.define(version: 20170410055654) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                                            null: false
-    t.string   "last_name",                                       null: false
-    t.integer  "codigo",                                          null: false
+    t.string   "name",                                                      null: false
+    t.string   "last_name",                                                 null: false
+    t.integer  "codigo",                                                    null: false
     t.boolean  "teacher"
-    t.float    "saldo",                  limit: 24, default: 0.0, null: false
-    t.string   "email",                             default: "",  null: false
-    t.string   "encrypted_password",                default: "",  null: false
+    t.float    "saldo",                  limit: 24, default: 0.0,           null: false
+    t.string   "email",                             default: "",            null: false
+    t.string   "encrypted_password",                default: "",            null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,   null: false
+    t.integer  "sign_in_count",                     default: 0,             null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -89,8 +89,9 @@ ActiveRecord::Schema.define(version: 20170410055654) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "skin",                              default: "skin-purple"
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

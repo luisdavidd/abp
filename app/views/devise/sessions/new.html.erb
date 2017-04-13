@@ -14,12 +14,12 @@
 </head>
 
 <body>
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     if(!window.location.hash) {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
-  </script>
+  </script> -->
   <nav class="gtco-nav" role="navigation" style="padding:5px 0;height:125px;background-color:rgb(33, 47, 86)">
     <div class="gtco-container">
       <div class="row">
@@ -54,7 +54,7 @@
       <div class="row" style="padding:450px;background-color:#fff;align-content:center">
 
         <div class="col-md-8">
-          <div class="login">
+          <div class="login" id="#login_form">
             
 
             <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"login-form") do |f| %>
@@ -148,6 +148,8 @@
             vali = textarea.value;
           }
       }
+
+      //$('#login_form').reload(document.URL +  '#login_form');
 
     </script>
     

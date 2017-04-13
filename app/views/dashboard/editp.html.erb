@@ -1,73 +1,77 @@
+<% if alert %>
+<div class="alert-error alert-dismissible fade in">
+  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <%= alert %>
+</div>
+<% end %>
 <div class="box-body">
 <h2 style="align-self: center;">Edit <%= resource_name.to_s.humanize %> Profile</h2>
 
-<div class="box-body">
-<div class="panel panel-default">
-  <div class="panel-heading"> <h3 class="panel-title">Change my profile picture</h3></div>
-  <div class="panel-body">
-    
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-    <div class="form-group">
-          <label>Image</label>
-          <div class="input-group">
-          <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
-          <% original = 'missing_pp.png'%>
-          <% else %>
-          <% original = current_user.avatar.url(:thumb) %>
-          <% end %>
-          <img id="user_avatar_Preview" src="<%=original%>" style="width: 100px; height: 100px;border-radius: 25%;" required />
-          <br><br>
-          <%= f.file_field :avatar, onchange: "PreviewImage();", accept: "image/*", :required => true, pattern:"[^@]+\.(png)" %>
+<div class="row">
+  <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"> <h3 class="panel-title">Change my profile picture</h3></div>
+        <div class="panel-body">          
+          <%= form_for(resource,as:resource_name, :url => {:action => "update_image"}) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-group">
+                <label>Image</label>
+                <div class="input-group">
+                <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
+                <% original = 'missing_pp.png'%>
+                <% else %>
+                <% original = current_user.avatar.url(:thumb) %>
+                <% end %>
+                <img id="user_avatar_Preview" src="<%=original%>" style="width: 100px; height: 100px;border-radius: 25%;" required />
+                <br><br>
+                <%= f.file_field :avatar, onchange: "PreviewImage();", accept: "image/*", :required => true, pattern:"[^@]+\.(png)" %>
+                </div>
           </div>
-
+          <div class="actions">
+            <%= f.submit "Update", class: 'btn btn-default' %>
+          </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
+  <div class="col-md-5">
+    <div class="panel panel-default">
+      <div class="panel-heading"> <h3 class="panel-title">Change my password</h3></div>
+      <div class="panel-body">
 
-    <div class="form-group">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true ,style:"width:80px"%>
-    </div>  
-    <div class="actions">
-      <%= f.submit "Update", class: 'btn btn-default' %>
-    </div>
+    <%= form_for(resource, as: resource_name, :url =>{:action => "update_password"}) do |f| %>
+        <div class="form-group">
+        <label>New Password</label> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px"%>
+        </div>
+
+<!--         <div class="form-group">
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4,:required => true,style:"width:80px" %>
+        </div> -->
+
+      <div class="actions">
+        <%= f.submit "Update", class: 'btn btn-default' %>
+      </div>
     <% end %>
-  </div>
-</div>
-</div>
 
-<div class="box-body">
-<div class="panel panel-default">
-  <div class="panel-heading"> <h3 class="panel-title">Change my password</h3></div>
-  <div class="panel-body">
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <div class="form-group">
-    <label>New Password</label> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+      </div>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px"%>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-      <%= f.password_field :current_password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4,:required => true,style:"width:80px" %>
-    </div>
-
-  <div class="actions">
-    <%= f.submit "Update", class: 'btn btn-default' %>
   </div>
-<% end %>
 
-  </div>
 </div>
+
 </div>
 
 <!-- <%= link_to "Back", dashboard_panel_path %> -->

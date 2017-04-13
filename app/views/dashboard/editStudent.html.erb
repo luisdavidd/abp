@@ -1,0 +1,143 @@
+<!-- <script src="plugins/datatables/jquery.dataTables.js" type="text/javascript"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.jqueryui.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js">
+
+<script type="text/javascript" src="https://cdn.datatables.net/keytable/2.2.0/js/dataTables.keyTable.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.2.0/css/keyTable.jqueryui.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/keytable/2.1.1/css/keyTable.dataTables.min.css">
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var colum_names=[];
+    columnas = document.getElementById("students").rows[0].cells;
+    for (var i = 0; i <columnas.length; i++) {
+      colum_names.push(columnas[i].getAttribute("name"));
+    }
+    console.log(colum_names)
+    var events = $('#events');
+    var table = $('#students').DataTable( {
+        keys: true /*,
+        columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+            }
+        ]*/
+    } );
+
+    //Add new row
+    var contador = 1;
+     $('#addRow').on( 'click', function () {
+        //table.row.add([contador,1,2,3,4,5]).draw(false); //ERROR PORQUE DESAPARECE LA COLUMNA PARA HTML
+        console.log('contador: ',contador)
+        contador += 1;        
+    } );
+    //---------
+
+      var sw = true;
+      var input;
+      var currCell;
+   
+      table
+          .on( 'key', function ( e, datatable, key, cell, originalEvent ) {
+              //events.prepend( '<div>Key press: '+key+' for cell <i>'+cell.data()+'</i></div>' );
+              //console.log(key);
+              if(key != 13){
+                if(sw){
+                  var value = cell.data();
+                  if(cell.index().column == colum_names.indexOf("saldo") || cell.index().column == colum_names.indexOf("codigo")){
+                    cell.data('<input id="intro" type="number" step="10" min="0.0" name="" value='+value+'>')
+                  }else{
+                    cell.data('<input id="intro" type="text" name="" value='+value+'>')
+                  }
+                
+                $("#intro").focus();
+                sw = false;
+                table.keys.disable();
+                }
+              }else{
+                var pos = currCell.index().row*5 + currCell.index().column + 1;
+                table.cell( ':eq('+pos+')' ).focus();
+              }
+
+          } )
+          .on( 'key-focus', function ( e, datatable, cell ) {
+            currCell = cell;
+          } )
+          .on( 'key-blur', function ( e, datatable, cell ) {
+          } )
+
+        window.onkeyup = function(e) {
+       var key = e.keyCode ? e.keyCode : e.which;
+
+
+       if (key == 13) {
+          if(sw == false){
+            input = document.getElementById("intro").value;
+                currCell.data(input);
+                sw = true;
+                table.keys.enable();
+                // PARTE DE AJAX
+                columna = currCell.index().column;
+                row = currCell.index().row;
+                indexo = document.getElementById("students").rows[row+1].cells[0].innerText;
+                inputo = input;
+                modified = colum_names[columna];
+                console.log('fila:',row, 'columna:',columna, 'index:',indexo)
+                $.ajax({
+                  type: 'GET',
+                  url: 'update',
+                  data: ({index:indexo,column:modified,new:inputo}),
+                  success: function(data){
+                    console.log("Sucess")
+                    console.log(data[0]['name']);
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                  }
+                });
+                // PASAR A SIGUIENTE CELDA
+                var pos = currCell.index().row*5 + currCell.index().column + 1;
+                table.cell( ':eq('+pos+')' ).focus();
+          }
+           
+       }
+    }
+  } );
+</script>
+
+<table class="display responsive" id="students" style="width:100%">
+  <thead>
+    <tr>
+      <th style="display:none" name="id"></th>
+      <!-- <th>Id</th> -->
+      <th name="name">Name</th>
+      <th name="last_name">Last Name</th>
+      <th name="email">Email</th>
+      <th name="saldo">Budget</th> 
+      <th name="codigo">Code</th> 
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td style="display:none;" id="zero"><%= user.id %></td>
+        <!-- <td id="userid"><%= user.id %></td> -->
+        <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.saldo %></td>
+        <td><%= user.codigo %></td>
+        
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<button id="addRow" class="btn btn-default">Add New Student</button>

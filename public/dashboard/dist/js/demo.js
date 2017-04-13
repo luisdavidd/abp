@@ -1,4 +1,4 @@
-/**
+  /**
  * AdminLTE Demo Menu
  * ------------------
  * You should not use this file in production.
@@ -13,6 +13,7 @@
    *
    * @type Array
    */
+  var new_skin;
   var my_skins = [
     "skin-blue",
     "skin-black",
@@ -256,7 +257,16 @@
    */
   function store(name, val) {
     if (typeof (Storage) !== "undefined") {
-      localStorage.setItem(name, val);
+      $.ajax({
+        type: 'GET',
+        url: 'update_skin',
+        data: ({skin:val}),
+        success: function(data){
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("some error");
+        }
+      });
     } else {
       window.alert('Please use a modern browser to properly view this template!');
     }
@@ -282,9 +292,6 @@
    * @returns void
    */
   function setup() {
-    var tmp = get('skin');
-    if (tmp && $.inArray(tmp, my_skins))
-      change_skin(tmp);
 
     //Add the change skin listener
     $("[data-skin]").on('click', function (e) {
@@ -338,3 +345,36 @@
 
   }
 })(jQuery, $.AdminLTE);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
