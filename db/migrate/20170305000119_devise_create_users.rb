@@ -5,7 +5,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :name, null: false
       t.string :last_name, null: false
       t.integer :codigo, null: false
-      t.boolean :teacher
+      t.boolean :teacher,default:0
       t.float :saldo , null:false, default: 0
 
       t.string :email,              null: false, default: ""

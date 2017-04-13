@@ -14,13 +14,45 @@
 </head>
 
 <body>
-<!--   <script type="text/javascript">
-    if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
+  <script type="text/javascript">
+    (function()
+    {
+      if( window.localStorage )
+      {
+        if( !localStorage.getItem( 'firstLoad' ) )
+        {
+          localStorage[ 'firstLoad' ] = true;
+          window.location.reload();
+        }  
+        else
+          localStorage.removeItem( 'firstLoad' );
+      }
+    })();
+    //////////F12 disable code////////////////////////
+    document.onkeypress = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+           //alert('No F-12');
+            return false;
+        }
     }
-  </script> -->
-  <nav class="gtco-nav" role="navigation" style="padding:5px 0;height:125px;background-color:rgb(33, 47, 86)">
+    document.onmousedown = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+            //alert('No F-keys');
+            return false;
+        }
+    }
+document.onkeydown = function (event) {
+        event = (event || window.event);
+        if (event.keyCode == 123) {
+            //alert('No F-keys');
+            return false;
+        }
+    }
+/////////////////////end///////////////////////
+</script>
+  <nav class="gtco-nav" role="navigation" style="padding:5px 0;height:125px;background-color:rgb(33, 47, 86)"oncontextmenu="return false;" >
     <div class="gtco-container">
       <div class="row">
         <div class="col-sm-4 col-xs-12">
@@ -49,7 +81,7 @@
     </div>
   </nav>
 
-  <div id="gtco-portfolio" class="gtco-section" style="background-color:#fff">
+  <div id="gtco-portfolio" class="gtco-section" style="background-color:#fff" oncontextmenu="return false;">
     <center> 
       <div class="row" style="padding:450px;background-color:#fff;align-content:center">
 
@@ -87,7 +119,7 @@
       </div>
     </center>
   </div>
-  <div class="lineBlack" style="height:50px">
+  <div class="lineBlack" style="height:50px" oncontextmenu="return false;">
     <div class="gtco-container">
       
         <div class="gtco-footer">
@@ -116,7 +148,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/js/jqbtk.js"></script>
-    <script>
+    <script type="text/javascript">
     //var teclasOriginal = [[['7'],['8'],['9']],[['4'],['5'],['6']],[['1'],['2'],['3']],[['0'],['del']]];
     //var teclasRow = [['*','7'],['*','8'],['*','9'],['*','4'],['*','5'],['*','6'],['*','1'],['*','2'],['*','3'],['*','0']];
       $(function(){

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post 'dashboard/update_image'
   post 'dashboard/update_password'
   post 'dashboard/update_skin'
-  
+  get 'dashboard/panel', :to => 'devise/registrations#new'
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   as :user do
   	get 'dashboard/panel', :to => 'devise/registrations#edit', :as => :user_root
   end
-  get 'dashboard/panel', :to => 'devise/registrations#new'
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
 end

@@ -42,12 +42,14 @@ class DashboardController < ApplicationController
       end
     end
   end
+
   def update_skin
     @user = User.find(current_user.id)
     @user.update({:skin => params[:skin]}) 
     @skins = params[:skin]
     render :json => @user
   end
+  
   def get_myskin
     @skin = User.select("skin").where({:id=>current_user.id})
     render :json =>@skin

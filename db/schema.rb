@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20170410055654) do
     t.string   "name",                                                      null: false
     t.string   "last_name",                                                 null: false
     t.integer  "codigo",                                                    null: false
-    t.boolean  "teacher"
+    t.boolean  "teacher",                           default: false
     t.float    "saldo",                  limit: 24, default: 0.0,           null: false
     t.string   "email",                             default: "",            null: false
     t.string   "encrypted_password",                default: "",            null: false

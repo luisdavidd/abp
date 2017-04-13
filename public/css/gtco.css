@@ -653,8 +653,7 @@ form label {
   #gtco-products,
   #gtco-services,
   #gtco-subscribe,
-  #gtco-footer,
-  .gtco-section {
+  #gtco-footer{
     padding: 3em 0;
   }
 }
