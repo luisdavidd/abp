@@ -63,7 +63,7 @@ $(document).ready(function() {
               table.keys.disable();
               }
             }else{
-              var pos = parseInt(currCell.selector.rows.substr(4,1))*5 + currCell.index().column + 1;;
+              var pos = parseInt(currCell.selector.rows.substr(4,1))*5 + currCell.index().column + 1;
               table.cell( ':eq('+pos+')' ).focus();
             }
 

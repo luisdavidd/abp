@@ -25,18 +25,8 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
-
-  # Don't care if the mailer can't send.
-
-
-  config.action_mailer.perform_caching = false
-
-  # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
-
-  # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
   
+  # Don't care if the mailer can't send.
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
