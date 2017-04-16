@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  offer: one
+  user: one
+  content: MyText
+  price_offer: 1.5
+
+two:
+  offer: two
+  user: two
+  content: MyText
+  price_offer: 1.5
