@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Abp</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag "custom.css" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- New page -->
+    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="/css/icomoon.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+    <link rel='stylesheet' id='camera-css'  href='/css/camera.css' type='text/css' media='all'>
+    
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="/css/gtco.css">
+    <!-- New page -->
+    <link rel="stylesheet" type="text/css" href="/css/slicknav.css">
+    <link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/coin.css">
+
+  </head>
+
+  <body>
+	<!--    <p class="notice"><%= notice %></p>
+   	<p class="alert"><%= alert %></p> -->
+    <div class="gtco-section" style="text-align:center">
+    	<%= render 'layouts/messages' %>
+    </div>
+    <%= yield %> 
+  </body>
+</html>

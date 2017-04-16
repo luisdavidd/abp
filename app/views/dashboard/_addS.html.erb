@@ -1,0 +1,32 @@
+<script type="text/javascript" src="dist/js/table_addS.js"></script>
+<br>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2">
+    <button id="addRow" class="btn btn-default">Add Row</button>
+  </div>
+  <div class="col-md-3">
+    <button id="addStudent" class="btn btn-default">Upload New Students</button>
+  </div>
+  <div class="col-md-5">
+    <div class="input-group">
+      <span class="input-group-addon">Set a default initial budget $</span>
+      <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="set_budget" value="0" min="0">
+      <span class="input-group-addon">.00</span>
+    </div>
+  </div>
+</div>
+
+<br>
+
+<table class="display responsive" id="addRowTable" style="width:100%" >
+  <thead>
+    <tr>
+      <th name="name">Name</th>
+      <th name="last_name">Last Name</th>
+      <th name="email">Email</th>
+      <th name="saldo">Budget</th> 
+      <th name="codigo">Code</th> 
+    </tr>
+  </thead>
+</table>

@@ -1,0 +1,24 @@
+
+<li class="active"><a href="studentsHandler"><i class="fa fa-book"></i> <span>Edit Students</span></a></li>
+<li><a href="shopping_teacher"><i class="fa fa-shopping-cart"></i> <span>Shopping Module</span></a></li>
+<li><a href="auction_teacher"><i class="fa fa-money"></i> <span>Auction Module</span></a></li>
+<li class="treeview">
+  <a href="#"><i class="fa fa-users"></i> <span>Multilevel</span>
+    <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+    </span>
+  </a>
+  <ul class="treeview-menu">
+    <li><a href="#">Link in level 2</a></li>
+    <li><a href="#">Link in level 2</a></li>
+  </ul>
+</li>
+
+<script type="text/javascript">
+$('li').each(function(){
+    if(window.location.href.indexOf($(this).find('a:first').attr('href'))>-1)
+    {
+    $(this).addClass('active').siblings().removeClass('active');
+    }
+});
+</script>

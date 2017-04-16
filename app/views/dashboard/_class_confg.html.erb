@@ -1,0 +1,164 @@
+<script type="text/javascript">
+$(document).ready(function() {
+var colum_names=[];
+columnas = document.getElementById("addRowTable").rows[0].cells;
+for (var i = 0; i <columnas.length; i++) {
+colum_names.push(columnas[i].getAttribute("name"));
+}
+console.log(colum_names)
+var names=[]; var id_names = [];
+
+var table = $('#addRowTable').DataTable( {
+  keys: true,
+  columnDefs: [
+          {
+              "targets": [0],
+              "visible": false,
+          },
+          {
+              "targets": [2],
+              "visible": false,
+          }
+   ]
+} );
+$.ajax({
+type: 'GET',
+url: 'editClasses',
+success: function(data){
+  console.log(data)
+  res_names = data['names'];
+  tabla = data['tabla']; names=[];id_names=[];
+  for (j in res_names) {
+  	names.push(res_names[j]['name']);
+  	id_names.push(res_names[j]['id']);
+  }
+  for (i in tabla) {
+    table.row.add(tabla[i]).draw(false);
+  }
+  
+}
+});
+
+var sw = true;
+var input;
+var currCell;
+
+table
+    .on( 'key', function ( e, datatable, key, cell, originalEvent ) {
+        //events.prepend( '<div>Key press: '+key+' for cell <i>'+cell.data()+'</i></div>' );
+        //console.log(key);
+        if(key != 13){
+          if(sw){
+            var value = cell.data();
+            if(cell.index().column == colum_names.indexOf("subject_name")){
+            	opciones = '';
+            	for (var i = 0; i < names.length; i++) {
+            		opciones = opciones + '<option value="'+id_names[i]+'" name="'+names[i]+'">'+names[i]+'</option>';
+            	}
+            	
+              	cell.data('<select id="intro">'+ opciones +' </select>');
+              	console.log(names,id_names)
+              
+            }else{
+              cell.data('<input id="intro" type="text" name="" value='+value+'>')
+            }
+          
+          $("#intro").focus();
+          sw = false;
+          table.keys.disable();
+          }
+        }else{
+          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          table.cell( ':eq('+pos+')' ).focus();
+        }
+
+    } )
+    .on( 'key-focus', function ( e, datatable, cell ) {
+      currCell = cell;
+    } )
+    .on( 'key-blur', function ( e, datatable, cell ) {
+    } )
+
+  window.onkeyup = function(e) {
+ var key = e.keyCode ? e.keyCode : e.which;
+
+
+ if (key == 13) {
+    if(sw == false){
+    	row = currCell.index().row;
+    	if(currCell.index().column == colum_names.indexOf("subject_name")){
+    		id_input = parseInt(document.getElementById("intro").value);
+    		input = names[id_names.indexOf(id_input)];
+    		table.cell(row,0).data(id_input);
+    		columna = 0;
+    		inputo = id_input;
+      }
+      else{
+      		input = document.getElementById("intro").value;
+      		columna = currCell.index().column;
+      		inputo = input;
+      }
+
+          currCell.data(input);
+          sw = true;
+          table.keys.enable();
+          // PARTE DE AJAX
+          indexo = table.cell(row,2).data();
+          modified = colum_names[columna];
+          $.ajax({
+            type: 'GET',
+            url: 'update_class',
+            data: ({index:indexo,column:modified,new:inputo}),
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("some error");
+            }
+          });
+          // PASAR A SIGUIENTE CELDA
+          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          table.cell( ':eq('+pos+')' ).focus();
+    }     
+ }
+}
+
+$('#addRow').on( 'click', function () {
+	c_error = 0;
+	  $.ajax({
+	    type: 'GET',
+	    url: 'addClasses',
+	    success: function(data){
+	      table.row.add([1,'Control Automático',data['id'],'']).draw(false);
+	    },
+	    error: function(XMLHttpRequest, textStatus, errorThrown) {
+	      if (c_error<1) {
+	        alert("Please check your data");
+	        c_error += 1;
+	      }
+	       
+	    }
+	  }); 
+  } );
+
+} );
+</script>
+
+
+<br>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-6">
+    <button id="addRow" class="btn btn-default">Add Class</button>
+  </div>
+</div>
+
+<br>
+
+<table class="display responsive" id="addRowTable" style="width:100%" >
+  <thead>
+    <tr>
+      <th style="display:none" name="subject_id"></th>
+      <th name="subject_name">Name</th>
+      <th style="display:none" name="id"></th>
+      <th name="nrc">NRC</th>
+    </tr>
+  </thead>
+</table>
