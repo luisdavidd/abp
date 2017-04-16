@@ -60,7 +60,6 @@ $(function() {
     url: 'get_myskin', 
     dataType: 'json', 
     success: function(data){ //Sending the output to a function
-      console.log('success bitchyy', data[0]['skin']); //Help to print the output of the API
       $('#toadd').addClass(data[0]['skin']);
     } 
   }); //AJAX to energy calculation module

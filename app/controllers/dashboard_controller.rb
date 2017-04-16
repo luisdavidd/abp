@@ -1,27 +1,44 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
   layout 'panel_template'
-  def panel
-    if current_user.teacher
-      render 'teacher'
-    else
-      render 'student'
-    end
-  end
 
-  def editp
-    #respond_to do |format|
-    #  format.html {render :layout => 'admineditp'}
-    #end
-  end
-
-  def editStudent
+  # Only for Professors
+  def studentsHandler
     if current_user.teacher
       @users = User.where(teacher: '0')
-      render 'editStudent'
+      render 'studentsHandler'
     else
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found 
     end
+  end
+
+  def newStudents
+    generated_pass = Devise.friendly_token.first(4)
+    user = User.create!({:name=>params[:name], :last_name =>params[:last_name], :email =>params[:email], :saldo =>params[:saldo], :codigo =>params[:codigo], :password => generated_pass})
+  end
+
+  def editStudents
+    @users = User.where(teacher: '0')
+    render :json => @users
+  end
+
+  def editClasses
+    #@out = SubjectNrc.joins(Subject.name) #funciona pero no une nada
+    @out = SubjectNrc.connection.execute("SELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;")
+    @classes_name = Subject.all()
+    render :json => {:names => @classes_name, :tabla => @out }
+  end
+
+  def addClasses
+    class_nrc = SubjectNrc.new(:subject_id => 1)
+    class_nrc.save()
+    render :json => class_nrc
+  end
+
+  def update_class
+   @class =  SubjectNrc.where({ :id => params[:index]})
+   @class.update({params[:column] => params[:new]})
+   render :json => @class
   end
 
   def update
@@ -30,16 +47,12 @@ class DashboardController < ApplicationController
    render :json => @user
   end
 
-  def update_image
-    @user = User.find(current_user.id)
-    if @user.update(user_params)
-      # Sign in the user by passing validation in case their password changed
-       
-      redirect_to dashboard_panel_path
+  # For everyone:
+  def panel
+    if current_user.teacher
+      render 'teacher'
     else
-      respond_to do |format|
-        format.html { redirect_to dashboard_editp_path, alert: 'Ha ocurrido un error al actualizar tu perfil. Intenta de nuevo.' }
-      end
+      render 'student'
     end
   end
 
@@ -53,6 +66,19 @@ class DashboardController < ApplicationController
   def get_myskin
     @skin = User.select("skin").where({:id=>current_user.id})
     render :json =>@skin
+  end
+
+  def update_image
+    @user = User.find(current_user.id)
+    if @user.update(user_params)
+      # Sign in the user by passing validation in case their password changed
+       
+      redirect_to dashboard_panel_path
+    else
+      respond_to do |format|
+        format.html { redirect_to dashboard_editp_path, alert: 'Ha ocurrido un error al actualizar tu perfil. Intenta de nuevo.' }
+      end
+    end
   end
 
   def update_password
