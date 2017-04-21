@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  require 'csv'
   before_action :authenticate_user!
   layout 'panel_template'
 
@@ -90,6 +91,23 @@ class DashboardController < ApplicationController
       sign_in @user, :bypass => true
       redirect_to dashboard_panel_path
     end
+  end
+  
+  def import
+    file = params[:file]
+    CSV.foreach(file.path, headers: true) do |row|
+      student_hash = row.to_hash # exclude the price field
+      student = User.where({email: student_hash["Email"]})
+
+      if student.count == 1
+        student.first.update_attributes(:name=>student_hash["Name"],:last_name=>student_hash["Last name"],:email =>student_hash["Email"],:codigo=>student_hash["Codigo"])
+      else
+        generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
+        @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"], :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass})
+        flash[:notice] = "Users successfully created."
+        UserMailer.welcome_email(@user).deliver
+      end # end if !product.nil?
+    end # end CSV.foreach
   end
 
   private

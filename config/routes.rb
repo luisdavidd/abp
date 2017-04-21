@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'dashboard/editClasses', to: 'dashboard#editClasses'
   get 'dashboard/update_class', to: 'dashboard#update_class'
   get 'dashboard/addClasses', to: 'dashboard#addClasses'  
-
+  post 'dashboard/import'
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'

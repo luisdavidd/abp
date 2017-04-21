@@ -1,14 +1,23 @@
 <script type="text/javascript" src="dist/js/table_addS.js"></script>
 <br>
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-2" style="width:8.33%">
     <button id="addRow" class="btn btn-default">Add Row</button>
   </div>
-  <div class="col-md-3">
+  <div class="col-xs-3" style="width:14.33%">
+    
+    <%= form_tag dashboard_import_path, :id => 'readlist',multipart: true do %>
+     <label for="filechoose" class="btn btn-default">Import File</label>
+    <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv', :style=>"visibility:hidden;" %>
+    <!-- <%= submit_tag "Import File" ,:class => "btn btn-default" %> -->
+    <% end %>
+    <!-- <button id="readlist" class="btn btn-default">Import File</button> -->
+  </div>
+  <div class="col-xs-4" style="width:16%">
     <button id="addStudent" class="btn btn-default">Upload New Students</button>
   </div>
-  <div class="col-md-5">
+  <div class="col-sm-5">
     <div class="input-group">
       <span class="input-group-addon">Set a default initial budget $</span>
       <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="set_budget" value="0" min="0">
@@ -16,7 +25,10 @@
     </div>
   </div>
 </div>
-
+<div class="alert-success alert-dismissible fade in" >
+  <button type="button" class="close" data-dismiss="alert" id="noticia" style="visibility: hidden;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <%= flash[:notice] %>
+</div>
 <br>
 
 <table class="display responsive" id="addRowTable" style="width:100%" >
@@ -30,3 +42,27 @@
     </tr>
   </thead>
 </table>
+
+  
+<script type="text/javascript">
+  elem = document.getElementById('noticia');
+  $('#filechoose').change(function() {
+    var ext = this.value.match(/\.([^\.]+)$/)[1];
+    if(ext=='csv'){
+      alert('Users table updated'); 
+      $('#readlist').submit();
+    }else{
+       alert('Format not supported'); 
+    };
+    elem.style.visibility = 'visible';
+    element.setAttribute("aria-pressed", !pressed);
+    //alert('Users upload succesfully')
+  });
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#noticia').remove();
+  }, 5000);
+ })
+</script>
