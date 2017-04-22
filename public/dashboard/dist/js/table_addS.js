@@ -68,9 +68,9 @@ $(document).ready(function() {
                 if(cell.index().column == colum_names.indexOf("saldo") || cell.index().column == colum_names.indexOf("codigo")){
                   cell.data('<input id="intro2" type="number" step="10" min="0.0">')
                 } else if(cell.index().column == colum_names.indexOf("email")){
-                  cell.data('<input id="intro2" type="email" name="email" value='+value+'>')
+                  cell.data('<input id="intro2" type="email" name="email" value="'+value+'">')
                 } else{
-                  cell.data('<input id="intro2" type="text" name="" value='+value+'>')
+                  cell.data('<input id="intro2" type="text" name="" value="'+value+'">')
                 }
               
               $("#intro2").focus();

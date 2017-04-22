@@ -25,10 +25,10 @@
     </div>
   </div>
 </div>
-<div class="alert-success alert-dismissible fade in" >
+<!-- <div class="alert-success alert-dismissible fade in" >
   <button type="button" class="close" data-dismiss="alert" id="noticia" style="visibility: hidden;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
   <%= flash[:notice] %>
-</div>
+</div> -->
 <br>
 
 <table class="display responsive" id="addRowTable" style="width:100%" >
@@ -45,7 +45,7 @@
 
   
 <script type="text/javascript">
-  elem = document.getElementById('noticia');
+
   $('#filechoose').change(function() {
     var ext = this.value.match(/\.([^\.]+)$/)[1];
     if(ext=='csv'){
@@ -54,8 +54,8 @@
     }else{
        alert('Format not supported'); 
     };
-    elem.style.visibility = 'visible';
-    element.setAttribute("aria-pressed", !pressed);
+    
+    //elem.setAttribute("aria-controls", !pressed);
     //alert('Users upload succesfully')
   });
 </script>

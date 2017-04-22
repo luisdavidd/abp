@@ -43,9 +43,9 @@ $(document).ready(function() {
               if(sw){
                 var value = cell.data();
                 if(cell.index().column == colum_names.indexOf("saldo") || cell.index().column == colum_names.indexOf("codigo")){
-                  cell.data('<input id="intro" type="number" step="10" min="0.0" name="" value='+value+'>')
+                  cell.data('<input id="intro" type="number" step="10" min="0.0" name="" value="'+value+'">')
                 }else{
-                  cell.data('<input id="intro" type="text" name="" value='+value+'>')
+                  cell.data('<input id="intro" type="text" name="" value="'+value+'">')
                 }
               
               $("#intro").focus();
