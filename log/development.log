@@ -35699,3 +35699,891 @@ Processing by DashboardController#get_myskin as JSON
 Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.7ms)
 
 
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 14:58:47 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (3.8ms)
+  Rendered dashboard/_student_sidebar.erb (0.3ms)
+Completed 200 OK in 246ms (Views: 143.0ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 14:58:47 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:35:01 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 1.9ms)
+
+
+  
+TypeError (no implicit conversion of Integer into String):
+  
+app/controllers/dashboard_controller.rb:63:in `+'
+app/controllers/dashboard_controller.rb:63:in `panel'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.1ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (26.1ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:35:17 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id;[0m
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 3.9ms)
+
+
+  
+ActiveRecord::StatementInvalid (Mysql2::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1: SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id;):
+  
+app/controllers/dashboard_controller.rb:63:in `panel'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.4ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (28.1ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:35:49 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (0.8ms)
+  Rendered dashboard/_student_sidebar.erb (0.4ms)
+Completed 200 OK in 73ms (Views: 7.5ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:35:50 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 5ms (Views: 1.5ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2017-04-30 15:36:33 -0500
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 15ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-30 15:36:33 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_messages.html.erb (0.4ms)
+Completed 200 OK in 95ms (Views: 94.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:36:35 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (17.5ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 62ms (Views: 57.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/images/blank.gif?1493584594197" for 127.0.0.1 at 2017-04-30 15:36:35 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/blank.gif"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.7.1) lib/puma/configuration.rb:232:in `call'
+puma (3.7.1) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.1) lib/puma/server.rb:415:in `process_client'
+puma (3.7.1) lib/puma/server.rb:275:in `block in run'
+puma (3.7.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered collection of /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [43 times] (48.6ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:36:35 -0500
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.3ms)
+Processing by Devise::SessionsController#new as HTML
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (91.9ms)
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (12.8ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 132ms (Views: 128.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:36:42 -0500
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"t57tj1YLdhJWVyTEyUdQcVngzzl6BhHtnbT4rUwQlpOOdt56vFpZ/2x03vwaUfznnpoMs8C+edUBxV6nhoMA5Q==", "user"=>{"email"=>"luisdavidd@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'luisdavidd@uninorte.edu.co' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2017-04-30 15:36:42', `last_sign_in_at` = '2017-04-30 14:04:13', `sign_in_count` = 6, `updated_at` = '2017-04-30 15:36:42' WHERE `users`.`id` = 1[0m
+  [1m[35m (55.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard/panel
+Completed 302 Found in 224ms (ActiveRecord: 56.8ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:36:42 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 30ms (Views: 11.3ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:36:42 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-04-30 15:36:45 -0500
+Processing by DashboardController#transfer as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.9ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2515 and u.id=s.user_id;[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2516 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+  Rendering dashboard/transfer.html.erb within layouts/panel_template
+  Rendered dashboard/transfer.html.erb within layouts/panel_template (0.5ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 49ms (Views: 4.6ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:36:45 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=Segunda+Consignaci%C3%B3n&student%5B%5D=3&nrc=2515" for 127.0.0.1 at 2017-04-30 15:36:55 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"Segunda Consignación", "student"=>["3"], "nrc"=>"2515"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 20.0, 'Segunda Consignación', 2515, '2017-04-30 15:36:55', '2017-04-30 15:36:55')[0m
+  [1m[35m (90.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (77.6ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+20 WHERE user_id=3;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 241ms (ActiveRecord: 171.9ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-04-30 15:36:56 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (0.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 9ms (Views: 5.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:36:56 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2017-04-30 15:36:59 -0500
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 7ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-30 15:36:59 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_messages.html.erb (1.7ms)
+Completed 200 OK in 44ms (Views: 43.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:37:01 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.0ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 73ms (Views: 72.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/images/blank.gif?1493584620174" for 127.0.0.1 at 2017-04-30 15:37:01 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/blank.gif"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.7.1) lib/puma/configuration.rb:232:in `call'
+puma (3.7.1) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.1) lib/puma/server.rb:415:in `process_client'
+puma (3.7.1) lib/puma/server.rb:275:in `block in run'
+puma (3.7.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:37:01 -0500
+  Rendered collection of /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [43 times] (25.8ms)
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.2ms)
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered devise/shared/_links.html.erb (0.8ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.6ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (94.7ms)
+  Rendered layouts/_messages.html.erb (1.0ms)
+Completed 200 OK in 154ms (Views: 153.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:37:09 -0500
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"XdpolzbUgoNV5OjS1CmHkvk3cdBmlCUAIaqxkMV0qKoIRfFYFBc8IHPUlpD5FDxrsxEfZYo46s9c84QEITw3sQ==", "user"=>{"email"=>"jsantofimio@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'jsantofimio@uninorte.edu.co' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2017-04-30 15:37:10', `last_sign_in_at` = '2017-04-30 14:23:25', `sign_in_count` = 5, `updated_at` = '2017-04-30 15:37:10' WHERE `users`.`id` = 3[0m
+  [1m[35m (57.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard/panel
+Completed 302 Found in 222ms (ActiveRecord: 59.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:37:10 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (1.4ms)
+  Rendered dashboard/_student_sidebar.erb (1.0ms)
+Completed 200 OK in 17ms (Views: 14.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:37:10 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:37:30 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (1.6ms)
+  Rendered dashboard/_student_sidebar.erb (1.6ms)
+Completed 200 OK in 16ms (Views: 13.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:37:30 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2017-04-30 15:40:20 -0500
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 30ms (ActiveRecord: 3.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-30 15:40:20 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_messages.html.erb (0.6ms)
+Completed 200 OK in 37ms (Views: 36.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:40:22 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (8.4ms)
+  Rendered layouts/_messages.html.erb (1.1ms)
+Completed 200 OK in 62ms (Views: 60.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/images/blank.gif?1493584820926" for 127.0.0.1 at 2017-04-30 15:40:22 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/blank.gif"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.7.1) lib/puma/configuration.rb:232:in `call'
+puma (3.7.1) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.1) lib/puma/server.rb:415:in `process_client'
+puma (3.7.1) lib/puma/server.rb:275:in `block in run'
+puma (3.7.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered collection of /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [43 times] (15.4ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:40:22 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.7ms)
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (4.9ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (74.9ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 131ms (Views: 128.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:40:29 -0500
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"++WraJxenDFfr7zr0KBHGerSIzU1CWODCWd2YvrlLYvc60zyQ1wBeXmxw47s7YKRR4Ijm0dVYd2pabwonJmyBQ==", "user"=>{"email"=>"luisdavidd@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'luisdavidd@uninorte.edu.co' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2017-04-30 15:40:30', `last_sign_in_at` = '2017-04-30 15:36:42', `sign_in_count` = 7, `updated_at` = '2017-04-30 15:40:30' WHERE `users`.`id` = 1[0m
+  [1m[35m (43.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard/panel
+Completed 302 Found in 211ms (ActiveRecord: 46.4ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:40:30 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (2.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 39ms (Views: 14.8ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:40:30 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-04-30 15:40:32 -0500
+Processing by DashboardController#transfer as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2515 and u.id=s.user_id;[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2516 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+  Rendering dashboard/transfer.html.erb within layouts/panel_template
+  Rendered dashboard/transfer.html.erb within layouts/panel_template (0.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (1.3ms)
+Completed 200 OK in 37ms (Views: 11.6ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:40:32 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=Tercera+consignaci%C3%B3n&student%5B%5D=3&nrc=2515" for 127.0.0.1 at 2017-04-30 15:40:44 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"Tercera consignación", "student"=>["3"], "nrc"=>"2515"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 20.0, 'Tercera consignación', 2515, '2017-04-30 15:40:44', '2017-04-30 15:40:44')[0m
+  [1m[35m (47.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (233.1ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+20 WHERE user_id=3;[0m
+  [1m[35m (0.5ms)[0m  [1m[33mUpdate saldo SET saldo=saldo+20WHERE id=3;[0m
+Completed 500 Internal Server Error in 313ms (ActiveRecord: 283.4ms)
+
+
+  
+ActiveRecord::StatementInvalid (Mysql2::Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'id=3' at line 1: Update saldo SET saldo=saldo+20WHERE id=3;):
+  
+app/controllers/dashboard_controller.rb:178:in `block in newTransaction'
+app/controllers/dashboard_controller.rb:175:in `each'
+app/controllers/dashboard_controller.rb:175:in `each_with_index'
+app/controllers/dashboard_controller.rb:175:in `newTransaction'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.4ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.4ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.7ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (15.3ms)
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-04-30 15:41:08 -0500
+Processing by DashboardController#transfer as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2515 and u.id=s.user_id;[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2516 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.5ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+  Rendering dashboard/transfer.html.erb within layouts/panel_template
+  Rendered dashboard/transfer.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.6ms)
+Completed 200 OK in 89ms (Views: 9.3ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:41:08 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 6ms (Views: 1.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=Cuarta+consignaci%C3%B3n&student%5B%5D=3&nrc=2515" for 127.0.0.1 at 2017-04-30 15:41:19 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"Cuarta consignación", "student"=>["3"], "nrc"=>"2515"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 20.0, 'Cuarta consignación', 2515, '2017-04-30 15:41:19', '2017-04-30 15:41:19')[0m
+  [1m[35m (99.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (88.6ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+20 WHERE user_id=3;[0m
+  [1m[35m (0.5ms)[0m  [1m[33mUpdate saldo SET saldo=saldo+20 WHERE id=3;[0m
+Completed 500 Internal Server Error in 221ms (ActiveRecord: 191.7ms)
+
+
+  
+ActiveRecord::StatementInvalid (Mysql2::Error: Table 'abp_db.saldo' doesn't exist: Update saldo SET saldo=saldo+20 WHERE id=3;):
+  
+app/controllers/dashboard_controller.rb:178:in `block in newTransaction'
+app/controllers/dashboard_controller.rb:175:in `each'
+app/controllers/dashboard_controller.rb:175:in `each_with_index'
+app/controllers/dashboard_controller.rb:175:in `newTransaction'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.5ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.6ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (15.1ms)
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-04-30 15:41:40 -0500
+Processing by DashboardController#transfer as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.6ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.8ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2515 and u.id=s.user_id;[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = 2516 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.1ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+  Rendering dashboard/transfer.html.erb within layouts/panel_template
+  Rendered dashboard/transfer.html.erb within layouts/panel_template (0.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.8ms)
+Completed 200 OK in 77ms (Views: 9.6ms | ActiveRecord: 5.9ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:41:41 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 8ms (Views: 2.3ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=Cuarta+consignaci%C3%B3n&student%5B%5D=3&nrc=2515" for 127.0.0.1 at 2017-04-30 15:41:51 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"Cuarta consignación", "student"=>["3"], "nrc"=>"2515"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 20.0, 'Cuarta consignación', 2515, '2017-04-30 15:41:51', '2017-04-30 15:41:51')[0m
+  [1m[35m (46.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (32.9ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+20 WHERE user_id=3;[0m
+  [1m[35m (33.1ms)[0m  [1m[33mUpdate users SET saldo=saldo+20 WHERE id=3;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 170ms (ActiveRecord: 114.3ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-04-30 15:41:51 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (0.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 16ms (Views: 8.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:41:51 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-04-30 15:42:22 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (0.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (1.4ms)
+Completed 200 OK in 14ms (Views: 10.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:42:22 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 3ms (Views: 1.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/sign_out" for 127.0.0.1 at 2017-04-30 15:42:25 -0500
+Processing by Devise::SessionsController#destroy as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 11ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-04-30 15:42:25 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_messages.html.erb (1.2ms)
+Completed 200 OK in 41ms (Views: 40.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:42:27 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (5.7ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 61ms (Views: 58.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/images/blank.gif?1493584946218" for 127.0.0.1 at 2017-04-30 15:42:27 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/blank.gif"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.7.1) lib/puma/configuration.rb:232:in `call'
+puma (3.7.1) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.1) lib/puma/server.rb:415:in `process_client'
+puma (3.7.1) lib/puma/server.rb:275:in `block in run'
+puma (3.7.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:42:27 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.8ms)
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered collection of /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [43 times] (30.0ms)
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.0ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.5ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (104.6ms)
+  Rendered layouts/_messages.html.erb (0.7ms)
+Completed 200 OK in 211ms (Views: 208.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-04-30 15:42:33 -0500
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"tFUIF129LfDYOptxNjg/PcdBHL7HtNtJgF4e6+10b6go4bF41wYkVzp2QkkYLrKH/X3wP/wWHuvRSmwudby/vA==", "user"=>{"email"=>"jsantofimio@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'jsantofimio@uninorte.edu.co' ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[33mUPDATE `users` SET `current_sign_in_at` = '2017-04-30 15:42:34', `last_sign_in_at` = '2017-04-30 15:37:10', `sign_in_count` = 6, `updated_at` = '2017-04-30 15:42:34' WHERE `users`.`id` = 3[0m
+  [1m[35m (50.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard/panel
+Completed 302 Found in 212ms (ActiveRecord: 51.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:42:34 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (1.0ms)
+  Rendered dashboard/_student_sidebar.erb (0.3ms)
+Completed 200 OK in 10ms (Views: 6.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:42:34 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:42:57 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (2.4ms)
+  Rendered dashboard/_student_sidebar.erb (0.5ms)
+Completed 200 OK in 17ms (Views: 12.6ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:42:57 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 9ms (Views: 3.5ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:48:29 -0500
+  
+SyntaxError (/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+re (user_id="+current_user.id" or user_to="+current_user.id+
+                              ^
+/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+user_to="+current_user.id+")")
+                              ^):
+  
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.8ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.9ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.7ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:48:49 -0500
+  
+SyntaxError (/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+ser_id="+current_user.id.to_s" or user_to="+current_user.id.
+                              ^
+/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+to="+current_user.id.to_s+")")
+                              ^):
+  
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.4ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (21.7ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:49:13 -0500
+  
+SyntaxError (/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+ser_id="+current_user.id.to_s" or user_to="+current_user.id.
+                              ^
+/home/luisdavidd/Documents/Proyectos/abp/app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+o="+current_user.id.to_s+");")
+                              ^):
+  
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected tSTRING_BEG, expecting ')'
+app/controllers/dashboard_controller.rb:64: syntax error, unexpected ')', expecting keyword_end
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (18.3ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (8.3ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.4ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (47.9ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:50:00 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=3 or user_to=3);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_student_sidebar.erb (0.4ms)
+Completed 200 OK in 78ms (Views: 13.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:50:01 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 5ms (Views: 1.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:50:20 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=3 or user_to=3);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (3.8ms)
+  Rendered dashboard/_student_sidebar.erb (0.3ms)
+Completed 200 OK in 18ms (Views: 15.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:50:21 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 6ms (Views: 1.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:50:52 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=3 or user_to=3);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (4.8ms)
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for #<Mysql2::Result:0x007f03c461f9a8>):
+    13:  </section>
+    14: 
+    15: 
+    16: <p>Notificaciones <% @notifs[0]%></p>
+    17: <!-- Main content -->
+    18: <section class="content" style="min-height: 750px">
+    19: 
+  
+app/views/dashboard/student.html.erb:16:in `_app_views_dashboard_student_html_erb__112376551580562287_69827078187360'
+app/controllers/dashboard_controller.rb:65:in `panel'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (14.3ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (36.1ms)
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:54:18 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=3 or user_to=3);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (2.4ms)
+  Rendered dashboard/_student_sidebar.erb (0.5ms)
+Completed 200 OK in 18ms (Views: 11.8ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:54:18 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-04-30 15:55:58 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=3 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=3 or user_to=3);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (1.5ms)
+  Rendered dashboard/_student_sidebar.erb (0.3ms)
+Completed 200 OK in 14ms (Views: 11.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-04-30 15:55:59 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 3 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 3[0m
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.6ms)
+
+

@@ -13,7 +13,6 @@
  </section>
 
 
-
 <!-- Main content -->
 <section class="content" style="min-height: 750px">
 
@@ -22,6 +21,7 @@
 		<!-- small box -->
 		<div class="small-box bg-green" style="border-radius:12px">
 		<div class="inner">
+
 		  
 		  <% if user_signed_in? %>
 		  	<h3>$<%= current_user.saldo %></h3>
@@ -40,9 +40,12 @@
       <!-- small box -->
 		<div class="small-box bg-red" style="border-radius:12px">
 			<div class="inner" >
-			  <h3>150</h3>
+      <% @notifs.each do |nc|%>
+        <h3><%= nc[0] %></h3>
+      <% end %>
+			  
 
-			  <p>New Orders</p>
+			  <p>Transactions</p>
 			</div>
 			<div class="icon">
 			  <i class="fa fa-shopping-cart"></i>
@@ -164,32 +167,24 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table class="table">
+              <table class="table responsive">
+              <thead>
                 <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Subject</th>
-                  <th style="width: 40px">Budget</th>
+                  <!-- <th>Id</th> -->
+                  <th name="budget">Subject</th>
+                  <th name="nrc">NRC</th>
+                  <th name="budget">Budget</th>
                 </tr>
+              </thead>
+              <tbody>
+                <% @enrolled.each do |enroll| %>
                 <tr>
-                  <td>1.</td>
-                  <td>Control Automático</td>
-                  <td><span class="badge bg-red">150$</span></td>
+                  <td><%= enroll[0] %></td>
+                  <td><%= enroll[1] %></td>
+                  <td><span class="badge bg-red">$<%= enroll[2] %></span></td>       
                 </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Sistemas Inteligentes</td>
-                  <td><span class="badge bg-yellow">220$</span></td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Diseño Electrónico</td>
-                  <td><span class="badge bg-light-blue">170$</span></td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>Procesamiento de Imagenes</td>
-                  <td><span class="badge bg-green">15$</span></td>
-                </tr>
+              <% end %>
+              </tbody>
               </table>
             </div>
             <!-- /.box-body -->

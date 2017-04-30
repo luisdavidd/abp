@@ -55,9 +55,13 @@ class DashboardController < ApplicationController
     if current_user.teacher
       @count = SubjectNrc.where(:user_id => current_user.id).count
       @numbers = User.where(:teacher=>0).count
+
       render 'teacher'
       
     else
+      
+      @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc and suser.id=uf.id);")
+      @notifs = Transaction.connection.execute("SELECT COUNT(*) from transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+");")
       render 'student'
     end
     
@@ -172,6 +176,7 @@ class DashboardController < ApplicationController
     params[:student].each_with_index do |user, i|
       Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE user_id="+user+";")
+      User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
     end
   end
 
