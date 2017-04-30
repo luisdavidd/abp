@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   post 'dashboard/update_password'
   post 'dashboard/update_skin'
   get 'dashboard/panel', :to => 'devise/registrations#new'
+  get 'dashboard/newTransaction'
+  get 'dashboard/historicalTransactions'
+
   # Only for professors
   get 'dashboard/studentsHandler'
   get 'dashboard/shopping_teacher'
@@ -19,6 +22,11 @@ Rails.application.routes.draw do
   get 'dashboard/update_class', to: 'dashboard#update_class'
   get 'dashboard/addClasses', to: 'dashboard#addClasses'  
   post 'dashboard/import'
+  get 'dashboard/community'
+  get 'dashboard/student_historics'
+  get 'dashboard/userTransactions', to: 'dashboard#userTransactions'
+  get 'dashboard/transfer' 
+
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'

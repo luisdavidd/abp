@@ -1,0 +1,124 @@
+<!-- <script src="plugins/datatables/jquery.dataTables.js" type="text/javascript"></script> -->
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.jqueryui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.jqueryui.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+
+
+<div id="Content">
+	<div class="row">
+  		<div id="navigation" class="col-xs-6 col-md-4">
+  			<h2>Student's List</h2>
+  			<input type="text" id="myInput" onkeyup="mySearch()" placeholder="Search for names..">
+			<div class="list-group" id="student_list">
+				<% @users.each do |user| %>
+				    <a id=<%=user.id%> class="list-group-item"><%= user.name %> <%= user.last_name %></a>
+				<% end %>
+			</div>
+  		</div>
+  		<div id="content" class="col-xs-12 col-md-8">
+  			<h2>Transactions</h2>
+  			<table class="display responsive" id="transactions_table" style="width:100%">
+	        <thead>
+	          <tr>
+	            <!-- <th>Id</th> -->
+	            <th name="user_from">From Student</th>
+	            <th name="user_to">To Student</th>
+	            <th name="amount">Amount</th>
+	            <th name="observations">Observations</th> 
+	            <th name="created_at">Date</th>
+	          </tr>
+	        </thead>
+
+	        <tbody>
+	          
+
+	        </tbody>
+	      </table>
+  		</div>
+	</div>
+</div>
+
+<style type="text/css">
+	.list-group{
+	    max-height: 80vh;
+	    overflow-y:auto;
+	    overflow-x:auto;
+	}
+
+	#content{
+		padding-right: 5vh;
+	}
+
+	#navigation{
+		padding-left: 5vh;
+	}
+
+	#myInput {
+	    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+	    background-position: 10px 12px; /* Position the search icon */
+	    background-repeat: no-repeat; /* Do not repeat the icon image */
+	    width: 100%; /* Full-width */
+	    font-size: 16px; /* Increase font-size */
+	    padding: 12px 20px 12px 40px; /* Add some padding */
+	    border: 1px solid #ddd; /* Add a grey border */
+	    margin-bottom: 12px; /* Add some space below the input */
+	}
+</style>
+
+<script type="text/javascript">
+	$('.list-group-item').on('click', function() {
+	    var $this = $(this);
+	    //var $alias = $this.data('alias');
+
+	    $('.active').removeClass('active');
+	    $this.toggleClass('active')
+	    table.clear();
+        table.draw();
+	    $.ajax({
+		    type: 'GET',
+		    url: 'userTransactions',
+		    data: {'id': this.id},
+		    success: function(data){
+		    console.log('transacciones: ',data)
+		    for (i in data) {
+		        trans = data[i];
+		        date = Date(trans[6])
+		        date = date.split("GMT")
+		        table.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date[0]]).draw(false);
+			}}});
+
+	    // Pass clicked link element to another function
+	    //myfunction($this, $alias)
+	})
+
+	var table = $('#transactions_table').DataTable( {
+		responsive: true	      
+	  } );
+
+	function mySearch() {
+	    // Declare variables
+	    var input, filter, ul, li, a, i;
+	    input = document.getElementById('myInput');
+	    filter = input.value.toUpperCase();
+	    ul = document.getElementById("student_list");
+	    li = ul.getElementsByTagName('a');
+
+	    // Loop through all list items, and hide those who don't match the search query
+	    for (i = 0; i < li.length; i++) {
+	        //a = li[i].getElementsByTagName("a")[0];
+	        if (li[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+	            li[i].style.display = "";
+	        } else {
+	            li[i].style.display = "none";
+	        }
+	    }
+	}
+</script>
+
+

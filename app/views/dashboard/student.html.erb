@@ -1,19 +1,215 @@
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
-  <h1>
-    ESTUDIANTEEE
-  </h1>
-  
-  <ol class="breadcrumb">
+	<h1>
+        Dashboard
+     </h1>
+     <br>
+  <!-- <ol class="breadcrumb">
     <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
     <li class="active">Here</li>
   </ol>
-</section>
+ -->
+ </section>
+
+
 
 <!-- Main content -->
-<section class="content">
+<section class="content" style="min-height: 750px">
 
   <!-- Your Page Content Here -->
+    <div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-green" style="border-radius:12px">
+		<div class="inner">
+		  
+		  <% if user_signed_in? %>
+		  	<h3>$<%= current_user.saldo %></h3>
+		  <% end %>
+		  <p>Budget</p>
+		</div>
+		<div class="icon">
+		  <i class="ion-social-usd"></i>
+		</div>
+		<a href="#" class="small-box-footer" style="border-radius:12px">
+			<i class="fa fa-arrow-circle-right"></i>
+		</a>
+		</div>
+    </div>
+  	<div class="col-lg-4 col-xs-6">
+      <!-- small box -->
+		<div class="small-box bg-red" style="border-radius:12px">
+			<div class="inner" >
+			  <h3>150</h3>
+
+			  <p>New Orders</p>
+			</div>
+			<div class="icon">
+			  <i class="fa fa-shopping-cart"></i>
+			</div>
+			<a href="#" class="small-box-footer" style="border-radius:12px">
+			  <i class="fa fa-arrow-circle-right"></i>
+			</a>
+		</div>
+
+    </div>
+    
+    <div class="col-lg-5 col-xs-6">
+		<!-- small box -->
+		<div class="small-box bg-yellow" style="border-radius:12px">
+		<div class="inner">
+		  
+		  <% if user_signed_in? %>
+		  	<h3 style="font-size:20px"><%= current_user.last_sign_in_at.to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></h3>
+		  <% end %>
+		  <br>
+		  <p>Last Signed In</p>
+		</div>
+		<div class="icon">
+		  <i class="ion ion-person"></i>
+		</div>
+		<a href="#" class="small-box-footer" style="border-radius:12px">
+		  <i class="fa fa-arrow-circle-right"></i>
+		</a>
+		</div>
+	</div>
+	<!-- /.col -->
+	        <div class="col-md-6">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monthly Recap Report</h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <p class="text-center">
+                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                  </p>
+
+                  <div class="chart">
+                    <!-- Sales Chart Canvas -->
+                    <canvas id="salesChart" style="height: 180px;"></canvas>
+                  </div>
+                  <!-- /.chart-responsive -->
+                </div>
+                <!-- /.col -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- ./box-body -->
+            <div class="box-footer">
+              <div class="row">
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
+                    <h5 class="description-header">$35,210.43</h5>
+                    <span class="description-text">TOTAL REVENUE</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
+                    <h5 class="description-header">$10,390.90</h5>
+                    <span class="description-text">TOTAL COST</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block border-right">
+                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
+                    <h5 class="description-header">$24,813.53</h5>
+                    <span class="description-text">TOTAL PROFIT</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-3 col-xs-6">
+                  <div class="description-block">
+                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                    <h5 class="description-header">1200</h5>
+                    <span class="description-text">GOAL COMPLETIONS</span>
+                  </div>
+                  <!-- /.description-block -->
+                </div>
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-6">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Budget per Subject</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Subject</th>
+                  <th style="width: 40px">Budget</th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Control Automático</td>
+                  <td><span class="badge bg-red">150$</span></td>
+                </tr>
+                <tr>
+                  <td>2.</td>
+                  <td>Sistemas Inteligentes</td>
+                  <td><span class="badge bg-yellow">220$</span></td>
+                </tr>
+                <tr>
+                  <td>3.</td>
+                  <td>Diseño Electrónico</td>
+                  <td><span class="badge bg-light-blue">170$</span></td>
+                </tr>
+                <tr>
+                  <td>4.</td>
+                  <td>Procesamiento de Imagenes</td>
+                  <td><span class="badge bg-green">15$</span></td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.box -->        
+          </div>
+	
 
 </section>
+
 <!-- /.content -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard2.js"></script>
+

@@ -1,22 +1,22 @@
-<li class="active"><a href="#"><i class="fa fa-link"></i> <span>ESTUDIANNNTE</span></a></li>
-<li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+<li class="active"><a href="#"><i class="fa fa-shopping-cart"></i><span>Shopping Module</span></a></li>
+<li><a href="#"><i class="fa fa-money"></i> <span>Auction Module</span></a></li>
 <li class="treeview">
-  <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+  <a href="#"><i class="fa fa-exchange"></i> <span>Transferences</span>
     <span class="pull-right-container">
       <i class="fa fa-angle-left pull-right"></i>
     </span>
   </a>
   <ul class="treeview-menu">
-    <li><a href="#">Link in level 2</a></li>
-    <li><a href="#">Link in level 2</a></li>
+    <li><a href="#">Transfer</a></li>
+    <li><a href="historicalTransactions">Historical</a></li>
   </ul>
 </li>
 
 <script type="text/javascript">
-$('li').each(function(){
-    if(window.location.href.indexOf($(this).find('a:first').attr('href'))>-1)
-    {
-    $(this).addClass('active').siblings().removeClass('active');
-    }
-});
+  $('li').each(function(){
+      if(window.location.href.indexOf($(this).find('a:first').attr('href'))>-1)
+      {
+        $(this).addClass('active').siblings().removeClass('active');
+      }
+  });
 </script>

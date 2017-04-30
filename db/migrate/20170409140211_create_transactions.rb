@@ -5,7 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.integer :user_to, null: false
       t.float :amount, null: false
       t.text :observations
-
+      t.integer :nrc
       t.timestamps
     end
   end

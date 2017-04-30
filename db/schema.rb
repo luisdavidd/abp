@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170410055654) do
   create_table "subject_nrcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "subject_id"
     t.integer  "nrc"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_subject_nrcs_on_subject_id", using: :btree
@@ -55,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170410055654) do
     t.integer  "user_to",                    null: false
     t.float    "amount",       limit: 24,    null: false
     t.text     "observations", limit: 65535
+    t.integer  "nrc"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
@@ -63,8 +65,9 @@ ActiveRecord::Schema.define(version: 20170410055654) do
   create_table "user_subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "subject_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.float    "budget",     limit: 24, default: 0.0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.index ["subject_id"], name: "index_user_subjects_on_subject_id", using: :btree
     t.index ["user_id"], name: "index_user_subjects_on_user_id", using: :btree
   end

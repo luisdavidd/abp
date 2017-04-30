@@ -53,10 +53,14 @@ class DashboardController < ApplicationController
   # For everyone:
   def panel
     if current_user.teacher
+      @count = SubjectNrc.where(:user_id => current_user.id).count
+      @numbers = User.where(:teacher=>0).count
       render 'teacher'
+      
     else
       render 'student'
     end
+    
   end
 
   def update_skin
@@ -108,6 +112,74 @@ class DashboardController < ApplicationController
         #UserMailer.welcome_email(@user).deliver
       end # end if !product.nil?
     end # end CSV.foreach
+  end
+  def student_historics
+    @users = User.where(teacher: '0').order('name')
+    
+  end
+
+  def userTransactions
+    #@trans_user =  Transaction.where({ :user_id => })
+    @trans_user = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+params[:id]+" or t.user_to="+params[:id]+") and (t.user_to=uT.id and t.user_id=uF.id);")
+    render :json => @trans_user
+  end
+
+  def transfer
+    classes = Subject.all()
+    @data = Hash.new
+    i = 0
+    classes_array = []
+    nrc_array = []
+    students_array = []
+    students_id_array = []
+    for clase in classes
+      #class_name = clase.name
+      classes_array.append(clase.name)
+      nrcs = SubjectNrc.select("id, nrc").where('subject_id' => clase.id)
+      #nrc_ids = []
+      nrc_names = []
+
+      std_sub_array = []
+      std_ids_sub_array = []
+
+      for nrc in nrcs
+        #nrc_ids.append(nrc.id)
+        nrc_names.append(nrc.nrc)
+        students = UserSubject.connection.select_all("SELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = "+nrc.nrc.to_s+" and u.id=s.user_id;")
+        std_names = []
+        std_ids = []
+        for student in students
+          std_ids.append(student["id"])
+          std_names.append(student["name"] +' '+student["last_name"])
+        end
+        std_sub_array.append(std_names)
+        std_ids_sub_array.append(std_ids)
+      end
+      nrc_array.append(nrc_names)
+      students_array.append(std_sub_array)
+      students_id_array.append(std_ids_sub_array)
+      #nrcs = SubjectNrc.connection.execute("SELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;")
+    end
+    @classes = classes_array
+    @NRCs = nrc_array
+    @students_names = students_array
+    @students_ids = students_id_array
+
+  end
+
+  def newTransaction
+
+    params[:student].each_with_index do |user, i|
+      Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE user_id="+user+";")
+    end
+  end
+
+  def historicalTransactions
+    
+    @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id);")
+
+    #render :json => @dTransaction
   end
 
   private
