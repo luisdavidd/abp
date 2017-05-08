@@ -155,12 +155,12 @@ class DashboardController < ApplicationController
       for nrc in nrcs
         #nrc_ids.append(nrc.id)
         nrc_names.append(nrc.nrc)
-        students = UserSubject.connection.select_all("SELECT u.id, u.name, u.last_name FROM users as u, user_subjects as s WHERE s.subject_id = "+nrc.nrc.to_s+" and u.id=s.user_id;")
+        students = UserSubject.connection.select_all("SELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = "+nrc.nrc.to_s+" and u.id=s.user_id;")
         std_names = []
         std_ids = []
         for student in students
           std_ids.append(student["id"])
-          std_names.append(student["name"] +' '+student["last_name"])
+          std_names.append([student["name"],student["last_name"],student["email"],student["budget"],student["codigo"]])
         end
         std_sub_array.append(std_names)
         std_ids_sub_array.append(std_ids)
