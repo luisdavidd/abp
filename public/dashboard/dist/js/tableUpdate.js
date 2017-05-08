@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  var colum_names=[];
+  var colum_names=[]; var id_trans = 1;
   columnas = document.getElementById("students").rows[0].cells;
   for (var i = 0; i <columnas.length; i++) {
     colum_names.push(columnas[i].getAttribute("name"));
@@ -157,7 +157,7 @@ success: function(data){
         .on( 'key-focus', function ( e, datatable, cell ) {
           currCell = cell;
           row = currCell.index().row;
-          id = table.cell(row,0).data();
+          id_trans = table.cell(row,0).data();
             //var $this = $(this);
             //var $alias = $this.data('alias');
 
@@ -166,7 +166,7 @@ success: function(data){
             $.ajax({
               type: 'GET',
               url: 'userTransactions',
-              data: {'id': id},
+              data: {'id': id_trans},
               success: function(data){
               console.log('transacciones: ',data)
               for (i in data) {
@@ -223,4 +223,45 @@ success: function(data){
 
 
   }
+
+
+  //empieza transferecia
+
+  $("#transfer").click(function() {
+    amount = $("#amount").val();
+    observations = $("#observations").val();
+    students_id = id_trans;
+    nrc = $("#nrc").select2("data")[0].text;
+    /*
+    var students_id = [];
+    for (var i = 0; i < student.length; i++) {
+      students_id.push(student[i].id);
+    }*/
+    console.log(amount,observations,students_id,nrc)
+    var c_error = 0;
+    var envio = 0;
+    $.ajax({
+        type: 'GET',
+        url: 'newTransaction',
+        data: {amount:amount, observations:observations, student: id_trans, nrc:nrc},
+        success: function(){
+          console.log('wiii')
+          window.location='historicalTransactions'
+
+
+          
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+          if (c_error<1) {
+            alert("Please check your data");
+            c_error += 1;
+          }
+           
+        }
+      }); 
+    
+  });  
+
+    //termina transferencia
 } );

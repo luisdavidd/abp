@@ -47736,3 +47736,440 @@ Processing by DashboardController#userTransactions as */*
 Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.8ms)
 
 
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:09:14 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 93ms (Views: 1.3ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:09:16 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (2.9ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 17ms (Views: 3.7ms | ActiveRecord: 6.3ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-08 18:12:54 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (5.4ms)
+  Rendered dashboard/_editS.html.erb (0.4ms)
+  Rendered dashboard/_class_confg.html.erb (1.3ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (14.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 172ms (Views: 169.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:12:55 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-08 18:12:55 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 40ms (Views: 36.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:12:55 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 10ms (Views: 1.5ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:12:59 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 13ms (Views: 0.5ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:13:03 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboard/userTransactions?id=4" for 127.0.0.1 at 2017-05-08 18:13:16 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=4 or t.user_to=4) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:13:16 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/dashboard/userTransactions?id=4" for 127.0.0.1 at 2017-05-08 18:13:19 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=4 or t.user_to=4) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:13:20 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=&nrc=3207" for 127.0.0.1 at 2017-05-08 18:13:25 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"", "nrc"=>"3207"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.5ms)
+
+
+  
+NoMethodError (undefined method `each_with_index' for nil:NilClass):
+  
+app/controllers/dashboard_controller.rb:184:in `newTransaction'
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.7ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.7ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.7ms)
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (18.5ms)
+Started GET "/dashboard/newTransaction?amount=20&observations=&nrc=3207" for 127.0.0.1 at 2017-05-08 18:13:29 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"", "nrc"=>"3207"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.6ms)
+
+
+  
+NoMethodError (undefined method `each_with_index' for nil:NilClass):
+  
+app/controllers/dashboard_controller.rb:184:in `newTransaction'
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.6ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.6ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.9ms)
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (16.7ms)
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-08 18:14:44 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.7ms)
+  Rendered dashboard/_editS.html.erb (1.0ms)
+  Rendered dashboard/_class_confg.html.erb (1.6ms)
+  Rendered dashboard/_class_confg.html.erb (0.3ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (10.4ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 21ms (Views: 19.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:14:44 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-08 18:14:44 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (0.4ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:14:46 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 12ms (Views: 2.7ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:14:50 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/newTransaction?amount=20&observations=&student=3&nrc=3207" for 127.0.0.1 at 2017-05-08 18:14:56 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"20", "observations"=>"", "student"=>"3", "nrc"=>"3207"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.5ms)
+
+
+  
+NoMethodError (undefined method `each_with_index' for "3":String
+Did you mean?  each_line):
+  
+app/controllers/dashboard_controller.rb:184:in `newTransaction'
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (0.7ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.7ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (19.9ms)
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:16:53 -0500
+Processing by DashboardController#transfer as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.2ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 11ms (Views: 1.5ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:16:58 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.7ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 13ms (Views: 2.8ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/dashboard/userTransactions?id=4" for 127.0.0.1 at 2017-05-08 18:18:03 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=4 or t.user_to=4) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-08 18:18:57 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.7ms)
+  Rendered dashboard/_editS.html.erb (0.5ms)
+  Rendered dashboard/_class_confg.html.erb (1.6ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (11.0ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:18:57 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-08 18:18:57 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (0.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 10ms (Views: 1.9ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:18:58 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 14ms (Views: 3.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:19:02 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/dashboard/newTransaction?amount=10&observations=Kia&student=3&nrc=3207" for 127.0.0.1 at 2017-05-08 18:19:13 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"10", "observations"=>"Kia", "student"=>"3", "nrc"=>"3207"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.5ms)
+
+
+  
+NoMethodError (undefined method `each_with_index' for "3":String
+Did you mean?  each_line):
+  
+app/controllers/dashboard_controller.rb:184:in `newTransaction'
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_source.text.erb (1.1ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.7ms)
+  Rendering /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.8ms)
+  Rendered /home/sorelys/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (19.8ms)
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-08 18:20:57 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.1ms)
+  Rendered dashboard/_editS.html.erb (0.4ms)
+  Rendered dashboard/_class_confg.html.erb (1.3ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (8.0ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 49ms (Views: 17.9ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:20:58 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-08 18:20:58 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 28ms (Views: 12.0ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:21:00 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 28ms (Views: 2.8ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-08 18:21:04 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 12ms (Views: 0.8ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/dashboard/newTransaction?amount=10&observations=Holi&student=3&nrc=3207" for 127.0.0.1 at 2017-05-08 18:21:12 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"10", "observations"=>"Holi", "student"=>"3", "nrc"=>"3207"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 10.0, 'Holi', 3207, '2017-05-08 18:21:12', '2017-05-08 18:21:12')[0m
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (19.5ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+10 WHERE user_id=3;[0m
+  [1m[35m (1.6ms)[0m  [1m[33mUpdate users SET saldo=saldo+10 WHERE id=3;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 132ms (ActiveRecord: 43.4ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-08 18:21:12 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 35ms (Views: 8.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:21:12 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-08 18:21:18 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (2.0ms)
+  Rendered dashboard/_editS.html.erb (0.5ms)
+  Rendered dashboard/_class_confg.html.erb (1.7ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (12.4ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.5ms)
+Completed 200 OK in 29ms (Views: 24.2ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-08 18:21:18 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-08 18:21:18 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 5ms (Views: 2.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-08 18:21:20 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (0.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (0.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (0.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 12ms (Views: 3.3ms | ActiveRecord: 2.5ms)
+
+

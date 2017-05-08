@@ -181,11 +181,12 @@ class DashboardController < ApplicationController
 
   def newTransaction
 
-    params[:student].each_with_index do |user, i|
+    #params[:student].each_with_index do |user, i|
+    user = params[:student]
       Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE user_id="+user+";")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
-    end
+    #end
   end
 
   def historicalTransactions
