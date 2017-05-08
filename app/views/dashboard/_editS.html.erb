@@ -4,17 +4,53 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <script src="plugins/select2/select2.full.min.js"></script>
 
-<div class="panel panel-default">
-      <div class="panel-body"> 
-    <div class="form-group">
-          <label>Subject</label>
-          <select id="subject" class="form-control select2"  style="width: 100%;"><option></option></select>
-          <label>NRC</label>
-          <select id="nrc" class="form-control select2" style="width: 100%;"><option></option></select>
+<div class="row"> 
+<div class="col-xs-4">
+  <div class="panel panel-default">
+    <div class="panel-body"> 
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="subject" class="form-control select2"  style="width: 100%;"><option></option></select>
+        <label>NRC</label>
+        <select id="nrc" class="form-control select2" style="width: 100%;"><option></option></select>
+      </div>
     </div>
   </div>
 
+<div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">Transfer</h3>
+
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+              <div class="form-group">
+                  <label>Amount</label>
+                  <div class="input-group">
+                      <span class="input-group-addon">Amount $</span>
+                      <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="amount" value="0" min="0">
+                      <span class="input-group-addon">.00</span>
+                    </div>
+                    <div class="form-group">
+                      <label>Observations</label>
+                      <textarea id="observations" class="form-control" rows="3" placeholder="Observations"></textarea>
+                    </div>
+              </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix">
+        <button type="submit" class="btn btn-default" id="transfer">Submit</button>
+      </div>
+      <!-- /.box-footer -->
+    </div>
+
 </div>
+
+<div class="col-xs-7">
 
 <table class="display responsive" id="students" style="width:100%">      
   <thead>
@@ -29,4 +65,22 @@
     </tr>
   </thead>
 
+</table>
+
+
+</div>
+
+</div>
+
+<table class="display responsive" id="transactions_table" style="width:100%">
+  <thead>
+    <tr>
+      <!-- <th>Id</th> -->
+      <th name="user_from">From Student</th>
+      <th name="user_to">To Student</th>
+      <th name="amount">Amount</th>
+      <th name="observations">Observations</th> 
+      <th name="created_at">Date</th>
+    </tr>
+  </thead>
 </table>

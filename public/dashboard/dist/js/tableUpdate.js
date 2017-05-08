@@ -7,6 +7,10 @@ $(document).ready(function() {
   console.log(colum_names)
   //colum_names = ["id",name", "last_name", "email", "saldo", "codigo"];
   //Tabla para actualizar
+  var tableHistorics = $('#transactions_table').DataTable( {
+    responsive: true        
+    } );
+
   var table = $('#students').DataTable( {
       keys: true,
       columnDefs: [
@@ -152,6 +156,30 @@ success: function(data){
         } )
         .on( 'key-focus', function ( e, datatable, cell ) {
           currCell = cell;
+          row = currCell.index().row;
+          id = table.cell(row,0).data();
+            //var $this = $(this);
+            //var $alias = $this.data('alias');
+
+            tableHistorics.clear();
+            tableHistorics.draw();
+            $.ajax({
+              type: 'GET',
+              url: 'userTransactions',
+              data: {'id': id},
+              success: function(data){
+              console.log('transacciones: ',data)
+              for (i in data) {
+                  trans = data[i];
+                  date = Date(trans[6])
+                  date = date.split("GMT")
+                  tableHistorics.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date[0]]).draw(false);
+            }}});
+
+            // Pass clicked link element to another function
+            //myfunction($this, $alias)
+
+
         } )
         .on( 'key-blur', function ( e, datatable, cell ) {
         } )
