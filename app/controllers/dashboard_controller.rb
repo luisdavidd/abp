@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
     #generated_pass = Devise.friendly_token.first(4)
     generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
     @user = User.create!({:name=>params[:name], :last_name =>params[:last_name], :email =>params[:email], :saldo =>params[:saldo], :codigo =>params[:codigo], :password => generated_pass})
-    UserMailer.welcome_email(@user).deliver
+    #UserMailer.welcome_email(@user).deliver
   end
 
   def editStudents
@@ -33,7 +33,8 @@ class DashboardController < ApplicationController
   end
 
   def addClasses
-    class_nrc = SubjectNrc.new(:subject_id => 1)
+    # subir todo lo que se ingresa en el formulario
+    class_nrc = SubjectNrc.new(:subject_id => params[:subject_id], :nrc => params[:NRC], :user_id => current_user.id)
     class_nrc.save()
     render :json => class_nrc
   end
@@ -103,6 +104,7 @@ class DashboardController < ApplicationController
   
   def import
     file = params[:file]
+    nrc = params[:nrc]
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = row.to_hash # exclude the price field
       student = User.where({email: student_hash["Email"]+'@uninorte.edu.co'})
@@ -112,6 +114,10 @@ class DashboardController < ApplicationController
       else
         generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
         @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"]+'@uninorte.edu.co', :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass})
+        #user_subject = UserSubject.new({:user_id=>'1', :subject_id=>'1', :budget=>'0'})
+        #user_subject.save()
+        user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+@user.id.to_s+","+nrc.to_s+",now(),now())")
+        
         flash[:notice] = "Users successfully created."
         #UserMailer.welcome_email(@user).deliver
       end # end if !product.nil?
@@ -168,7 +174,9 @@ class DashboardController < ApplicationController
     @NRCs = nrc_array
     @students_names = students_array
     @students_ids = students_id_array
-
+    
+    render :json => {:classes => @classes, :NRCs => @NRCs, :students_names => @students_names, :students_ids => @students_ids}
+    
   end
 
   def newTransaction

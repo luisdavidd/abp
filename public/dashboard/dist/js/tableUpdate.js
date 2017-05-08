@@ -23,7 +23,7 @@ $(document).ready(function() {
       console.log('reload @user: ',data)
       for (i in data) {
         user = data[i];
-        console.log('user_id:', user)
+        //console.log('user_id:', user)
         table.row.add([user['id'],user['name'],user['last_name'],user['email'],user['saldo'],user['codigo']]).draw(false);
       }
       
