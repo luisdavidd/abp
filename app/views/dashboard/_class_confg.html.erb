@@ -179,43 +179,43 @@ $('#addRow').on( 'click', function () {
 
 
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
-
-<div class="row">   
-
-  <div class="col-xs-4">
-    <div class="panel panel-default">
+<div class="box-body">
+  <h2 style="align-self: center;"></h2>
+  <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"> <h3 class="panel-title">Create class</h3></div>
           <div class="panel-body"> 
-        <div class="form-group">
-          <label>Subject</label>
-          <select id="subject" class="form-control select2"  style="width: 100%;"><option></option></select>
-          <label>NRC</label>
-          <input type="number" class="form-control" id="nrc"><br>
-          <label>List of students</label>
-          <%= form_tag dashboard_import_path, :id => 'readlist',multipart: true do %>
-          <!-- <label for="filechoose" class="btn btn-default">Import File</label> -->
-          <!-- <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv', :style=>"visibility:hidden;" %> -->
-            <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv'%><br>
-          <% end %>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="subject" class="form-control select2"  style="width: 100%;"><option></option></select>
+              <label>NRC</label>
+              <input type="number" class="form-control" id="nrc"><br>
+              <label>List of students</label>
+              <%= form_tag dashboard_import_path, :id => 'readlist',multipart: true do %>
+              <!-- <label for="filechoose" class="btn btn-default">Import File</label> -->
+              <!-- <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv', :style=>"visibility:hidden;" %> -->
+                <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv'%><br>
+              <% end %>
+            </div>
+            <button id="addRow" class="btn btn-default">Add Class</button>
+          </div>
         </div>
-        <button id="addRow" class="btn btn-default">Add Class</button>
       </div>
-
+      <div class="col-md-5">
+      <table class="display responsive" id="addRowTable" style="width:100%" >
+        <thead>
+          <tr>
+            <th style="display:none" name="subject_id"></th>
+            <th name="subject_name">Name</th>
+            <th style="display:none" name="id"></th>
+            <th name="nrc">NRC</th>
+          </tr>
+        </thead>
+      </table>
     </div>
-  </div>
 
-    <div class="col-xs-6">
-    <table class="display responsive" id="addRowTable" style="width:100%" >
-      <thead>
-        <tr>
-          <th style="display:none" name="subject_id"></th>
-          <th name="subject_name">Name</th>
-          <th style="display:none" name="id"></th>
-          <th name="nrc">NRC</th>
-        </tr>
-      </thead>
-    </table>
   </div>
-
 </div>
 
 

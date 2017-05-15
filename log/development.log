@@ -48173,3 +48173,1348 @@ Processing by DashboardController#transfer as */*
 Completed 200 OK in 12ms (Views: 3.3ms | ActiveRecord: 2.5ms)
 
 
+Started GET "/" for 127.0.0.1 at 2017-05-15 14:03:24 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.6ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 282ms (Views: 268.1ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 14:03:27 -0500
+Processing by Devise::SessionsController#new as HTML
+  [1m[36mUser Load (149.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (62.3ms)
+  Rendered layouts/_messages.html.erb (1.2ms)
+Completed 200 OK in 2004ms (Views: 110.7ms | ActiveRecord: 575.9ms)
+
+
+Started GET "/users/images/blank.gif?1494875005681" for 127.0.0.1 at 2017-05-15 14:03:29 -0500
+  
+ActionController::RoutingError (No route matches [GET] "/users/images/blank.gif"):
+  
+actionpack (5.0.2) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.2) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.2) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.2) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.2) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.2) lib/rails/engine.rb:522:in `call'
+puma (3.7.1) lib/puma/configuration.rb:232:in `call'
+puma (3.7.1) lib/puma/server.rb:578:in `handle_request'
+puma (3.7.1) lib/puma/server.rb:415:in `process_client'
+puma (3.7.1) lib/puma/server.rb:275:in `block in run'
+puma (3.7.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 14:03:29 -0500
+  Rendered collection of /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_route.html.erb [43 times] (27.1ms)
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/routes/_table.html.erb (8.8ms)
+  Rendered devise/shared/_links.html.erb (2.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (15.4ms)
+  Rendering /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.0ms)
+  Rendered /home/luisdavidd/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.2/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (85.4ms)
+  Rendered layouts/_messages.html.erb (0.9ms)
+Completed 200 OK in 154ms (Views: 152.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-05-15 14:03:35 -0500
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lqOx11rrHr3SGyqkwZOGh9BCU108zyicO4CdJJc8aOv3v0u34qisYljOzXQdpdAn1eM/f5B8rmstvhTp1vqq+A==", "user"=>{"email"=>"luisdavidd@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (133.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'luisdavidd@uninorte.edu.co' ORDER BY `users`.`id` ASC LIMIT 1[0m
+Completed 401 Unauthorized in 282ms (ActiveRecord: 133.1ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lqOx11rrHr3SGyqkwZOGh9BCU108zyicO4CdJJc8aOv3v0u34qisYljOzXQdpdAn1eM/f5B8rmstvhTp1vqq+A==", "user"=>{"email"=>"luisdavidd@uninorte.edu.co", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (3.9ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 251ms (Views: 53.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-05-15 14:03:36 -0500
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (1.3ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (6.8ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 65ms (Views: 63.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2017-05-15 14:03:50 -0500
+Processing by Devise::RegistrationsController#new as HTML
+  Rendering devise/registrations/new.html.erb within layouts/application
+  Rendered devise/shared/_links.html.erb (0.9ms)
+  Rendered devise/registrations/new.html.erb within layouts/application (31.5ms)
+  Rendered layouts/_messages.html.erb (0.5ms)
+Completed 200 OK in 83ms (Views: 82.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2017-05-15 14:04:07 -0500
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5vlGG7ufieEV7Kjkfp4pVwBMcMgTp6h5yBx6PoB4uuCH5bx7A9w7Pp85TzSiqH/3Be0c6r8ULo7eIvPzwb548w==", "user"=>{"name"=>"Christian", "last_name"=>"Quintero", "codigo"=>"200054878", "email"=>"luisdavidd@uninorte.edu.co", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (131.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (143.1ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'luisdavidd@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (194.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Christian', 'Quintero', 200054878, 'luisdavidd@uninorte.edu.co', '$2a$11$0lLlPFDlO5.XFo4C.3jpfeUd/fS0EGvRc/0xmamMYAoU1LiJQ.vca', '2017-05-15 14:04:08', '2017-05-15 14:04:08')[0m
+  [1m[35m (131.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (131.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (153.1ms)[0m  [1m[33mUPDATE `users` SET `sign_in_count` = 1, `current_sign_in_at` = '2017-05-15 14:04:08', `last_sign_in_at` = '2017-05-15 14:04:08', `current_sign_in_ip` = '127.0.0.1', `last_sign_in_ip` = '127.0.0.1' WHERE `users`.`id` = 1[0m
+  [1m[35m (132.5ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/dashboard/panel
+Completed 302 Found in 1505ms (ActiveRecord: 1017.9ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:04:08 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (130.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.5ms)[0m  [1m[34mSELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id=1 and suser.subject_id = snrc.nrc and suser.id=uf.id);[0m
+  [1m[35m (131.1ms)[0m  [1m[34mSELECT COUNT(*) from transactions where (user_id=1 or user_to=1);[0m
+  Rendering dashboard/student.html.erb within layouts/panel_template
+  Rendered dashboard/student.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_student_sidebar.erb (0.3ms)
+Completed 200 OK in 547ms (Views: 7.3ms | ActiveRecord: 396.2ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:04:09 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (138.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.6ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 399ms (Views: 1.0ms | ActiveRecord: 267.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:04:29 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (132.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (128.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (129.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (146.8ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (157.8ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 1083ms (Views: 11.1ms | ActiveRecord: 825.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:04:30 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (134.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (133.6ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 591ms (Views: 1.4ms | ActiveRecord: 267.6ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:04:34 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (136.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.8ms)
+  Rendered dashboard/_editS.html.erb (0.3ms)
+  Rendered dashboard/_class_confg.html.erb (0.8ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (5.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.5ms)
+Completed 200 OK in 555ms (Views: 14.1ms | ActiveRecord: 136.6ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:04:35 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:04:35 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (130.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (133.5ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 396ms (Views: 1.1ms | ActiveRecord: 263.7ms)
+
+
+  [1m[36mUser Load (132.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (128.9ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (140.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 1621ms (Views: 2.9ms | ActiveRecord: 530.5ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:04:44 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (135.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (128.6ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 639ms (Views: 0.2ms | ActiveRecord: 264.2ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:04:47 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (132.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (135.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (130.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 597ms (Views: 0.8ms | ActiveRecord: 397.5ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:05:10 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (136.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.7ms)
+  Rendered dashboard/_editS.html.erb (0.2ms)
+  Rendered dashboard/_class_confg.html.erb (0.7ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (5.4ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 321ms (Views: 12.1ms | ActiveRecord: 136.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:05:10 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:05:10 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (135.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (130.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (132.1ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 401ms (Views: 1.1ms | ActiveRecord: 267.1ms)
+
+
+  [1m[35m (130.1ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (130.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 526ms (Views: 0.8ms | ActiveRecord: 390.8ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:05:12 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (135.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (140.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 466ms (Views: 0.2ms | ActiveRecord: 275.8ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:05:14 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (157.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (136.0ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (129.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 556ms (Views: 0.8ms | ActiveRecord: 422.9ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:06:33 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (136.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.4ms)
+  Rendered dashboard/_editS.html.erb (0.5ms)
+  Rendered dashboard/_class_confg.html.erb (0.8ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (7.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 302ms (Views: 12.6ms | ActiveRecord: 136.3ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:06:33 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:06:33 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (132.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (129.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (130.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 395ms (Views: 0.9ms | ActiveRecord: 262.2ms)
+
+
+  [1m[35m (133.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (131.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 809ms (Views: 8.5ms | ActiveRecord: 654.9ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-15 14:06:47 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (130.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (0.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 486ms (Views: 7.7ms | ActiveRecord: 259.9ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:06:48 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (132.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (147.7ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 429ms (Views: 0.9ms | ActiveRecord: 280.2ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:06:50 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (141.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.9ms)
+  Rendered dashboard/_editS.html.erb (0.2ms)
+  Rendered dashboard/_class_confg.html.erb (0.7ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (6.3ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 534ms (Views: 14.7ms | ActiveRecord: 141.4ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:06:51 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:06:51 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (131.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (132.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (301.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+  [1m[35m (301.5ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+Completed 200 OK in 722ms (Views: 1.0ms | ActiveRecord: 433.7ms)
+
+
+  [1m[36mSubject Load (132.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 816ms (Views: 2.6ms | ActiveRecord: 567.2ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:06:55 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (131.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (129.1ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (146.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[36mSubjectNrc Load (133.6ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 701ms (Views: 0.2ms | ActiveRecord: 540.7ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:07:03 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (128.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (139.4ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (134.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 542ms (Views: 1.6ms | ActiveRecord: 402.0ms)
+
+
+Started GET "/dashboard/addClasses?subject_id=1&NRC=3207" for 127.0.0.1 at 2017-05-15 14:07:26 -0500
+Processing by DashboardController#addClasses as */*
+  Parameters: {"subject_id"=>"1", "NRC"=>"3207"}
+Started POST "/dashboard/import" for 127.0.0.1 at 2017-05-15 14:07:26 -0500
+Processing by DashboardController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UJdFkyoIRnpjdW0ioggxKCYG1Je8OjIc6J/4nkDwcgd8u9VMFw7qDoe87e+28jlNKjbTSLE73xqCwqzU3g+3yQ==", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fb934a25158 @tempfile=#<Tempfile:/tmp/RackMultipart20170515-8366-1ah64ge.csv>, @original_filename="3207_IEL_4045.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"3207_IEL_4045.csv\"\r\nContent-Type: text/csv\r\n">, "nrc"=>"3207"}
+  [1m[36mUser Load (131.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (143.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (135.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'lcafanador@uninorte.edu.co'[0m
+  [1m[35m (205.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`nrc` = 3207[0m
+  [1m[35m (128.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (135.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (133.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'lcafanador@uninorte.edu.co' LIMIT 1[0m
+  [1m[36mSubject Load (135.3ms)[0m  [1m[34mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (129.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Luis', 'Afanador Pacheco', 200062804, 'lcafanador@uninorte.edu.co', '$2a$11$f/0jTi4RK5eOu3ANdgIJi.GqogbpkzsJ1PW45UWJt8fvZeDP2FtCi', '2017-05-15 14:07:27', '2017-05-15 14:07:27')[0m
+  [1m[35mSQL (127.7ms)[0m  [1m[32mINSERT INTO `subject_nrcs` (`subject_id`, `nrc`, `user_id`, `created_at`, `updated_at`) VALUES (1, 3207, 1, '2017-05-15 14:07:27', '2017-05-15 14:07:27')[0m
+  [1m[35m (136.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (136.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 1154ms (Views: 0.5ms | ActiveRecord: 1005.4ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:07:27 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[35m (134.0ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(2,3207,now(),now())[0m
+  [1m[35m (130.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'darrubla@uninorte.edu.co'[0m
+  [1m[36mUser Load (246.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.8ms)
+  Rendered dashboard/_editS.html.erb (0.3ms)
+  Rendered dashboard/_class_confg.html.erb (0.8ms)
+  Rendered dashboard/_class_confg.html.erb (0.3ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (5.6ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 398ms (Views: 19.9ms | ActiveRecord: 246.7ms)
+
+
+  [1m[35m (131.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (136.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'darrubla@uninorte.edu.co' LIMIT 1[0m
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:07:28 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:07:28 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[35mSQL (130.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Daniel', 'Arrubla Funez', 200052695, 'darrubla@uninorte.edu.co', '$2a$11$i93M.DidZqHJlo8jCAVJhuXUpnVq74Lal0XRIpH91GheVoBCKLWue', '2017-05-15 14:07:27', '2017-05-15 14:07:27')[0m
+  [1m[35m (136.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (130.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.6ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(3,3207,now(),now())[0m
+  [1m[36mUser Load (138.1ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 398ms (Views: 1.0ms | ActiveRecord: 268.8ms)
+
+
+  [1m[35m (129.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'lfavila@uninorte.edu.co'[0m
+  [1m[35m (148.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (134.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'lfavila@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Luis', 'Avila Monsalvo', 200059120, 'lfavila@uninorte.edu.co', '$2a$11$dZC.n895JZgFm/c1LtPpEuBu94clRsU1SpGNpCXTAYjd4dQrhM1Ti', '2017-05-15 14:07:28', '2017-05-15 14:07:28')[0m
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:07:29 -0500
+Processing by DashboardController#transfer as */*
+  [1m[35m (136.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (128.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (133.8ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(4,3207,now(),now())[0m
+  [1m[35m (136.5ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mUser Load (131.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (131.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'julianabonilla@uninorte.edu.co'[0m
+  [1m[36mSubject Load (194.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 1509ms (Views: 1.3ms | ActiveRecord: 459.5ms)
+
+
+  [1m[36mSubject Load (173.1ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (179.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (182.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (150.0ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'julianabonilla@uninorte.edu.co' LIMIT 1[0m
+  [1m[35m (152.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (132.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+  [1m[35mSQL (133.0ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Juliana', 'Bonilla Tapia', 200062443, 'julianabonilla@uninorte.edu.co', '$2a$11$htmmqZrObI/FCIzxyAzKmO9qtWanWNPlOvkoBjwFJ0cneSVBPnGEC', '2017-05-15 14:07:29', '2017-05-15 14:07:29')[0m
+Completed 200 OK in 906ms (Views: 0.3ms | ActiveRecord: 768.4ms)
+
+
+  [1m[35m (133.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.7ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(5,3207,now(),now())[0m
+  [1m[35m (129.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'fierroc@uninorte.edu.co'[0m
+  [1m[35m (291.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (136.1ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'fierroc@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Camilo', 'Cantillo Fierro', 200062131, 'fierroc@uninorte.edu.co', '$2a$11$Bd7.ZeETGM/uU9stJg.2A.mEbBxt2pbP9memKIz.5N6oo1WU1GbyC', '2017-05-15 14:07:31', '2017-05-15 14:07:31')[0m
+  [1m[35m (135.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (133.9ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(6,3207,now(),now())[0m
+  [1m[35m (129.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'jimesc@uninorte.edu.co'[0m
+  [1m[35m (250.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (132.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'jimesc@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (133.9ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Jimes', 'Castro Morales', 200063925, 'jimesc@uninorte.edu.co', '$2a$11$zqr03wtwHdiCNnBn388BkuoG91czpWv0jrLZDvh8HYDQt9M/Sbw/y', '2017-05-15 14:07:32', '2017-05-15 14:07:32')[0m
+  [1m[35m (149.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.3ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(7,3207,now(),now())[0m
+  [1m[35m (132.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'jdoriad@uninorte.edu.co'[0m
+  [1m[35m (126.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (128.3ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'jdoriad@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Jose', 'Doria Garcia', 200062894, 'jdoriad@uninorte.edu.co', '$2a$11$OcW1L51V0tJDT2Izsx20QOwW5zphbDC9oNVX/LUZKOyeHqIMz8Mwe', '2017-05-15 14:07:33', '2017-05-15 14:07:33')[0m
+  [1m[35m (133.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (153.6ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(8,3207,now(),now())[0m
+  [1m[35m (129.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'cefreyle@uninorte.edu.co'[0m
+  [1m[35m (234.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (134.0ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'cefreyle@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (132.9ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Camilo', 'Freyle Lopez', 200059288, 'cefreyle@uninorte.edu.co', '$2a$11$ZAtwE3hmrCEm5/sgS7EztOAMARJGW2y2UPkA7R73ZO0B.N9OeTqEC', '2017-05-15 14:07:34', '2017-05-15 14:07:34')[0m
+  [1m[35m (133.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.7ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(9,3207,now(),now())[0m
+  [1m[35m (130.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'gonzalezgarcia@uninorte.edu.co'[0m
+  [1m[35m (343.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (134.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'gonzalezgarcia@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (128.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Maria', 'Gonzalez Garcia', 200060332, 'gonzalezgarcia@uninorte.edu.co', '$2a$11$keasJuLFM/qJfSsUiheasuTLwRJgssJhSz3qRbacuCICxKNcsLINK', '2017-05-15 14:07:35', '2017-05-15 14:07:35')[0m
+  [1m[35m (136.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (137.5ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(10,3207,now(),now())[0m
+  [1m[35m (147.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'hben@uninorte.edu.co'[0m
+  [1m[35m (298.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (137.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'hben@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (129.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Ben', 'Harvey Ortega', 200064488, 'hben@uninorte.edu.co', '$2a$11$qVOlOqhq/YLO81r9O31T1eLAYseFnXtrNIhT4HrOu0AnV261GlFBm', '2017-05-15 14:07:36', '2017-05-15 14:07:36')[0m
+  [1m[35m (136.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.9ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(11,3207,now(),now())[0m
+  [1m[35m (130.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'lizkeilym@uninorte.edu.co'[0m
+  [1m[35m (318.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (136.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'lizkeilym@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.0ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Liz', 'Martinez Zabala', 200065323, 'lizkeilym@uninorte.edu.co', '$2a$11$brnSep98sQxfmV2JO5SqZuAUIIzcaSeZgZTe5d.3q7qri3lANIIDO', '2017-05-15 14:07:37', '2017-05-15 14:07:37')[0m
+  [1m[35m (135.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (135.5ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(12,3207,now(),now())[0m
+  [1m[35m (183.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'admena@uninorte.edu.co'[0m
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:07:38 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[35m (132.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (133.1ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'admena@uninorte.edu.co' LIMIT 1[0m
+  [1m[36mUser Load (131.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mSQL (129.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Andres', 'Mena Galeano', 200062302, 'admena@uninorte.edu.co', '$2a$11$u9kqbqo56GQWv32M8tIqBeGpQw1lFUvHt18WX8tI6jSRz8QmjO2vK', '2017-05-15 14:07:38', '2017-05-15 14:07:38')[0m
+  [1m[35m (129.9ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[35m (133.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSubject Load (146.6ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 544ms (Views: 1.9ms | ActiveRecord: 408.3ms)
+
+
+  [1m[35m (135.0ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(13,3207,now(),now())[0m
+  [1m[35m (130.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'sebastianllinas@uninorte.edu.co'[0m
+  [1m[35m (130.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (134.2ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'sebastianllinas@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Sebastian', 'Meza LLinas', 200064302, 'sebastianllinas@uninorte.edu.co', '$2a$11$uwtO.AcgWvKx1pgXM0yyTO.j1PGDHSRiuxqDQI57xOoofag8LSMHe', '2017-05-15 14:07:39', '2017-05-15 14:07:39')[0m
+  [1m[35m (135.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (135.7ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(14,3207,now(),now())[0m
+  [1m[35m (144.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'davidap@uninorte.edu.co'[0m
+  [1m[35m (309.2ms)[0m  [1m[35mBEGIN[0m
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:07:40 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Exists (134.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'davidap@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (144.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('David', 'Pacheco Castro', 200063787, 'davidap@uninorte.edu.co', '$2a$11$FF/3ijCy7QedHdRNcTJdeup1aRlL5SB9EgxD520GXPBT54tMT0L2W', '2017-05-15 14:07:40', '2017-05-15 14:07:40')[0m
+  [1m[36mUser Load (131.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (136.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mSubject Load (130.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[35m (132.2ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(15,3207,now(),now())[0m
+  [1m[36mSubjectNrc Load (134.7ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (129.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'neruiz@uninorte.edu.co'[0m
+  [1m[35m (202.0ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (127.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubjectNrc Load (134.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 869ms (Views: 0.6ms | ActiveRecord: 732.9ms)
+
+
+  [1m[36mUser Exists (131.1ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'neruiz@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (129.8ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Nelson', 'Ruiz Martinez', 200061948, 'neruiz@uninorte.edu.co', '$2a$11$AfcnoGIYepdWeWw2OJSPrekfPOALDRbM7z3leQDx7FLVXI9LFAnGu', '2017-05-15 14:07:41', '2017-05-15 14:07:41')[0m
+  [1m[35m (133.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (130.2ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(16,3207,now(),now())[0m
+  [1m[35m (143.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'osvaldos@uninorte.edu.co'[0m
+  [1m[35m (158.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (130.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'osvaldos@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (131.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Osvaldo', 'Salas Martinez', 200058607, 'osvaldos@uninorte.edu.co', '$2a$11$vffaELyuwIBbQxIJoynOd.D/t4WcHa2b4uObs5s7hlBIzXzpHIP4O', '2017-05-15 14:07:42', '2017-05-15 14:07:42')[0m
+  [1m[35m (133.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (139.9ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(17,3207,now(),now())[0m
+  [1m[35m (133.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'esugahara@uninorte.edu.co'[0m
+  [1m[35m (339.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (133.7ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'esugahara@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.0ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Erika', 'Sugahara Lopez', 200059239, 'esugahara@uninorte.edu.co', '$2a$11$6hYH7B49OBKjv5z.j9ODHO1lY4S5tQyhSCXbY2N1eY5mIGUDSPRo2', '2017-05-15 14:07:43', '2017-05-15 14:07:43')[0m
+  [1m[35m (137.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (166.2ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(18,3207,now(),now())[0m
+  [1m[35m (129.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'detrujillo@uninorte.edu.co'[0m
+  [1m[35m (289.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (138.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'detrujillo@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (126.9ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Daniel', 'Trujillo Florian', 200061893, 'detrujillo@uninorte.edu.co', '$2a$11$IQm3/oQdl6VgJbMXbjSzje3uhFKzOZzQQ/3IcY5NF2X6P8DpGpPjq', '2017-05-15 14:07:44', '2017-05-15 14:07:44')[0m
+  [1m[35m (134.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (135.0ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(19,3207,now(),now())[0m
+No template found for DashboardController#import, rendering head :no_content
+Completed 204 No Content in 18994ms (ActiveRecord: 16247.1ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:08:21 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (136.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.0ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (151.1ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 617ms (Views: 1.5ms | ActiveRecord: 421.3ms)
+
+
+Started GET "/dashboard/addClasses?subject_id=1&NRC=3208" for 127.0.0.1 at 2017-05-15 14:08:32 -0500
+Processing by DashboardController#addClasses as */*
+  Parameters: {"subject_id"=>"1", "NRC"=>"3208"}
+Started POST "/dashboard/import" for 127.0.0.1 at 2017-05-15 14:08:32 -0500
+Processing by DashboardController#import as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"x6bKvorp+eoFeEoAnyaEnsn2rNaVosinn3cje0Ugv2Hrilpht+9VnuGxys2L3Iz7xcarCZijJaH1Kncx2996rw==", "file"=>#<ActionDispatch::Http::UploadedFile:0x007fb92012aff8 @tempfile=#<Tempfile:/tmp/RackMultipart20170515-8366-15ey4d.csv>, @original_filename="3208_IEL_4045.csv", @content_type="text/csv", @headers="Content-Disposition: form-data; name=\"file\"; filename=\"3208_IEL_4045.csv\"\r\nContent-Type: text/csv\r\n">, "nrc"=>"3208"}
+  [1m[36mUser Load (142.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (144.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (148.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'karolaya@uninorte.edu.co'[0m
+  [1m[35m (146.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`nrc` = 3208[0m
+  [1m[35m (246.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (246.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (138.0ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'karolaya@uninorte.edu.co' LIMIT 1[0m
+  [1m[36mSubject Load (138.9ms)[0m  [1m[34mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (128.9ms)[0m  [1m[32mINSERT INTO `subject_nrcs` (`subject_id`, `nrc`, `user_id`, `created_at`, `updated_at`) VALUES (1, 3208, 1, '2017-05-15 14:08:33', '2017-05-15 14:08:33')[0m
+  [1m[35mSQL (130.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Karolay', 'Ardila Salazar', 200055337, 'karolaya@uninorte.edu.co', '$2a$11$xElkiFyxqQNytU2Dewj3Q.eV1ktdOghBm3KWwqhelvRKEv/w5wXi2', '2017-05-15 14:08:33', '2017-05-15 14:08:33')[0m
+  [1m[35m (136.4ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 1240ms (Views: 0.5ms | ActiveRecord: 941.8ms)
+
+
+  [1m[35m (137.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:08:33 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[35m (138.2ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(20,3208,now(),now())[0m
+  [1m[35m (129.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'sarengas@uninorte.edu.co'[0m
+  [1m[36mUser Load (259.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.8ms)
+  Rendered dashboard/_editS.html.erb (1.0ms)
+  Rendered dashboard/_class_confg.html.erb (0.9ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (7.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 407ms (Views: 12.7ms | ActiveRecord: 259.3ms)
+
+
+  [1m[35m (135.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (130.0ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'sarengas@uninorte.edu.co' LIMIT 1[0m
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:08:34 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[35mSQL (130.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Silvana', 'Arengas Romero', 200038047, 'sarengas@uninorte.edu.co', '$2a$11$kG55K9aTLpSlz5lWOM0JIuEbSRHJyzjWCNW/Pq5ay/V.L4ZWd7qs2', '2017-05-15 14:08:34', '2017-05-15 14:08:34')[0m
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:08:34 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[35m (143.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (136.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (131.8ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(21,3208,now(),now())[0m
+  [1m[36mUser Load (135.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (129.1ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 405ms (Views: 0.8ms | ActiveRecord: 265.4ms)
+
+
+  [1m[35m (145.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'lecervantes@uninorte.edu.co'[0m
+  [1m[35m (246.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[35m (266.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Load (265.9ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 785ms (Views: 2.3ms | ActiveRecord: 647.3ms)
+
+
+  [1m[36mUser Exists (137.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'lecervantes@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (140.8ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Luis', 'Cervantes Salcedo', 200051985, 'lecervantes@uninorte.edu.co', '$2a$11$pYT3THTYtYhIB4sOc8TLguN8kNJFiVZnVnrpPv53ceGUlFl7lopcO', '2017-05-15 14:08:35', '2017-05-15 14:08:35')[0m
+  [1m[35m (170.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (139.4ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(22,3208,now(),now())[0m
+  [1m[35m (131.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'cdimas@uninorte.edu.co'[0m
+  [1m[35m (264.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (140.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'cdimas@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Christian', 'Dimas Bermudez', 200062036, 'cdimas@uninorte.edu.co', '$2a$11$DKDmjWTVhZpGzJL0o8/lau1Rm0FRDQHdu54LvhuRTblZns7ifut3K', '2017-05-15 14:08:36', '2017-05-15 14:08:36')[0m
+  [1m[35m (134.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (133.6ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(23,3208,now(),now())[0m
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:08:36 -0500
+Processing by DashboardController#transfer as */*
+  [1m[35m (134.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'gonzalezal@uninorte.edu.co'[0m
+  [1m[35m (308.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (309.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (138.3ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mUser Exists (139.2ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'gonzalezal@uninorte.edu.co' LIMIT 1[0m
+  [1m[36mSubjectNrc Load (132.5ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35mSQL (134.2ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Luis', 'Gonzalez Moreno', 200052579, 'gonzalezal@uninorte.edu.co', '$2a$11$JRlxomBL1/XMkzDePl16KOkgqLv.q6RjHofsHlXF6tJvCTB7qlQre', '2017-05-15 14:08:37', '2017-05-15 14:08:37')[0m
+  [1m[35m (133.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (137.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (132.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[35m (137.7ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(24,3208,now(),now())[0m
+  [1m[36mSubjectNrc Load (132.6ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 1217ms (Views: 0.8ms | ActiveRecord: 978.9ms)
+
+
+  [1m[35m (127.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'djgranados@uninorte.edu.co'[0m
+  [1m[35m (301.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (140.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'djgranados@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Jorge', 'Granados Sierra', 200055730, 'djgranados@uninorte.edu.co', '$2a$11$TvJGpyMzvHNAL5E5i2CHgOZML8N.7qv/Eaj6aTEbp9IVpCddrakxy', '2017-05-15 14:08:38', '2017-05-15 14:08:38')[0m
+  [1m[35m (133.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (132.4ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(25,3208,now(),now())[0m
+  [1m[35m (129.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'ilujan@uninorte.edu.co'[0m
+  [1m[35m (329.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (135.3ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'ilujan@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (128.9ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Isabella', 'Lujan Lujan', 200055498, 'ilujan@uninorte.edu.co', '$2a$11$vTg7BxMv.rqyjGJlKeKdfe9k.Ao48EPQCQ6Q6/SRYhLhLSEX1eqk2', '2017-05-15 14:08:39', '2017-05-15 14:08:39')[0m
+  [1m[35m (161.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (132.2ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(26,3208,now(),now())[0m
+  [1m[35m (133.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'juanu@uninorte.edu.co'[0m
+  [1m[35m (287.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (138.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'juanu@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (129.6ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Juan', 'Molinares Uparela', 200012975, 'juanu@uninorte.edu.co', '$2a$11$WWpTJxrolw2R2Ne/.97vWeHCQvdVHT6QlJWuH2zR80CAD.UJliApu', '2017-05-15 14:08:40', '2017-05-15 14:08:40')[0m
+  [1m[35m (133.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (143.3ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(27,3208,now(),now())[0m
+  [1m[35m (127.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'apmanuel@uninorte.edu.co'[0m
+  [1m[35m (221.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (129.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'apmanuel@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (129.1ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Manuel', 'Peña Garcia', 200054679, 'apmanuel@uninorte.edu.co', '$2a$11$I5/gYkAwyC8GMr6.c3sKWuGHKi1zH3KATsEkH8GnTgOyXX6.6.aRS', '2017-05-15 14:08:41', '2017-05-15 14:08:41')[0m
+  [1m[35m (133.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.5ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(28,3208,now(),now())[0m
+  [1m[35m (134.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'maylingp@uninorte.edu.co'[0m
+  [1m[35m (129.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (133.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'maylingp@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (146.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Mayling', 'Perez Herrera', 200048284, 'maylingp@uninorte.edu.co', '$2a$11$hPtOxR6zPqKpkeNw1CJTW.JK735Kogc48d4GRaidYzMCH26CRMnR.', '2017-05-15 14:08:42', '2017-05-15 14:08:42')[0m
+  [1m[35m (133.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.6ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(29,3208,now(),now())[0m
+  [1m[35m (131.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'cepernett@uninorte.edu.co'[0m
+  [1m[35m (285.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (136.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'cepernett@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.4ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Carlos', 'Pernett Vidal', 200062718, 'cepernett@uninorte.edu.co', '$2a$11$YsBJztayvunj9mVbJQgU/.nh/7/VPgI6Reud6O9DPC3U0jHfCjXCO', '2017-05-15 14:08:44', '2017-05-15 14:08:44')[0m
+  [1m[35m (132.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (131.9ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(30,3208,now(),now())[0m
+  [1m[35m (133.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'fjimeneza@uninorte.edu.co'[0m
+  [1m[35m (234.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (133.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'fjimeneza@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.0ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Andres', 'Rodriguez Jimenez', 200057221, 'fjimeneza@uninorte.edu.co', '$2a$11$qUUK/930TYdr7gsL8aVmb.j9BkW2uPs2xRiwib37HRyOj5hpVKfHa', '2017-05-15 14:08:45', '2017-05-15 14:08:45')[0m
+  [1m[35m (134.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (130.9ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(31,3208,now(),now())[0m
+  [1m[35m (129.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'mgthomas@uninorte.edu.co'[0m
+  [1m[35m (304.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (138.1ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'mgthomas@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (129.7ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Manuel', 'Thomas Camargo', 200059091, 'mgthomas@uninorte.edu.co', '$2a$11$RvG9rlEFLMH2jD1XDPNbmOOnKSOz4v1axfOIuxM8LeCtlZaK4mS/6', '2017-05-15 14:08:46', '2017-05-15 14:08:46')[0m
+  [1m[35m (133.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.3ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(32,3208,now(),now())[0m
+  [1m[35m (129.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'blauren@uninorte.edu.co'[0m
+  [1m[35m (317.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (185.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'blauren@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (133.5ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Lauren', 'Torres Barrera', 200064821, 'blauren@uninorte.edu.co', '$2a$11$v0DVKPokc9SjwQ3JRq.souglBmnPYhj22V.QC1WjGOnqQuf0n6Amy', '2017-05-15 14:08:47', '2017-05-15 14:08:47')[0m
+  [1m[35m (157.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (138.5ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(33,3208,now(),now())[0m
+  [1m[35m (162.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'dduribe@uninorte.edu.co'[0m
+  [1m[35m (309.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (137.9ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'dduribe@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (130.9ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Daniel', 'Uribe Curiel', 200044946, 'dduribe@uninorte.edu.co', '$2a$11$.XMCanx4lUdpQehPiVgbK.wEkHkQ6rhHsErl0dXqQITRAhn3yHjAi', '2017-05-15 14:08:48', '2017-05-15 14:08:48')[0m
+  [1m[35m (133.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.0ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(34,3208,now(),now())[0m
+  [1m[35m (129.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`email` = 'verak@uninorte.edu.co'[0m
+  [1m[35m (133.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (145.8ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'verak@uninorte.edu.co' LIMIT 1[0m
+  [1m[35mSQL (144.3ms)[0m  [1m[32mINSERT INTO `users` (`name`, `last_name`, `codigo`, `email`, `encrypted_password`, `created_at`, `updated_at`) VALUES ('Katherine', 'Vera Torres', 200054866, 'verak@uninorte.edu.co', '$2a$11$dw05YvM7Gu0lMqfBCJnrquSDKpKBOnqF4COlk72tloUCd1Kr.65ty', '2017-05-15 14:08:49', '2017-05-15 14:08:49')[0m
+  [1m[35m (137.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.3ms)[0m  [1m[32mINSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES(35,3208,now(),now())[0m
+No template found for DashboardController#import, rendering head :no_content
+Completed 204 No Content in 17604ms (ActiveRecord: 15152.8ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:08:55 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (135.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.7ms)
+  Rendered dashboard/_editS.html.erb (0.2ms)
+  Rendered dashboard/_class_confg.html.erb (0.7ms)
+  Rendered dashboard/_class_confg.html.erb (0.3ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (6.1ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 307ms (Views: 13.0ms | ActiveRecord: 135.2ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:08:55 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:08:55 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (132.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (133.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (131.6ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 418ms (Views: 0.9ms | ActiveRecord: 263.7ms)
+
+
+  [1m[35m (135.7ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (150.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 559ms (Views: 1.8ms | ActiveRecord: 420.5ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:08:57 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (129.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (130.1ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (145.6ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (127.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (134.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (162.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 1024ms (Views: 1.2ms | ActiveRecord: 829.1ms)
+
+
+Started GET "/dashboard/userTransactions?id=20" for 127.0.0.1 at 2017-05-15 14:09:12 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"20"}
+  [1m[36mUser Load (132.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (133.0ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=20 or t.user_to=20) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 442ms (Views: 0.2ms | ActiveRecord: 265.0ms)
+
+
+Started GET "/dashboard/userTransactions?id=21" for 127.0.0.1 at 2017-05-15 14:09:13 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"21"}
+  [1m[36mUser Load (132.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (128.0ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=21 or t.user_to=21) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 402ms (Views: 0.2ms | ActiveRecord: 260.8ms)
+
+
+Started GET "/dashboard/userTransactions?id=22" for 127.0.0.1 at 2017-05-15 14:09:14 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"22"}
+  [1m[36mUser Load (141.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+Started GET "/dashboard/userTransactions?id=23" for 127.0.0.1 at 2017-05-15 14:09:14 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"23"}
+  [1m[35m (128.7ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=22 or t.user_to=22) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 465ms (Views: 0.1ms | ActiveRecord: 270.6ms)
+
+
+  [1m[36mUser Load (302.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (138.3ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=23 or t.user_to=23) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 572ms (Views: 0.1ms | ActiveRecord: 440.4ms)
+
+
+Started GET "/dashboard/userTransactions?id=25" for 127.0.0.1 at 2017-05-15 14:09:15 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"25"}
+  [1m[36mUser Load (130.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (145.6ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=25 or t.user_to=25) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 408ms (Views: 0.2ms | ActiveRecord: 275.6ms)
+
+
+Started GET "/dashboard/userTransactions?id=24" for 127.0.0.1 at 2017-05-15 14:09:15 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"24"}
+  [1m[36mUser Load (129.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (130.0ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=24 or t.user_to=24) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 391ms (Views: 0.2ms | ActiveRecord: 259.4ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:09:26 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (129.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.0ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (145.9ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 588ms (Views: 1.6ms | ActiveRecord: 404.7ms)
+
+
+Started GET "/dashboard/update_class?index=2&column=nrc&new=3209" for 127.0.0.1 at 2017-05-15 14:09:32 -0500
+Processing by DashboardController#update_class as */*
+  Parameters: {"index"=>"2", "column"=>"nrc", "new"=>"3209"}
+  [1m[36mUser Load (128.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubjectNrc Load (129.7ms)[0m  [1m[34mSELECT  `subject_nrcs`.* FROM `subject_nrcs` WHERE `subject_nrcs`.`id` = 2 ORDER BY `subject_nrcs`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.7ms)[0m  [1m[33mUPDATE `user_subjects` SET `subject_id` = 3209 WHERE `subject_id` = 3208;[0m
+  [1m[36mSubjectNrc Load (133.3ms)[0m  [1m[34mSELECT `subject_nrcs`.* FROM `subject_nrcs` WHERE `subject_nrcs`.`id` = 2[0m
+  [1m[35m (130.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Load (129.9ms)[0m  [1m[34mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (129.7ms)[0m  [1m[33mUPDATE `subject_nrcs` SET `nrc` = 3209, `updated_at` = '2017-05-15 14:09:33' WHERE `subject_nrcs`.`id` = 2[0m
+  [1m[35m (135.0ms)[0m  [1m[35mCOMMIT[0m
+No template found for DashboardController#update_class, rendering head :no_content
+Completed 204 No Content in 1267ms (ActiveRecord: 1051.6ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:09:34 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (131.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (131.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (159.5ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (134.4ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (130.8ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3209 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (144.7ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 1002ms (Views: 1.1ms | ActiveRecord: 832.7ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:09:39 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (129.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.3ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (133.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 534ms (Views: 2.6ms | ActiveRecord: 392.1ms)
+
+
+Started GET "/dashboard/update_class?index=2&column=nrc&new=3208" for 127.0.0.1 at 2017-05-15 14:09:45 -0500
+Processing by DashboardController#update_class as */*
+  Parameters: {"index"=>"2", "column"=>"nrc", "new"=>"3208"}
+  [1m[36mUser Load (132.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubjectNrc Load (134.0ms)[0m  [1m[34mSELECT  `subject_nrcs`.* FROM `subject_nrcs` WHERE `subject_nrcs`.`id` = 2 ORDER BY `subject_nrcs`.`id` ASC LIMIT 1[0m
+  [1m[35m (136.2ms)[0m  [1m[33mUPDATE `user_subjects` SET `subject_id` = 3208 WHERE `subject_id` = 3209;[0m
+  [1m[36mSubjectNrc Load (128.3ms)[0m  [1m[34mSELECT `subject_nrcs`.* FROM `subject_nrcs` WHERE `subject_nrcs`.`id` = 2[0m
+  [1m[35m (126.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mSubject Load (138.2ms)[0m  [1m[34mSELECT  `subjects`.* FROM `subjects` WHERE `subjects`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (150.8ms)[0m  [1m[33mUPDATE `subject_nrcs` SET `nrc` = 3208, `updated_at` = '2017-05-15 14:09:45' WHERE `subject_nrcs`.`id` = 2[0m
+  [1m[35m (135.6ms)[0m  [1m[35mCOMMIT[0m
+No template found for DashboardController#update_class, rendering head :no_content
+Completed 204 No Content in 1265ms (ActiveRecord: 1082.3ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:09:46 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (131.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (138.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (127.4ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (132.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (131.0ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (128.8ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 997ms (Views: 1.1ms | ActiveRecord: 789.7ms)
+
+
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:10:00 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (128.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.6ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (134.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 623ms (Views: 1.5ms | ActiveRecord: 393.0ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:10:12 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (134.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (151.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (145.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (248.5ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (140.9ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 1020ms (Views: 7.7ms | ActiveRecord: 821.0ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:10:13 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (219.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (134.0ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 649ms (Views: 2.2ms | ActiveRecord: 353.3ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:12:13 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (130.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.7ms)
+  Rendered dashboard/_editS.html.erb (0.2ms)
+  Rendered dashboard/_class_confg.html.erb (0.8ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (5.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 375ms (Views: 16.8ms | ActiveRecord: 130.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:12:14 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:12:14 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (133.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (131.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (134.5ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 401ms (Views: 1.0ms | ActiveRecord: 268.4ms)
+
+
+  [1m[35m (131.0ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (133.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 531ms (Views: 1.6ms | ActiveRecord: 396.1ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:12:15 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (128.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (134.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (129.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (132.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (129.3ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (132.8ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 922ms (Views: 1.0ms | ActiveRecord: 786.4ms)
+
+
+Started GET "/dashboard/userTransactions?id=2" for 127.0.0.1 at 2017-05-15 14:12:20 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (151.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (132.8ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=2 or t.user_to=2) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 483ms (Views: 0.2ms | ActiveRecord: 284.0ms)
+
+
+Started GET "/dashboard/newTransaction?amount=100&observations=Ejercicios+en+clase.&student=2&nrc=3207" for 127.0.0.1 at 2017-05-15 14:12:27 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"100", "observations"=>"Ejercicios en clase.", "student"=>"2", "nrc"=>"3207"}
+  [1m[36mUser Load (133.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (128.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (131.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (129.5ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 2, 100.0, 'Ejercicios en clase.', 3207, '2017-05-15 14:12:28', '2017-05-15 14:12:28')[0m
+  [1m[35m (134.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (135.0ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+100 WHERE user_id=2;[0m
+  [1m[35m (131.2ms)[0m  [1m[33mUpdate users SET saldo=saldo+100 WHERE id=2;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 1574ms (ActiveRecord: 1333.7ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-15 14:12:29 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (132.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.4ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (1.5ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 409ms (Views: 13.7ms | ActiveRecord: 261.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:12:30 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (129.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.5ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 442ms (Views: 1.1ms | ActiveRecord: 257.7ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:12:32 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (137.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.1ms)
+  Rendered dashboard/_editS.html.erb (0.5ms)
+  Rendered dashboard/_class_confg.html.erb (0.8ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (7.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 558ms (Views: 12.8ms | ActiveRecord: 137.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:12:33 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:12:33 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (130.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (132.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 393ms (Views: 1.0ms | ActiveRecord: 259.5ms)
+
+
+  [1m[35m (129.9ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (132.5ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 527ms (Views: 1.5ms | ActiveRecord: 394.7ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:12:35 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (128.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (150.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (128.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (127.4ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (133.2ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (1.3ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 871ms (Views: 7.1ms | ActiveRecord: 667.9ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:12:36 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (130.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (300.6ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 721ms (Views: 2.2ms | ActiveRecord: 430.9ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:13:13 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (132.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.0ms)
+  Rendered dashboard/_editS.html.erb (1.0ms)
+  Rendered dashboard/_class_confg.html.erb (2.0ms)
+  Rendered dashboard/_class_confg.html.erb (0.3ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (9.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 339ms (Views: 16.2ms | ActiveRecord: 132.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:13:14 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:13:14 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (130.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (135.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (144.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 410ms (Views: 0.9ms | ActiveRecord: 275.2ms)
+
+
+  [1m[35m (130.0ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (128.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 527ms (Views: 1.8ms | ActiveRecord: 394.8ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:13:15 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (132.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (129.6ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (130.0ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (157.6ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (138.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (129.6ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 1123ms (Views: 1.2ms | ActiveRecord: 817.8ms)
+
+
+Started GET "/dashboard/userTransactions?id=3" for 127.0.0.1 at 2017-05-15 14:13:22 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (128.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (130.4ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=3 or t.user_to=3) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 421ms (Views: 0.2ms | ActiveRecord: 258.7ms)
+
+
+Started GET "/dashboard/newTransaction?amount=100&observations=Ejercicios+en+clase&student=3&nrc=3207" for 127.0.0.1 at 2017-05-15 14:13:29 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"100", "observations"=>"Ejercicios en clase", "student"=>"3", "nrc"=>"3207"}
+  [1m[36mUser Load (163.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (133.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (147.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (135.7ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 3, 100.0, 'Ejercicios en clase', 3207, '2017-05-15 14:13:30', '2017-05-15 14:13:30')[0m
+  [1m[35m (133.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (138.1ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+100 WHERE user_id=3;[0m
+  [1m[35m (153.8ms)[0m  [1m[33mUpdate users SET saldo=saldo+100 WHERE id=3;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 1221ms (ActiveRecord: 1005.3ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-15 14:13:30 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (132.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.1ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (1.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 403ms (Views: 7.2ms | ActiveRecord: 261.9ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:13:31 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (134.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 669ms (Views: 1.0ms | ActiveRecord: 263.7ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:13:34 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (131.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (1.0ms)
+  Rendered dashboard/_editS.html.erb (0.3ms)
+  Rendered dashboard/_class_confg.html.erb (1.0ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (6.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.8ms)
+Completed 200 OK in 316ms (Views: 18.4ms | ActiveRecord: 131.3ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:13:35 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:13:35 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (165.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (166.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (136.6ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mUser Load (137.1ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 600ms (Views: 1.5ms | ActiveRecord: 302.5ms)
+
+
+  [1m[36mSubject Load (128.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 691ms (Views: 1.8ms | ActiveRecord: 431.0ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:13:36 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (128.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (132.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (129.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (132.8ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (130.1ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.4ms)
+Completed 200 OK in 867ms (Views: 6.9ms | ActiveRecord: 653.0ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:13:37 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (134.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (131.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 401ms (Views: 1.8ms | ActiveRecord: 265.9ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:14:07 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (137.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (126.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (134.1ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (132.3ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.8ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 850ms (Views: 6.2ms | ActiveRecord: 665.6ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:14:08 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (132.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (135.3ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 400ms (Views: 1.1ms | ActiveRecord: 267.5ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:14:28 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (130.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (0.7ms)
+  Rendered dashboard/_editS.html.erb (0.2ms)
+  Rendered dashboard/_class_confg.html.erb (0.7ms)
+  Rendered dashboard/_class_confg.html.erb (0.2ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (5.3ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 341ms (Views: 16.2ms | ActiveRecord: 130.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:14:29 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:14:29 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (129.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (131.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (132.6ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 411ms (Views: 1.1ms | ActiveRecord: 261.6ms)
+
+
+  [1m[35m (129.8ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (130.2ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 526ms (Views: 2.9ms | ActiveRecord: 391.6ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:14:30 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (128.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (129.7ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (131.3ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (147.0ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (130.9ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (128.7ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 970ms (Views: 1.2ms | ActiveRecord: 796.3ms)
+
+
+Started GET "/dashboard/userTransactions?id=20" for 127.0.0.1 at 2017-05-15 14:14:35 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"20"}
+  [1m[36mUser Load (133.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.4ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=20 or t.user_to=20) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 422ms (Views: 0.2ms | ActiveRecord: 262.6ms)
+
+
+Started GET "/dashboard/newTransaction?amount=100&observations=Ejercicios+en+clase&student=20&nrc=3208" for 127.0.0.1 at 2017-05-15 14:14:42 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"100", "observations"=>"Ejercicios en clase", "student"=>"20", "nrc"=>"3208"}
+  [1m[36mUser Load (131.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (128.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (131.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (151.0ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 20, 100.0, 'Ejercicios en clase', 3208, '2017-05-15 14:14:43', '2017-05-15 14:14:43')[0m
+  [1m[35m (134.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.7ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+100 WHERE user_id=20;[0m
+  [1m[35m (134.1ms)[0m  [1m[33mUpdate users SET saldo=saldo+100 WHERE id=20;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 1161ms (ActiveRecord: 945.8ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-15 14:14:44 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (131.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (130.0ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (1.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 405ms (Views: 7.4ms | ActiveRecord: 261.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:14:44 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (146.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (133.5ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 525ms (Views: 1.0ms | ActiveRecord: 280.1ms)
+
+
+Started GET "/dashboard/studentsHandler" for 127.0.0.1 at 2017-05-15 14:15:13 -0500
+Processing by DashboardController#studentsHandler as HTML
+  [1m[36mUser Load (144.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendering dashboard/studentsHandler.html.erb within layouts/panel_template
+  Rendered dashboard/_addS.html.erb (2.0ms)
+  Rendered dashboard/_editS.html.erb (0.5ms)
+  Rendered dashboard/_class_confg.html.erb (2.1ms)
+  Rendered dashboard/_class_confg.html.erb (0.4ms)
+  Rendered dashboard/studentsHandler.html.erb within layouts/panel_template (10.7ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 349ms (Views: 16.3ms | ActiveRecord: 144.3ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:15:14 -0500
+Processing by DashboardController#get_myskin as JSON
+Started GET "/dashboard/editClasses" for 127.0.0.1 at 2017-05-15 14:15:14 -0500
+Processing by DashboardController#editClasses as */*
+  [1m[36mUser Load (136.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (132.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 399ms (Views: 0.9ms | ActiveRecord: 265.2ms)
+
+
+  [1m[35m (136.4ms)[0m  [1m[34mSELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;[0m
+  [1m[36mSubject Load (128.8ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+Completed 200 OK in 533ms (Views: 1.8ms | ActiveRecord: 397.5ms)
+
+
+Started GET "/dashboard/transfer" for 127.0.0.1 at 2017-05-15 14:15:15 -0500
+Processing by DashboardController#transfer as */*
+  [1m[36mUser Load (131.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mSubject Load (130.0ms)[0m  [1m[34mSELECT `subjects`.* FROM `subjects`[0m
+  [1m[36mSubjectNrc Load (128.7ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 1[0m
+  [1m[35m (129.2ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3207 and u.id=s.user_id;[0m
+  [1m[35m (136.7ms)[0m  [1m[34mSELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = 3208 and u.id=s.user_id;[0m
+  [1m[36mSubjectNrc Load (133.1ms)[0m  [1m[34mSELECT id, nrc FROM `subject_nrcs` WHERE `subject_nrcs`.`subject_id` = 2[0m
+Completed 200 OK in 1065ms (Views: 1.0ms | ActiveRecord: 788.9ms)
+
+
+Started GET "/dashboard/userTransactions?id=21" for 127.0.0.1 at 2017-05-15 14:15:19 -0500
+Processing by DashboardController#userTransactions as */*
+  Parameters: {"id"=>"21"}
+  [1m[36mUser Load (131.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (172.1ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=21 or t.user_to=21) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+Completed 200 OK in 438ms (Views: 0.2ms | ActiveRecord: 303.6ms)
+
+
+Started GET "/dashboard/newTransaction?amount=50&observations=Participaci%C3%B3n+en+clase.&student=21&nrc=3208" for 127.0.0.1 at 2017-05-15 14:15:28 -0500
+Processing by DashboardController#newTransaction as */*
+  Parameters: {"amount"=>"50", "observations"=>"Participación en clase.", "student"=>"21", "nrc"=>"3208"}
+  [1m[36mUser Load (129.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (145.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (135.1ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 LIMIT 1[0m
+  [1m[35mSQL (142.5ms)[0m  [1m[32mINSERT INTO `transactions` (`user_id`, `user_to`, `amount`, `observations`, `nrc`, `created_at`, `updated_at`) VALUES (1, 21, 50.0, 'Participación en clase.', 3208, '2017-05-15 14:15:29', '2017-05-15 14:15:29')[0m
+  [1m[35m (132.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (134.0ms)[0m  [1m[33mUpdate user_subjects SET budget = budget+50 WHERE user_id=21;[0m
+  [1m[35m (134.4ms)[0m  [1m[33mUpdate users SET saldo=saldo+50 WHERE id=21;[0m
+No template found for DashboardController#newTransaction, rendering head :no_content
+Completed 204 No Content in 1358ms (ActiveRecord: 953.6ms)
+
+
+Started GET "/dashboard/historicalTransactions" for 127.0.0.1 at 2017-05-15 14:15:29 -0500
+Processing by DashboardController#historicalTransactions as HTML
+  [1m[36mUser Load (132.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (129.9ms)[0m  [1m[34mSELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id=1 or t.user_to=1) and (t.user_to=uT.id and t.user_id=uF.id);[0m
+  Rendering dashboard/historicalTransactions.html.erb within layouts/panel_template
+  Rendered dashboard/historicalTransactions.html.erb within layouts/panel_template (1.0ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 408ms (Views: 8.3ms | ActiveRecord: 262.5ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:15:30 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (132.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (130.8ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 401ms (Views: 2.5ms | ActiveRecord: 263.6ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:15:32 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (129.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (136.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (136.2ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (129.8ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (1.0ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 858ms (Views: 7.5ms | ActiveRecord: 665.7ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:15:33 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (134.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (129.2ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 596ms (Views: 2.1ms | ActiveRecord: 263.9ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:16:18 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (129.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (134.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (130.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (130.6ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (127.9ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (0.9ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.3ms)
+Completed 200 OK in 805ms (Views: 12.2ms | ActiveRecord: 653.8ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:16:19 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (136.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (137.1ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 409ms (Views: 2.2ms | ActiveRecord: 273.5ms)
+
+
+Started GET "/dashboard/panel" for 127.0.0.1 at 2017-05-15 14:16:31 -0500
+Processing by DashboardController#panel as HTML
+  [1m[36mUser Load (148.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (136.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `subject_nrcs` WHERE `subject_nrcs`.`user_id` = 1[0m
+  [1m[35m (129.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `users` WHERE `users`.`teacher` = 0[0m
+  [1m[35m (131.2ms)[0m  [1m[34mSELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id=1 and snrc.user_id=uf.id);[0m
+  [1m[35m (129.9ms)[0m  [1m[34mSELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);[0m
+  Rendering dashboard/teacher.html.erb within layouts/panel_template
+  Rendered dashboard/teacher.html.erb within layouts/panel_template (1.2ms)
+  Rendered dashboard/_teacher_sidebar.html.erb (0.2ms)
+Completed 200 OK in 906ms (Views: 7.3ms | ActiveRecord: 675.1ms)
+
+
+Started GET "/dashboard/get_myskin" for 127.0.0.1 at 2017-05-15 14:16:32 -0500
+Processing by DashboardController#get_myskin as JSON
+  [1m[36mUser Load (131.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`id` = 1 ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (128.9ms)[0m  [1m[34mSELECT `users`.`skin` FROM `users` WHERE `users`.`id` = 1[0m
+Completed 200 OK in 396ms (Views: 1.2ms | ActiveRecord: 259.9ms)
+
+

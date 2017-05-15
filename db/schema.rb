@@ -111,6 +111,5 @@ ActiveRecord::Schema.define(version: 20170410055654) do
   add_foreign_key "subject_nrcs", "subjects"
   add_foreign_key "subjects", "users"
   add_foreign_key "transactions", "users"
-  add_foreign_key "user_subjects", "subjects"
   add_foreign_key "user_subjects", "users"
 end

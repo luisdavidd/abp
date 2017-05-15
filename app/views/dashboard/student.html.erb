@@ -1,7 +1,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
+  <h1>
         Dashboard
      </h1>
      <br>
@@ -18,66 +18,66 @@
 
   <!-- Your Page Content Here -->
     <div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-		<div class="small-box bg-green" style="border-radius:12px">
-		<div class="inner">
+    <!-- small box -->
+    <div class="small-box bg-green" style="border-radius:12px">
+    <div class="inner">
 
-		  
-		  <% if user_signed_in? %>
-		  	<h3>$<%= current_user.saldo %></h3>
-		  <% end %>
-		  <p>Budget</p>
-		</div>
-		<div class="icon">
-		  <i class="ion-social-usd"></i>
-		</div>
-		<a href="#" class="small-box-footer" style="border-radius:12px">
-			<i class="fa fa-arrow-circle-right"></i>
-		</a>
-		</div>
+      
+      <% if user_signed_in? %>
+        <h3>$<%= current_user.saldo %></h3>
+      <% end %>
+      <p>Budget</p>
     </div>
-  	<div class="col-lg-4 col-xs-6">
+    <div class="icon">
+      <i class="ion-social-usd"></i>
+    </div>
+    <a href="#" class="small-box-footer" style="border-radius:12px">
+      <i class="fa fa-arrow-circle-right"></i>
+    </a>
+    </div>
+    </div>
+    <div class="col-lg-4 col-xs-6">
       <!-- small box -->
-		<div class="small-box bg-red" style="border-radius:12px">
-			<div class="inner" >
+    <div class="small-box bg-red" style="border-radius:12px">
+      <div class="inner" >
       <% @notifs.each do |nc|%>
         <h3><%= nc[0] %></h3>
       <% end %>
-			  
+        
 
-			  <p>Transactions</p>
-			</div>
-			<div class="icon">
-			  <i class="fa fa-shopping-cart"></i>
-			</div>
-			<a href="#" class="small-box-footer" style="border-radius:12px">
-			  <i class="fa fa-arrow-circle-right"></i>
-			</a>
-		</div>
+        <p>Transactions</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-shopping-cart"></i>
+      </div>
+      <a href="#" class="small-box-footer" style="border-radius:12px">
+        <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
 
     </div>
     
     <div class="col-lg-5 col-xs-6">
-		<!-- small box -->
-		<div class="small-box bg-yellow" style="border-radius:12px">
-		<div class="inner">
-		  
-		  <% if user_signed_in? %>
-		  	<h3 style="font-size:20px"><%= current_user.last_sign_in_at.to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></h3>
-		  <% end %>
-		  <br>
-		  <p>Last Signed In</p>
-		</div>
-		<div class="icon">
-		  <i class="ion ion-person"></i>
-		</div>
-		<a href="#" class="small-box-footer" style="border-radius:12px">
-		  <i class="fa fa-arrow-circle-right"></i>
-		</a>
-		</div>
-	</div>
-	<!-- /.col -->
-	        <div class="col-md-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow" style="border-radius:12px">
+    <div class="inner">
+      
+      <% if user_signed_in? %>
+        <h3 style="font-size:20px"><%= current_user.last_sign_in_at.to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></h3>
+      <% end %>
+      <br>
+      <p>Last Signed In</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-person"></i>
+    </div>
+    <a href="#" class="small-box-footer" style="border-radius:12px">
+      <i class="fa fa-arrow-circle-right"></i>
+    </a>
+    </div>
+  </div>
+  <!-- /.col -->
+          <div class="col-md-6">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Monthly Recap Report</h3>
@@ -200,7 +200,7 @@
           </div>
           <!-- /.box -->        
           </div>
-	
+  
 
 </section>
 

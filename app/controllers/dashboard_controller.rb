@@ -35,14 +35,22 @@ class DashboardController < ApplicationController
   def addClasses
     # subir todo lo que se ingresa en el formulario
     class_nrc = SubjectNrc.new(:subject_id => params[:subject_id], :nrc => params[:NRC], :user_id => current_user.id)
-    class_nrc.save()
+    nrcindb = SubjectNrc.where({nrc: params[:NRC]})
+    if(nrcindb.count==1)
+      #nrcindb.update({:nrc => params[:NRC]})
+
+    else
+      class_nrc.save()
+    end
     render :json => class_nrc
+
   end
 
   def update_class
-   @class =  SubjectNrc.where({ :id => params[:index]})
-   @class.update({params[:column] => params[:new]})
-   render :json => @class
+    @class =  SubjectNrc.where({ :id => params[:index]})
+    @user_class = UserSubject.connection.execute("UPDATE `user_subjects` SET `subject_id` = "+params[:new]+" WHERE `subject_id` = "+@class.first.nrc.to_s+";")
+    @class.update({params[:column] => params[:new]})
+   
   end
 
   def update
@@ -56,11 +64,11 @@ class DashboardController < ApplicationController
     if current_user.teacher
       @count = SubjectNrc.where(:user_id => current_user.id).count
       @numbers = User.where(:teacher=>0).count
-
+      @enrolled = SubjectNrc.connection.execute("SELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id="+current_user.id.to_s+" and snrc.user_id=uf.id);")
+      @budget_adj=Transaction.connection.execute("SELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);")
       render 'teacher'
       
     else
-      
       @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc and suser.id=uf.id);")
       @notifs = Transaction.connection.execute("SELECT COUNT(*) from transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+");")
       render 'student'
@@ -108,14 +116,17 @@ class DashboardController < ApplicationController
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = row.to_hash # exclude the price field
       student = User.where({email: student_hash["Email"]+'@uninorte.edu.co'})
-
-      if student.count == 1
+      if(student.count == 1)
+        studentinnrc = UserSubject.connection.execute("SELECT uf.name,uf.last_name from users as uf, user_subjects usub where (usub.user_id = "+student.first.id.to_s+" and usub.user_id = uf.id and usub.subject_id="+nrc.to_s+");")
         student.first.update_attributes(:name=>student_hash["Name"],:last_name=>student_hash["Last name"],:email =>student_hash["Email"]+'@uninorte.edu.co',:codigo=>student_hash["Codigo"])
+        if(studentinnrc.count==1)
+          puts("")
+        else
+          user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+student.first.id.to_s+","+nrc.to_s+",now(),now())")
+        end
       else
         generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
         @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"]+'@uninorte.edu.co', :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass})
-        #user_subject = UserSubject.new({:user_id=>'1', :subject_id=>'1', :budget=>'0'})
-        #user_subject.save()
         user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+@user.id.to_s+","+nrc.to_s+",now(),now())")
         
         flash[:notice] = "Users successfully created."

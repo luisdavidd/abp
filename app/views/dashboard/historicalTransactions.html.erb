@@ -51,7 +51,21 @@
 <script type="text/javascript">
 
 	var table = $('#transactions_table').DataTable( {
-		responsive: true	      
+		responsive: true,
+		"rowCallback": function( row, data, index ) {
+		    if ( data[0] == <%= raw '"'+current_user.name+' '+current_user.last_name+'"'%> )
+		    {
+		        $('td', row).css('background-color', '#ffe6e6');
+		        $('td:eq(2)', row).css('color', '#e60000');
+		        $('td:eq(2)', row).css('font-weight', 'bold');
+		    }
+		    else if ( data[1] == <%= raw '"'+current_user.name+' '+current_user.last_name+'"'%> )
+		    {
+		        $('td', row).css('background-color', '#e6ffe6');
+		        $('td:eq(2)', row).css('color', '#009900');
+		        $('td:eq(2)', row).css('font-weight', 'bold');
+		    }
+		}	      
 	  } );
 </script>
 
