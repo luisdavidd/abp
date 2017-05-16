@@ -127,7 +127,7 @@
         <tbody>
           <% @enrolled.each do |enroll| %>
           <tr>
-            <td><%= enroll[0] %></td>
+            <td onclick="escribe(<%= enroll[1]%>)"><%= enroll[0] %></td>
             <td><%= enroll[1] %></td>     
           </tr>
         <% end %>
@@ -152,15 +152,23 @@
 <!-- /.content -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script type="text/javascript">
+  var vnrcs;
+  function escribe(param){
+    console.log(param)
+    vnrcs = param;
+  }
   nrc_curve = [];
   labelmonths = []
   data2 = []
 
   <% @budget_adj.each do |bgclass| %>
+
     nrc_curve.push(<%= bgclass[0] %>)
     labelmonths.push(<%=bgclass[1]%>)
     data2.push(<%=bgclass[2]%>)
-  <% end %>
+  <% end %> 
+ 
+  
   
  
 </script>

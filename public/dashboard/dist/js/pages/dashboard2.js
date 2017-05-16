@@ -1,6 +1,6 @@
-$(function () {
+$(setTimeout(function(){
 
-  'use strict';
+  // 'use strict';
 
   /* ChartJS
    * -------
@@ -10,8 +10,7 @@ $(function () {
   //-----------------------
   //- MONTHLY SALES CHART -
   //-----------------------
-
- 
+  console.log(vnrcs);
   var months=["January","February","March","April","May","June","July","August","September","October","November","December"]
   var monthstring = [];
   var monthstring_r = [];
@@ -39,8 +38,6 @@ $(function () {
     ]
 
   };
-  console.log(arr[1])
-  console.log(arr)
   for(var i=0;i<arr.length;i++){
     var c = '#'+(Math.random().toString(16) + "000000").substring(2,8);
     var obj = {label:nummer_nrcs[i],fillColor:c,strokecolor:c,pointcolor:c,pointStrokeColor:c,pointHighlightFill:c,pointHighlightStroke:c,data:arr[i]}
@@ -51,7 +48,7 @@ $(function () {
       //Boolean - If we should show the scale at all
       showScale: true,
       //Boolean - Whether grid lines are shown across the chart
-      scaleShowGridLines: false,
+      scaleShowGridLines: true,
       //String - Colour of the grid lines
       scaleGridLineColor: "rgba(0,0,0,.05)",
       //Number - Width of the grid lines
@@ -65,7 +62,7 @@ $(function () {
       //Number - Tension of the bezier curve between points
       bezierCurveTension: 0.3,
       //Boolean - Whether to show a dot for each point
-      pointDot: false,
+      pointDot: true,
       //Number - Radius of each point dot in pixels
       pointDotRadius: 4,
       //Number - Pixel width of point dot stroke
@@ -77,7 +74,7 @@ $(function () {
       //Number - Pixel width of dataset stroke
       datasetStrokeWidth: 2,
       //Boolean - Whether to fill the dataset with a color
-      datasetFill: true,
+      datasetFill: false,
       //String - A legend template
       legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
       //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
@@ -91,11 +88,11 @@ $(function () {
   var salesChartCanvas = $("#salesChart").get(0).getContext("2d");
   // This will get the first returned node in the jQuery collection.
   var salesChart = new Chart(salesChartCanvas);
-  //salesChartOptions.datasetFill = false;
+  salesChartOptions.datasetFill = true;
   salesChart.Line(salesChartData, salesChartOptions);
 
 
   //---------------------------
   //- END MONTHLY SALES CHART -
   //---------------------------
-});
+},1000));

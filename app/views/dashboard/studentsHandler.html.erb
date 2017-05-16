@@ -8,12 +8,19 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/keytable/2.2.0/css/keyTable.jqueryui.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/keytable/2.1.1/css/keyTable.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.2.2/css/select.jqueryui.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js"></script>
+
+<script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.4/js/dataTables.checkboxes.min.js"></script>
+<link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.4/css/dataTables.checkboxes.css" rel="stylesheet" />
 
 <div>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#clase" aria-controls="clase" role="tab" data-toggle="tab">Classes</a></li>
-    <!-- <li role="presentation"><a href="#add_students" aria-controls="add_students" role="tab" data-toggle="tab">Add Students</a></li> -->
+    <% if current_user.superadmin==1%>
+      <!-- <li role="presentation"><a href="#add_class" aria-controls="add_class" role="tab" data-toggle="tab">Classes</a></li> -->
+    <% end %>
+    <li role="presentation" class="active"><a href="#clase" aria-controls="clase" role="tab" data-toggle="tab">Courses</a></li>
     <li role="presentation"><a href="#edit_students" aria-controls="edit_students" role="tab" data-toggle="tab">Edit Students</a></li>
     
   </ul>
@@ -23,8 +30,8 @@
     <div role="tabpanel" class="tab-pane active" id="clase">
       <p id="clases"></p>
     </div>
-    <div role="tabpanel" class="tab-pane" id="add_students">
-      <p id="addS"></p>
+    <div role="tabpanel" class="tab-pane" id="add_class">
+      <p id="addclass"></p>
     </div>
     <div role="tabpanel" class="tab-pane" id="edit_students">
       <p id="editS"></p>
@@ -34,18 +41,18 @@
 </div>
 
 <script type="text/javascript">
-$('a[aria-controls="add_students"]').on('shown.bs.tab', function (e) {
+$('a[aria-controls="add_class"]').on('shown.bs.tab', function (e) {
   e.target // newly activated tab
   e.relatedTarget // previous active tab
   $('#editS').html('');
   $('#clases').html('');
-  $('#addS').html('<%= j render 'addS' %>');  
+  $('#addclass').html('<%= j render 'addclass' %>');  
 });
 
 $('a[aria-controls="edit_students"]').on('shown.bs.tab', function (e) {
   e.target // newly activated tab
   e.relatedTarget // previous active tab
-  $('#addS').html('');
+  $('#addclass').html('');
   $('#clases').html('');
   $('#editS').html('<%= j render 'editS' %>');
 });
@@ -53,7 +60,7 @@ $('a[aria-controls="edit_students"]').on('shown.bs.tab', function (e) {
 $('a[aria-controls="clase"]').on('shown.bs.tab', function (e) {
   e.target // newly activated tab
   e.relatedTarget // previous active tab
-  $('#addS').html('');
+  $('#addclass').html('');
   $('#editS').html('');
   $('#clases').html('<%= j render 'class_confg' %>');
 });

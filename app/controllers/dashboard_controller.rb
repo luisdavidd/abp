@@ -66,6 +66,7 @@ class DashboardController < ApplicationController
       @numbers = User.where(:teacher=>0).count
       @enrolled = SubjectNrc.connection.execute("SELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id="+current_user.id.to_s+" and snrc.user_id=uf.id);")
       @budget_adj=Transaction.connection.execute("SELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);")
+      
       render 'teacher'
       
     else
@@ -190,14 +191,14 @@ class DashboardController < ApplicationController
     
   end
 
-  def newTransaction
+ def newTransaction
 
-    #params[:student].each_with_index do |user, i|
-    user = params[:student]
+    params[:student].each_with_index do |user, i|
+    #user = params[:student]
       Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE user_id="+user+";")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
-    #end
+    end
   end
 
   def historicalTransactions

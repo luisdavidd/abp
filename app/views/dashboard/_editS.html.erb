@@ -1,8 +1,10 @@
 
-<script type="text/javascript" src="dist/js/tableUpdate.js"></script>
+
 
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <script src="plugins/select2/select2.full.min.js"></script>
+
+<script type="text/javascript" src="dist/js/tableUpdate.js"></script>
 
 <div class="row"> 
   <h2 style="align-self: center;"></h2>
@@ -26,7 +28,7 @@
 </div>
 
 <div class="row"> 
-  <div class="col-md-6">
+  <div class="col-md-8">
     <div class="box box-info">
       <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
         <h3 class="box-title" style="align-self:center;font-weight:bold">Select Students</h3>
@@ -35,7 +37,8 @@
           <table class="display responsive" id="students" style="width:100%">      
             <thead>
               <tr>
-                <th style="display:none" name="id"></th>
+                <th name="check"></th>
+                <th name="id"></th>
                 <th name="name">Name</th>
                 <th name="last_name">Last Name</th>
                 <th name="email">Email</th>
@@ -49,7 +52,7 @@
       
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="box box-info">
       <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
         <h3 class="box-title" style="font-weight:bold">Transfer</h3>
@@ -59,17 +62,17 @@
       <div class="box-body">
         
         <div class="form-group">
-          <div class="col-md-6">
+          <div>
             <label>Amount</label>
             <div class="input-group">
               <span class="input-group-addon">Amount $</span>
               <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="amount" value="0" min="0">
               <span class="input-group-addon">.00</span>
             </div>
-          </div>
-          <div class="form-group">
-            <div class="col-md-6"><label>Observations</label>
-            <textarea id="observations" class="form-control" rows="3" placeholder="Observations"></textarea></div>
+            <label>Observations</label>
+            <div class="form-group">
+              <textarea id="observations" class="form-control" rows="3" placeholder="Observations"></textarea>
+            </div>
           </div>
         </div>
       </div>

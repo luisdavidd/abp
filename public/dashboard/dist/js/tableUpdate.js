@@ -11,14 +11,25 @@ $(document).ready(function() {
     responsive: true        
     } );
 
-  var table = $('#students').DataTable( {
+  var selected = [];
+  var table;
+  table = $('#students').DataTable( {
       keys: true,
       columnDefs: [
           {
-              "targets": [0],
-              "visible": false,
+              "targets": [1],
+              "visible": false
+          },
+          {
+            'targets': [0],
+            'checkboxes': {
+               'selectRow': true
+            }
           }
-      ]
+      ],
+      select: {
+            'style': 'multi'
+        }
   } );
 
 var names=[]; var id_names = []; var data2 = [];
@@ -105,17 +116,34 @@ success: function(data){
               for(j = 0; j < stdNames[i_subj[k]][i_nrc[i]].length; j++){
                 if (stdIDs[i_subj[k]][i_nrc[i]][j]) {
                   s = stdNames[i_subj[k]][i_nrc[i]][j]
-                  table.row.add([stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[2],s[3],s[4] ]).draw(false);
+                  table.row.add(["", stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[2],s[3],s[4]]).draw(true);
                   //data_stds.push({id: stdIDs[i_subj[k]][i_nrc[i]][j], text: stdNames[i_subj[k]][i_nrc[i]][j]})
                 }
               
               }
             } 
           }
-        } 
-
-
-        
+        }
+        /*
+        table = $('#students').DataTable( {
+            keys: true,
+            columnDefs: [
+                {
+                    "targets": [1],
+                    "visible": false
+                },
+                {
+                  'targets': [0],
+                  'checkboxes': {
+                     'selectRow': true
+                  }
+                }
+            ],
+            select: {
+                  'style': 'multi'
+              }
+        } );
+        */
     });
 
     //Termina select2
@@ -132,7 +160,7 @@ success: function(data){
         .on( 'key', function ( e, datatable, key, cell, originalEvent ) {
             //events.prepend( '<div>Key press: '+key+' for cell <i>'+cell.data()+'</i></div>' );
             //console.log(key);
-            if(key != 13){
+            if(key != 13 && cell.index().column != 0 && cell.index().column != colum_names.indexOf("saldo")){
               if(sw){
                 var value = cell.data();
                 if(cell.index().column == colum_names.indexOf("saldo")) {
@@ -155,9 +183,15 @@ success: function(data){
 
         } )
         .on( 'key-focus', function ( e, datatable, cell ) {
+          //console.log(table.rows( { selected: true } ).data().toArray()[0][1])
+          if(cell.index().column != 0){
+            //console.log(cell.index().column)
+            table.rows( { selected: true } ).deselect()
+          }
+          
           currCell = cell;
           row = currCell.index().row;
-          id_trans = table.cell(row,0).data();
+          id_trans = table.cell(row,1).data();
             //var $this = $(this);
             //var $alias = $this.data('alias');
 
@@ -168,12 +202,13 @@ success: function(data){
               url: 'userTransactions',
               data: {'id': id_trans},
               success: function(data){
-              console.log('transacciones: ',data)
+              //console.log('transacciones: ',data)
               for (i in data) {
                   trans = data[i];
-                  date = Date(trans[6])
-                  date = date.split("GMT")
-                  tableHistorics.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date[0]]).draw(false);
+                  
+                  date = new Date(trans[6]).toString();
+                  date = date.split("GMT")[0]
+                  tableHistorics.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date]).draw(false);
             }}});
 
             // Pass clicked link element to another function
@@ -198,7 +233,7 @@ success: function(data){
               columna = currCell.index().column;
               row = currCell.index().row;
               //indexo = document.getElementById("students").rows[row+1].cells[0].innerText;
-              indexo = table.cell(row,0).data();
+              indexo = table.cell(row,1).data();
               inputo = input;
               modified = colum_names[columna];
               console.log('fila:',row, 'columna:',columna, 'index:',indexo)
@@ -230,26 +265,24 @@ success: function(data){
   $("#transfer").click(function() {
     amount = $("#amount").val();
     observations = $("#observations").val();
-    students_id = id_trans;
+    //students_id = id_trans;
     nrc = $("#nrc").select2("data")[0].text;
-    /*
+    selectedRows = table.rows( { selected: true } ).data().toArray();
     var students_id = [];
-    for (var i = 0; i < student.length; i++) {
-      students_id.push(student[i].id);
-    }*/
+    for (var i = 0; i < selectedRows.length; i++) {
+      students_id.push(selectedRows[i][1]);
+    }
+
     console.log(amount,observations,students_id,nrc)
     var c_error = 0;
     var envio = 0;
+    //for(var i=0; i <)
     $.ajax({
         type: 'GET',
         url: 'newTransaction',
-        data: {amount:amount, observations:observations, student: id_trans, nrc:nrc},
+        data: {amount:amount, observations:observations, student: students_id, nrc:nrc},
         success: function(){
-          console.log('wiii')
           window.location='historicalTransactions'
-
-
-          
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
 

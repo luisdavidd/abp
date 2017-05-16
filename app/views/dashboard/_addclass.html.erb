@@ -1,0 +1,212 @@
+<script src="plugins/select2/select2.full.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+var names=[]; var id_names = []; var data2 = [];
+var colum_names=[];
+columnas = document.getElementById("addRowTable").rows[0].cells;
+for (var i = 0; i <columnas.length; i++) {
+colum_names.push(columnas[i].getAttribute("name"));
+}
+console.log(colum_names)
+
+var table = $('#addRowTable').DataTable( {
+  keys: true,
+  columnDefs: [
+          {
+              "targets": [0],
+              "visible": false,
+          },
+          {
+              "targets": [2],
+              "visible": false,
+          }
+   ]
+} );
+$.ajax({
+type: 'GET',
+url: 'editClasses',
+success: function(data){
+  console.log(data)
+  res_names = data['names'];
+  tabla = data['tabla']; names=[];id_names=[];
+  for (j in res_names) {
+    names.push(res_names[j]['name']);
+    id_names.push(res_names[j]['id']);
+    data2.push({id: res_names[j]['id'], text: res_names[j]['name']})
+  }
+  for (i in tabla) {
+    table.row.add(tabla[i]).draw(false);
+  }
+      //Initialize Select2 Elements
+    $("#subject").select2({
+      allowClear: true,
+      data: data2,
+      placeholder: "Select a subject"
+    });
+}
+});
+
+
+var sw = true;
+var input;
+var currCell;
+
+table
+    .on( 'key', function ( e, datatable, key, cell, originalEvent ) {
+        //events.prepend( '<div>Key press: '+key+' for cell <i>'+cell.data()+'</i></div>' );
+        //console.log(key);
+        if(key != 13){
+          if(sw){
+            var value = cell.data();
+            if(cell.index().column == colum_names.indexOf("subject_name")){
+              opciones = '';
+              for (var i = 0; i < names.length; i++) {
+                opciones = opciones + '<option value="'+id_names[i]+'" name="'+names[i]+'">'+names[i]+'</option>';
+              }
+              
+                cell.data('<select id="intro">'+ opciones +' </select>');
+                console.log(names,id_names)
+              
+            }else{
+              cell.data('<input id="intro" type="text" name="" value='+value+'>')
+            }
+          
+          $("#intro").focus();
+          sw = false;
+          table.keys.disable();
+          }
+        }else{
+          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          table.cell( ':eq('+pos+')' ).focus();
+        }
+
+    } )
+    .on( 'key-focus', function ( e, datatable, cell ) {
+      currCell = cell;
+    } )
+    .on( 'key-blur', function ( e, datatable, cell ) {
+    } )
+
+  window.onkeyup = function(e) {
+ var key = e.keyCode ? e.keyCode : e.which;
+
+
+ if (key == 13) {
+    if(sw == false){
+      row = currCell.index().row;
+      if(currCell.index().column == colum_names.indexOf("subject_name")){
+        id_input = parseInt(document.getElementById("intro").value);
+        input = names[id_names.indexOf(id_input)];
+        table.cell(row,0).data(id_input);
+        columna = 0;
+        inputo = id_input;
+      }
+      else{
+          input = document.getElementById("intro").value;
+          columna = currCell.index().column;
+          inputo = input;
+      }
+
+          currCell.data(input);
+          sw = true;
+          table.keys.enable();
+          // PARTE DE AJAX
+          indexo = table.cell(row,2).data();
+          modified = colum_names[columna];
+          $.ajax({
+            type: 'GET',
+            url: 'update_class',
+            data: ({index:indexo,column:modified,new:inputo}),
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("some error");
+            }
+          });
+          // PASAR A SIGUIENTE CELDA
+          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          table.cell( ':eq('+pos+')' ).focus();
+    }     
+ }
+}
+
+
+$('#addRow').on( 'click', function () {
+  c_error = 0;
+  subject_id = $("#subject").select2("data")[0]['id'];
+  nrc = $("#nrc").val();
+  // Parte de CSV
+    file = document.getElementById("filechoose");
+    var ext = file.value.match(/\.([^\.]+)$/)[1];
+    if(ext=='csv'){
+    $('#readlist').append('<input type="hidden" name="nrc" value="'+nrc+'" /> ');
+    $('#readlist').submit();
+    alert('Users table updated'); 
+    }else{
+       alert('Format not supported'); 
+    };
+    
+    //elem.setAttribute("aria-controls", !pressed);
+    //alert('Users upload succesfully')
+  // Fin parte de CSV
+  console.log('crear nrc',subject_id,nrc)
+    $.ajax({
+      type: 'GET',
+      url: 'addClasses',
+      data: ({subject_id: subject_id, NRC: nrc}),
+      success: function(data){
+        table.row.add([subject_id,$("#subject").select2("data")[0]['text'] ,data['id'],nrc]).draw(false);
+
+        // Recargue apenas se envíe (temporalmete, es para borrar el FORM y el problemilla con NRC)
+          window.location.reload();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        if (c_error<1) {
+          alert("Please check your data");
+          c_error += 1;
+        }
+         
+      }
+    }); 
+  } );
+
+
+  setTimeout(function(){
+    $('#noticia').remove();
+  }, 5000);
+
+} );
+</script>
+
+
+
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<div class="box-body">
+  <h2 style="align-self: center;"></h2>
+  <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading"> <h3 class="panel-title">Create Class</h3></div>
+          <div class="panel-body"> 
+            <div class="form-group">
+              <label>Subject</label>
+              <input id="subject" class="form-control select2"  style="width: 100%;">
+            </div>
+            <button id="addRow" class="btn btn-default">Add Class</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+      <table class="display responsive" id="addRowTable" style="width:100%" >
+        <thead>
+          <tr>
+            <th style="display:none" name="subject_id"></th>
+            <th name="subject_name">Name</th>
+            <th style="display:none" name="id"></th>
+            <th name="nrc">NRC</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+  </div>
+</div>
+
