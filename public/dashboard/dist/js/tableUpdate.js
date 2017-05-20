@@ -81,6 +81,8 @@ success: function(data){
       });
 
       $("#subject").change(function() {
+        tableHistorics.clear();
+        tableHistorics.draw();
         table.clear();
         table.draw();
         data_nrc = [];
@@ -103,6 +105,8 @@ success: function(data){
     });
 
     $("#nrc").change(function() {
+        tableHistorics.clear();
+        tableHistorics.draw();
         data_stds = [];
         i_nrc = $("#nrc").val();
         i_subj = $("#subject").val();
@@ -193,7 +197,7 @@ success: function(data){
           row = currCell.index().row;
           id_trans = table.cell(row,1).data();
             //var $this = $(this);
-            //var $alias = $this.data('alias');
+            //var $alias = $this.data('alias'); 
 
             tableHistorics.clear();
             tableHistorics.draw();
@@ -282,7 +286,20 @@ success: function(data){
         url: 'newTransaction',
         data: {amount:amount, observations:observations, student: students_id, nrc:nrc},
         success: function(){
-          window.location='historicalTransactions'
+          //window.location='historicalTransactions'
+            //var $this = $(this);
+            //var $alias = $this.data('alias');
+
+            tableHistorics.clear();
+            tableHistorics.draw();
+            for (var i = 0; i < selectedRows.length; i++) {
+              console.log('budget_inicial',selectedRows[i][5]);
+              filaa = table.rows( { selected: true } )[i];
+              table.cell(filaa,5).data( Number(selectedRows[i][5]) + Number(amount))
+              console.log('test:',table.cell(filaa,5).data());
+            }
+            table.rows( { selected: true } ).deselect();
+
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
 
