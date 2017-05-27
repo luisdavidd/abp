@@ -13,7 +13,7 @@
 	<div class="row">
 	
   		<div id="content" class="col-lg-12 col-md-8" style="padding-left:40px">
-  			<h2>Historical</h2>
+  			<h2>Historical Module</h2>
   			<table class="display responsive" id="transactions_table" style="width:100%">
 	        <thead>
 	          <tr>
@@ -33,7 +33,7 @@
               <td><%= transaction[2]+' ' +transaction[3] %></td>
               <td><%= transaction[4] %></td>
               <td><%= transaction[5] %></td>
-              <td><%= transaction[6] %></td>        
+              <td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>        
             </tr>
           <% end %>
 
