@@ -139,7 +139,7 @@ $('#addRow').on( 'click', function () {
     if(ext=='csv'){
     $('#readlist').append('<input type="hidden" name="nrc" value="'+nrc+'" /> ');
     $('#readlist').submit();
-    alert('Users table updated'); 
+    // alert('Users table updated');
     }else{
        alert('Format not supported'); 
     };
@@ -156,7 +156,7 @@ $('#addRow').on( 'click', function () {
         table.row.add([subject_id,$("#subject").select2("data")[0]['text'] ,data['id'],nrc]).draw(false);
 
         // Recargue apenas se envíe (temporalmete, es para borrar el FORM y el problemilla con NRC)
-          window.location.reload();
+        window.location.reload();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         if (c_error<1) {

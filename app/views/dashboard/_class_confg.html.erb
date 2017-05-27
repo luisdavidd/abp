@@ -139,7 +139,8 @@ $('#addRow').on( 'click', function () {
     if(ext=='csv'){
     $('#readlist').append('<input type="hidden" name="nrc" value="'+nrc+'" /> ');
     $('#readlist').submit();
-    alert('Users table updated'); 
+    $("#cCreat").css('visibility', 'visible');
+    $("#cCreat").show().delay(3000).fadeOut();
     }else{
        alert('Format not supported'); 
     };
@@ -198,7 +199,17 @@ $('#addRow').on( 'click', function () {
                 <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv'%><br>
               <% end %>
             </div>
-            <button id="addRow" class="btn btn-default">Add Course</button>
+            <div class="col-xs-3" style="padding-left:0px">
+              <button id="addRow" class="btn btn-default" style="height:37px">Add Course</button>  
+            </div>
+            <div class="col-md-5">
+              <div class="box box-info" id="cCreat" style="visibility:hidden;border-top-color:#dd4b39;height:35px">
+                <div class="box-header with-border" style="background-color:#dd4b39;color:#fff;height:35px;padding-top:5px">
+                  <h3 class="box-title" style="color:white;font-weight:bold;">Course created</h3>
+                </div>
+              </div> 
+            </div>
+            
           </div>
         </div>
       </div>
