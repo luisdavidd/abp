@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410055654) do
+ActiveRecord::Schema.define(version: 20170528040201) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "offer_id"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20170410055654) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["user_id"], name: "index_offers_on_user_id", using: :btree
+  end
+
+  create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.string   "elemento"
+    t.integer  "nrc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "subject_nrcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -99,6 +107,7 @@ ActiveRecord::Schema.define(version: 20170410055654) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.boolean  "superadmin",                        default: false
     t.index ["codigo"], name: "index_users_on_codigo", unique: true, using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

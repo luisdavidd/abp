@@ -1,4 +1,21 @@
 <!-- Content Header (Page header) -->
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var vnrcs;
+    nrc_curve = [];
+    labelmonths = []
+    data2 = []
+    <% @budget_adj.each do |bgclass| %>
+      nrc_curve.push(<%= bgclass[0] %>)
+      labelmonths.push(<%=bgclass[1]%>)
+      data2.push(<%=bgclass[2]%>)
+    <% end %>
+    var lLChartContent = document.getElementById('lChartcontentG');
+    lLChartContent.innerHTML = '&nbsp;';
+    $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+    dibuja() 
+  });
+</script>
 <section class="content-header">
   <h1>
       Dashboard
@@ -69,7 +86,7 @@
     <div class="box">
       <div class="box-header with-border">
         <h3 class="box-title">Monthly Recap Report</h3>
-
+        <button type="button" onclick="conmutaF()" class="btn btn-box-tool" style="font-weight:bold;padding-left:15px" >All/None</button>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
@@ -78,17 +95,14 @@
         </div>
       </div>
       <!-- /.box-header -->
-      <div class="box-body">
+      <div class="box-body" style="padding-top:0px">
         <div class="row">
-          <div class="col-md-12">
-            <p class="text-center">
-              <strong></strong>
-            </p>
-
-            <div class="chart">
+          <div class="col-md-12">        
+            <div class="chart" id="lChartcontentG">
               <!-- Sales Chart Canvas -->
-              <canvas id="salesChart" style="height: 180px;"></canvas>
+              <canvas id="lineChart" style="height: 180px;"></canvas>
             </div>
+
             <!-- /.chart-responsive -->
           </div>
           <!-- /.col -->
@@ -152,21 +166,56 @@
 <!-- /.content -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script type="text/javascript">
-  var vnrcs;
-  function escribe(param){
-    console.log(param)
-    vnrcs = param;
+  flag = 0;
+  function conmutaF(){
+    console.log(flag)
+    if(flag==0){
+      var lLChartContent = document.getElementById('lChartcontentG');
+      lLChartContent.innerHTML = '&nbsp;';
+      $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+      flag = 1
+    }else{
+      
+      var vnrcs;
+      nrc_curve = [];
+      labelmonths = []
+      data2 = []
+      <% @budget_adj.each do |bgclass| %>
+        nrc_curve.push(<%= bgclass[0] %>)
+        labelmonths.push(<%=bgclass[1]%>)
+        data2.push(<%=bgclass[2]%>)
+      <% end %>
+      var lLChartContent = document.getElementById('lChartcontentG');
+      lLChartContent.innerHTML = '&nbsp;';
+      $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+      flag = 0
+      dibuja()
+
+    }
   }
-  nrc_curve = [];
-  labelmonths = []
-  data2 = []
 
-  <% @budget_adj.each do |bgclass| %>
+  function escribe(param){
+    var vnrcs;
+    nrc_curve = [];
+    labelmonths = []
+    data2 = []
+    vnrcs = param;
+    <% @budget_adj.each do |bgclass| %>
+      if(vnrcs == <%= bgclass[0] %>){
+        nrc_curve.push(<%= bgclass[0] %>)
+        labelmonths.push(<%=bgclass[1]%>)
+        data2.push(<%=bgclass[2]%>)
+      }   
+    <% end %>
+    var lLChartContent = document.getElementById('lChartcontentG');
+    lLChartContent.innerHTML = '&nbsp;';
+    $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
 
-    nrc_curve.push(<%= bgclass[0] %>)
-    labelmonths.push(<%=bgclass[1]%>)
-    data2.push(<%=bgclass[2]%>)
-  <% end %> 
+    dibuja()
+  }
+
+ 
+  
  
   
   
