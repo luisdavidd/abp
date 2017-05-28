@@ -1,3 +1,176 @@
-<div>
-	<h2>HOLAAAA4</h2>
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<script src="plugins/select2/select2.full.min.js"></script>
+
+<div class="row"> 
+  <h2 style="align-self: center;"></h2>
+  
+  <div class="col" style="padding-left:3%; padding-right:3%" >
+    <div class="box box-info" id="prodCreated" style="visibility: hidden;display:none;border-top-color:#dd4b39">
+      <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
+        <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully created!!!</h3>
+      </div>
+    </div>
+    <div class="box box-info">
+      <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
+        <div class="form-group">
+          <div class="col-md-4" style="padding-bottom:0%">
+            <label>Subject</label>
+            <select id="subject" class="form-control"  style="width: 100%;" required><option></option></select>
+            <label style="padding-top:5%">NRC</label>
+            <select id="nrc" class="form-control" style="width: 100%;" required><option></option></select>
+          </div>
+          <div id="Inputs" style="visibility:hidden">
+            <div class="col-md-4" style="padding-bottom:0%">
+              <label>Product Name</label>
+              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Product"><option></option>
+              <div class="row">
+                <div class="col-md-8">
+                  <label style="padding-top:0%">Quantity</label>
+                </div>
+                <div class="col-md-4">
+                  <label style="padding-top:0%">Price</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input id="QuantityToggle" type="checkbox" data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
+                </div>
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input disabled="true" id="QuantityInput" type="number" class="form-control" style="width:70%;" required min=1>
+                </div>
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input id="PriceInput" type="number" class="form-control" style="width:100%;" required  min=0 step=10> 
+                </div>
+              </div><option></option>
+            </div>
+
+            <div class="col-md-4" style="padding-bottom:0%">
+              <label style="padding-top:0%">Available Until:</label>
+              <div class="row">
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input id="DateToggle" type="checkbox" data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
+                </div>
+                <div class="col-md-8" style="padding-bottom:0%">
+                  <input disabled="true" id="DateInput" class="form-control" style="width:100%;">
+                </div>
+              </div><option></option>
+
+              <div style="padding-bottom:5%"></div>
+              <button id="Release" type="button" class="btn btn-primary btn-lg btn-block">Release</button><option></option>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div> 
 </div>
+
+<script>
+  $.ajax({
+    type: 'GET',
+    url: 'transfer',
+    success: function(data){
+      var subjects = data['classes'];
+      var NRCs = data['NRCs'];
+      var data2 = [];
+      for(i = 0; i < subjects.length; i++){
+        data2.push({id: i, text: subjects[i]})
+      }
+      $("#subject").select2({
+        data: data2,
+        placeholder: "Select a subject"
+      });
+
+      $("#subject").change(function() {
+        data_nrc = [];
+        i_subj = $("#subject").val();
+        if (i_subj) {
+          for(i = 0; i < i_subj.length; i++){
+            for(j = 0; j < NRCs[i_subj[i]].length; j++){
+            data_nrc.push({id: j, text: NRCs[i_subj[i]][j]})
+            }
+          } 
+        }
+        //$("#nrc").html('<option></option>');
+        $("#nrc").select2({
+          data: data_nrc,
+          placeholder: "Select a NRC"
+        });
+
+        $("#nrc").change(function() {
+          if($(this).text() != ""){
+            $("#Inputs").css('visibility', 'visible');
+          }
+        });
+
+      });
+    }
+  });
+
+  $(function() {
+    $('#QuantityToggle').change(function() {
+      if($(this).prop('checked') == true){
+        $('#QuantityInput').prop("disabled", false); 
+      }else{
+        $('#QuantityInput').prop("disabled", true); 
+      }
+    })
+
+    $('#DateToggle').change(function() {
+      if($(this).prop('checked') == true){
+        $('#DateInput').prop("disabled", false); 
+      }else{
+        $('#DateInput').prop("disabled", true); 
+      }
+    })
+  })
+
+  $('#DateInput').datepicker({
+    format: 'mm-dd-yyyy'
+  });
+
+  $('#Release').click(function(){
+    var Due;
+    var Quant;
+    var Nam;
+    if($('#DateToggle').prop('checked') == false){
+      Due = new Date('12-31-3000 12:00:00');
+    }else{
+      Due = new Date($('#DateInput').val() + ' 12:00:00');
+    }
+    if($('#QuantityToggle').prop('checked') == false){
+      Quant = 99999;
+    }else{
+      Quant = $('#QuantityInput').val();
+    }
+
+    if($('#ProdInput').val() == ""){
+      Nam = "New Product"
+    }else{
+      Nam = $('#ProdInput').val();
+    }
+
+    var c_error = 0;
+    $.ajax({
+      type: 'GET',
+      url: 'newProduct',
+      data: {name: Nam, quantity:Quant, price: $('#PriceInput').val(), due:Due, nrc:$('#nrc').select2('data')[0].text},
+      success: function(){
+        $('#prodCreated').css('visibility', 'visible');
+        $('#prodCreated').show().delay(3000).fadeOut();
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        if (c_error<1) {
+          alert("Please check your data");
+          c_error += 1;
+        }  
+      }
+    });
+  });
+</script>

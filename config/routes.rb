@@ -25,7 +25,8 @@ Rails.application.routes.draw do
   get 'dashboard/community'
   get 'dashboard/student_historics'
   get 'dashboard/userTransactions', to: 'dashboard#userTransactions'
-  get 'dashboard/transfer' 
+  get 'dashboard/transfer'
+  get 'dashboard/newProduct' 
 
   devise_for :users
   devise_scope :user do

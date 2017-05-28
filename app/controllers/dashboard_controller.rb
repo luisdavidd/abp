@@ -65,7 +65,7 @@ class DashboardController < ApplicationController
       @count = SubjectNrc.where(:user_id => current_user.id).count
       @numbers = User.where(:teacher=>0).count
       @enrolled = SubjectNrc.connection.execute("SELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id="+current_user.id.to_s+" and snrc.user_id=uf.id);")
-      @budget_adj=Transaction.connection.execute("SELECT nrc,MONTH(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,MONTH(created_at);")
+      @budget_adj=Transaction.connection.execute("SELECT nrc,WEEK(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,WEEK(created_at);")
       
       render 'teacher'
       
@@ -206,6 +206,10 @@ class DashboardController < ApplicationController
     @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id);")
 
     #render :json => @dTransaction
+  end
+
+  def newProduct
+    Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc]})
   end
 
   private

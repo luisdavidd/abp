@@ -12,7 +12,7 @@
     <% end %>
     var lLChartContent = document.getElementById('lChartcontentG');
     lLChartContent.innerHTML = '&nbsp;';
-    $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+    $('#lChartcontentG').append('<canvas id="lineChart" height="120px"><canvas>');
     dibuja() 
   });
 </script>
@@ -87,6 +87,7 @@
       <div class="box-header with-border">
         <h3 class="box-title">Monthly Recap Report</h3>
         <button type="button" onclick="conmutaF()" class="btn btn-box-tool" style="font-weight:bold;padding-left:15px" >All/None</button>
+        <span id="courseMR" style="padding-left:30px"></span>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
           </button>
@@ -100,7 +101,7 @@
           <div class="col-md-12">        
             <div class="chart" id="lChartcontentG">
               <!-- Sales Chart Canvas -->
-              <canvas id="lineChart" style="height: 180px;"></canvas>
+              <canvas id="lineChart" style="height:120px"></canvas>
             </div>
 
             <!-- /.chart-responsive -->
@@ -168,14 +169,14 @@
 <script type="text/javascript">
   flag = 0;
   function conmutaF(){
-    console.log(flag)
     if(flag==0){
+      document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px"></span>';
       var lLChartContent = document.getElementById('lChartcontentG');
       lLChartContent.innerHTML = '&nbsp;';
-      $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+      $('#lChartcontentG').append('<canvas id="lineChart" height="120px"><canvas>');
       flag = 1
     }else{
-      
+      document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px"></span>';
       var vnrcs;
       nrc_curve = [];
       labelmonths = []
@@ -187,7 +188,7 @@
       <% end %>
       var lLChartContent = document.getElementById('lChartcontentG');
       lLChartContent.innerHTML = '&nbsp;';
-      $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+      $('#lChartcontentG').append('<canvas id="lineChart" height="120px"><canvas>');
       flag = 0
       dibuja()
 
@@ -195,6 +196,7 @@
   }
 
   function escribe(param){
+    document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px">NRC: '+param+'</span>'; 
     var vnrcs;
     nrc_curve = [];
     labelmonths = []
@@ -209,7 +211,7 @@
     <% end %>
     var lLChartContent = document.getElementById('lChartcontentG');
     lLChartContent.innerHTML = '&nbsp;';
-    $('#lChartcontentG').append('<canvas id="lineChart" height="180px"><canvas>');
+    $('#lChartcontentG').append('<canvas id="lineChart" height="120px"><canvas>');
 
     dibuja()
   }

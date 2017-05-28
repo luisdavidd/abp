@@ -14,15 +14,19 @@ function dibuja(){
   // }
   // var paletteC = ["#605ca8","#dd4b39","#337ab7","#00c0ef","#00a65a","#f39c12",""];
 
-  var months=["January","February","March","April","May","June","July","August","September","October","November","December"]
-  var monthstring = [];
-  var monthstring_r = [];
+  // var months=["January","February","March","April","May","June","July","August","September","October","November","December"]
+  // var monthstring = [];
+  // var monthstring_r = [];
+  var weekstring = []
+  var weekstring_r = []
+  var dictW = [{4:"Week 1",5:"Week 2",6:"Week 3",7:"Week 4",8:"Week 5",9:" Week 6",10:"Week 7",11:"Week 8",12:"Week 9",13:"Week 10",14:"Week 11",15:"Week 12",16:"Week 13",17:"Week 14",18:"Week 15",19:"Week 16",20:"Week 17",21:"Week 18",22:"Week 19",30:"Week 1",31:"Week 2",32:"Week 3",33:"Week 4",34:"Week 5",35:"Week 6",36:"Week 7",37:"Week 8",38:"Week 9",39:"Week 10",40:"Week 11",41:"Week 12",42:"Week 13",43:"Week 14",44:"Week 15",45:"Week 16",46:"Week 17",47:"Week 18",48:"Week 19"}] 
   for(var i=0; i < labelmonths.length; i++){
-    monthstring.push(months[labelmonths[i]-1]);
+    // monthstring.push(months[labelmonths[i]-1]);
+    weekstring.push(dictW[0][labelmonths[i]])
   }
   var nummer_nrcs = [];
   nummer_nrcs=Array.from(new Set(nrc_curve));
-  monthstring = Array.from(new Set(monthstring));
+  weekstring = Array.from(new Set(weekstring));
   var arr = []; 
   for(var i= 0; i<nummer_nrcs.length;i++){
     arr.push([]);
@@ -35,14 +39,13 @@ function dibuja(){
   
 
   var lineChartData = {
-    labels: monthstring,
+    labels: weekstring,
     datasets: [
 
     ]
 
   };
   for(var i=0;i<arr.length;i++){
-    console.log(nummer_nrcs)
     var c = '#'+(Math.random().toString(16) + "000000").substring(2,8);
     var obj = {label:nummer_nrcs[i],fillColor:c,borderWidth:1,strokecolor:c,fillOpacity:97,pointcolor:c,pointStrokeColor:c,pointHighlightFill:c,pointHighlightStroke:c,data:arr[i]}
     lineChartData.datasets.push(obj)
