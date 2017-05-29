@@ -212,6 +212,20 @@ class DashboardController < ApplicationController
     Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc]})
   end
 
+  def shopping_student
+    @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
+    @shopt = []
+    @NRCShop.each do |nrce|
+      temp = Offer.connection.select_all("SELECT name,price,due_date,quantity from offers where nrc="+nrce['subject_id'].to_s+";")
+      if temp.blank?
+      else
+        @shopt.append(temp)
+      end
+      
+    end
+    # render :json => @NRCShop
+  end
+
   private
 
   def user_params

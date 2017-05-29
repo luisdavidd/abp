@@ -1,0 +1,63 @@
+<section class="content"> 
+ <div class="col-lg-5 col-xs-6">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Wells available</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+        
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding">
+        <table class="table responsive">
+        <thead>
+          <tr>
+            <!-- <th>Id</th> -->
+            <th name="concept">Concept</th>
+            <th name="price">Price</th>
+            <th name="action">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @shopt.first.each do |shopT| %>
+          <tr>
+            <td><%= shopT['name'] %></td>
+            <td><%= shopT['price'] %></td>
+            <!-- Es necesario mandar <%=shopT['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p')%> pero no me funciona :( ) -->
+            <td><button type="button" onclick="buyP(<%= shopT['price']%>,<%=shopT['quantity']%>)" class="badge bg-green">Buy</button></td>      
+          </tr>
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <li><a href="#">&laquo;</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- /.box -->        
+    </div>
+</section>
+<script type="text/javascript">
+	function buyP(Price,DD,QTT){
+		console.log(DD)
+		console.log(QTT)
+		saldo = <%= @NRCShop.first['budget'] %>
+		valor = Price
+		if(saldo>Price){
+			console.log("Ok puedes comprar")
+		}else{
+			console.log("Sin plata suficiente bro")
+		}
+	}
+</script>

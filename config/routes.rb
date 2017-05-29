@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'dashboard/panel', :to => 'devise/registrations#new'
   get 'dashboard/newTransaction'
   get 'dashboard/historicalTransactions'
-
+  get 'dashboard/shopping_student'
   # Only for professors
   get 'dashboard/studentsHandler'
   get 'dashboard/shopping_teacher'
