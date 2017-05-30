@@ -3,6 +3,9 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
   layout 'panel_template'
 
+  def delete_product
+    Offer.connection.execute("DELETE FROM offers WHERE name='"+params[:id]+"';")
+  end
   # Only for Professors
   def studentsHandler
     if current_user.teacher
@@ -57,6 +60,12 @@ class DashboardController < ApplicationController
    @user =  User.where({ :id => params[:index]})
    @user.update({params[:column] => params[:new]})
    render :json => @user
+  end
+
+  def shopping_teacher_Handler
+    products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0);")
+    students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
+    render :json => {:products => products, :students => students}
   end
 
   # For everyone:
