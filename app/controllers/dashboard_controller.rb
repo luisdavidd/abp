@@ -192,7 +192,6 @@ class DashboardController < ApplicationController
   end
 
  def newTransaction
-
     params[:student].each_with_index do |user, i|
     #user = params[:student]
       Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
@@ -216,7 +215,7 @@ class DashboardController < ApplicationController
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
     @shopt = []
     @NRCShop.each do |nrce|
-      temp = Offer.connection.select_all("SELECT name,price,due_date,quantity from offers where nrc="+nrce['subject_id'].to_s+";")
+      temp = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0);")
       if temp.blank?
       else
         @shopt.append(temp)
@@ -224,6 +223,16 @@ class DashboardController < ApplicationController
       
     end
     # render :json => @NRCShop
+  end
+
+  def buyProduct
+  	product = Offer.connection.select_all("SELECT * from offers where id="+params[:product_id]+";").first
+  	observation = "Purchase of "+ product['name']
+  	amount = product['price'].to_s
+  	#por aqui botará error
+  	Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
+    UserSubject.connection.execute("Update user_subjects SET budget = budget-"+amount+" WHERE user_id="+current_user.id.to_s+";")
+    User.connection.execute("Update users SET saldo=saldo-"+amount+" WHERE id="+current_user.id.to_s+";")
   end
 
   private

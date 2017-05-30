@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'dashboard/newTransaction'
   get 'dashboard/historicalTransactions'
   get 'dashboard/shopping_student'
+  get 'dashboard/buyProduct'
   # Only for professors
   get 'dashboard/studentsHandler'
   get 'dashboard/shopping_teacher'
