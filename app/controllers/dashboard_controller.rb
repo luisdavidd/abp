@@ -70,7 +70,7 @@ class DashboardController < ApplicationController
       render 'teacher'
       
     else
-      @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and suser.id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc and suser.id=uf.id);")
+      @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
       @notifs = Transaction.connection.execute("SELECT COUNT(*) from transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+");")
       render 'student'
     end
@@ -212,6 +212,7 @@ class DashboardController < ApplicationController
   end
 
   def shopping_student
+    @SIP = Product.connection.select_all("SELECT elemento,nrc,created_at from products where user_id="+current_user.id.to_s+";")
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
     @shopt = []
     @NRCShop.each do |nrce|
@@ -222,7 +223,7 @@ class DashboardController < ApplicationController
       end
       
     end
-    # render :json => @NRCShop
+    # render :json => @SIP[0]['elemento']
   end
 
   def buyProduct
@@ -233,6 +234,8 @@ class DashboardController < ApplicationController
   	Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
     UserSubject.connection.execute("Update user_subjects SET budget = budget-"+amount+" WHERE user_id="+current_user.id.to_s+";")
     User.connection.execute("Update users SET saldo=saldo-"+amount+" WHERE id="+current_user.id.to_s+";")
+    Product.create!({:user_id=>current_user.id,:elemento =>observation,:nrc=>product['nrc']})
+    Offer.connection.execute("Update offers SET quantity=quantity-1 where id="+params[:product_id]+";")
   end
 
   private

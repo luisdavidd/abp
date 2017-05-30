@@ -1,62 +1,109 @@
 <section class="content"> 
 
-<div class="box box-info" id="prodBought" style="visibility: hidden;display:none;border-top-color:#dd4b39">
-  <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
-    <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully bought!!!</h3>
-  </div>
-</div> 
+	<div class="box box-info" id="prodBought" style="visibility: hidden;display:none;border-top-color:#dd4b39">
+	  <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
+	    <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully bought!!!</h3>
+	  </div>
+	</div> 
 
- <div class="col-lg-5 col-xs-6">
-    <div class="box">
-      <div class="box-header">
-        <h3 class="box-title">Wells available</h3>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-          </button>
+	<div class="col-lg-5 col-xs-6">
+	    <div class="box">
+	      <div class="box-header">
+	        <h3 class="box-title">Goods available</h3>
+	        <div class="box-tools pull-right">
+	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          </button>
 
-          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-        
-      </div>
-      <!-- /.box-header -->
-      <div class="box-body no-padding">
-        <table class="table responsive">
-        <thead>
-          <tr>
-            <!-- <th>Id</th> -->
-            <th name="concept">Concept</th>
-            <th name="price">Price</th>
-            <th name="available">Due date</th>
-            <th name="action">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @shopt.first.each do |shopT| %>
-          <tr>
-            <td style="display:none;"><%= shopT['id'] %></td>
-            <td><%= shopT['name'] %></td>
-            <td><%= shopT['price'] %></td>
-            <td><%= shopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
-            <!-- Es necesario mandar <%=shopT['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p')%> pero no me funciona :( ) -->
-            <td><button type="button" onclick="buyP(<%= shopT['id'] %>, <%= shopT['price']%>,<%=shopT['quantity']%>)" class="badge bg-green">Buy</button></td>
-          </tr>
-        <% end %>
-        </tbody>
-        </table>
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer clearfix">
-        <ul class="pagination pagination-sm no-margin pull-right">
-          <li><a href="#">&laquo;</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">&raquo;</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- /.box -->        
-    </div>
+	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        </div>
+	        
+	      </div>
+	      <!-- /.box-header -->
+	      <div class="box-body no-padding">
+	        <table class="table responsive">
+	        <thead>
+	          <tr>
+	            <!-- <th>Id</th> -->
+	            <th name="concept">Concept</th>
+	            <th name="price">Price</th>
+	            <th name="available">Due date</th>
+	            <th name="action">Action</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <% @shopt.first.each do |shopT| %>
+	          <tr>
+	            <td style="display:none;"><%= shopT['id'] %></td>
+	            <td><%= shopT['name'] %></td>
+	            <td><%= shopT['price'] %></td>
+	            <td><%= shopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+	            <!-- Es necesario mandar <%=shopT['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p')%> pero no me funciona :( ) -->
+	            <td><button type="button" onclick="buyP(<%= shopT['id'] %>, <%= shopT['price']%>,<%=shopT['quantity']%>)" class="badge bg-green">Buy</button></td>
+	          </tr>
+	        <% end %>
+	        </tbody>
+	        </table>
+	      </div>
+	      <!-- /.box-body -->
+	      <div class="box-footer clearfix">
+	        <ul class="pagination pagination-sm no-margin pull-right">
+	          <li><a href="#">&laquo;</a></li>
+	          <li><a href="#">1</a></li>
+	          <li><a href="#">2</a></li>
+	          <li><a href="#">3</a></li>
+	          <li><a href="#">&raquo;</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- /.box -->        
+	</div>
+	<div class="col-lg-5 col-xs-6">
+	    <div class="box">
+	      <div class="box-header">
+	        <h3 class="box-title">Goods in Posession</h3>
+	        <div class="box-tools pull-right">
+	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          </button>
+
+	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        </div>
+	        
+	      </div>
+	      <!-- /.box-header -->
+	      <div class="box-body no-padding">
+	        <table class="table responsive">
+	        <thead>
+	          <tr>
+	            <!-- <th>Id</th> -->
+	            <th name="element">Element</th>
+	            <th name="nrc">NRC</th>
+	            <th name="created_at">Created at</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	          <% @SIP.each do |possST| %>
+	          <tr>
+	            <td><%= possST['elemento'] %></td>
+	            <td><%= possST['nrc'] %></td>
+	            <td><%= possST['created_at'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+	          </tr>
+	        <% end %>
+	        </tbody>
+	        </table>
+	      </div>
+	      <!-- /.box-body -->
+	      <div class="box-footer clearfix">
+	        <ul class="pagination pagination-sm no-margin pull-right">
+	          <li><a href="#">&laquo;</a></li>
+	          <li><a href="#">1</a></li>
+	          <li><a href="#">2</a></li>
+	          <li><a href="#">3</a></li>
+	          <li><a href="#">&raquo;</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- /.box -->        
+	</div>
 </section>
 <script type="text/javascript">
 	function buyP(id,Price,DD,QTT){
@@ -64,7 +111,7 @@
 		console.log(QTT)
 		saldo = <%= @NRCShop.first['budget'] %>
 		valor = Price
-		if(saldo>Price){
+		if(saldo>=Price){
 			console.log("Ok puedes comprar")
       //Empieza el ajax
       $.ajax({
