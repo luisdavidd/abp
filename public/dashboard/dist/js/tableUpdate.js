@@ -201,10 +201,11 @@ success: function(data){
 
             tableHistorics.clear();
             tableHistorics.draw();
+            console.log("Soy nrc",$("#nrc").select2("data")[0]['text'])
             $.ajax({
               type: 'GET',
               url: 'userTransactions',
-              data: {'id': id_trans},
+              data: {'id': id_trans,'nrcito':$("#nrc").select2("data")[0]['text']},
               success: function(data){
               //console.log('transacciones: ',data)
               for (i in data) {
@@ -286,17 +287,13 @@ success: function(data){
         url: 'newTransaction',
         data: {amount:amount, observations:observations, student: students_id, nrc:nrc},
         success: function(){
-          //window.location='historicalTransactions'
-            //var $this = $(this);
-            //var $alias = $this.data('alias');
-
             tableHistorics.clear();
             tableHistorics.draw();
+            filaa = table.rows( { selected: true } )[0];
             for (var i = 0; i < selectedRows.length; i++) {
               console.log('budget_inicial',selectedRows[i][5]);
-              filaa = table.rows( { selected: true } )[i];
-              table.cell(filaa,5).data( Number(selectedRows[i][5]) + Number(amount))
-              console.log('test:',table.cell(filaa,5).data());
+              table.cell(filaa[i],5).data( Number(selectedRows[i][5]) + Number(amount))
+              console.log('test:',table.cell(filaa[i],5).data());
             }
             table.rows( { selected: true } ).deselect();
 

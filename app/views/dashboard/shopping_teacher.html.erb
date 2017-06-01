@@ -183,7 +183,6 @@
 
         data_nrc = [];
         i_subj = $("#subject").val();
-        console.log(i_subj)
         if (i_subj) {
           for(i = 0; i < i_subj.length; i++){
             for(j = 0; j < NRCs[i_subj[i]].length; j++){
@@ -215,27 +214,19 @@ function reload(bandera, tabla) {
     url: 'shopping_teacher_Handler',
     data: {nrc: $('#nrc').select2('data')[0].text, reload: bandera, offer_type: tabla},
     success: function(data){
-      console.log('entro a reload')
       s = ['name','price','due_date']
-      console.log(data)
       table = document.getElementById(tabla + "_availables");
       if (bandera == false) {
         $(tabla + "_availables").remove();
-
         table.innerHTML = '<tr><th name="concept">Concept</th><th name="price">Price</th><th name="available">Due date</th><th name="action">Action</th></tr>';
       }      
       
       products = data['products'];
-      console.log(products)
-
       table = document.getElementById(tabla + "_availables");
-      console.log(table)
       for (var i = 0; i < products.length; i++) {
-        
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
         row.id = products[i]['id']
-        console.log("Row: ",row.id)
         // Intento de guardar el id del producto
         var temp = new Date(products[i]['due_date'])
         products[i]['due_date'] = String(temp).split('GMT')[0] //Intentando que la fecha se vea bien
@@ -243,33 +234,35 @@ function reload(bandera, tabla) {
         for (var j = 0; j < 3; j++) {
           var cell = row.insertCell(j);
           cell.innerHTML = products[i][s[j]];
-          console.log(products[i][s[j]])
         }   
         var cell = row.insertCell(3);    
-        cell.innerHTML= "<button type='button' onclick='deleteP("+rowCount+")' class='badge bg-red'>Delete</button>";
+        cell.innerHTML= "<button type='button' onclick='deleteP("+rowCount+",table.id)' class='badge bg-red'>Delete</button>";
       }        
 
     } // aqui termina success
   }); // aqui termina ajax
 }
 
- function deleteP(indice) {
-    tablas = ["g","s"]
-    for (var k = 0; k < tablas.length; k++) {
-      table = document.getElementById(tablas[k] + "_availables")
-      data = table.rows[indice].id
-      table.deleteRow(indice);
-      var rowCount = table.rows.length;
-      for (var i = indice; i < rowCount.length+1; i++) {
-        table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteP("+i+")' class='badge bg-red'>Delete</button>"
-      }
-      $.ajax({
-        type: 'GET',
-        url: 'delete_product',
-        data: {id: data},
-        success: function(data){      }
-      });      
-    }    
+ function deleteP(indice,param2) {
+    if(param2 == "g_availables"){
+      dident = "g"
+    }else{
+      dident = "s"
+    }
+    table = document.getElementById(dident + "_availables")
+    data = table.rows[indice].id
+    table.deleteRow(indice);
+    var rowCount = table.rows.length;
+    for (var i = indice; i < rowCount.length+1; i++) {
+      table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteP("+i+",table.id)' class='badge bg-red'>Delete</button>"
+    }
+    $.ajax({
+      type: 'GET',
+      url: 'delete_product',
+      data: {id: data},
+      success: function(data){      }
+    });      
+       
  }
 
 
@@ -321,8 +314,11 @@ function reload(bandera, tabla) {
       url: 'newProduct',
       data: {name: Nam, quantity:Quant, price: $('#PriceInput').val(), offer_type: $('#TypeInput').prop('checked'),due:Due, nrc:$('#nrc').select2('data')[0].text},
       success: function(){
-        reload(true,"g");
-        reload(true,"s");
+        if($('#TypeInput').prop('checked')==false){
+          reload(true,"g");
+        }else{
+          reload(true,"s"); 
+        }
         $('#prodCreated').css('visibility', 'visible');
         $('#prodCreated').show().delay(3000).fadeOut();
 

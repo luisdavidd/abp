@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'dashboard/shopping_student'
   get 'dashboard/buyProduct'
   get 'dashboard/delete_product'
+  get 'dashboard/getBudget'
   # Only for professors
   get 'dashboard/studentsHandler'
   get 'dashboard/shopping_teacher'

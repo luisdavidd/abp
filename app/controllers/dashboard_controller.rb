@@ -161,7 +161,7 @@ class DashboardController < ApplicationController
 
   def userTransactions
     #@trans_user =  Transaction.where({ :user_id => })
-    @trans_user = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+params[:id]+" or t.user_to="+params[:id]+") and (t.user_to=uT.id and t.user_id=uF.id);")
+    @trans_user = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+params[:id]+" or t.user_to="+params[:id]+") and (t.user_to=uT.id and t.user_id=uF.id) and t.nrc="+params[:nrcito]+";")
     render :json => @trans_user
   end
 
@@ -214,7 +214,7 @@ class DashboardController < ApplicationController
     params[:student].each_with_index do |user, i|
     #user = params[:student]
       Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
-      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE user_id="+user+";")
+      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
     end
   end
@@ -235,15 +235,27 @@ class DashboardController < ApplicationController
       Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
   end
 
+  def getBudget
+    bget = UserSubject.connection.select_all("SELECT budget from user_subjects where(user_id="+current_user.id.to_s+" and subject_id = '"+params[:nrc]+"');")
+    render :json => bget[0]['budget']
+  end
+
   def shopping_student
-    @SIP = Product.connection.select_all("SELECT elemento,nrc,created_at from products where user_id="+current_user.id.to_s+";")
+    @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good');")
+    @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service');")
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
-    @shopt = []
+    @shoptG = []
+    @shoptS = []
     @NRCShop.each do |nrce|
-      temp = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0);")
-      if temp.blank?
+      tempG = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='good');")
+      tempS = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='service');")
+      if tempG.blank?
       else
-        @shopt.append(temp)
+        @shoptG.append(tempG)
+      end
+      if tempS.blank?
+      else
+        @shoptS.append(tempS)
       end
       
     end
@@ -252,14 +264,27 @@ class DashboardController < ApplicationController
 
   def buyProduct
   	product = Offer.connection.select_all("SELECT * from offers where id="+params[:product_id]+";").first
-  	observation = product['name']
-  	amount = product['price'].to_s
-  	#por aqui botará error
-  	Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
-    UserSubject.connection.execute("Update user_subjects SET budget = budget-"+amount+" WHERE user_id="+current_user.id.to_s+";")
-    User.connection.execute("Update users SET saldo=saldo-"+amount+" WHERE id="+current_user.id.to_s+";")
-    Product.create!({:user_id=>current_user.id,:elemento =>observation,:nrc=>product['nrc']})
-    Offer.connection.execute("Update offers SET quantity=quantity-1 where id="+params[:product_id]+";")
+    observation = product['name']
+    amount = product['price'].to_s
+
+    verifAd = Product.connection.select_all("SELECT offer_id from products where(user_id="+current_user.id.to_s+" and offer_id="+product['id'].to_s+");")
+    puts verifAd.count == 0
+    if(verifAd.count == 0)
+      @buy = Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
+      if @buy.save
+        UserSubject.connection.execute("Update user_subjects SET budget = budget-"+amount+" WHERE(user_id="+current_user.id.to_s+" and subject_id="+product['nrc'].to_s+");")
+        User.connection.execute("Update users SET saldo=saldo-"+amount+" WHERE id="+current_user.id.to_s+";")
+        Product.create!({:offer_id=>product['id'],:user_id=>current_user.id,:elemento =>observation,:nrc=>product['nrc'],:product_type =>product['offer_type']})
+        Offer.connection.execute("Update offers SET quantity=quantity-1 where id="+params[:product_id]+";")
+      end
+      flash[:success] = "Product succesfully bought!!!"
+    else
+      flash[:error] = "Sorry... Product already bought!!!"
+      
+    end
+  	
+    
+
   end
 
   private
