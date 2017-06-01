@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   layout 'panel_template'
 
   def delete_product
-    Offer.connection.execute("DELETE FROM offers WHERE name='"+params[:id]+"';")
+    Offer.connection.execute("DELETE FROM offers WHERE id='"+params[:id]+"';")
   end
   # Only for Professors
   def studentsHandler
@@ -63,9 +63,19 @@ class DashboardController < ApplicationController
   end
 
   def shopping_teacher_Handler
-    products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0);")
+    if params[:offer_type]=="s"
+      tipo = 'service'
+    else
+      tipo = 'good'
+    end
+    if params[:reload]=='true'
+      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"') order by id desc limit 1;")
+    else
+      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"');")
+      
+    end
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
-    render :json => {:products => products, :students => students}
+    render :json => {:products => products, :students => students}  
   end
 
   # For everyone:
@@ -217,7 +227,12 @@ class DashboardController < ApplicationController
   end
 
   def newProduct
-    Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc]})
+    if params[:offer_type]=='true'
+      tipo = 'service'
+    else
+      tipo = 'good'
+    end
+      Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
   end
 
   def shopping_student
@@ -237,7 +252,7 @@ class DashboardController < ApplicationController
 
   def buyProduct
   	product = Offer.connection.select_all("SELECT * from offers where id="+params[:product_id]+";").first
-  	observation = "Purchase of "+ product['name']
+  	observation = product['name']
   	amount = product['price'].to_s
   	#por aqui botará error
   	Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
