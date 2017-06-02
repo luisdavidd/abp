@@ -27,12 +27,13 @@ class DashboardController < ApplicationController
   def createnewClass
     params[:className]
     @verifEC = Subject.connection.select_all("SELECT LCASE(name) from subjects where (LCASE(name)='"+params[:className].to_s.downcase+"');")
+    @ccCreate = 0
     if(@verifEC.count == 0)
-      Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+current_user.id.to_s+");")
-      flash[:success] = "Class succesfully created!!!"
+      @ccCreate = Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+current_user.id.to_s+");")
     else
-      flash[:error] = "Sorry.... Class already exists!!!"
+      
     end
+    render :json => @ccCreate
   end
 
   def editStudents
