@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   get 'dashboard/student_historics'
   get 'dashboard/userTransactions', to: 'dashboard#userTransactions'
   get 'dashboard/transfer'
-  get 'dashboard/newProduct' 
+  get 'dashboard/newProduct'
+  get 'dashboard/createnewClass'
 
   devise_for :users
   devise_scope :user do

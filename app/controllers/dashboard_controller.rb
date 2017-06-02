@@ -10,7 +10,8 @@ class DashboardController < ApplicationController
   def studentsHandler
     if current_user.teacher
       @users = User.where(teacher: '0')
-      render 'studentsHandler'
+      @subJ = Subject.connection.select_all("SELECT name,created_at from subjects order by name;")
+      # render 'studentsHandler'
     else
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found 
     end
@@ -21,6 +22,17 @@ class DashboardController < ApplicationController
     generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
     @user = User.create!({:name=>params[:name], :last_name =>params[:last_name], :email =>params[:email], :saldo =>params[:saldo], :codigo =>params[:codigo], :password => generated_pass})
     #UserMailer.welcome_email(@user).deliver
+  end
+
+  def createnewClass
+    params[:className]
+    @verifEC = Subject.connection.select_all("SELECT LCASE(name) from subjects where (LCASE(name)='"+params[:className].to_s.downcase+"');")
+    if(@verifEC.count == 0)
+      Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+current_user.id.to_s+");")
+      flash[:success] = "Class succesfully created!!!"
+    else
+      flash[:error] = "Sorry.... Class already exists!!!"
+    end
   end
 
   def editStudents
@@ -91,6 +103,8 @@ class DashboardController < ApplicationController
     else
       @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
       @notifs = Transaction.connection.execute("SELECT COUNT(*) from transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+");")
+      @budget_adj=Transaction.connection.execute("SELECT nrc,WEEK(created_at),SUM(amount) AS Budgetperclass FROM transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+") group by nrc,WEEK(created_at);")
+      
       render 'student'
     end
     
@@ -177,9 +191,7 @@ class DashboardController < ApplicationController
       #class_name = clase.name
       classes_array.append(clase.name)
       nrcs = SubjectNrc.select("id, nrc").where('subject_id' => clase.id)
-      #nrc_ids = []
       nrc_names = []
-
       std_sub_array = []
       std_ids_sub_array = []
 
@@ -219,10 +231,8 @@ class DashboardController < ApplicationController
     end
   end
 
-  def historicalTransactions
-    
+  def historicalTransactions   
     @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id);")
-
     #render :json => @dTransaction
   end
 
@@ -266,9 +276,7 @@ class DashboardController < ApplicationController
   	product = Offer.connection.select_all("SELECT * from offers where id="+params[:product_id]+";").first
     observation = product['name']
     amount = product['price'].to_s
-
     verifAd = Product.connection.select_all("SELECT offer_id from products where(user_id="+current_user.id.to_s+" and offer_id="+product['id'].to_s+");")
-    puts verifAd.count == 0
     if(verifAd.count == 0)
       @buy = Transaction.create!({:user_id=>current_user.id, :user_to =>product['user_id'], :amount =>amount, :observations =>observation, :nrc => product['nrc']})
       if @buy.save

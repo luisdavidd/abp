@@ -1,5 +1,22 @@
 
 <!-- Content Header (Page header) -->
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var vnrcs;
+    nrc_curve = [];
+    labelmonths = []
+    data2 = []
+    <% @budget_adj.each do |bgclass| %>
+      nrc_curve.push(<%= bgclass[0] %>)
+      labelmonths.push(<%=bgclass[1]%>)
+      data2.push(<%=bgclass[2]%>)
+    <% end %>
+    var lLChartContent = document.getElementById('lChartcontentG');
+    lLChartContent.innerHTML = '&nbsp;';
+    $('#lChartcontentG').append('<canvas id="lineChart" height="75px"><canvas>');
+    dibuja() 
+  });
+</script>
 <section class="content-header">
   <h1>
         Dashboard
@@ -77,134 +94,148 @@
     </div>
   </div>
   <!-- /.col -->
-          <div class="col-md-6">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title">Monthly Recap Report</h3>
+  <div class="col-md-6">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Monthly Recap Report</h3>
+        <button type="button" onclick="conmutaF()" class="btn btn-box-tool" style="font-weight:bold;padding-left:15px" >All/None</button>
+        <span id="courseMR" style="padding-left:30px"></span>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
 
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <div class="row">
-                <div class="col-md-12">
-                  <p class="text-center">
-                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                  </p>
-
-                  <div class="chart">
-                    <!-- Sales Chart Canvas -->
-                    <canvas id="salesChart" style="height: 180px;"></canvas>
-                  </div>
-                  <!-- /.chart-responsive -->
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- ./box-body -->
-            <div class="box-footer">
-              <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                    <h5 class="description-header">$35,210.43</h5>
-                    <span class="description-text">TOTAL REVENUE</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                    <h5 class="description-header">$10,390.90</h5>
-                    <span class="description-text">TOTAL COST</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block border-right">
-                    <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                    <h5 class="description-header">$24,813.53</h5>
-                    <span class="description-text">TOTAL PROFIT</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-3 col-xs-6">
-                  <div class="description-block">
-                    <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                    <h5 class="description-header">1200</h5>
-                    <span class="description-text">GOAL COMPLETIONS</span>
-                  </div>
-                  <!-- /.description-block -->
-                </div>
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
-        <!-- /.col -->
-        <div class="col-md-6">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Budget per Subject</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body" style="padding-top:0px">
+        <div class="row">
+          <div class="col-md-12">        
+            <div class="chart" id="lChartcontentG">
+              <!-- Sales Chart Canvas -->
+              <canvas id="lineChart" style="height:120px"></canvas>
+            </div>
 
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
-              
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table responsive">
-              <thead>
-                <tr>
-                  <!-- <th>Id</th> -->
-                  <th name="budget">Subject</th>
-                  <th name="nrc">NRC</th>
-                  <th name="budget">Budget</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @enrolled.each do |enroll| %>
-                <tr>
-                  <td><%= enroll[0] %></td>
-                  <td><%= enroll[1] %></td>
-                  <td><span class="badge bg-red">$<%= enroll[2] %></span></td>       
-                </tr>
-              <% end %>
-              </tbody>
-              </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
+            <!-- /.chart-responsive -->
           </div>
-          <!-- /.box -->        
-          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- ./box-body -->
+      <!-- /.box-footer -->
+    </div>
+    <!-- /.box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-6">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">Budget per Subject</h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+        
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body no-padding">
+        <table class="table responsive">
+        <thead>
+          <tr>
+            <!-- <th>Id</th> -->
+            <th name="budget">Subject</th>
+            <th name="nrc">NRC</th>
+            <th name="budget">Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @enrolled.each do |enroll| %>
+          <tr>
+            <td onclick="escribe(<%= enroll[1]%>)"><%= enroll[0] %></td>
+            <td><%= enroll[1] %></td>
+            <td><span class="badge bg-red">$<%= enroll[2] %></span></td>       
+          </tr>
+        <% end %>
+        </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <li><a href="#">&laquo;</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- /.box -->        
+    </div>
   
 
 </section>
+<script type="text/javascript">
+  flag = 0;
+  function conmutaF(){
+    if(flag==0){
+      document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px"></span>';
+      var lLChartContent = document.getElementById('lChartcontentG');
+      lLChartContent.innerHTML = '&nbsp;';
+      $('#lChartcontentG').append('<canvas id="lineChart" height="75px"><canvas>');
+      flag = 1
+    }else{
+      document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px"></span>';
+      var vnrcs;
+      nrc_curve = [];
+      labelmonths = []
+      data2 = []
+      <% @budget_adj.each do |bgclass| %>
+        nrc_curve.push(<%= bgclass[0] %>)
+        labelmonths.push(<%=bgclass[1]%>)
+        data2.push(<%=bgclass[2]%>)
+      <% end %>
+      var lLChartContent = document.getElementById('lChartcontentG');
+      lLChartContent.innerHTML = '&nbsp;';
+      $('#lChartcontentG').append('<canvas id="lineChart" height="120px"><canvas>');
+      flag = 0
+      dibuja()
 
+    }
+  }
+
+  function escribe(param){
+    document.getElementById('courseMR').innerHTML='<span id="courseMR" style="padding-left:30px">NRC: '+param+'</span>'; 
+    var vnrcs;
+    nrc_curve = [];
+    labelmonths = []
+    data2 = []
+    vnrcs = param;
+    <% @budget_adj.each do |bgclass| %>
+      if(vnrcs == <%= bgclass[0] %>){
+        nrc_curve.push(<%= bgclass[0] %>)
+        labelmonths.push(<%=bgclass[1]%>)
+        data2.push(<%=bgclass[2]%>)
+      }   
+    <% end %>
+    var lLChartContent = document.getElementById('lChartcontentG');
+    lLChartContent.innerHTML = '&nbsp;';
+    $('#lChartcontentG').append('<canvas id="lineChart" height="75px"><canvas>');
+
+    dibuja()
+  }
+
+ 
+  
+ 
+  
+  
+ 
+</script>
 <!-- /.content -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="dist/js/pages/dashboard3.js"></script>
+<script src="dist/js/pages/dashboard2.js"></script>
 
