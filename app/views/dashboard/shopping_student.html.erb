@@ -13,113 +13,134 @@
 	</div> 
 <% end %>
 <section class="content"> 
+	<div class="row">
+		<% @budget.each do |budgets| %>
+			<div class="col-lg-3 col-xs-6">
+			    <!-- small box -->
+			    <div class="small-box bg-red" style="border-radius:12px">
+				    <div class="inner">
+				      
+				      <h3>$<%=  budgets['budget']%></h3>
+				      <p style="font-size:25px"><%=  budgets['name']%></p>
+				      <p style="font-size:25px"><%=  budgets['subject_id']%></p>
+				    </div>
+				    <div class="icon">
+				      <i class="fa fa-line-chart"></i>
+				    </div>
 
-	
+			    </div>
+		  	</div>
+	  	<% end %>
+  	</div>
+  	<div class="row">
+		<div class="col-lg-5 col-xs-6">
+		    <div class="box">
+		      <div class="box-header">
+		        <h3 class="box-title">Goods available</h3>
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
 
-	<div class="col-lg-5 col-xs-6">
-	    <div class="box">
-	      <div class="box-header">
-	        <h3 class="box-title">Goods available</h3>
-	        <div class="box-tools pull-right">
-	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		        
+		      </div>
+		      <!-- /.box-header -->
+		      <div class="box-body no-padding">
+		        <table class="table responsive">
+		        <thead>
+		          <tr>
+		            <!-- <th>Id</th> -->
+		            <th name="nrc">NRC</th>
+		            <th name="concept">Concept</th>
+		            <th name="price">Price</th>
+		            <th name="available">Due date</th>
+		            <th name="action">Action</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <% @shoptG.each do |shopT| %>
+		          	<% shopT.each do |minishopT| %>
+			          <tr>
+			            <td style="display:none;"><%= minishopT['id'] %></td>
+			            <td id="nrcB"><%= minishopT['nrc'] %></td>
+			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['price'] %></td>
+			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        </div>
-	        
-	      </div>
-	      <!-- /.box-header -->
-	      <div class="box-body no-padding">
-	        <table class="table responsive">
-	        <thead>
-	          <tr>
-	            <!-- <th>Id</th> -->
-	            <th name="nrc">NRC</th>
-	            <th name="concept">Concept</th>
-	            <th name="price">Price</th>
-	            <th name="available">Due date</th>
-	            <th name="action">Action</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <% @shoptG.first.each do |shopT| %>
-	          <tr>
-	            <td style="display:none;"><%= shopT['id'] %></td>
-	            <td id="nrcB"><%= shopT['nrc'] %></td>
-	            <td><%= shopT['name'] %></td>
-	            <td><%= shopT['price'] %></td>
-	            <td><%= shopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>)" class="badge bg-green">Buy</button></td>
+			          </tr>
+			        <% end %>
+		        <% end %>
+		        </tbody>
+		        </table>
+		      </div>
+		      <!-- /.box-body -->
+		      <div class="box-footer clearfix">
+		        <ul class="pagination pagination-sm no-margin pull-right">
+		          <li><a href="#">&laquo;</a></li>
+		          <li><a href="#">1</a></li>
+		          <li><a href="#">2</a></li>
+		          <li><a href="#">3</a></li>
+		          <li><a href="#">&raquo;</a></li>
+		        </ul>
+		      </div>
+		    </div>
+		    <!-- /.box -->
+		    	    <div class="box">
+		      <div class="box-header">
+		        <h3 class="box-title">Services available</h3>
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
 
-	            <td><button type="button" onclick="buyP(<%= shopT['id'] %>, <%= shopT['price']%>,<%=shopT['quantity']%>)" class="badge bg-green">Buy</button></td>
-	          </tr>
-	        <% end %>
-	        </tbody>
-	        </table>
-	      </div>
-	      <!-- /.box-body -->
-	      <div class="box-footer clearfix">
-	        <ul class="pagination pagination-sm no-margin pull-right">
-	          <li><a href="#">&laquo;</a></li>
-	          <li><a href="#">1</a></li>
-	          <li><a href="#">2</a></li>
-	          <li><a href="#">3</a></li>
-	          <li><a href="#">&raquo;</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	    <!-- /.box -->
-	    	    <div class="box">
-	      <div class="box-header">
-	        <h3 class="box-title">Services available</h3>
-	        <div class="box-tools pull-right">
-	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          </button>
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		        
+		      </div>
+		      <!-- /.box-header -->
+		      <div class="box-body no-padding">
+		        <table class="table responsive" >
+		        <thead>
+		          <tr>
+		            <!-- <th>Id</th> -->
+		            <th name="nrc">NRC</th>
+		            <th name="concept">Concept</th>
+		            <th name="price">Price</th>
+		            <th name="available">Due date</th>
+		            <th name="action">Action</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <% @shoptS.each do |shopT| %>
+		          	<% shopT.each do |minishopT| %>
+			          <tr>
+			            <td style="display:none;"><%= minishopT['id'] %></td>
+			            <td id="nrcB"><%= minishopT['nrc'] %></td>
+			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['price'] %></td>
+			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        </div>
-	        
-	      </div>
-	      <!-- /.box-header -->
-	      <div class="box-body no-padding">
-	        <table class="table responsive" >
-	        <thead>
-	          <tr>
-	            <!-- <th>Id</th> -->
-	            <th name="nrc">NRC</th>
-	            <th name="concept">Concept</th>
-	            <th name="price">Price</th>
-	            <th name="available">Due date</th>
-	            <th name="action">Action</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <% @shoptS.first.each do |shopT| %>
-	          <tr>
-	            <td style="display:none;"><%= shopT['id'] %></td>
-	            <td id="nrcB"><%= shopT['nrc'] %></td>
-	            <td><%= shopT['name'] %></td>
-	            <td><%= shopT['price'] %></td>
-	            <td><%= shopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
-
-	            <td><button type="button" onclick="buyP(<%= shopT['id'] %>, <%= shopT['price']%>,<%=shopT['quantity']%>)" class="badge bg-green">Buy</button></td>
-	          </tr>
-	        <% end %>
-	        </tbody>
-	        </table>
-	      </div>
-	      <!-- /.box-body -->
-	      <div class="box-footer clearfix">
-	        <ul class="pagination pagination-sm no-margin pull-right">
-	          <li><a href="#">&laquo;</a></li>
-	          <li><a href="#">1</a></li>
-	          <li><a href="#">2</a></li>
-	          <li><a href="#">3</a></li>
-	          <li><a href="#">&raquo;</a></li>
-	        </ul>
-	      </div>
-	    </div>        
-	</div>
-	<div class="col-lg-5 col-xs-6">
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>)" class="badge bg-green">Buy</button></td>
+			          </tr>
+			        <% end %>
+		        <% end %>
+		        </tbody>
+		        </table>
+		      </div>
+		      <!-- /.box-body -->
+		      <div class="box-footer clearfix">
+		        <ul class="pagination pagination-sm no-margin pull-right">
+		          <li><a href="#">&laquo;</a></li>
+		          <li><a href="#">1</a></li>
+		          <li><a href="#">2</a></li>
+		          <li><a href="#">3</a></li>
+		          <li><a href="#">&raquo;</a></li>
+		        </ul>
+		      </div>
+		    </div>        
+		</div>
+		<div class="col-lg-5 col-xs-6">
 	    <div class="box">
 	      <div class="box-header">
 	        <h3 class="box-title">Goods in Posession</h3>
@@ -211,6 +232,8 @@
 	    </div>
 	    <!-- /.box -->            
 	</div>
+	</div>
+	
 </section>
 <script type="text/javascript">
 	$('#prodBought').delay(3000).fadeOut();

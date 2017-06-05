@@ -255,6 +255,7 @@ class DashboardController < ApplicationController
     @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good');")
     @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service');")
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
+    @budget=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
     @shoptG = []
     @shoptS = []
     @NRCShop.each do |nrce|
