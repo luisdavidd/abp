@@ -1,0 +1,217 @@
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap-datetimepicker.css" />
+
+
+
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<script src="plugins/select2/select2.full.min.js"></script>
+
+<div class="row"> 
+  <h2 style="align-self: center;"></h2>
+  
+  <div class="col" style="padding-left:3%; padding-right:3%" >
+    <div class="box box-info" id="prodCreated" style="visibility: hidden;display:none;border-top-color:#dd4b39">
+      <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
+        <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully created!!!</h3>
+      </div>
+    </div>
+    <div class="box box-info">
+      <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
+        <div class="form-group">
+          <div class="col-md-4" style="padding-bottom:0%">
+            <label>Subject</label>
+            <select id="subject" class="form-control"  style="width: 100%;" required><option></option></select>
+            <label style="padding-top:2%">NRC</label>
+            <select id="nrc" class="form-control" style="width: 100%;" required><option></option></select>
+          </div>
+          <div id="Inputs" style="visibility:hidden">
+            <div class="col-md-4" style="padding-bottom:0%">
+              <label>Auction Name</label>
+              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Auction"><option></option>
+              <div class="row">
+                <div class="col-md-4">
+                  <label style="padding-top:5%">Initial Price</label>
+                </div>
+                <div class="col-md-4">
+                  <label style="padding-top:5%">Type</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input id="PriceInput" type="number" class="form-control" style="width:100%;" required  min=0 step=10> 
+                </div>
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <input id="TypeInput" type="checkbox"  data-toggle="toggle" data-on="Service" data-off="Good">
+                </div> 
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:200px">Release</button><option></option>
+                </div> 
+                
+              </div>
+                 
+              </div><option></option>
+            <div class="col-md-4" style="padding-bottom:0%">
+              <label style="padding-top:0%">Available Until:</label>
+              <div class="row">
+                <div class="col-md-4" style="padding-bottom:0%" style="width:75%">
+                  <input id="DateInput" class="form-control" style="width:75%;">
+                </div>
+              </div><option></option>
+
+            </div>
+          </div>
+        </div>
+    </div>
+  </div> 
+
+
+</div>
+<script>
+ $.ajax({
+    type: 'GET',
+    url: 'transfer',
+    success: function(data){
+      var subjects = data['classes'];
+      var NRCs = data['NRCs'];
+      var data2 = [];
+      for(i = 0; i < subjects.length; i++){
+        data2.push({id: i, text: subjects[i]})
+      }
+      $("#subject").select2({
+        data: data2,
+        placeholder: "Select a subject"
+      });
+      $("#subject").change(function() {
+
+        data_nrc = [];
+        i_subj = $("#subject").val();
+        if (i_subj) {
+          for(i = 0; i < i_subj.length; i++){
+            for(j = 0; j < NRCs[i_subj[i]].length; j++){
+            data_nrc.push({id: j, text: NRCs[i_subj[i]][j]})
+            }
+          } 
+        }
+        $("#nrc").html('<option></option>');
+        $("#nrc").select2({
+          data: data_nrc,
+          placeholder: "Select a NRC"
+        });
+
+        $("#nrc").change(function() {
+          if($(this).text() != ""){
+            $("#Inputs").css('visibility', 'visible');
+             reload(false,"g");
+             reload(false,"s");
+          }
+        });
+
+      });
+    }
+  });
+
+function reload(bandera, tabla) {
+  $.ajax({
+    type: 'GET',
+    url: 'shopping_teacher_Handler',
+    data: {nrc: $('#nrc').select2('data')[0].text, reload: bandera, offer_type: tabla},
+    success: function(data){
+      s = ['name','price','due_date']
+      table = document.getElementById(tabla + "_availables");
+      if (bandera == false) {
+        $(tabla + "_availables").remove();
+        table.innerHTML = '<tr><th name="concept">Concept</th><th name="price">Price</th><th name="available">Due date</th><th name="action">Action</th></tr>';
+      }      
+      
+      products = data['products'];
+      table = document.getElementById(tabla + "_availables");
+      for (var i = 0; i < products.length; i++) {
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+        row.id = products[i]['id']
+        // Intento de guardar el id del producto
+        var temp = new Date(products[i]['due_date'])
+        products[i]['due_date'] = String(temp).split('GMT')[0] //Intentando que la fecha se vea bien
+        var cell = row.insertCell(-1);
+        for (var j = 0; j < 3; j++) {
+          var cell = row.insertCell(j);
+          cell.innerHTML = products[i][s[j]];
+        }   
+        var cell = row.insertCell(3);    
+        cell.innerHTML= "<button type='button' onclick='deleteP("+rowCount+",table.id)' class='badge bg-red'>Delete</button>";
+      }        
+
+    } // aqui termina success
+  }); // aqui termina ajax
+}
+
+ function deleteP(indice,param2) {
+    if(param2 == "g_availables"){
+      dident = "g"
+    }else{
+      dident = "s"
+    }
+    table = document.getElementById(dident + "_availables")
+    data = table.rows[indice].id
+    table.deleteRow(indice);
+    var rowCount = table.rows.length;
+    for (var i = indice; i < rowCount.length+1; i++) {
+      table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteP("+i+",table.id)' class='badge bg-red'>Delete</button>"
+    }
+    $.ajax({
+      type: 'GET',
+      url: 'delete_product',
+      data: {id: data},
+      success: function(data){      }
+    });      
+       
+ }
+
+  
+
+  $('#DateInput').datetimepicker();
+
+  $('#Release').click(function(){
+    var Due;
+    var Quant;
+    var Nam;
+    
+    Due = new Date($('#DateInput').val() + ' 12:00:00');
+    console.log($('#timepicker').val())
+
+    if($('#ProdInput').val() == ""){
+      Nam = "New Product"
+    }else{
+      Nam = $('#ProdInput').val();
+    }
+
+    var c_error = 0;
+    $.ajax({
+      type: 'GET',
+      url: 'newProduct',
+      data: {name: Nam,price: $('#PriceInput').val(), offer_type: $('#TypeInput').prop('checked'),due:Due, nrc:$('#nrc').select2('data')[0].text},
+      success: function(){
+        if($('#TypeInput').prop('checked')==false){
+          reload(true,"g");
+        }else{
+          reload(true,"s"); 
+        }
+        $('#prodCreated').css('visibility', 'visible');
+        $('#prodCreated').show().delay(3000).fadeOut();
+
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        if (c_error<1) {
+          alert("Please check your data");
+          c_error += 1;
+        }  
+      }
+    });
+  });
+
+</script>

@@ -18,14 +18,11 @@ class DashboardController < ApplicationController
   end
 
   def newStudents
-    #generated_pass = Devise.friendly_token.first(4)
     generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
     @user = User.create!({:name=>params[:name], :last_name =>params[:last_name], :email =>params[:email], :saldo =>params[:saldo], :codigo =>params[:codigo], :password => generated_pass})
-    #UserMailer.welcome_email(@user).deliver
   end
 
   def createnewClass
-    params[:className]
     @verifEC = Subject.connection.select_all("SELECT LCASE(name) from subjects where (LCASE(name)='"+params[:className].to_s.downcase+"');")
     @ccCreate = 0
     if(@verifEC.count == 0)
@@ -43,8 +40,8 @@ class DashboardController < ApplicationController
 
   def editClasses
     #@out = SubjectNrc.joins(Subject.name) #funciona pero no une nada
-    @out = SubjectNrc.connection.execute("SELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;")
-    @classes_name = Subject.all()
+    @out = SubjectNrc.connection.execute("SELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE (n.subject_id = s.id and n.user_id = "+current_user.id.to_s+" and n.user_id = s.user_id) ;")
+    @classes_name = Subject.where("user_id="+current_user.id.to_s+"")
     render :json => {:names => @classes_name, :tabla => @out }
   end
 
@@ -97,7 +94,7 @@ class DashboardController < ApplicationController
       @count = SubjectNrc.where(:user_id => current_user.id).count
       @numbers = User.where(:teacher=>0).count
       @enrolled = SubjectNrc.connection.execute("SELECT su.name,snrc.nrc from subjects as su,users uf,subject_nrcs snrc where (snrc.subject_id= su.id and snrc.user_id="+current_user.id.to_s+" and snrc.user_id=uf.id);")
-      @budget_adj=Transaction.connection.execute("SELECT nrc,WEEK(created_at),SUM(amount) AS Budgetperclass FROM transactions group by nrc,WEEK(created_at);")
+      @budget_adj=Transaction.connection.execute("SELECT nrc,WEEK(created_at),SUM(amount) AS Budgetperclass FROM transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+") group by nrc,WEEK(created_at);")
       
       render 'teacher'
       
@@ -181,7 +178,7 @@ class DashboardController < ApplicationController
   end
 
   def transfer
-    classes = Subject.all()
+    classes = Subject.connection.select_all("SELECT * from subjects where user_id="+current_user.id.to_s+";")
     @data = Hash.new
     i = 0
     classes_array = []
@@ -190,8 +187,8 @@ class DashboardController < ApplicationController
     students_id_array = []
     for clase in classes
       #class_name = clase.name
-      classes_array.append(clase.name)
-      nrcs = SubjectNrc.select("id, nrc").where('subject_id' => clase.id)
+      classes_array.append(clase['name'])
+      nrcs = SubjectNrc.select("id, nrc").where('subject_id' => clase['id'])
       nrc_names = []
       std_sub_array = []
       std_ids_sub_array = []
@@ -223,6 +220,7 @@ class DashboardController < ApplicationController
     
   end
 
+
  def newTransaction
     params[:student].each_with_index do |user, i|
     #user = params[:student]
@@ -247,6 +245,7 @@ class DashboardController < ApplicationController
   end
 
   def getBudget
+    puts "Soy nrc",params[:nrc]
     bget = UserSubject.connection.select_all("SELECT budget from user_subjects where(user_id="+current_user.id.to_s+" and subject_id = '"+params[:nrc]+"');")
     render :json => bget[0]['budget']
   end

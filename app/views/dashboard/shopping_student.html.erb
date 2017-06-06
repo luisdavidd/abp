@@ -35,7 +35,7 @@
   	<div class="row">
 		<div class="col-lg-5 col-xs-6">
 		    <div class="box">
-		      <div class="box-header">
+		      <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
 		        <h3 class="box-title">Goods available</h3>
 		        <div class="box-tools pull-right">
 		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -68,7 +68,7 @@
 			            <td><%= minishopT['price'] %></td>
 			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>)" class="badge bg-green">Buy</button></td>
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Buy</button></td>
 			          </tr>
 			        <% end %>
 		        <% end %>
@@ -88,7 +88,7 @@
 		    </div>
 		    <!-- /.box -->
 		    	    <div class="box">
-		      <div class="box-header">
+		      <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
 		        <h3 class="box-title">Services available</h3>
 		        <div class="box-tools pull-right">
 		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -121,7 +121,7 @@
 			            <td><%= minishopT['price'] %></td>
 			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>)" class="badge bg-green">Buy</button></td>
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Buy</button></td>
 			          </tr>
 			        <% end %>
 		        <% end %>
@@ -142,7 +142,7 @@
 		</div>
 		<div class="col-lg-5 col-xs-6">
 	    <div class="box">
-	      <div class="box-header">
+	      <div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
 	        <h3 class="box-title">Goods in Posession</h3>
 	        <div class="box-tools pull-right">
 	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -187,7 +187,7 @@
 	    </div>
 	    <!-- /.box -->    
 	    <div class="box">
-	      <div class="box-header">
+	      <div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
 	        <h3 class="box-title">Services in Posession</h3>
 	        <div class="box-tools pull-right">
 	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -239,9 +239,9 @@
 	$('#prodBought').delay(3000).fadeOut();
 </script>
 <script type="text/javascript">
-	function buyP(id,Price,QTT){
+	function buyP(id,Price,QTT,nNRC){
+		console.log(nNRC);
 		var saldo;
-		nNRC = $("#nrcB").text()
 		$.ajax({
 			type:'GET',
 			url: 'getBudget',
@@ -249,6 +249,7 @@
 			success: function(data){
 
 				saldo = data;
+				console.log(saldo)
 				continueBuy(saldo,id,Price,nNRC)
 				
 			},

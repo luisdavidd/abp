@@ -22,7 +22,7 @@
           <div class="col-md-4" style="padding-bottom:0%">
             <label>Subject</label>
             <select id="subject" class="form-control"  style="width: 100%;" required><option></option></select>
-            <label style="padding-top:5%">NRC</label>
+            <label style="padding-top:2%">NRC</label>
             <select id="nrc" class="form-control" style="width: 100%;" required><option></option></select>
           </div>
           <div id="Inputs" style="visibility:hidden">
@@ -31,10 +31,10 @@
               <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Product"><option></option>
               <div class="row">
                 <div class="col-md-8">
-                  <label style="padding-top:0%">Quantity</label>
+                  <label style="padding-top:2%">Quantity</label>
                 </div>
                 <div class="col-md-4">
-                  <label style="padding-top:0%">Price</label>
+                  <label style="padding-top:2%;margin-bottom:0">Price</label>
                 </div>
                
               </div>
@@ -46,7 +46,7 @@
                   <input disabled="true" id="QuantityInput" type="number" class="form-control" style="width:70%;" required min=1>
                 </div>
                 <div class="col-md-4" style="padding-bottom:0%">
-                  <input id="PriceInput" type="number" class="form-control" style="width:100%;" required  min=0 step=10> 
+                  <input id="PriceInput" type="number" class="form-control" style="width:100%;padding-top:0" required  min=0 step=10> 
                 </div>
                  
               </div><option></option>
@@ -63,7 +63,7 @@
                 </div>
               </div><option></option>
                <div class="col-md-8">
-                  <label style="padding-top:0%">Type</label>
+                  <label style="padding-top:2%">Type</label>
                 </div>
               <div style="padding-bottom:5%"></div>
               <div class="col-md-4" style="padding-bottom:0%">
@@ -284,7 +284,7 @@ function reload(bandera, tabla) {
   })
 
   $('#DateInput').datepicker({
-    format: 'mm-dd-yyyy'
+    format: 'M d, yy'
   });
 
   $('#Release').click(function(){
