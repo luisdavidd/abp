@@ -9,10 +9,10 @@
 
 <div class="row">
   <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading"> <h3 class="panel-title">Change my profile picture</h3></div>
-        <div class="panel-body">          
-          <%= form_for(resource,as:resource_name, :url => {:action => "update_image"}) do |f| %>
+    <div class="panel panel-default">
+      <div class="panel-heading"> <h3 class="panel-title">Change my profile picture</h3></div>
+      <div class="panel-body">          
+        <%= form_for(resource,as:resource_name, :url => {:action => "update_image"}) do |f| %>
           <%= devise_error_messages! %>
           <div class="form-group">
                 <label>Image</label>
@@ -30,40 +30,40 @@
           <div class="actions">
             <%= f.submit "Update", class: 'btn btn-default' %>
           </div>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
+  </div>
 
   <div class="col-md-5">
     <div class="panel panel-default">
       <div class="panel-heading"> <h3 class="panel-title">Change my password</h3></div>
       <div class="panel-body">
 
-    <%= form_for(resource, as: resource_name, :url =>{:action => "update_password"}) do |f| %>
-        <div class="form-group">
-        <label>New Password</label> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px" %>
-        <% if @minimum_password_length %>
-          <br />
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
-        </div>
+        <%= form_for(resource, as: resource_name, :url =>{:action => "update_password"}) do |f| %>
+          <div class="form-group">
+            <label>New Password</label> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px" %>
+            <% if @minimum_password_length %>
+              <br />
+              <em><%= @minimum_password_length %> characters minimum</em>
+            <% end %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px"%>
-        </div>
+          <div class="form-group">
+            <%= f.label :password_confirmation %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4, :required => true,style:"width:80px"%>
+          </div>
 
-<!--         <div class="form-group">
-          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-          <%= f.password_field :current_password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4,:required => true,style:"width:80px" %>
-        </div> -->
+          <!--      <div class="form-group">
+            <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+            <%= f.password_field :current_password, autocomplete: "off", pattern: "[0-9]{4}", maxlength: 4,:required => true,style:"width:80px" %>
+          </div> -->
 
-      <div class="actions">
-        <%= f.submit "Update", class: 'btn btn-default' %>
-      </div>
-    <% end %>
+          <div class="actions">
+            <%= f.submit "Update", class: 'btn btn-default' %>
+          </div>
+            <% end %>
 
       </div>
     </div>

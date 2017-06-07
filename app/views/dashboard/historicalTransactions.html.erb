@@ -17,33 +17,31 @@
   		<div id="content" class="col-lg-12 col-md-8" style="padding-left:40px">
   			<h2>Historical Module</h2>
   			<table class="display responsive" id="transactions_table" style="width:100%">
-	        <thead>
-	          <tr>
-	            <!-- <th>Id</th> -->
-	            <th name="user_from">Origin</th>
-	            <th name="user_to">Destination</th>
-	            <th name="amount">Amount</th>
-	            <th name="observations">Observations</th> 
-	            <th name="created_at">Date</th>
-	          </tr>
-	        </thead>
+		        <thead>
+		         	<tr>
+			            <!-- <th>Id</th> -->
+			            <th name="user_from">Origin</th>
+			            <th name="user_to">Destination</th>
+			            <th name="amount">Amount</th>
+			            <th name="observations">Observations</th> 
+			            <th name="created_at">Date</th>
+		          	</tr>
+		        </thead>
 
-	        <tbody>
-          	<% @dTransaction.each do |transaction| %>
-            <tr>
-              <td><%= transaction[0]+' '+transaction[1] %></td>
-              <td><%= transaction[2]+' ' +transaction[3] %></td>
-              <td><%= transaction[4] %></td>
-              <td><%= transaction[5] %></td>
-              <td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>        
-            </tr>
-          <% end %>
-
-        </tbody>
-	      </table>
+	        	<tbody>
+          			<% @dTransaction.each do |transaction| %>
+            			<tr>
+			             	<td><%= transaction[0]+' '+transaction[1] %></td>
+			             	<td><%= transaction[2]+' ' +transaction[3] %></td>
+			             	<td><%= transaction[4] %></td>
+			            	<td><%= transaction[5] %></td>
+			            	<td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>        
+            			</tr>
+          			<% end %>
+        		</tbody>
+	      	</table>
   		</div>
 	</div> 
-
 </div>
 <style type="text/css">
 	#content{
@@ -71,14 +69,3 @@
 	  } );
 </script>
 
-
-<!-- <script type="text/javascript">
-	console.log(envio)
-	$(window).load(function() {
-		console.log("entre aqui")
-		if(envio == 1){
-			cerrar = '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
-        	$("#replaceable").replaceWith('<div id="replaceable" class="alert alert-success">'+cerrar+'<strong>Success!</strong>Transfer successful</div>');
-        }
-	});
-</script> -->
