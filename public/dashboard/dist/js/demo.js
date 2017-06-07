@@ -262,11 +262,9 @@
         url: 'update_skin',
         data: ({skin:val}),
         success: function(data){
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          alert("some error");
         }
       });
+      location.reload()
     } else {
       window.alert('Please use a modern browser to properly view this template!');
     }

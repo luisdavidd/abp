@@ -9,7 +9,20 @@
 
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <script src="plugins/select2/select2.full.min.js"></script>
-
+<script type="text/javascript">
+$(function() {
+  $.ajax({ 
+    type: 'GET', 
+    url: 'get_myskin', 
+    dataType: 'json', 
+    success: function(data){ //Sending the output to a function
+      dictColors = [{'skin-red':'#dd4b39','skin-black':'#fff','skin-blue':'#3c8dbc','skin-purple':'#605ca8','skin-green':'#00a65a','skin-yellow':'#f39c12'}]
+      $('#bHeader').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#bInfo').css('border-top-color',dictColors[0][data[0]['skin']])
+    } 
+  }); //AJAX to energy calculation module
+});
+</script>
 <div class="row"> 
   <h2 style="align-self: center;"></h2>
   
@@ -19,8 +32,8 @@
         <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully created!!!</h3>
       </div>
     </div>
-    <div class="box box-info">
-      <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
+    <div class="box box-info" id="bInfo">
+      <div class="box-header with-border" id="bHeader" style="color:#fff">
         <div class="form-group">
           <div class="col-md-4" style="padding-bottom:0%">
             <label>Subject</label>
