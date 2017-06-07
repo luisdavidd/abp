@@ -1,1 +1,207 @@
-<h2>Holaaaa</h2>
+<script type="text/javascript">
+$(function() {
+  $.ajax({ 
+    type: 'GET', 
+    url: 'get_myskin', 
+    dataType: 'json', 
+    success: function(data){ //Sending the output to a function
+      dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
+      $('#infoAuctHeader').css('background-color',dictColors[0][data[0]['skin']]);
+    } 
+  }); //AJAX to energy calculation module
+});
+</script>
+<section class="content"> 
+	<div class="row">
+		<% @budget.each do |budgets| %>
+			<div class="col-lg-3 col-xs-6">
+			    <!-- small box -->
+			    <div class="small-box bg-red" style="border-radius:12px">
+				    <div class="inner">
+				      
+				      <h3>$<%=  budgets['budget']%></h3>
+				      <p style="font-size:25px"><%=  budgets['name']%></p>
+				      <p style="font-size:25px"><%=  budgets['subject_id']%></p>
+				    </div>
+				    <div class="icon">
+				      <i class="fa fa-line-chart"></i>
+				    </div>
+
+			    </div>
+		  	</div>
+	  	<% end %>
+  	</div>
+  	<div class="row">
+		<div class="col-lg-5 col-xs-6">
+		    <div class="box">
+		      <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+		        <h3 class="box-title">Goods in Auction available</h3>
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		        
+		      </div>
+		      <!-- /.box-header -->
+		      <div class="box-body no-padding">
+		        <table class="table responsive">
+		        <thead>
+		          <tr>
+		            <!-- <th>Id</th> -->
+		            <th name="nrc">NRC</th>
+		            <th name="concept">Concept</th>
+		            <th name="price">Price</th>
+		            <th name="available">Due date</th>
+		            <th name="action">Action</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <% @shoptG.each do |shopT| %>
+		          	<% shopT.each do |minishopT| %>
+			          <tr>
+			            <td style="display:none;"><%= minishopT['id'] %></td>
+			            <td id="nrcB"><%= minishopT['nrc'] %></td>
+			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['price'] %></td>
+			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Join</button></td>
+			          </tr>
+			        <% end %>
+		        <% end %>
+		        </tbody>
+		        </table>
+		      </div>
+		      <!-- /.box-body -->
+		      <div class="box-footer clearfix">
+		        <ul class="pagination pagination-sm no-margin pull-right">
+		          <li><a href="#">&laquo;</a></li>
+		          <li><a href="#">1</a></li>
+		          <li><a href="#">2</a></li>
+		          <li><a href="#">3</a></li>
+		          <li><a href="#">&raquo;</a></li>
+		        </ul>
+		      </div>
+		    </div>
+		    <!-- /.box -->
+		   	<div class="box">
+		      <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
+		        <h3 class="box-title">Services in Auction available</h3>
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+
+		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		        </div>
+		        
+		      </div>
+		      <!-- /.box-header -->
+		      <div class="box-body no-padding">
+		        <table class="table responsive" >
+		        <thead>
+		          <tr>
+		            <!-- <th>Id</th> -->
+		            <th name="nrc">NRC</th>
+		            <th name="concept">Concept</th>
+		            <th name="price">Price</th>
+		            <th name="available">Due date</th>
+		            <th name="action">Action</th>
+		          </tr>
+		        </thead>
+		        <tbody>
+		          <% @shoptS.each do |shopT| %>
+		          	<% shopT.each do |minishopT| %>
+			          <tr>
+			            <td style="display:none;"><%= minishopT['id'] %></td>
+			            <td id="nrcB"><%= minishopT['nrc'] %></td>
+			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['price'] %></td>
+			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+
+			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Join</button></td>
+			          </tr>
+			        <% end %>
+		        <% end %>
+		        </tbody>
+		        </table>
+		      </div>
+		      <!-- /.box-body -->
+		      <div class="box-footer clearfix">
+		        <ul class="pagination pagination-sm no-margin pull-right">
+		          <li><a href="#">&laquo;</a></li>
+		          <li><a href="#">1</a></li>
+		          <li><a href="#">2</a></li>
+		          <li><a href="#">3</a></li>
+		          <li><a href="#">&raquo;</a></li>
+		        </ul>
+		      </div>
+		    </div>        
+		</div>
+		<div class="col-lg-5 col-xs-6">
+			<div class="box">
+				<div class="box-header" id="infoAuctHeader" style="font-weight:bold;color:white">
+			        <h3 class="box-title">Auction Info</h3>
+			        <div class="box-tools pull-right">
+			          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+			          </button>
+
+			          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+			        </div>
+		      	</div>
+		      	<div class="box-body no-padding">
+		      		
+		      	</div>
+			</div>
+		</div>
+	</div>	
+</section>
+<script type="text/javascript">
+	$('#prodBought').delay(3000).fadeOut();
+</script>
+<script type="text/javascript">
+	function buyP(id,Price,QTT,nNRC){
+		console.log(nNRC);
+		var saldo;
+		$.ajax({
+			type:'GET',
+			url: 'getBudget',
+			data: ({nrc: nNRC}),
+			success: function(data){
+
+				saldo = data;
+				console.log(saldo)
+				continueBuy(saldo,id,Price,nNRC)
+				
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+		    	alert("some error");
+		    }
+		});
+	}
+	function continueBuy(saldo,id,Price,nNRC){
+		console.log(saldo)
+		valor = Price
+		if(saldo>=Price){
+			console.log("Ok puedes comprar")
+	      //Empieza el ajax
+			$.ajax({
+				type: 'GET',
+				url: 'buyProduct',
+				data: ({product_id: id}),
+				success: function(data){
+				setTimeout(function(){location.reload()}, 3000);
+				
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("some error");
+				}
+		    });
+      		//Termina ajax
+		}else{
+			alert("You dont have enough money! :(");
+		}	
+	}
+	
+</script>

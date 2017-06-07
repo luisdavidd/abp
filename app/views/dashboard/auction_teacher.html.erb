@@ -4,9 +4,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap-datetimepicker.css" />
-
-
-
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <script src="plugins/select2/select2.full.min.js"></script>
 <script type="text/javascript">
@@ -16,20 +13,21 @@ $(function() {
     url: 'get_myskin', 
     dataType: 'json', 
     success: function(data){ //Sending the output to a function
-      dictColors = [{'skin-red':'#dd4b39','skin-black':'#fff','skin-blue':'#3c8dbc','skin-purple':'#605ca8','skin-green':'#00a65a','skin-yellow':'#f39c12'}]
+      dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
       $('#bHeader').css('background-color',dictColors[0][data[0]['skin']]);
       $('#bInfo').css('border-top-color',dictColors[0][data[0]['skin']])
+      $("#nAuctionHeader").css('background-color',dictColors[0][data[0]['skin']]);
+      $("#auctCreated").css('border-top-color',dictColors[0][data[0]['skin']]);
     } 
   }); //AJAX to energy calculation module
 });
 </script>
 <div class="row"> 
   <h2 style="align-self: center;"></h2>
-  
   <div class="col" style="padding-left:3%; padding-right:3%" >
-    <div class="box box-info" id="prodCreated" style="visibility: hidden;display:none;border-top-color:#dd4b39">
-      <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
-        <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully created!!!</h3>
+    <div class="box box-info" id="auctCreated" style="visibility: hidden;display:none;border-top-color:#dd4b39">
+      <div class="box-header with-border" id="nAuctionHeader" style="background-color:#00a65a;color:#fff">
+        <h3 class="box-title" style="color:white;font-weight:bold;">Auction sucessfully created!!!</h3>
       </div>
     </div>
     <div class="box box-info" id="bInfo">
@@ -44,42 +42,137 @@ $(function() {
           <div id="Inputs" style="visibility:hidden">
             <div class="col-md-4" style="padding-bottom:0%">
               <label>Auction Name</label>
-              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Auction">
+              <input id="AuctInput" type="text" class="form-control" style="width: 100%" placeholder="New Auction">
               <div class="row">
                 <div class="col-md-4">
                   <label style="padding-top:7%">Initial Price</label>
                 </div>
                 <div class="col-md-4">
-                  <label style="padding-top:7%">Type</label>
+                  <label style="padding-top:7%">Quantity</label>
+                </div>
+                <div class="col-md-4">
+                  <label style="padding-top:7%;margin-left:30px">Type</label>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4" style="padding-bottom:0%">
                   <input id="PriceInput" type="number" class="form-control" style="width:100%;" required  min=0 step=10> 
                 </div>
-                <div class="col-md-4" style="padding-bottom:0%">
+                <div class="col-md-2" style="padding-bottom:0%">
+                  <input id="QuantityToggle" type="checkbox" data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
+                </div>
+                <div class="col-md-2" style="padding-bottom:0%;margin-left:30px">
+                  <input disabled="true" id="QuantityInput" type="number" class="form-control" placeholder="Quantity" required min=1>
+                </div>
+                <div class="col-md-4" style="padding-bottom:0%;width:20%">
                   <input id="TypeInput" type="checkbox"  data-toggle="toggle" data-on="Service" data-off="Good">
                 </div> 
-                <div class="col-md-4" style="padding-bottom:0%">
-                  <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:200px">Release</button><option></option>
-                </div> 
+                
               </div><option></option>
             </div>
             <div class="col-md-4" style="padding-bottom:0%">
               <label style="padding-top:0%">Available Until:</label>
               <div class="row">
-                <div class="col-md-4" style="padding-bottom:0%" style="width:175%">
-                  <input id="DateInput" class="form-control" style="width:175%;">
+                <div class="col-md-4" style="padding-bottom:0%" style="width:200%">
+                  <input id="DateInput" class="form-control" style="width:200%;">
                 </div>
+                
               </div><option></option>
 
             </div>
+            <div class="col-md-4" style="padding-bottom:0%">
+              <div class="row">
+                <div class="col-md-4" style="padding-bottom:0%">
+                  <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:200%">Release</button>
+                </div> 
+              </div>        
+            </div> 
           </div>
         </div>
+      </div>
     </div>
-  </div> 
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Goods in Auction available</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <table class="table responsive" id="g_availables">
+              <thead>
+                <tr>
+                  <th name="concept">Concept</th>
+                  <th name="price">Price</th>
+                  <th name="available">Due date</th>
+                  <th name="action">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="#">&laquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+      <!-- /.box --> 
+      </div>
 
+      <div class="col-lg-6">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">Services in Auction available</h3>
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
 
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+      
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body no-padding">
+            <table class="table responsive" id="s_availables">
+              <thead>
+                <tr>
+                  <th name="concept">Concept</th>
+                  <th name="price">Price</th>
+                  <th name="available">Due date</th>
+                  <th name="action">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="#">&laquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+      <!-- /.box --> 
+      </div>
+    </div> 
+  </div>
 </div>
 <script>
  $.ajax({
@@ -128,8 +221,8 @@ $(function() {
 function reload(bandera, tabla) {
   $.ajax({
     type: 'GET',
-    url: 'shopping_teacher_Handler',
-    data: {nrc: $('#nrc').select2('data')[0].text, reload: bandera, offer_type: tabla},
+    url: 'auction_teacher_Handler',
+    data: {nrc: $('#nrc').select2('data')[0].text, reload: bandera, auction_type: tabla},
     success: function(data){
       s = ['name','price','due_date']
       table = document.getElementById(tabla + "_availables");
@@ -175,13 +268,21 @@ function reload(bandera, tabla) {
     }
     $.ajax({
       type: 'GET',
-      url: 'delete_product',
+      url: 'delete_auction',
       data: {id: data},
       success: function(data){      }
     });      
        
  }
-
+ $(function() {
+    $('#QuantityToggle').change(function() {
+      if($(this).prop('checked') == true){
+        $('#QuantityInput').prop("disabled", false); 
+      }else{
+        $('#QuantityInput').prop("disabled", true); 
+      }
+    })
+  })
   $('#DateInput').datetimepicker({
     minDate: new Date(),
     format: "MM/DD/YYYY hh:mm A"
@@ -192,28 +293,32 @@ function reload(bandera, tabla) {
     var Quant;
     var Nam;
     
-    Due = new Date($('#DateInput').val() + ' 12:00:00');
-    console.log($('#timepicker').val())
+    Due = new Date($('#DateInput').val());
 
-    if($('#ProdInput').val() == ""){
-      Nam = "New Product"
+    if($('#AuctInput').val() == ""){
+      Nam = "New Auction"
     }else{
-      Nam = $('#ProdInput').val();
+      Nam = $('#AuctInput').val();
+    }
+    if($('#QuantityToggle').prop('checked') == false){
+      Quant = 1000;
+    }else{
+      Quant = $('#QuantityInput').val();
     }
 
     var c_error = 0;
     $.ajax({
       type: 'GET',
-      url: 'newProduct',
-      data: {name: Nam,price: $('#PriceInput').val(), offer_type: $('#TypeInput').prop('checked'),due:Due, nrc:$('#nrc').select2('data')[0].text},
+      url: 'newAuction',
+      data: {name: Nam,quantity:Quant,price: $('#PriceInput').val(), auction_type: $('#TypeInput').prop('checked'),due:Due, nrc:$('#nrc').select2('data')[0].text},
       success: function(){
         if($('#TypeInput').prop('checked')==false){
           reload(true,"g");
         }else{
           reload(true,"s"); 
         }
-        $('#prodCreated').css('visibility', 'visible');
-        $('#prodCreated').show().delay(3000).fadeOut();
+        $('#auctCreated').css('visibility', 'visible');
+        $('#auctCreated').show().delay(3500).fadeOut();
 
 
       },

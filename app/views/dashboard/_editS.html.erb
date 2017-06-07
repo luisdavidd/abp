@@ -15,7 +15,7 @@ $(function() {
     url: 'get_myskin', 
     dataType: 'json', 
     success: function(data){ //Sending the output to a function
-      dictColors = [{'skin-red':'#dd4b39','skin-black':'#fff','skin-blue':'#3c8dbc','skin-purple':'#605ca8','skin-green':'#00a65a','skin-yellow':'#f39c12'}]
+      dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
       $('#bHeader_1').css('background-color',dictColors[0][data[0]['skin']]);
       $('#bHeader_2').css('background-color',dictColors[0][data[0]['skin']]);
       $('#bHeader_3').css('background-color',dictColors[0][data[0]['skin']]);

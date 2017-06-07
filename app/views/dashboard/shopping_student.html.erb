@@ -141,99 +141,96 @@
 		    </div>        
 		</div>
 		<div class="col-lg-5 col-xs-6">
-	    <div class="box">
-	      <div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
-	        <h3 class="box-title">Goods in Posession</h3>
-	        <div class="box-tools pull-right">
-	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          </button>
+	    	<div class="box">
+	      		<div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
+	        		<h3 class="box-title">Goods in Posession</h3>
+	        		<div class="box-tools pull-right">
+	         			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          			</button>
 
-	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        </div>
+	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        		</div>
 	        
-	      </div>
-	      <!-- /.box-header -->
-	      <div class="box-body no-padding">
-	        <table class="table responsive">
-	        <thead>
-	          <tr>
-	            <!-- <th>Id</th> -->
-	            <th name="element">Element</th>
-	            <th name="nrc">NRC</th>
-	            <th name="created_at">Created at</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <% @SIPG.each do |possST| %>
-	          <tr>
-	            <td><%= possST['elemento'] %></td>
-	            <td><%= possST['nrc'] %></td>
-	            <td><%= possST['created_at'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
-	          </tr>
-	        <% end %>
-	        </tbody>
-	        </table>
-	      </div>
-	      <!-- /.box-body -->
-	      <div class="box-footer clearfix">
-	        <ul class="pagination pagination-sm no-margin pull-right">
-	          <li><a href="#">&laquo;</a></li>
-	          <li><a href="#">1</a></li>
-	          <li><a href="#">2</a></li>
-	          <li><a href="#">3</a></li>
-	          <li><a href="#">&raquo;</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	    <!-- /.box -->    
-	    <div class="box">
-	      <div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
-	        <h3 class="box-title">Services in Posession</h3>
-	        <div class="box-tools pull-right">
-	          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          </button>
-
-	          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        </div>
-	        
-	      </div>
-	      <!-- /.box-header -->
-	      <div class="box-body no-padding">
-	        <table class="table responsive">
-	        <thead>
-	          <tr>
-	            <!-- <th>Id</th> -->
-	            <th name="element">Element</th>
-	            <th name="nrc">NRC</th>
-	            <th name="created_at">Created at</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <% @SIPS.each do |possST| %>
-	          <tr>
-	            <td><%= possST['elemento'] %></td>
-	            <td><%= possST['nrc'] %></td>
-	            <td><%= possST['created_at'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
-	          </tr>
-	        <% end %>
-	        </tbody>
-	        </table>
-	      </div>
-	      <!-- /.box-body -->
-	      <div class="box-footer clearfix">
-	        <ul class="pagination pagination-sm no-margin pull-right">
-	          <li><a href="#">&laquo;</a></li>
-	          <li><a href="#">1</a></li>
-	          <li><a href="#">2</a></li>
-	          <li><a href="#">3</a></li>
-	          <li><a href="#">&raquo;</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	    <!-- /.box -->            
-	</div>
-	</div>
-	
+	     		 </div>
+	      		<!-- /.box-header -->
+	      		<div class="box-body no-padding">
+	        		<table class="table responsive">
+	        			<thead>
+				          <tr>
+				            <!-- <th>Id</th> -->
+				            <th name="element">Element</th>
+				            <th name="nrc">NRC</th>
+				            <th name="created_at">Created at</th>
+				          </tr>
+	        			</thead>
+				        <tbody>
+				         	<% @SIPG.each do |possST| %>
+					          	<tr>
+						            <td><%= possST['elemento'] %></td>
+						            <td><%= possST['nrc'] %></td>
+						            <td><%= possST['created_at'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+					          	</tr>
+				        	<% end %>
+				        </tbody>
+	        		</table>
+	      		</div>
+	      		<!-- /.box-body -->
+	     		<div class="box-footer clearfix">
+			        <ul class="pagination pagination-sm no-margin pull-right">
+			          <li><a href="#">&laquo;</a></li>
+			          <li><a href="#">1</a></li>
+			          <li><a href="#">2</a></li>
+			          <li><a href="#">3</a></li>
+			          <li><a href="#">&raquo;</a></li>
+			        </ul>
+	      		</div>
+	    	</div>
+	    	<!-- /.box -->    
+	    	<div class="box">
+	      		<div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
+	        		<h3 class="box-title">Services in Posession</h3>
+	        		<div class="box-tools pull-right">
+	          			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          			</button>
+	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        		</div>
+	      		</div>
+	      		<!-- /.box-header -->
+	      		<div class="box-body no-padding">
+			        <table class="table responsive">
+				        <thead>
+				          <tr>
+				            <!-- <th>Id</th> -->
+				            <th name="element">Element</th>
+				            <th name="nrc">NRC</th>
+				            <th name="created_at">Created at</th>
+				          </tr>
+				        </thead>
+			        	<tbody>
+			            	<% @SIPS.each do |possST| %>
+					          <tr>
+					            <td><%= possST['elemento'] %></td>
+					            <td><%= possST['nrc'] %></td>
+					            <td><%= possST['created_at'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+					          </tr>
+			        		<% end %>
+			        	</tbody>
+			        </table>
+	      		</div>
+	      		<!-- /.box-body -->
+	      		<div class="box-footer clearfix">
+			        <ul class="pagination pagination-sm no-margin pull-right">
+			          <li><a href="#">&laquo;</a></li>
+			          <li><a href="#">1</a></li>
+			          <li><a href="#">2</a></li>
+			          <li><a href="#">3</a></li>
+			          <li><a href="#">&raquo;</a></li>
+			        </ul>
+	      		</div>
+	    	</div>
+	    	!-- /.box -->            
+		</div>
+	</div>	
 </section>
 <script type="text/javascript">
 	$('#prodBought').delay(3000).fadeOut();

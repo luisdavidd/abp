@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528040201) do
+ActiveRecord::Schema.define(version: 20170607173238) do
+
+  create_table "auctions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "auctioneers_number",            default: 1000
+    t.float    "price",              limit: 24, default: 0.0,    null: false
+    t.datetime "due_date",                                       null: false
+    t.integer  "nrc",                                            null: false
+    t.string   "auction_type",                  default: "good"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.index ["user_id"], name: "index_auctions_on_user_id", using: :btree
+  end
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "offer_id"
@@ -27,19 +40,23 @@ ActiveRecord::Schema.define(version: 20170528040201) do
     t.string   "name"
     t.integer  "user_id"
     t.integer  "quantity",              default: 1
-    t.float    "price",      limit: 24, default: 0.0, null: false
-    t.datetime "due_date",                            null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["user_id"], name: "index_offers_on_user_id", using: :btree
+    t.float    "price",      limit: 24, default: 0.0,    null: false
+    t.datetime "due_date",                               null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "nrc",                                    null: false
+    t.string   "offer_type", limit: 45, default: "good", null: false
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.string   "elemento"
     t.integer  "nrc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "product_type", limit: 45, default: "good", null: false
+    t.integer  "offer_id",                                 null: false
+    t.index ["offer_id"], name: "fk_products_1_idx", using: :btree
   end
 
   create_table "subject_nrcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -54,8 +71,8 @@ ActiveRecord::Schema.define(version: 20170528040201) do
   create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id"], name: "index_subjects_on_user_id", using: :btree
   end
 
@@ -114,9 +131,9 @@ ActiveRecord::Schema.define(version: 20170528040201) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "auctions", "users"
   add_foreign_key "comments", "offers"
   add_foreign_key "comments", "users"
-  add_foreign_key "offers", "users"
   add_foreign_key "subject_nrcs", "subjects"
   add_foreign_key "subjects", "users"
   add_foreign_key "transactions", "users"

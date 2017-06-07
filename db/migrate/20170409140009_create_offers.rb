@@ -7,6 +7,7 @@ class CreateOffers < ActiveRecord::Migration[5.0]
       t.float :price, default: 0, null: false
       t.datetime :due_date, null: false
       t.integer :nrc
+      t.string :offer_type, default: 'good'
       t.timestamps
     end
   end

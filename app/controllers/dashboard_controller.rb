@@ -6,6 +6,9 @@ class DashboardController < ApplicationController
   def delete_product
     Offer.connection.execute("DELETE FROM offers WHERE id='"+params[:id]+"';")
   end
+  def delete_auction
+    Auction.connection.execute("DELETE FROM auctions WHERE id='"+params[:id]+"';")
+  end
   # Only for Professors
   def studentsHandler
     if current_user.teacher
@@ -82,6 +85,22 @@ class DashboardController < ApplicationController
       products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"') order by id desc limit 1;")
     else
       products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"');")
+      
+    end
+    students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
+    render :json => {:products => products, :students => students}  
+  end
+
+  def auction_teacher_Handler
+    if params[:auction_type]=="s"
+      tipo = 'service'
+    else
+      tipo = 'good'
+    end
+    if params[:reload]=='true'
+      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 AND auction_type='"+tipo+"') order by id desc limit 1;")
+    else
+      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 AND auction_type='"+tipo+"');")
       
     end
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
@@ -244,6 +263,15 @@ class DashboardController < ApplicationController
       Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
   end
 
+  def newAuction
+    if params[:auction_type]=='true'
+      tipo = 'service'
+    else
+      tipo = 'good'
+    end
+      Auction.create!({:user_id=>current_user.id,:name =>params[:name], :auctioneers_number=>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :auction_type => tipo})
+  end
+
   def getBudget
     puts "Soy nrc",params[:nrc]
     bget = UserSubject.connection.select_all("SELECT budget from user_subjects where(user_id="+current_user.id.to_s+" and subject_id = '"+params[:nrc]+"');")
@@ -260,6 +288,29 @@ class DashboardController < ApplicationController
     @NRCShop.each do |nrce|
       tempG = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='good');")
       tempS = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='service');")
+      if tempG.blank?
+      else
+        @shoptG.append(tempG)
+      end
+      if tempS.blank?
+      else
+        @shoptS.append(tempS)
+      end
+      
+    end
+    # render :json => @SIP[0]['elemento']
+  end
+
+  def auction_student
+    @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good');")
+    @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service');")
+    @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
+    @budget=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
+    @shoptG = []
+    @shoptS = []
+    @NRCShop.each do |nrce|
+      tempG = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 and auction_type='good');")
+      tempS = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 and auction_type='service');")
       if tempG.blank?
       else
         @shoptG.append(tempG)

@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   get 'dashboard/newTransaction'
   get 'dashboard/historicalTransactions'
   get 'dashboard/shopping_student'
+  get 'dashboard/auction_student'
   get 'dashboard/buyProduct'
   get 'dashboard/delete_product'
+  get 'dashboard/delete_auction'
   get 'dashboard/getBudget'
   get 'dashboard/auction_student'
   # Only for professors
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   get 'dashboard/auction_teacher'
   get 'dashboard/newStudents', to: 'dashboard#newStudents'
   get 'dashboard/shopping_teacher_Handler', to: 'dashboard#shopping_teacher_Handler'
+  get 'dashboard/auction_teacher_Handler', to: 'dashboard#auction_teacher_Handler'
   get 'dashboard/editStudents', to: 'dashboard#editStudents'
   get 'dashboard/editClasses', to: 'dashboard#editClasses'
   get 'dashboard/update_class', to: 'dashboard#update_class'
@@ -32,6 +35,7 @@ Rails.application.routes.draw do
   get 'dashboard/userTransactions', to: 'dashboard#userTransactions'
   get 'dashboard/transfer'
   get 'dashboard/newProduct'
+  get 'dashboard/newAuction'
   get 'dashboard/createnewClass'
 
   devise_for :users
