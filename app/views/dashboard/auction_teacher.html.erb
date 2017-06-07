@@ -31,13 +31,13 @@
           <div id="Inputs" style="visibility:hidden">
             <div class="col-md-4" style="padding-bottom:0%">
               <label>Auction Name</label>
-              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Auction"><option></option>
+              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Auction">
               <div class="row">
                 <div class="col-md-4">
-                  <label style="padding-top:5%">Initial Price</label>
+                  <label style="padding-top:7%">Initial Price</label>
                 </div>
                 <div class="col-md-4">
-                  <label style="padding-top:5%">Type</label>
+                  <label style="padding-top:7%">Type</label>
                 </div>
               </div>
               <div class="row">
@@ -50,15 +50,13 @@
                 <div class="col-md-4" style="padding-bottom:0%">
                   <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:200px">Release</button><option></option>
                 </div> 
-                
-              </div>
-                 
               </div><option></option>
+            </div>
             <div class="col-md-4" style="padding-bottom:0%">
               <label style="padding-top:0%">Available Until:</label>
               <div class="row">
-                <div class="col-md-4" style="padding-bottom:0%" style="width:75%">
-                  <input id="DateInput" class="form-control" style="width:75%;">
+                <div class="col-md-4" style="padding-bottom:0%" style="width:175%">
+                  <input id="DateInput" class="form-control" style="width:175%;">
                 </div>
               </div><option></option>
 
@@ -171,9 +169,10 @@ function reload(bandera, tabla) {
        
  }
 
-  
-
-  $('#DateInput').datetimepicker();
+  $('#DateInput').datetimepicker({
+    minDate: new Date(),
+    format: "MM/DD/YYYY hh:mm A"
+  });
 
   $('#Release').click(function(){
     var Due;
