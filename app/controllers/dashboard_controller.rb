@@ -342,10 +342,21 @@ class DashboardController < ApplicationController
       flash[:error] = "Sorry... Product already bought!!!"
       
     end
-  	
-    
-
   end
+
+  def bidAuction
+    @fAuction = Auction.select("winner").where('id'=>params[:auction_id])
+    puts "Soy current auction", @fAuction
+    if(@fAuction.count==0)
+      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
+      UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
+    else
+      UserSubject.connection.execute("Update user_subjects SET budget=budget+"+params[:oldPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+@fAuction.to_s+"); ")
+      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
+      UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
+    end
+  end
+
 
   private
 

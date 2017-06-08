@@ -7,10 +7,13 @@ $(function() {
     success: function(data){ //Sending the output to a function
       dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
       $('#infoAuctHeader').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#btntoAuction').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#btntoAuction').css('border-top-color',dictColors[0][data[0]['skin']]);
     } 
   }); //AJAX to energy calculation module
 });
 </script>
+
 <section class="content"> 
 	<div class="row">
 		<% @budget.each do |budgets| %>
@@ -46,7 +49,7 @@ $(function() {
 		      </div>
 		      <!-- /.box-header -->
 		      <div class="box-body no-padding">
-		        <table class="table responsive">
+		        <table class="table responsive" id="table2">
 		        <thead>
 		          <tr>
 		            <!-- <th>Id</th> -->
@@ -62,12 +65,12 @@ $(function() {
 		          	<% shopT.each do |minishopT| %>
 			          <tr>
 			            <td style="display:none;"><%= minishopT['id'] %></td>
-			            <td id="nrcB"><%= minishopT['nrc'] %></td>
-			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['nrc'] %></td>
+			            <td id="nameE"><%= minishopT['name'] %></td>
 			            <td><%= minishopT['price'] %></td>
 			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Join</button></td>
+			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Join</button></td>
 			          </tr>
 			        <% end %>
 		        <% end %>
@@ -99,7 +102,7 @@ $(function() {
 		      </div>
 		      <!-- /.box-header -->
 		      <div class="box-body no-padding">
-		        <table class="table responsive" >
+		        <table class="table responsive" id="table2">
 		        <thead>
 		          <tr>
 		            <!-- <th>Id</th> -->
@@ -115,12 +118,12 @@ $(function() {
 		          	<% shopT.each do |minishopT| %>
 			          <tr>
 			            <td style="display:none;"><%= minishopT['id'] %></td>
-			            <td id="nrcB"><%= minishopT['nrc'] %></td>
-			            <td><%= minishopT['name'] %></td>
+			            <td><%= minishopT['nrc'] %></td>
+			            <td id="nameE"  ><%= minishopT['name'] %></td>
 			            <td><%= minishopT['price'] %></td>
 			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-			            <td><button type="button" onclick="buyP(<%= minishopT['id'] %>, <%= minishopT['price']%>,<%=minishopT['quantity']%>,<%= minishopT['nrc'] %>)" class="badge bg-green">Join</button></td>
+			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
 			          </tr>
 			        <% end %>
 		        <% end %>
@@ -139,7 +142,7 @@ $(function() {
 		      </div>
 		    </div>        
 		</div>
-		<div class="col-lg-5 col-xs-6">
+		<div class="col-lg-3 col-xs-6">
 			<div class="box">
 				<div class="box-header" id="infoAuctHeader" style="font-weight:bold;color:white">
 			        <h3 class="box-title">Auction Info</h3>
@@ -151,7 +154,19 @@ $(function() {
 			        </div>
 		      	</div>
 		      	<div class="box-body no-padding">
-		      		
+		      		<div class="box box-info" id="nDS" style="visibility: visible;border-top-color:#9e8d8b;width:85%;left:6.25%;margin-top:10px">
+					  <div class="box-header with-border" style="background-color:#9e8d8b;color:#fff">
+					    <h3 class="box-title" style="color:white;">No Data Selected</h3>
+					  </div>
+					</div>
+					<div class="box box-info" id="auctioning" style="display:none;border-top-color:#fff;width:85%;left:6.25%;margin-top:10px">
+						
+					</div>
+					<div class="box box-info" id="budIns" style="display:none;border-top-color:#dd4b39;width:85%;left:6.25%;margin-top:10px">
+					  <div class="box-header with-border" class="blink_me" style="background-color:#dd4b39;color:#fff">
+					    <h3 class="box-title" style="color:white;">Current budget insufficient</h3>
+					  </div>
+					</div>  
 		      	</div>
 			</div>
 		</div>
@@ -161,7 +176,38 @@ $(function() {
 	$('#prodBought').delay(3000).fadeOut();
 </script>
 <script type="text/javascript">
-	function buyP(id,Price,QTT,nNRC){
+	function doAuction(param1,param2,param3,param4){
+		if ($('#newPrice').val()==param3){
+			alert('Sorry... The Amount must be higher than current value.')
+		}else{
+			if($('#newPrice').val()>param4){
+				alert('Sorry.... The bid price is higher than your current budget')
+				$('#auctioning').fadeOut();
+				$('#abouttoAuctN').fadeOut();
+				$('#abouttoAuctB').fadeOut();
+				$('#abouttoAuctI').fadeOut();
+				$('#abouttoAuctS').fadeOut();
+				$('#nDS').show();
+			}else{
+				$.ajax({
+					type: 'GET',
+					url: 'bidAuction',
+					data: ({auction_id: param1,auction_nrc:param2,newPrice:$('#newPrice').val(),oldPrice:param3}),
+					success: function(data){
+					setTimeout(function(){location.reload()}, 3000);
+					
+					},
+					error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("some error");
+					}
+		    	});
+
+			}
+			
+		}
+
+	}
+	function joinA(id,Price,QTT,nNRC,nName){
 		console.log(nNRC);
 		var saldo;
 		$.ajax({
@@ -169,39 +215,35 @@ $(function() {
 			url: 'getBudget',
 			data: ({nrc: nNRC}),
 			success: function(data){
-
 				saldo = data;
-				console.log(saldo)
-				continueBuy(saldo,id,Price,nNRC)
-				
+				if(saldo>=Price){
+					$('#nDS').fadeOut();
+					$('#auctioning').show();
+					$('#auctioning').html('<div class="small-box bg-green" id="abouttoAuctN" style="border-radius:12px"><div class="inner"><h3 style="font-size:30px">'+nName+'</h3>'+
+		      							 '<p>Auction Name</p></div>'+
+		    							 '</div><div class="small-box bg-yellow" id="abouttoAuctB" style="border-radius:12px"><div class="inner"><h3 style="font-size:30px">$'+saldo+'.00</h3>'+
+		    							 '<p>Current Budget in '+nNRC+'</p></div>'+
+		    							 '</div><div class="small-box " id="abouttoAuctI" style="border-radius:12px">'+
+		    							 '<div class="input-group"><span class="input-group-addon">Amount $</span><input type="number" id="newPrice" class="form-control" aria-label="Amount (to the nearest dollar)" id="amount" value="'+Price+'" min="'+Price+'"><span class="input-group-addon">.00</span></div>'+
+		    							 '</div>'+
+		    							 '<div class="small-box" id="abouttoAuctS" style="border-radius:12px"><button type="button" onclick="doAuction('+id+','+nNRC+','+Price+','+saldo+')" id="btntoAuction" class="btn btn-primary btn-lg btn-block">Auction</button>'+
+		    							 '</div>');
+
+				}else{
+					$('#budIns').show().delay(3500).fadeOut();
+					$('#auctioning').fadeOut();
+					$('#abouttoAuctN').fadeOut();
+					$('#abouttoAuctB').fadeOut();
+					$('#abouttoAuctI').fadeOut();
+					$('#abouttoAuctS').fadeOut();
+
+				}	
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 		    	alert("some error");
 		    }
 		});
 	}
-	function continueBuy(saldo,id,Price,nNRC){
-		console.log(saldo)
-		valor = Price
-		if(saldo>=Price){
-			console.log("Ok puedes comprar")
-	      //Empieza el ajax
-			$.ajax({
-				type: 'GET',
-				url: 'buyProduct',
-				data: ({product_id: id}),
-				success: function(data){
-				setTimeout(function(){location.reload()}, 3000);
-				
-				},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-				alert("some error");
-				}
-		    });
-      		//Termina ajax
-		}else{
-			alert("You dont have enough money! :(");
-		}	
-	}
+	
 	
 </script>

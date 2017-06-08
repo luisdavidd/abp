@@ -8,6 +8,7 @@ class CreateAuctions < ActiveRecord::Migration[5.0]
       t.datetime :due_date, null: false
       t.integer :nrc, null: false
       t.string :auction_type, default: 'good'
+      t.integer :winner
       t.timestamps
     end
   end
