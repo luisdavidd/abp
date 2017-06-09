@@ -13,7 +13,9 @@ $(function() {
   }); //AJAX to energy calculation module
 });
 </script>
-
+<script type="text/javascript">
+	
+</script>
 <section class="content"> 
 	<div class="row">
 		<% @budget.each do |budgets| %>
@@ -35,7 +37,7 @@ $(function() {
 	  	<% end %>
   	</div>
   	<div class="row">
-		<div class="col-lg-5 col-xs-6">
+		<div class="col-lg-4 col-xs-6">
 		    <div class="box">
 		      <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
 		        <h3 class="box-title">Goods in Auction available</h3>
@@ -70,7 +72,7 @@ $(function() {
 			            <td><%= minishopT['price'] %></td>
 			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
 
-			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Join</button></td>
+			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
 			          </tr>
 			        <% end %>
 		        <% end %>
@@ -102,7 +104,7 @@ $(function() {
 		      </div>
 		      <!-- /.box-header -->
 		      <div class="box-body no-padding">
-		        <table class="table responsive" id="table2">
+		        <table class="table responsive" id="table3">
 		        <thead>
 		          <tr>
 		            <!-- <th>Id</th> -->
@@ -169,6 +171,99 @@ $(function() {
 					</div>  
 		      	</div>
 			</div>
+		</div>
+		<div class="col-lg-4 col-xs-6">
+	    	<div class="box">
+	      		<div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
+	        		<h3 class="box-title">Goods in Posession</h3>
+	        		<div class="box-tools pull-right">
+	         			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          			</button>
+
+	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        		</div>
+	     		</div>
+	      		<!-- /.box-header -->
+	      		<div class="box-body no-padding">
+	        		<table class="table responsive">
+	        			<thead>
+				          <tr>
+				            <!-- <th>Id</th> -->
+				            <th name="element">Element</th>
+				            <th name="nrc">NRC</th>
+				            <th name="created_at">Due Date</th>
+				            <th name="status">Status</th>
+				          </tr>
+	        			</thead>
+				        <tbody>
+				         	<% @SIPG.each_with_index do |possST,indexTg| %>
+					          	<tr>
+						            <td><%= possST['name'] %></td>
+						            <td><%= possST['nrc'] %></td>
+						            <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+						            <td id="Tgstatus"><span class="<%= @statusG[indexTg][:class]%>"><%= @statusG[indexTg][:status]%></span></td>
+					          	</tr>
+				        	<% end %>
+				        </tbody>
+	        		</table>
+	      		</div>
+	      		<!-- /.box-body -->
+	     		<div class="box-footer clearfix">
+			        <ul class="pagination pagination-sm no-margin pull-right">
+			          <li><a href="#">&laquo;</a></li>
+			          <li><a href="#">1</a></li>
+			          <li><a href="#">2</a></li>
+			          <li><a href="#">3</a></li>
+			          <li><a href="#">&raquo;</a></li>
+			        </ul>
+	      		</div>
+	    	</div>
+	    	<!-- /.box -->    
+	    	<div class="box">
+	      		<div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
+	        		<h3 class="box-title">Services in Posession</h3>
+	        		<div class="box-tools pull-right">
+	          			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+	          			</button>
+	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+	        		</div>
+	      		</div>
+	      		<!-- /.box-header -->
+	      		<div class="box-body no-padding">
+			        <table class="table responsive">
+				        <thead>
+				          <tr>
+				            <!-- <th>Id</th> -->
+				            <th name="name">Element</th>
+				            <th name="nrc">NRC</th>
+				            <th name="due_date">Due Date</th>
+				            <th name="status">Status</th>
+				          </tr>
+				        </thead>
+			        	<tbody>
+			            	<% @SIPS.each_with_index do |possST,indexT| %>
+					          <tr>
+					            <td><%= possST['name'] %></td>
+					            <td><%= possST['nrc'] %></td>
+					            <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+					            <td id="Tstatus" ><span class="<%= @statusS[indexT][:class]%>"><%= @statusS[indexT][:status]%></span></td>
+					          </tr>
+			        		<% end %>
+			        	</tbody>
+			        </table>
+	      		</div>
+	      		<!-- /.box-body -->
+	      		<div class="box-footer clearfix">
+			        <ul class="pagination pagination-sm no-margin pull-right">
+			          <li><a href="#">&laquo;</a></li>
+			          <li><a href="#">1</a></li>
+			          <li><a href="#">2</a></li>
+			          <li><a href="#">3</a></li>
+			          <li><a href="#">&raquo;</a></li>
+			        </ul>
+	      		</div>
+	    	</div>
+	    	<!-- /.box -->            
 		</div>
 	</div>	
 </section>

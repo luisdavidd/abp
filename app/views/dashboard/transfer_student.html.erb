@@ -1,0 +1,225 @@
+<div class="row" style="padding-bottom:1%"></div>
+<div class="col-md-12">
+  <div class="row">
+    <div class="box box-info" id="transferS" style="display:none;border-top-color:#dd4b39">
+      <div class="box-header with-border" style="background-color:#dd4b39;color:#fff">
+        <h3 class="box-title" style="color:white;font-weight:bold;">Transfer succesfully made!!!</h3>
+      </div>
+    </div>  
+    <div class="col-md-4">
+      <div class="box box-info">
+        <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
+          <h3 class="box-title" style="font-weight:bold">Transfer</h3>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body">
+          <label>Subject</label>
+          <select id="subject" class="form-control"  style="width: 100%;" required><option></option></select>
+          <label>NRC</label>
+          <select id="nrc" class="form-control" style="width: 100%;" required><option></option></select>
+          <div class="form-group" id="Inputs" style="visibility:hidden; padding-top:5%">
+            <div>
+              <label>Current Budget</label>
+              <div class="input-group">
+                <span class="input-group-addon">Budget $</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="budget" value="0" min="0" disabled="">
+                <span class="input-group-addon">.00</span>
+              </div>
+              <label>Amount</label>
+              <div class="input-group">
+                <span class="input-group-addon">Amount $</span>
+                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="amount" value="0" min="0">
+                <span class="input-group-addon">.00</span>
+              </div>
+              <label>Observations</label>
+              <div class="form-group">
+                <textarea id="observations" class="form-control" rows="3" placeholder="Observations"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix" style="padding-left:35%; visibility:hidden" id="Submit">
+          <button type="submit" class="btn btn-default" id="transfer" style="width:45%">Submit</button>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+      <div class="box box-info" id="transfmade" style="visibility: hidden;border-top-color:#dd4b39">
+        <div class="box-header with-border" style="background-color:#dd4b39;color:#fff">
+          <h3 class="box-title" style="color:white;font-weight:bold;">Transfer sucessfully made!!!</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div class="box box-info">
+        <div class="box-header with-border" style="background-color:#605ca8;color:#fff">
+          <h3 class="box-title" style="align-self:center;font-weight:bold">Select Students</h3>
+        </div>
+          <div class="box-body">
+            <table class="display responsive" id="students" style="width:100%">      
+              <thead>
+                <tr>
+                  <th name="check"></th>
+                  <th name="id"></th>
+                  <th name="name">Name</th>
+                  <th name="last_name">Last Name</th>
+                  <th name="email">Email</th>
+                  <th name="codigo">Code</th> 
+                </tr>
+              </thead>
+
+            </table>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var selected = [];
+  table = $('#students').DataTable( {
+      'columnDefs': [
+          {
+              "targets": [1],
+              "visible": false
+          },
+          {
+            'targets': [0],
+            'checkboxes': {
+               'selectRow': true
+            }
+          }
+      ],
+      'select': {
+            'style': 'multi'
+        }
+  } );
+
+
+  var budgets;
+  $.ajax({
+    type: 'GET',
+    url: 'transferStudent',
+    success: function(data){
+      //console.log("exito")
+      //console.log(data)
+      var subjects = data['classes'];
+      var NRCs = data['NRCs'];
+      var stdNames = data['students_names'];
+      var stdIDs = data['students_ids'];
+      var data2 = [];
+      budgets = data['student_budgets']
+
+      for(i = 0; i < subjects.length; i++){
+        data2.push({id: i, text: subjects[i]})
+      }
+      $("#subject").select2({
+        data: data2,
+        placeholder: "Select a subject"
+      });
+      $("#subject").change(function() {
+        console.log(this.value)
+        $('#budget').val(budgets[this.value])
+        table.clear();
+        table.draw();
+        data_nrc = [];
+        i_subj = $("#subject").val();
+        if (i_subj){
+          for(i = 0; i < i_subj.length; i++){
+            for(j = 0; j < NRCs[i_subj[i]].length; j++){
+            data_nrc.push({id: j, text: NRCs[i_subj[i]][j]})
+            }
+          } 
+        }
+        $("#nrc").html('<option></option>');
+        $("#nrc").select2({
+          data: data_nrc,
+          placeholder: "Select a NRC"
+        });
+
+        $("#nrc").change(function() {
+          if($(this).text() != ""){
+            $("#Inputs").css('visibility', 'visible');
+            $("#Submit").css('visibility', 'visible');
+            data_stds = [];
+            i_nrc = $("#nrc").val();
+            i_subj = $("#subject").val();
+            //console.log('indices nrc: ',i_nrc)
+            //console.log(i_nrc,i_subj)
+            table.clear();
+            table.draw();
+            if (i_nrc && i_subj) {
+              for(k = 0; k < i_subj.length; k++){
+                for(i = 0; i < i_nrc.length; i++){
+                  for(j = 0; j < stdNames[i_subj[k]][i_nrc[i]].length; j++){
+                    if (stdIDs[i_subj[k]][i_nrc[i]][j]) {
+                      s = stdNames[i_subj[k]][i_nrc[i]][j]
+                      table.row.add(["", stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[2],s[3]]).draw(true);
+                      //data_stds.push({id: stdIDs[i_subj[k]][i_nrc[i]][j], text: stdNames[i_subj[k]][i_nrc[i]][j]})
+                    }
+                  
+                  }
+                } 
+              }
+            }
+          }
+        });
+
+      });
+    }
+  });
+
+  $("#transfer").click(function() {
+    amount = $("#amount").val();
+    observations = $("#observations").val();
+    //students_id = id_trans;
+    nrc = $("#nrc").select2("data")[0].text;
+    subject = $("#subject").select2("data")[0].text;
+    selectedRows = table.rows({ selected: true }).data().toArray();
+    //console.log(parseInt(amount))
+    //console.log(selectedRows.length)
+    if(selectedRows.length*parseInt(amount) < $('#budget').val() && selectedRows.length > 0 && parseInt(amount) > 0){
+      console.log("entré")
+      var students_id = [];
+      for (var i = 0; i < selectedRows.length; i++) {
+        students_id.push(selectedRows[i][1]);
+      }
+
+      //console.log(amount,observations,students_id,nrc)
+      var c_error = 0;
+      var envio = 0;
+      //for(var i=0; i <)
+      
+      $.ajax({
+          type: 'GET',
+          url: 'newTransactionStudent',
+          data: {amount:amount, observations:observations, student: students_id, nrc:nrc, subject:subject},
+          success: function(){
+              valNew = budgets[$('#subject').val()] - selectedRows.length*parseInt(amount);
+              budgets[$('#subject').val()] = valNew;
+              $('#budget').val(valNew);
+              $('#transferS').show().delay(3500).fadeOut();
+              table.rows( { selected: true } ).deselect();
+
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+            if (c_error<1) {
+              alert("Please check your data");
+              c_error += 1;
+            }
+             
+          }
+        });
+      
+    }else{
+      console.log("Rechazado")
+    }
+       
+    
+  });
+</script>

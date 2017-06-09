@@ -90,7 +90,35 @@ class DashboardController < ApplicationController
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
     render :json => {:products => products, :students => students}  
   end
-
+  def auction_teacher
+    @winnersG = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='good' and a.winner = uf.id)")
+    @winnersS = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='service' and a.winner = uf.id)")
+    @statusSt = []
+    @statusGt = []
+    @winnersG.each_with_index do |miniG,indexG|
+      if(miniG['Sname']==nil)
+        @statusGt.append({nID:indexG,status:'No one',class:'badge bg-gray'})
+      else
+        if(DateTime.now>=miniG['due_date'])
+            @statusGt.append({nID:indexG,winner:miniG['Sname']+' '+miniG['last_name'],class:'badge bg-green'})
+        else
+            @statusGt.append({nID:indexG,winner:miniG['Sname']+' '+miniG['last_name'],class:'badge bg-yellow'})
+        end
+      end
+    end
+    @winnersS.each_with_index do |miniS,indexS|
+      if(miniS['Sname']==nil)
+        @statusSt.append({nID:indexS,status:'No one',class:'badge bg-gray'})
+      else
+        if(DateTime.now>=miniS['due_date'])
+            @statusSt.append({nID:indexS,winner:miniS['Sname']+' '+miniS['last_name'],class:'badge bg-green'})
+        else
+            @statusSt.append({nID:indexS,winner:miniS['Sname']+' '+miniS['last_name'],class:'badge bg-yellow'})
+        end
+      end
+    end
+    # render :json => @winnersG
+  end
   def auction_teacher_Handler
     if params[:auction_type]=="s"
       tipo = 'service'
@@ -104,6 +132,7 @@ class DashboardController < ApplicationController
       
     end
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
+    
     render :json => {:products => products, :students => students}  
   end
 
@@ -121,7 +150,7 @@ class DashboardController < ApplicationController
       @enrolled=UserSubject.connection.execute("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
       @notifs = Transaction.connection.execute("SELECT COUNT(*) from transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+");")
       @budget_adj=Transaction.connection.execute("SELECT nrc,WEEK(created_at),SUM(amount) AS Budgetperclass FROM transactions where (user_id="+current_user.id.to_s+" or user_to="+current_user.id.to_s+") group by nrc,WEEK(created_at);")
-      
+      @tSaldo = UserSubject.connection.select_all("SELECT SUM(budget) As totalBudget from user_subjects where (user_id ="+current_user.id.to_s+");")
       render 'student'
     end
     
@@ -302,8 +331,49 @@ class DashboardController < ApplicationController
   end
 
   def auction_student
-    @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good');")
-    @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service');")
+    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner from auctions where (auction_type='good');")
+    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner from auctions where (auction_type = 'service');")
+    @statusG= []
+    @statusS= []
+    @SIPG.each_with_index do |miniG,indexG|
+      if(miniG['winner']==nil)
+        @statusG.append({nID:indexG,status:'Not in',class:'badge bg-gray'})
+      else
+        if(DateTime.now>=miniG['due_date'])
+          if(miniG['winner']==current_user.id)
+            @statusG.append({nID:indexG,status:'Won',class:'badge bg-green'})
+          else
+            @statusG.append({nID:indexG,status:'Lost',class:'badge bg-red'})
+          end
+        else
+          if(miniG['winner']==current_user.id)
+            @statusG.append({nID:indexG,status:'Winning',class:'badge bg-yellow'})
+          else
+            @statusG.append({nID:indexG,status:'Losing',class:'badge bg-red'})
+          end
+        end
+      end
+    end
+    @SIPS.each_with_index do |miniS,indexS|
+      if(miniS['winner']==nil)
+        @statusS.append({nID:indexS,status:'Not in',class:'badge bg-gray'})
+      else
+        if(DateTime.now>=miniS['due_date'])
+          if(miniS['winner']==current_user.id)
+            @statusS.append({nID:indexS,status:'Won',class:'badge bg-green'})
+          else
+            @statusS.append({nID:indexS,status:'Lost',class:'badge bg-red'})
+          end
+        else
+          if(miniS['winner']==current_user.id)
+            @statusS.append({nID:indexS,status:'Winning',class:'badge bg-yellow'})
+          else
+            @statusS.append({nID:indexS,status:'Losing',class:'badge bg-red'})
+          end
+        end
+      end
+    end
+
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
     @budget=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
     @shoptG = []
@@ -321,7 +391,7 @@ class DashboardController < ApplicationController
       end
       
     end
-    # render :json => @SIP[0]['elemento']
+    # render :json => @SIPG
   end
 
   def buyProduct
@@ -346,17 +416,83 @@ class DashboardController < ApplicationController
 
   def bidAuction
     @fAuction = Auction.select("winner").where('id'=>params[:auction_id])
-    puts "Soy current auction", @fAuction
+    puts "Soy current auction", @fAuction[0]['winner']
     if(@fAuction.count==0)
       Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
       UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
     else
-      UserSubject.connection.execute("Update user_subjects SET budget=budget+"+params[:oldPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+@fAuction.to_s+"); ")
+      UserSubject.connection.execute("Update user_subjects SET budget=budget+"+params[:oldPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+@fAuction[0]['winner'].to_s+"); ")
       Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
       UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
     end
   end
 
+  def newTransactionStudent
+    nrc = UserSubject.connection.select_all("SELECT n.nrc from user_subjects as u, subjects as s, subject_nrcs as n 
+      where(u.user_id="+current_user.id.to_s+" and n.nrc = u.subject_id and n.subject_id = s.id and s.name = '"+params[:subject]+"');")
+    nrc_u = nrc[0]['nrc'].to_s
+    params[:student].each_with_index do |user, i|
+    #user = params[:student]
+      Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
+      UserSubject.connection.execute("Update user_subjects SET budget = budget-"+params[:amount]+" WHERE(user_id="+current_user.id.to_s+" and subject_id="+nrc_u+");")
+      User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
+      User.connection.execute("Update users SET saldo=saldo-"+params[:amount]+" WHERE id="+current_user.id.to_s+";")
+    end
+  end
+
+  def transferStudent
+    budgetsQuery=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
+    std_budgets = []
+    for row in budgetsQuery
+      std_budgets.append(row['budget'])
+    end
+
+    classes = Subject.connection.select_all("SELECT s.id, s.name, s.user_id from subjects as s, user_subjects as u, 
+      subject_nrcs as n where u.user_id="+current_user.id.to_s+" and u.subject_id=n.nrc and n.subject_id = s.id;")
+    @data = Hash.new
+    i = 0
+    classes_array = []
+    nrc_array = []
+    students_array = []
+    students_id_array = []
+    for clase in classes
+      #class_name = clase.name
+      classes_array.append(clase['name'])
+      nrcs = SubjectNrc.select("id, nrc").where('subject_id' => clase['id'])
+      nrc_names = []
+      std_sub_array = []
+      std_ids_sub_array = []
+
+      for nrc in nrcs
+        #nrc_ids.append(nrc.id)
+        nrc_names.append(nrc.nrc)
+        students = UserSubject.connection.select_all("SELECT u.id, u.name, u.last_name, u.email, s.budget, u.codigo FROM users as u, user_subjects as s WHERE s.subject_id = "+nrc.nrc.to_s+" and u.id=s.user_id;")
+        std_names = []
+        std_ids = []
+        for student in students
+          std_ids.append(student["id"])
+          #std_names.append([student["name"],student["last_name"],student["email"],student["budget"],student["codigo"]])
+          std_names.append([student["name"],student["last_name"],student["email"],student["codigo"]])
+        end
+        std_sub_array.append(std_names)
+        std_ids_sub_array.append(std_ids)
+      end
+      nrc_array.append(nrc_names)
+      students_array.append(std_sub_array)
+      students_id_array.append(std_ids_sub_array)
+      #nrcs = SubjectNrc.connection.execute("SELECT s.id, s.name, n.id, n.nrc FROM subject_nrcs as n, subjects as s WHERE n.subject_id = s.id;")
+    end
+    @classes = classes_array
+    @NRCs = nrc_array
+    @students_names = students_array
+    @students_ids = students_id_array
+
+    @budgets = std_budgets
+    
+    render :json => {:classes => @classes, :NRCs => @NRCs, :students_names => @students_names, :students_ids => @students_ids, :student_budgets => @budgets}
+    
+  end
 
   private
 

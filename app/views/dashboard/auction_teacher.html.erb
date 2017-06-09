@@ -48,21 +48,12 @@ $(function() {
                   <label style="padding-top:7%">Initial Price</label>
                 </div>
                 <div class="col-md-4">
-                  <label style="padding-top:7%">Quantity</label>
-                </div>
-                <div class="col-md-4">
-                  <label style="padding-top:7%;margin-left:30px">Type</label>
+                  <label style="padding-top:7%;">Type</label>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-4" style="padding-bottom:0%">
                   <input id="PriceInput" type="number" class="form-control" style="width:100%;" required  min=0 step=10> 
-                </div>
-                <div class="col-md-2" style="padding-bottom:0%">
-                  <input id="QuantityToggle" type="checkbox" data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
-                </div>
-                <div class="col-md-2" style="padding-bottom:0%;margin-left:30px">
-                  <input disabled="true" id="QuantityInput" type="number" class="form-control" placeholder="Quantity" required min=1>
                 </div>
                 <div class="col-md-4" style="padding-bottom:0%;width:20%">
                   <input id="TypeInput" type="checkbox"  data-toggle="toggle" data-on="Service" data-off="Good">
@@ -92,9 +83,9 @@ $(function() {
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-5 col-xs-6">
         <div class="box">
-          <div class="box-header">
+          <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
             <h3 class="box-title">Goods in Auction available</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -107,6 +98,7 @@ $(function() {
             <table class="table responsive" id="g_availables">
               <thead>
                 <tr>
+                  <th name="nrc">NRC</th>
                   <th name="concept">Concept</th>
                   <th name="price">Price</th>
                   <th name="available">Due date</th>
@@ -128,12 +120,9 @@ $(function() {
             </ul>
           </div>
         </div>
-      <!-- /.box --> 
-      </div>
-
-      <div class="col-lg-6">
+        <!-- /.box --> 
         <div class="box">
-          <div class="box-header">
+          <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
             <h3 class="box-title">Services in Auction available</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -148,6 +137,7 @@ $(function() {
             <table class="table responsive" id="s_availables">
               <thead>
                 <tr>
+                  <th name="nrc">NRC</th>
                   <th name="concept">Concept</th>
                   <th name="price">Price</th>
                   <th name="available">Due date</th>
@@ -169,8 +159,101 @@ $(function() {
             </ul>
           </div>
         </div>
-      <!-- /.box --> 
+        <!-- /.box --> 
       </div>
+      <div class="col-lg-5 col-xs-6">
+        <div class="box">
+            <div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
+              <h3 class="box-title">Auction Results - Goods</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+          </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table responsive">
+                <thead>
+                  <tr>
+                    <!-- <th>Id</th> -->
+                    <th name="element">Element</th>
+                    <th name="nrc">NRC</th>
+                    <th name="created_at">Due Date</th>
+                    <th name="status">Winner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @winnersG.each_with_index do |possST,indexT| %>
+                      <tr>
+                        <td><%= possST['name'] %></td>
+                        <td><%= possST['nrc'] %></td>
+                        <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+                        <td><span class="<%= @statusGt[indexT][:class]%>"><%= @statusGt[indexT][:winner]%></span></td>
+                      </tr>
+                  <% end %>        
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </div>
+        </div>
+        <!-- /.box -->    
+        <div class="box">
+            <div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
+              <h3 class="box-title">Auction Results - Services</h3>
+              <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table responsive">
+                <thead>
+                  <tr>
+                    <!-- <th>Id</th> -->
+                    <th name="name">Element</th>
+                    <th name="nrc">NRC</th>
+                    <th name="due_date">Due Date</th>
+                    <th name="status">Winner</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @winnersS.each_with_index do |possST,indexT| %>
+                      <tr>
+                        <td><%= possST['name'] %></td>
+                        <td><%= possST['nrc'] %></td>
+                        <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+                        <td><span class="<%= @statusSt[indexT][:class]%>"><%= @statusSt[indexT][:winner]%></span></td>
+                      </tr>
+                  <% end %>    
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">&raquo;</a></li>
+              </ul>
+            </div>
+        </div>
+        <!-- /.box -->            
+    </div>
     </div> 
   </div>
 </div>
@@ -224,11 +307,11 @@ function reload(bandera, tabla) {
     url: 'auction_teacher_Handler',
     data: {nrc: $('#nrc').select2('data')[0].text, reload: bandera, auction_type: tabla},
     success: function(data){
-      s = ['name','price','due_date']
+      s = ['nrc','name','price','due_date']
       table = document.getElementById(tabla + "_availables");
       if (bandera == false) {
         $(tabla + "_availables").remove();
-        table.innerHTML = '<tr><th name="concept">Concept</th><th name="price">Price</th><th name="available">Due date</th><th name="action">Action</th></tr>';
+        table.innerHTML = '<tr><th name="nrc">NRC</th><th name="concept">Concept</th><th name="price">Price</th><th name="available">Due date</th><th name="action">Action</th></tr>';
       }      
       
       products = data['products'];
@@ -241,11 +324,11 @@ function reload(bandera, tabla) {
         var temp = new Date(products[i]['due_date'])
         products[i]['due_date'] = String(temp).split('GMT')[0] //Intentando que la fecha se vea bien
         var cell = row.insertCell(-1);
-        for (var j = 0; j < 3; j++) {
+        for (var j = 0; j < 4; j++) {
           var cell = row.insertCell(j);
           cell.innerHTML = products[i][s[j]];
         }   
-        var cell = row.insertCell(3);    
+        var cell = row.insertCell(4);    
         cell.innerHTML= "<button type='button' onclick='deleteP("+rowCount+",table.id)' class='badge bg-red'>Delete</button>";
       }        
 
@@ -274,15 +357,7 @@ function reload(bandera, tabla) {
     });      
        
  }
- $(function() {
-    $('#QuantityToggle').change(function() {
-      if($(this).prop('checked') == true){
-        $('#QuantityInput').prop("disabled", false); 
-      }else{
-        $('#QuantityInput').prop("disabled", true); 
-      }
-    })
-  })
+
   $('#DateInput').datetimepicker({
     minDate: new Date(),
     format: "MM/DD/YYYY hh:mm A"
@@ -300,11 +375,9 @@ function reload(bandera, tabla) {
     }else{
       Nam = $('#AuctInput').val();
     }
-    if($('#QuantityToggle').prop('checked') == false){
-      Quant = 1000;
-    }else{
-      Quant = $('#QuantityInput').val();
-    }
+
+    Quant = 1000;
+
 
     var c_error = 0;
     $.ajax({
