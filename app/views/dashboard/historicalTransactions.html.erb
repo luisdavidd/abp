@@ -25,6 +25,7 @@
 			            <th name="amount">Amount</th>
 			            <th name="observations">Observations</th> 
 			            <th name="created_at">Date</th>
+			            <th name="toSort">Date</th>    
 		          	</tr>
 		        </thead>
 
@@ -35,7 +36,8 @@
 			             	<td><%= transaction[2]+' ' +transaction[3] %></td>
 			             	<td><%= transaction[4] %></td>
 			            	<td><%= transaction[5] %></td>
-			            	<td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>        
+			            	<td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>   
+			            	<td><%= transaction[6].to_time %></td>     
             			</tr>
           			<% end %>
         		</tbody>
@@ -49,7 +51,6 @@
 	}
 </style>
 <script type="text/javascript">
-
 	var table = $('#transactions_table').DataTable( {
 		responsive: true,
 		"rowCallback": function( row, data, index ) {
@@ -65,7 +66,14 @@
 		        $('td:eq(2)', row).css('color', '#009900');
 		        $('td:eq(2)', row).css('font-weight', 'bold');
 		    }
-		}	      
+		},
+		columnDefs: [
+		{'orderData':[5], 'targets': [4]},
+        	{
+              "targets": [5],
+              "visible": false
+        	}
+      	]	      
 	  } );
 </script>
 

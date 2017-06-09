@@ -8,7 +8,15 @@ $(document).ready(function() {
   //colum_names = ["id",name", "last_name", "email", "saldo", "codigo"];
   //Tabla para actualizar
   var tableHistorics = $('#transactions_table').DataTable( {
-    responsive: true        
+    responsive: true,
+    columnDefs: [
+          {
+            "targets": [1],
+            "visible": false
+          },
+          
+      ],
+
     } );
 
   var selected = [];
@@ -38,22 +46,6 @@ $.ajax({
 type: 'GET',
 url: 'transfer',
 success: function(data){
-  /*console.log(data)
-  res_names = data['names'];
-  tabla = data['tabla']; names=[];id_names=[];
-  for (j in res_names) {
-    names.push(res_names[j]['name']);
-    id_names.push(res_names[j]['id']);
-    data2.push({id: res_names[j]['id'], text: res_names[j]['name']})
-  }
-      //Initialize Select2 Elements
-    $("#subject").select2({
-      allowClear: true,
-      data: data2,
-      placeholder: "Select a subject"
-
-    }); */
-
     var subjects = data['classes'];
     var NRCs = data['NRCs'];
     var stdNames = data['students_names'];
@@ -226,8 +218,6 @@ success: function(data){
 
       window.onkeyup = function(e) {
      var key = e.keyCode ? e.keyCode : e.which;
-
-
      if (key == 13) {
         if(sw == false){
           input = document.getElementById("intro").value;

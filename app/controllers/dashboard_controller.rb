@@ -82,9 +82,9 @@ class DashboardController < ApplicationController
       tipo = 'good'
     end
     if params[:reload]=='true'
-      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"') order by id desc limit 1;")
+      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND quantity>0 AND offer_type='"+tipo+"') order by id desc limit 1;")
     else
-      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND quantity>0 AND offer_type='"+tipo+"');")
+      products = Offer.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND quantity>0 AND offer_type='"+tipo+"');")
       
     end
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
@@ -126,9 +126,9 @@ class DashboardController < ApplicationController
       tipo = 'good'
     end
     if params[:reload]=='true'
-      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 AND auction_type='"+tipo+"') order by id desc limit 1;")
+      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND auctioneers_number>0 AND auction_type='"+tipo+"') order by id desc limit 1;")
     else
-      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 AND auction_type='"+tipo+"');")
+      products = Auction.connection.select_all("SELECT * from auctions where (nrc="+params[:nrc].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND auctioneers_number>0 AND auction_type='"+tipo+"');")
       
     end
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
@@ -315,8 +315,8 @@ class DashboardController < ApplicationController
     @shoptG = []
     @shoptS = []
     @NRCShop.each do |nrce|
-      tempG = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='good');")
-      tempS = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND quantity>0 and offer_type='service');")
+      tempG = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND quantity>0 and offer_type='good');")
+      tempS = Offer.connection.select_all("SELECT id,name,price,due_date,quantity,nrc from offers where (nrc="+nrce['subject_id'].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND quantity>0 and offer_type='service');")
       if tempG.blank?
       else
         @shoptG.append(tempG)
@@ -338,24 +338,25 @@ class DashboardController < ApplicationController
     @statusS= []
     @participantsG = []
     @participantsS = []
-    @SIPG.each do  |miniG|
+    @SIPG.each_with_index do  |miniG,indexG|
       if(not miniG['participants']== nil)
         @participantsG.append(miniG['participants'].split(";"))
-      else
-
+        puts "Before",@participantsG[indexG]
+        @participantsG[indexG]=@participantsG[indexG].uniq
+        puts "After",@participantsG[indexG]
       end
     end
-    @SIPS.each do  |miniS|
-      if(not miniS['participants']== nil)
+    @SIPS.each_with_index do  |miniS,indexS|
+      if(not miniS['participants']== nil) 
         @participantsS.append(miniS['participants'].split(";"))
+        @participantsS[indexS]=@participantsS[indexS].uniq      
       else
       end
+
     end
 
     @SIPG.each_with_index do |miniG,indexG|
       @participantsG[indexG].delete(nil)
-      puts @participantsG[indexG]
-      puts  (not @participantsG[indexG].include?(current_user.id.to_s))
       if(miniG['winner']==nil or (not (@participantsG[indexG].include?(current_user.id.to_s))))
         @statusG.append({nID:indexG,status:'Not in',class:'badge bg-gray'})
       else
@@ -400,8 +401,8 @@ class DashboardController < ApplicationController
     @shoptG = []
     @shoptS = []
     @NRCShop.each do |nrce|
-      tempG = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 and auction_type='good');")
-      tempS = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=CURDATE() AND auctioneers_number>0 and auction_type='service');")
+      tempG = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND auctioneers_number>0 and auction_type='good');")
+      tempS = Auction.connection.select_all("SELECT id,name,price,due_date,auctioneers_number,nrc from auctions where (nrc="+nrce['subject_id'].to_s+" AND due_date>=(NOW()-INTERVAL 5 HOUR) AND auctioneers_number>0 and auction_type='service');")
       if tempG.blank?
       else
         @shoptG.append(tempG)
@@ -437,7 +438,6 @@ class DashboardController < ApplicationController
 
   def bidAuction
     @fAuction = Auction.select("winner").where('id'=>params[:auction_id])
-    puts "Soy current auction", @fAuction[0]['winner']
     if(@fAuction.count==0)
       Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+",participants="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
       UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
