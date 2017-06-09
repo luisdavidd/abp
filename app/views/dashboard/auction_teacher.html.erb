@@ -189,7 +189,7 @@ $(function() {
                       <tr>
                         <td><%= possST['name'] %></td>
                         <td><%= possST['nrc'] %></td>
-                        <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+                        <td><%= (possST['due_date'].to_time-5.hours).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
                         <td><span class="<%= @statusGt[indexT][:class]%>"><%= @statusGt[indexT][:winner]%></span></td>
                       </tr>
                   <% end %>        
@@ -234,7 +234,7 @@ $(function() {
                       <tr>
                         <td><%= possST['name'] %></td>
                         <td><%= possST['nrc'] %></td>
-                        <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+                        <td><%= (possST['due_date'].to_time-5.hours).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
                         <td><span class="<%= @statusSt[indexT][:class]%>"><%= @statusSt[indexT][:winner]%></span></td>
                       </tr>
                   <% end %>    

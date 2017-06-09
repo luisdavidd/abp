@@ -70,7 +70,7 @@ $(function() {
 			            <td><%= minishopT['nrc'] %></td>
 			            <td id="nameE"><%= minishopT['name'] %></td>
 			            <td><%= minishopT['price'] %></td>
-			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+			            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
 
 			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
 			          </tr>
@@ -123,7 +123,7 @@ $(function() {
 			            <td><%= minishopT['nrc'] %></td>
 			            <td id="nameE"  ><%= minishopT['name'] %></td>
 			            <td><%= minishopT['price'] %></td>
-			            <td><%= minishopT['due_date'].to_time.strftime('%A %b %d %Y') %></td>
+			            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
 
 			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
 			          </tr>
@@ -200,7 +200,7 @@ $(function() {
 					          	<tr>
 						            <td><%= possST['name'] %></td>
 						            <td><%= possST['nrc'] %></td>
-						            <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+						            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
 						            <td id="Tgstatus"><span class="<%= @statusG[indexTg][:class]%>"><%= @statusG[indexTg][:status]%></span></td>
 					          	</tr>
 				        	<% end %>
@@ -245,7 +245,7 @@ $(function() {
 					          <tr>
 					            <td><%= possST['name'] %></td>
 					            <td><%= possST['nrc'] %></td>
-					            <td><%= possST['due_date'].to_time.strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+					            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
 					            <td id="Tstatus" ><span class="<%= @statusS[indexT][:class]%>"><%= @statusS[indexT][:status]%></span></td>
 					          </tr>
 			        		<% end %>

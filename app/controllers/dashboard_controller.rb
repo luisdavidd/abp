@@ -331,12 +331,32 @@ class DashboardController < ApplicationController
   end
 
   def auction_student
-    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner from auctions where (auction_type='good');")
-    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner from auctions where (auction_type = 'service');")
+   
+    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good');")
+    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service');")
     @statusG= []
     @statusS= []
+    @participantsG = []
+    @participantsS = []
+    @SIPG.each do  |miniG|
+      if(not miniG['participants']== nil)
+        @participantsG.append(miniG['participants'].split(";"))
+      else
+
+      end
+    end
+    @SIPS.each do  |miniS|
+      if(not miniS['participants']== nil)
+        @participantsS.append(miniS['participants'].split(";"))
+      else
+      end
+    end
+
     @SIPG.each_with_index do |miniG,indexG|
-      if(miniG['winner']==nil)
+      @participantsG[indexG].delete(nil)
+      puts @participantsG[indexG]
+      puts  (not @participantsG[indexG].include?(current_user.id.to_s))
+      if(miniG['winner']==nil or (not (@participantsG[indexG].include?(current_user.id.to_s))))
         @statusG.append({nID:indexG,status:'Not in',class:'badge bg-gray'})
       else
         if(DateTime.now>=miniG['due_date'])
@@ -355,7 +375,8 @@ class DashboardController < ApplicationController
       end
     end
     @SIPS.each_with_index do |miniS,indexS|
-      if(miniS['winner']==nil)
+      @participantsS[indexS].delete(nil)
+      if(miniS['winner']==nil or (not (@participantsS[indexS].include?(current_user.id.to_s))))
         @statusS.append({nID:indexS,status:'Not in',class:'badge bg-gray'})
       else
         if(DateTime.now>=miniS['due_date'])
@@ -391,7 +412,7 @@ class DashboardController < ApplicationController
       end
       
     end
-    # render :json => @SIPG
+    # render :json => @participantsG
   end
 
   def buyProduct
@@ -418,11 +439,11 @@ class DashboardController < ApplicationController
     @fAuction = Auction.select("winner").where('id'=>params[:auction_id])
     puts "Soy current auction", @fAuction[0]['winner']
     if(@fAuction.count==0)
-      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
+      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+",participants="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
       UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
     else
       UserSubject.connection.execute("Update user_subjects SET budget=budget+"+params[:oldPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+@fAuction[0]['winner'].to_s+"); ")
-      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+" where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
+      Auction.connection.execute("Update auctions SET price="+params[:newPrice]+",winner="+current_user.id.to_s+",participants=CONCAT(participants,';',"+current_user.id.to_s+") where(nrc="+params[:auction_nrc]+" and id="+params[:auction_id]+");")
       UserSubject.connection.execute("Update user_subjects SET budget=budget-"+params[:newPrice]+" where (subject_id="+params[:auction_nrc]+" and user_id="+current_user.id.to_s+"); ")
     end
   end
