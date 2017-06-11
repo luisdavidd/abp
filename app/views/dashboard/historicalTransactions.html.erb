@@ -25,7 +25,8 @@
 			            <th name="amount">Amount</th>
 			            <th name="observations">Observations</th> 
 			            <th name="created_at">Date</th>
-			            <th name="toSort">Date</th>    
+			            <th name="toSort">Date</th>
+			            <th name="fromtoSort">From</th>     
 		          	</tr>
 		        </thead>
 
@@ -37,7 +38,14 @@
 			             	<td><%= transaction[4] %></td>
 			            	<td><%= transaction[5] %></td>
 			            	<td><%= transaction[6].to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>   
-			            	<td><%= transaction[6].to_time %></td>     
+			            	<td><%= transaction[6].to_time %></td>
+			            	<% if (transaction[0]== current_user.name and transaction[1] == current_user.last_name) %>
+			            		<% @from = 1 %>
+			            	<% end %>
+			            	<% if (transaction[2]== current_user.name and transaction[3] == current_user.last_name) %>
+			            		<% @from = 0 %>
+			            	<% end %>
+			            	<td><%= @from %></td>
             			</tr>
           			<% end %>
         		</tbody>
@@ -72,7 +80,12 @@
         	{
               "targets": [5],
               "visible": false
-        	}
+        	},
+        {'orderData':[6], 'targets': [0]},
+        {
+              "targets": [6],
+              "visible": false
+        	},
       	]	      
 	  } );
 </script>

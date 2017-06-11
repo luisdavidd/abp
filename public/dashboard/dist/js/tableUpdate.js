@@ -10,10 +10,11 @@ $(document).ready(function() {
   var tableHistorics = $('#transactions_table').DataTable( {
     responsive: true,
     columnDefs: [
+         {'orderData':[5], 'targets': [4]},
           {
-            "targets": [1],
-            "visible": false
-          },
+              "targets": [5],
+              "visible": false
+          }
           
       ],
 
@@ -202,10 +203,10 @@ success: function(data){
               //console.log('transacciones: ',data)
               for (i in data) {
                   trans = data[i];
-                  
+                  console.log(trans[6])
                   date = new Date(trans[6]).toString();
                   date = date.split("GMT")[0]
-                  tableHistorics.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date]).draw(false);
+                  tableHistorics.row.add([trans[0]+' '+trans[1],trans[2]+' '+trans[3],trans[4],trans[5],date,trans[6]]).draw(false);
             }}});
 
             // Pass clicked link element to another function

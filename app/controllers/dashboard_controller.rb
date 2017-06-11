@@ -308,8 +308,8 @@ class DashboardController < ApplicationController
   end
 
   def shopping_student
-    @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good');")
-    @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service');")
+    @SIPG = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type='good') order by created_at desc;")
+    @SIPS = Product.connection.select_all("SELECT elemento,nrc,created_at from products where (user_id="+current_user.id.to_s+" and product_type = 'service') order by created_at desc;")
     @NRCShop = UserSubject.connection.select_all("SELECT subject_id,budget from user_subjects where user_id = "+current_user.id.to_s+";") 
     @budget=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
     @shoptG = []
@@ -332,8 +332,8 @@ class DashboardController < ApplicationController
 
   def auction_student
    
-    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good');")
-    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service');")
+    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good') order by due_date desc;")
+    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service') order by due_date desc;")
     @statusG= []
     @statusS= []
     @participantsG = []
@@ -341,9 +341,7 @@ class DashboardController < ApplicationController
     @SIPG.each_with_index do  |miniG,indexG|
       if(not miniG['participants']== nil)
         @participantsG.append(miniG['participants'].split(";"))
-        puts "Before",@participantsG[indexG]
         @participantsG[indexG]=@participantsG[indexG].uniq
-        puts "After",@participantsG[indexG]
       end
     end
     @SIPS.each_with_index do  |miniS,indexS|
