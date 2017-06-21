@@ -331,9 +331,12 @@ class DashboardController < ApplicationController
   end
 
   def auction_student
-   
-    @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good') order by due_date desc;")
-    @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service') order by due_date desc;")
+    @NRCIN = UserSubject.connection.select_all("SELECT subject_id from user_subjects where user_id = "+current_user.id.to_s+";")
+    @NRCIN.each do |nrce|
+      @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good' and nrc="+nrce['subject_id'].to_s+") order by due_date desc;")
+      @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service' and nrc="+nrce['subject_id'].to_s+") order by due_date desc;")
+    
+    end
     @statusG= []
     @statusS= []
     @participantsG = []
