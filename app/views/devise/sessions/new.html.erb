@@ -78,7 +78,7 @@ document.onkeydown = function (event) {
         <div class="row" style="padding:450px;background-color:#fff;align-content:center">
 
           <div class="col-md-8">
-            <div class="login" style="left: 50vh" id="#login_form">
+            <div class="login" style="left: 25vh" id="#login_form">
               
 
               <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"login-form") do |f| %>
@@ -88,8 +88,10 @@ document.onkeydown = function (event) {
 
                 <div class="field">
                   <input type="password" pattern="[0-9]{4}" class="login-input" name="user[password]" id="user_password" onkeydown="return false" maxlength=4 required onfocus ="validation()" autocomplete="off" placeholder="Password" oncontextmenu="return false;">                
+                </div><br>
+                <div class="actions">
+                  <%= f.submit "Log in",class: 'btn ',style:"background:#212f56;border:2px solid #212f56 !important;color:white" %>
                 </div>
-
                 <% if devise_mapping.rememberable? -%>
                   <div class="login-form">
                     <%= f.check_box :remember_me %>
@@ -97,9 +99,7 @@ document.onkeydown = function (event) {
                   </div>
                 <% end %>
 
-                <div class="actions">
-                  <%= f.submit "Log in", class:"login-btn" %>
-                </div>
+                
               <% end %>
 
               <div class="login-form">
