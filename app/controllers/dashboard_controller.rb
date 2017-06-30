@@ -90,6 +90,7 @@ class DashboardController < ApplicationController
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
     render :json => {:products => products, :students => students}  
   end
+
   def auction_teacher
     @winnersG = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='good' and a.winner = uf.id)")
     @winnersS = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='service' and a.winner = uf.id)")
@@ -134,6 +135,12 @@ class DashboardController < ApplicationController
     students = Product.connection.select_all("SELECT * from products where nrc="+params[:nrc].to_s+";")
     
     render :json => {:products => products, :students => students}  
+  end
+
+  def getGoods_at_NRC
+    b_products = Product.connection.select_all("SELECT * from products where (nrc="+params[:nrc].to_s+" AND product_type='good');") #Bought products
+    products = Product.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND offer_type='good');")
+    render :json => {:products => products, :b_products => b_products}
   end
 
   # For everyone:
