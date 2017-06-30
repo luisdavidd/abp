@@ -20,23 +20,23 @@
 		<script src="/js/sorting.js" type="text/javascript"></script>
 		<script src="/js/jquery.isotope.js" type="text/javascript"></script>
 		<!--script type="text/javascript" src="js/jquery.nav.js"></script-->
-		
+		<!-- bxSlider Javascript file -->
+	    <script src="/js/jquery.bxslider.min.js"></script>
+	    <!-- bxSlider CSS file -->
+	    <link href="/css/jquery.bxslider.css" rel="stylesheet" />
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> 
+	    <!-- <script src="/js/bootstrap.min.js"></script> -->
 		
 
 		<script>
-			jQuery(function(){
-					jQuery('#camera_wrap_1').camera({
-					transPeriod: 500,
-					time: 3000,
-					height: '490px',
-					thumbnails: false,
-					pagination: true,
-					playPause: false,
-					loader: false,
-					navigation: false,
-					hover: false
-				});
-			});
+			$(document).ready(function(){
+    
+                $('.bxslider').bxSlider({
+                    auto: true,
+                    autoControls: false,
+                  	hideControlOnEnd:true});
+            });
+			
 		</script>
 
 	</head>
@@ -79,29 +79,16 @@
 				</div>
 			</nav>
 		</div>
-		<div id="gtco-portfolio" class="gtco-section" style="background:url(/images/norte1.JPG);width:100%;height:100%;background-repeat:no-repeat">	
+		<div id="gtco-portfolio" class="gtco-section">	
 			<div class="gtco-container">
 				<div class="row">
-					<div class="col-md-12 gallery">
-						<div class="camera_wrap camera_white_skin" id="camera_wrap_1">
-							<div data-thumb="" data-src="/images/blank.gif">
-								
-								<div class="img-responsive camera_caption fadeFromBottom">
-									<h2 style="color:white; font-size:50px">Ahora en UNINORTE,</h2>
+					<div class="col-lg-12 gallery">
+						<ul class="bxslider">
+							<li style="height:612px"><img src="images/norte1.JPG" style="width:100%;height:100%;background-repeat:no-repeat"><h2 style="color:white; font-size:50px">Ahora en UNINORTE,</h2></li>
+							<li style="height:612px"><img src="images/norte2.JPG" style="width:100%;height:100%;background-repeat:no-repeat" ><h2 style="color:white;font-size:50px">Premiamos tu esfuerzo.</h2></li>
+							<li style="height:612px"><img src="images/norte3.JPG" style="width:100%;height:100%;background-repeat:no-repeat" ><h2 style="color:white; font-size:50px">Academic Coin System.</h2></li>		
+						</ul>
 
-								</div>
-							</div>
-							<div data-thumb="" data-src="images/blank.gif">
-								<div class="img-responsive camera_caption fadeFromBottom">
-									<h2 style="color:white;font-size:50px">Premiamos tu esfuerzo.</h2>
-								</div>
-							</div>
-							<div data-thumb="" data-src="images/blank.gif">
-								<div class="img-responsive camera_caption fadeFromBottom">
-									<h2 style="color:white; font-size:50px">Academic Coin System.</h2>
-								</div>
-							</div>
-						</div>
 						<!-- #camera_wrap_1 -->
 					</div>
 				</div>
