@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get 'dashboard/newTransactionStudent'
   # Only for professors
   get 'dashboard/studentsHandler'
+  get 'dashboard/getGoods_at_NRC'
+  get 'dashboard/grades_teacher'
   get 'dashboard/shopping_teacher'
   get 'dashboard/auction_teacher'
   get 'dashboard/newStudents', to: 'dashboard#newStudents'
