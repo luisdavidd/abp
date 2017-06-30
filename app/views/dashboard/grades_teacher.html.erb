@@ -1,0 +1,267 @@
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<link rel="stylesheet" href="plugins/select2/select2.min.css">
+<script src="plugins/select2/select2.full.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+  $.ajax({ 
+    type: 'GET', 
+    url: 'get_myskin', 
+    dataType: 'json', 
+    success: function(data){ //Sending the output to a function
+      dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
+      $('#bHeader').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#bInfo').css('border-top-color',dictColors[0][data[0]['skin']])
+    } 
+  }); //AJAX to energy calculation module
+});
+</script>
+<div class="row"> 
+  <h2 style="align-self: center;"></h2>
+  
+  <div class="col" style="padding-left:3%; padding-right:3%" >
+    <div class="box box-info" id="prodCreated" style="visibility: hidden;display:none;border-top-color:#dd4b39">
+      <div class="box-header with-border" style="background-color:#00a65a;color:#fff">
+        <h3 class="box-title" style="color:white;font-weight:bold;">Product sucessfully created!!!</h3>
+      </div>
+    </div>
+    <div class="box box-info" id="bInfo">
+      <div class="box-header with-border" id="bHeader" style="color:#fff">
+        <div class="form-group">
+          <div class="col-md-3" style="padding-bottom:0%">
+            <label>Subject</label>
+            <select id="subject" class="form-control"  style="width: 100%;height:34px" required><option></option></select>
+            <label style="padding-top:2%">NRC</label>
+            <select id="nrc" class="form-control" style="width: 100%;height:34px" required><option></option></select>
+          </div>
+          <div id="Inputs" style="visibility:hidden">
+            <div class="col-md-5" style="padding-bottom:0%">
+              <label>Exam Products</label>
+              <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple" required><option></option></select>
+              <label style="padding-top:2%">Lab products</label>
+              <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple" required><option></option></select>
+            </div>
+            <div class="col-md-1" style="padding-bottom:0%">
+              <label>Quantity</label>
+              <input id="ExamQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
+              <br>
+              <input id="LabQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
+            </div>            
+            <div class="col-md-1" style="padding-bottom:0%">
+              <label>Total Price</label>
+              <input id="ExamP" type="text" class="form-control" style="width: 100%" value="0" readonly>
+              <br>
+              <input id="LabP" type="text" class="form-control" style="width: 100%" value="0" readonly>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="col-lg-12">
+        <table class="display responsive" id="tablaS" style="width:100%">      
+          <thead>
+            <tr>
+              <th name="id"></th>
+              <th name="name">Name</th>
+              <th name="last_name">Last Name</th>
+              <th name="email">Email</th>
+              <th name="saldo">Budget</th> 
+              <th name="codigo">Code</th> 
+              <th name="examP">Exam Products</th> 
+              <th name="examC">Exam Grade</th> 
+              <th name="labP">Lab Products</th> 
+              <th name="labC">Lab Grade</th> 
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var tableS
+tableS = $('#tablaS').DataTable( {
+    keys: true,
+    columnDefs: [
+        {
+            "targets": [0],
+            "visible": false,
+        }
+    ]
+} );
+var c_error = 0;
+ $.ajax({
+    type: 'GET',
+    url: 'transfer',
+    success: function(data){
+      var subjects = data['classes'];
+      var NRCs = data['NRCs'];      
+      var stdNames = data['students_names'];
+      var stdIDs =  data['students_ids']; 
+      var data2 = [];
+      for(i = 0; i < subjects.length; i++){
+        data2.push({id: i, text: subjects[i]})
+      }
+      $("#subject").select2({
+        data: data2,
+        placeholder: "Select a subject"
+      });
+      $("#subject").change(function() {
+        data_nrc = [];
+        i_subj = $("#subject").val();
+        if (i_subj) {
+          for(i = 0; i < i_subj.length; i++){
+            for(j = 0; j < NRCs[i_subj[i]].length; j++){
+            data_nrc.push({id: j, text: NRCs[i_subj[i]][j]})
+            }
+          } 
+        }
+        $("#nrc").html('<option></option>');
+        $("#nrc").select2({
+          data: data_nrc,
+          placeholder: "Select a NRC"
+        });
+
+        $("#nrc").change(function() {
+          i_nrc = $("#nrc").val();
+          i_subj = $("#subject").val();
+          console.log('indices nrc: ',i_nrc)
+          console.log(i_nrc,i_subj)
+          tableS.clear();
+          tableS.draw();
+
+          data_goods = []
+          data_students = []
+          ids_students = []
+          products = []
+
+          if (i_nrc && i_subj) {
+            for(k = 0; k < i_subj.length; k++){
+              for(i = 0; i < i_nrc.length; i++){
+                for(j = 0; j < stdNames[i_subj[k]][i_nrc[i]].length; j++){
+                  if (stdIDs[i_subj[k]][i_nrc[i]][j]) {
+                    s = stdNames[i_subj[k]][i_nrc[i]][j]
+                    tableS.row.add([stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[2],s[3],s[4],'',0,'',0 ]).draw(false);
+                    ids_students.push(stdIDs[i_subj[k]][i_nrc[i]][j])
+                  }                
+                }
+              } 
+            }
+          }
+
+
+          $.ajax({
+          type: 'GET',
+          url: 'getGoods_at_NRC',
+          data: {nrc: $('#nrc').select2('data')[0].text},
+            success: function(data){
+              data_goods = []
+              console.log('data',data['products'])
+              data_students = data['b_products']
+              data_products = data['products']
+              for(i = 0; i < data['products'].length; i++){
+                  data_goods.push({id: i, text: data['products'][i]['name']})
+                }
+
+              $("#exam").html('<option></option>');
+              $("#exam").select2({
+                data: data_goods,
+                placeholder: "Select the exam points"
+              });
+              $("#lab").html('<option></option>');
+              $("#lab").select2({
+                data: data_goods,
+                placeholder: "Select the lab points"
+              });
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              if (c_error<1) {
+                alert("Please check your data");
+                c_error += 1;
+              }  
+              data_goods = []
+            }
+          });
+          
+          $("#Inputs").css('visibility', 'visible');
+
+          $("#exam").change(function() { 
+                products_selected_id = []
+                products_selected_price = []
+                total = 0
+                entrada = $("#exam").val()
+                if (entrada==null) {entrada = []}
+                for (var i = 0; i < entrada.length; i++) {
+                  products_selected_id.push(data_products[entrada[i]]['id'])
+                  products_selected_price.push(data_products[entrada[i]]['price'])
+                  total = total + data_products[entrada[i]]['price']
+                }
+                $("#ExamQ").val(entrada.length)
+                $("#ExamP").val(total)
+                calcular(ids_students, data_students, products_selected_id, products_selected_price, total, 6)
+          });
+
+          $("#lab").change(function() { 
+                products_selected_id = []
+                products_selected_price = []
+                total = 0
+                entrada = $("#lab").val()
+                if (entrada==null) {entrada = []}
+                for (var i = 0; i < entrada.length; i++) {
+                  products_selected_id.push(data_products[entrada[i]]['id'])
+                  products_selected_price.push(data_products[entrada[i]]['price'])
+                  total = total + data_products[entrada[i]]['price']
+                }
+                $("#LabQ").val(entrada.length)
+                $("#LabP").val(total)
+                calcular(ids_students, data_students, products_selected_id, products_selected_price, total, 8)
+          });
+        });
+
+      });
+    }
+  });
+
+function calcular(stdIDs, data_students, products_selected_id, products_selected_price, total, i_column) {
+  console.log('compras: ',data_students)
+  for (var i = 0; i < data_students.length; i++) {
+    fila = stdIDs.indexOf(data_students[i]['user_id'])
+    indice_producto = products_selected_id.indexOf(data_students[i]['offer_id'])
+    if (i==0) { //reset
+        tableS.cell(fila,i_column).data('')
+        tableS.cell(fila,i_column+1).data(0)
+      }
+    if (indice_producto > -1){
+      mensaje = tableS.cell(fila,i_column).data()
+      mensaje = mensaje + '<font color="black">|' + data_students[i]['elemento'] + '| </font>' //intento de hacer distintivos los produc. adquiridos
+      tableS.cell(fila,i_column).data(mensaje);
+
+      str = String(tableS.cell(fila,i_column+1).data())
+      bono = Number(str.split('">').pop().split('<').shift())
+      bono = bono + products_selected_price[indice_producto]*(5/total)
+      tableS.cell(fila,i_column+1).data('<font color="green">' + bono + '</font>');
+    }
+  }  
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+</script>
