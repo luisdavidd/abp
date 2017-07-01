@@ -21,6 +21,10 @@ $(function() {
   }); //AJAX to energy calculation module
 });
 </script>
+<style type="text/css">
+.select2-search { color:#000 !important;   }
+</style>
+
 <div class="row"> 
   <h2 style="align-self: center;"></h2>
   
@@ -35,16 +39,16 @@ $(function() {
         <div class="form-group">
           <div class="col-md-3" style="padding-bottom:0%">
             <label>Subject</label>
-            <select id="subject" class="form-control"  style="width: 100%;height:34px" required><option></option></select>
+            <select id="subject" class="form-control"  style="width: 100%;height:34px;" required><option></option></select>
             <label style="padding-top:2%">NRC</label>
             <select id="nrc" class="form-control" style="width: 100%;height:34px" required><option></option></select>
           </div>
           <div id="Inputs" style="visibility:hidden">
             <div class="col-md-5" style="padding-bottom:0%">
               <label>Exam Products</label>
-              <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple" required><option></option></select>
+              <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple"><option></option></select>
               <label style="padding-top:2%">Lab Products</label>
-              <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple" required><option></option></select>
+              <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple"><option></option></select>
             </div>
             <div class="col-md-1" style="padding-bottom:0%">
               <label>Quantity</label>
@@ -117,6 +121,10 @@ var c_error = 0;
         placeholder: "Select a subject"
       });
       $("#subject").change(function() {
+        $("#exam").html('<option></option>');
+        $("#lab").html('<option></option>');
+        $("#ExamP").val(0)
+        $("#LabP").val(0)
         data_nrc = [];
         i_subj = $("#subject").val();
         if (i_subj) {
@@ -133,6 +141,8 @@ var c_error = 0;
         });
 
         $("#nrc").change(function() {
+          $("#ExamP").val(0)
+          $("#LabP").val(0)
           i_nrc = $("#nrc").val();
           i_subj = $("#subject").val();
           console.log('indices nrc: ',i_nrc)
