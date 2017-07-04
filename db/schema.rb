@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607173238) do
+ActiveRecord::Schema.define(version: 20170704001204) do
 
   create_table "auctions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20170607173238) do
     t.string   "auction_type",                  default: "good"
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
+    t.integer  "winner"
+    t.string   "participants",       limit: 45, default: "0"
     t.index ["user_id"], name: "index_auctions_on_user_id", using: :btree
   end
 
@@ -34,6 +36,26 @@ ActiveRecord::Schema.define(version: 20170607173238) do
     t.datetime "updated_at",                null: false
     t.index ["offer_id"], name: "index_comments_on_offer_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "loan_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "type_name"
+    t.integer  "amount"
+    t.integer  "interest"
+    t.integer  "fees"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "recipient_id"
+    t.integer  "actor_id"
+    t.datetime "read_at"
+    t.string   "action"
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "offers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -59,6 +81,19 @@ ActiveRecord::Schema.define(version: 20170607173238) do
     t.index ["offer_id"], name: "fk_products_1_idx", using: :btree
   end
 
+  create_table "status_loans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "student_id"
+    t.integer  "nrc"
+    t.integer  "loan_stat"
+    t.integer  "type_id"
+    t.integer  "amount"
+    t.integer  "next_payment"
+    t.integer  "current_fee"
+    t.datetime "starting_in"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "subject_nrcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "subject_id"
     t.integer  "nrc"
@@ -78,12 +113,13 @@ ActiveRecord::Schema.define(version: 20170607173238) do
 
   create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.integer  "user_to",                    null: false
-    t.float    "amount",       limit: 24,    null: false
+    t.integer  "user_to",                                null: false
+    t.float    "amount",       limit: 24,                null: false
     t.text     "observations", limit: 65535
     t.integer  "nrc"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "auth",                       default: 0, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
   end
 

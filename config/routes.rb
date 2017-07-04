@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   get 'dashboard/transfer_student'
   get 'dashboard/transferStudent'
   get 'dashboard/newTransactionStudent'
+  get 'dashboard/loans_student'
+  get 'dashboard/newLoan'
+  get 'dashboard/payAll_Loan'
   # Only for professors
   get 'dashboard/studentsHandler'
   get 'dashboard/getGoods_at_NRC'
@@ -43,6 +46,9 @@ Rails.application.routes.draw do
   get 'dashboard/newProduct'
   get 'dashboard/newAuction'
   get 'dashboard/createnewClass'
+  get 'dashboard/loans_teacher'
+  get 'dashboard/approve_reject_loan'
+  get 'dashboard/subject_loans'
 
   devise_for :users
   devise_scope :user do

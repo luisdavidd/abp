@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id: 1
+  nrc: 1
+  loan_stat: 1
+  type_id: 1
+  amount: 1
+  next_payment: 1
+  current_fee: 1
+  starting_in: 2017-07-03 19:12:04
+
+two:
+  student_id: 1
+  nrc: 1
+  loan_stat: 1
+  type_id: 1
+  amount: 1
+  next_payment: 1
+  current_fee: 1
+  starting_in: 2017-07-03 19:12:04

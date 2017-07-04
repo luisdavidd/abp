@@ -90,7 +90,7 @@ document.onkeydown = function (event) {
                   <input type="password" pattern="[0-9]{4}" class="login-input" name="user[password]" id="user_password" onkeydown="return false" maxlength=4 required onfocus ="validation()" autocomplete="off" placeholder="Password" oncontextmenu="return false;">                
                 </div><br>
                 <div class="actions">
-                  <%= f.submit "Log in",class: 'btn ',style:"background:#212f56;border:2px solid #212f56 !important;color:white" %>
+                  <%= f.submit "Log in",class: 'btn ',style:"float:right;background:#212f56;border:2px solid #212f56 !important;color:white" %>
                 </div>
                 <% if devise_mapping.rememberable? -%>
                   <div class="login-form">

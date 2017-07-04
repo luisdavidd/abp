@@ -92,8 +92,8 @@ class DashboardController < ApplicationController
   end
 
   def auction_teacher
-    @winnersG = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='good' and a.winner = uf.id)")
-    @winnersS = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='service' and a.winner = uf.id)")
+    @winnersG = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='good' and a.winner = uf.id) order by a.updated_at desc")
+    @winnersS = Auction.connection.select_all("SELECT a.nrc,a.name,a.due_date,uf.name As Sname,uf.last_name from auctions as a,users uf where(a.auction_type='service' and a.winner = uf.id) order by a.updated_at desc")
     @statusSt = []
     @statusGt = []
     @winnersG.each_with_index do |miniG,indexG|
@@ -141,6 +141,33 @@ class DashboardController < ApplicationController
     b_products = Product.connection.select_all("SELECT * from products where (nrc="+params[:nrc].to_s+" AND product_type='good');") #Bought products
     products = Product.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND offer_type='good');")
     render :json => {:products => products, :b_products => b_products}
+  end
+
+  def loans_teacher
+    @pendings = StatusLoan.find_by_sql("SELECT u.name, u.last_name, s.name as subject, lt.type_name, us.budget, sl.*"+"
+      FROM status_loans as sl, subject_nrcs as sn, users as u, subjects as s, loan_types as lt, user_subjects as us "+"
+      where sn.nrc = sl.nrc AND us.subject_id = sl.nrc AND sl.loan_stat = 0 AND sl.student_id = u.id AND sl.student_id = us.user_id AND sn.subject_id = s.id AND sl.type_id = lt.id AND sn.user_id = "+current_user.id.to_s+" 
+      order by sl.created_at ASC")
+    
+  end
+
+  def approve_reject_loan
+    if params[:flag]=='true'
+      #puts 'Approve'
+      StatusLoan.update(params[:id], loan_stat: 2)
+      StatusLoan.update(params[:id], starting_in: DateTime.now.next_week)
+      Transaction.create!({:user_id=>current_user.id, :user_to =>params[:student_id], :amount =>params[:amount], :observations =>params[:type_name], :nrc =>params[:nrc]})
+      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+params[:student_id]+" and subject_id="+params[:nrc]+");")
+      User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+params[:student_id]+";")
+    else
+      #puts 'Reject'
+      StatusLoan.update(params[:id], loan_stat: 1)
+    end
+  end
+
+  def subject_loans
+    loans = StatusLoan.find_by_sql("SELECT lt.type_name, lt.fees, sl.* FROM status_loans as sl, loan_types as lt where sl.type_id = lt.id AND sl.nrc = "+params['nrc'].to_s+" AND sl.student_id = "+params['id'].to_s)
+    render :json => {:loans => loans} 
   end
 
   # For everyone:
@@ -340,8 +367,8 @@ class DashboardController < ApplicationController
   def auction_student
     @NRCIN = UserSubject.connection.select_all("SELECT subject_id from user_subjects where user_id = "+current_user.id.to_s+";")
     @NRCIN.each do |nrce|
-      @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good' and nrc="+nrce['subject_id'].to_s+") order by due_date desc;")
-      @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service' and nrc="+nrce['subject_id'].to_s+") order by due_date desc;")
+      @SIPG = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type='good' and nrc="+nrce['subject_id'].to_s+") order by updated_at desc;")
+      @SIPS = Auction.connection.select_all("SELECT id,name,nrc,due_date,winner,participants from auctions where (auction_type = 'service' and nrc="+nrce['subject_id'].to_s+") order by updated_at desc;")
     
     end
     @statusG= []
@@ -521,6 +548,72 @@ class DashboardController < ApplicationController
     
     render :json => {:classes => @classes, :NRCs => @NRCs, :students_names => @students_names, :students_ids => @students_ids, :student_budgets => @budgets}
     
+  end
+
+  def loans_student
+    @budget=UserSubject.connection.select_all("SELECT su.name,suser.subject_id,suser.budget from subjects as su,user_subjects suser,subject_nrcs snrc where (snrc.subject_id= su.id and suser.user_id="+current_user.id.to_s+" and suser.subject_id = snrc.nrc);")
+    @loans = []
+    @loan_types = Hash.new
+    loan_interest = Hash.new
+    @loan_fees = Hash.new
+
+    LoanType.find_each do |row|
+      @loans.append(row)
+      @loan_types[row['id']] = row['type_name']
+      loan_interest[row['id']] = row['interest']
+      @loan_fees[row['id']] = row['fees']
+    end
+
+
+    @loans_status = []
+    @payment = []
+    StatusLoan.where("student_id = "+current_user.id.to_s).find_each do |row|
+      @loans_status.append(row)
+      if row['loan_stat'] == 2
+        itr = loan_interest[row['type_id']]/100.0
+        amt = row['amount']
+        feeVal = row['next_payment']
+        n = @loan_fees[row['type_id']]-row['current_fee']
+        p = (feeVal*(((1+itr)**n)-1)/(itr*((1+itr)**n))).round
+        @payment.append(p)
+      else
+        @payment.append(0)
+      end
+    end
+    @loan_status_label = {0 => {"Status" => "Pending", "Class" => "badge bg-yellow"}, 1 => {"Status" => "Rejected", "Class" => "badge bg-red"}, 2 => {"Status" => "Approved", "Class" => "badge bg-green"}, 3 => {"Status" => "Finished", "Class" => "badge bg-gray"}}
+
+  end
+
+  def newLoan
+    row = LoanType.find(params[:loan_id])
+    itr = row['interest'].to_i/100.0
+    puts itr
+    n = row['fees'].to_i
+    puts n
+    feeVal= (params[:amount].to_i*(itr*((1+itr)**n))/(((1+itr)**n)-1)).ceil
+    puts feeVal
+    StatusLoan.create!({:student_id=>current_user.id, :nrc=>params[:nrc], :loan_stat=>0,:type_id =>params[:loan_id], :amount =>params[:amount], :next_payment => feeVal})
+  end
+
+  def payAll_Loan
+    status_row = StatusLoan.find(params[:id])
+    loan_row = LoanType.find(status_row['type_id'])
+    feeVal = status_row['next_payment'].to_i
+    itr = loan_row['interest']/100.0
+    n = loan_row['fees']-status_row['current_fee']
+    pay = (feeVal*(((1+itr)**n)-1)/(itr*((1+itr)**n))).round
+    puts pay
+
+    teacher = SubjectNrc.joins("INNER JOIN status_loans ON status_loans.id = "+status_row['id'].to_s+" AND status_loans.nrc = subject_nrcs.nrc")
+    puts teacher[0]['user_id']
+    
+    Transaction.create!({:user_id=>current_user.id, :user_to =>teacher[0]['user_id'].to_i, :amount => pay, :observations =>"Pay All: "+loan_row['type_name'].to_s, :nrc =>status_row['nrc'].to_i})
+    UserSubject.connection.execute("Update user_subjects SET budget = budget-"+pay.to_s+" WHERE(user_id="+current_user.id.to_s+" and subject_id="+status_row['nrc'].to_s+");")
+    User.connection.execute("Update users SET saldo=saldo-"+pay.to_s+" WHERE id="+current_user.id.to_s+";")
+
+    StatusLoan.update(status_row['id'], loan_stat: 3)
+    StatusLoan.update(status_row['id'], current_fee: loan_row['fees'])
+
   end
 
   private

@@ -1,0 +1,305 @@
+<script type="text/javascript">
+$(function() {
+  $.ajax({ 
+    type: 'GET', 
+    url: 'get_myskin', 
+    dataType: 'json', 
+    success: function(data){ //Sending the output to a function
+      dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
+      $('#bHeader').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#bInfo').css('border-top-color',dictColors[0][data[0]['skin']])
+    } 
+  }); //AJAX to energy calculation module
+});
+</script>
+<section class="content"> 
+<% if @pendings.length > 0 %>
+    <div class="box" id="pendingBox">
+     	<div class="box-header" style="background-color:#ff944d;font-weight:bold;">
+	        <h3 class="box-title">Pending Loans</h3>
+	        <div class="box-tools pull-right">
+	          <button type="button" class="btn btn-box-tool" onclick="minimize2()" data-widget="collapse"><i class="fa fa-minus"></i>
+	          </button>
+
+	        </div>
+     	</div>
+      	<!-- /.box-header -->
+      	
+    	<div class="box-body no-padding">
+	        <table class="table responsive" id="pendingTable">
+		        <thead>
+		         	<tr>
+			            <!-- <th>Id</th> -->
+			            <th name="Subject">Subject</th>
+			            <th name="NRC">NRC</th>
+			            <th name="Student">Student</th>
+			            <th name="Loan">Loan Type</th>
+			            <th name="Amount">Amount</th>
+			            <th name="Budget">Budget</th>
+			            <th name="Date">Date</th>
+			            <th name="Approve">Action</th>
+			            <th name="Reject">Action 2</th>
+		         	</tr>
+		        </thead>
+	        	<tbody>
+	          		<% @pendings.each_with_index do |row, index| %>
+			         	<tr id="<%= 'Prow'+row['id'].to_s %>">
+				            <td style="display:none;"><%= row['id'] %></td>
+				            <td><%= row['subject'] %></td>
+				            <td><%= row['nrc'] %></td>
+				            <td><%= row['name'].to_s + " " +row['last_name'].to_s %></td>
+				            <td><%= row['type_name'] %></td>
+				            <td><%= row['amount'] %></td>
+				            <td><%= row['budget'].to_i %></td>
+				            <td><%= row['created_at'] %></td>
+				            <td><button type="button" onclick="ApproveReject(<%= row['id'] %>, <%= row['student_id'] %>, <%= row['nrc'] %>, <%= row['amount'] %>, <%= raw "'"+row['type_name']+"'" %>, true)" class="badge bg-green">Approve</button></td>
+				            <td><button type="button" onclick="ApproveReject(<%= row['id'] %>, <%= row['student_id'] %>, <%= row['nrc'] %>, <%= row['amount'] %>, <%= raw "'"+row['type_name']+"'" %>,false)" class="badge bg-red">Reject</button></td>
+				            
+			         	</tr>
+	        		<% end %>
+	        	</tbody>
+	        </table>
+      	</div>
+      	
+      	
+      	<!-- /.box-body -->
+    </div>
+
+<% end %>
+
+<div class="box box-info" id="bInfo">
+  <div class="box-header with-border" id="bHeader" style="background-color:#99b3ff;color:#fff">
+    <div class="form-group">
+        <div class="col-md-6" style="padding-bottom:1%">
+        	<div class="col-md-12">
+        		<div class="row">
+	            	<label style="padding-top:0%">Subject</label>
+	            </div>
+	            <div class="row">
+	            	<select id="subject" class="form-control" style="padding-top:0%;width: 100%;height:34px" required><option></option>
+	            	</select>
+	            </div>
+        	</div>
+        </div>
+      	<div class="col-md-6" style="padding-bottom:1%">
+            <div class="col-md-12">
+        		<div class="row">
+	            	<label style="padding-top:0%">NRC</label>
+	            </div>
+	            <div class="row">
+	            	<select id="nrc" class="form-control" style="padding-top:0%;width: 100%;height:34px" required><option></option>
+	            	</select>
+	            </div>
+        	</div>     
+        </div> 
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+	<div class="col-md-7">
+		<table class="table responsive" id="students">
+		    <thead>
+		     	<tr>
+		            <!-- <th>Id</th> -->
+		            <th name="check"></th>
+		            <th name="id">id</th>
+		            <th name="name">Name</th>
+		            <th name="last_name">Last Name</th>
+		            <th name="codigo">Code</th> 
+		            <th name="saldo">Budget</th> 
+		     	</tr>
+		    </thead>
+		</table>
+	</div>
+	<div class="col-md-5">
+		<table class="table responsive" id="loans">
+		    <thead>
+		     	<tr>
+		            <!-- <th>Id</th> -->
+		            <th name="loan_name">Loan</th>
+		            <th name="amount">Amount</th>
+		            <th name="starting">Starting In</th>
+		            <th name="current">Current</th>
+		            <th name="status">Status</th>
+		     	</tr>
+		    </thead>
+		</table>
+	</div>
+		
+</div>
+	
+
+<br>
+
+
+</section>
+
+<script type="text/javascript">
+	$.ajax({
+	    type: 'GET',
+	    url: 'transfer',
+	    success: function(data){
+	      var subjects = data['classes'];
+	      var NRCs = data['NRCs'];
+	      var stdNames = data['students_names'];
+	      var stdIDs = data['students_ids'];
+	      var data2 = [];
+	      for(i = 0; i < subjects.length; i++){
+	        data2.push({id: i, text: subjects[i]})
+	      }
+	      $("#subject").select2({
+	        data: data2,
+	        placeholder: "Select a subject"
+	      });
+	      $("#subject").change(function() {
+	        data_nrc = [];
+	        i_subj = $("#subject").val();
+	        if (i_subj) {
+	          for(i = 0; i < i_subj.length; i++){
+	            for(j = 0; j < NRCs[i_subj[i]].length; j++){
+	            data_nrc.push({id: j, text: NRCs[i_subj[i]][j]})
+	            }
+	          } 
+	        }
+	        $("#nrc").html('<option></option>');
+	        $("#nrc").select2({
+	          data: data_nrc,
+	          placeholder: "Select a NRC"
+	        });
+	      });
+	      $("#nrc").change(function() {
+	        	//console.log($("#nrc option:selected").text())
+	        i_nrc = $("#nrc").val();
+	        i_subj = $("#subject").val();
+	        table.clear();
+	        table.draw();
+	        table2.clear()
+			table2.draw();
+	        if (i_nrc && i_subj) {
+	          for(k = 0; k < i_subj.length; k++){
+	            for(i = 0; i < i_nrc.length; i++){
+	              for(j = 0; j < stdNames[i_subj[k]][i_nrc[i]].length; j++){
+	                if (stdIDs[i_subj[k]][i_nrc[i]][j]) {
+	                  s = stdNames[i_subj[k]][i_nrc[i]][j]
+	                  table.row.add(["", stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[4],s[3]]).draw(true);
+	                  //data_stds.push({id: stdIDs[i_subj[k]][i_nrc[i]][j], text: stdNames[i_subj[k]][i_nrc[i]][j]})
+	                }
+	              
+	              }
+	            } 
+	          }
+	        }
+	      });
+	    }
+	});
+
+	table = $('#students').DataTable( {
+		columnDefs: [
+		  {
+		      "targets": [1],
+		      "visible": false
+		  },
+		  {
+		    'targets': [0],
+		    'checkboxes': {
+		       'selectRow': true
+		    }
+		  }
+		],
+		select: {
+		    'style': 'single'
+		}
+	} );
+
+	table2 = $('#loans').DataTable( {
+		"searching": false,
+    	"bLengthChange": false,
+    	"pageLength": 10,
+    	"rowCallback": function( row, data, index ) {
+		    if ( data[4] == 1 )
+		    {
+		        $('td', row).css('background-color', '#ffe6e6');
+		        //$('td:eq(2)', row).css('color', '#e60000');
+		        //$('td:eq(2)', row).css('font-weight', 'bold');
+		    }
+		    else if ( data[4] == 2 )
+		    {
+		        $('td', row).css('background-color', '#e6ffe6');
+		        //$('td:eq(2)', row).css('color', '#009900');
+		        //$('td:eq(2)', row).css('font-weight', 'bold');
+		    }
+		    else if(data[4] == 0 ){
+		    	$('td', row).css('background-color', '#fff0b3');
+		        //$('td:eq(2)', row).css('color', '#e6b800');
+		        //$('td:eq(2)', row).css('font-weight', 'bold');
+		    }
+		},
+    	columnDefs: [
+		  {
+		      "targets": [4],
+		      "visible": false
+		  }
+		]
+	} );
+
+	table.on( 'select', function ( e, dt, type, indexes ) {
+	    if ( type === 'row' ) {
+	        var rowData = table.rows( indexes ).data().toArray();
+	 		nrc = $("#nrc option:selected").text();
+	 		id = rowData[0][1]
+	 		updateTable(nrc, id)
+	        // do something with the ID of the selected items
+	    }
+	} );
+
+	function updateTable(nrc,id){
+		$.ajax({
+			type: 'GET',
+			url: 'subject_loans',
+			data: {nrc:nrc, id:id},
+			success: function(data){
+				console.log("success")
+				var loans = data['loans'];
+				console.log(loans[0])
+				table2.clear()
+				table2.draw();
+				for(var i=0;i < loans.length;i++){
+					console.log(loans[i])
+					table2.row.add([loans[i].type_name,loans[i].amount,loans[i].starting_in, loans[i].current_fee+" of "+loans[i].fees,loans[i].loan_stat]).draw(true);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("There was a problem. Please try again or inform the admin.");
+			 
+			}
+		});
+	}
+
+
+	var count = $('#pendingTable tr').length;
+	function ApproveReject(id,student_id,nrc,amount,type_name,flag){
+		
+		$.ajax({
+			type: 'GET',
+			url: 'approve_reject_loan',
+			data: {id:id, student_id:student_id, nrc:nrc, amount:amount, type_name:type_name, flag:flag},
+			success: function(){
+				count--;
+				console.log(count)
+				if(count > 1){
+					$('#Prow'+id).fadeOut();
+				}else{
+					$('#pendingBox').fadeOut();
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("There was a problem. Please try again or inform the admin.");
+			 
+			}
+		});
+		
+
+	}
+</script>

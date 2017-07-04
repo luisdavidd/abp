@@ -1,0 +1,348 @@
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<section class="content"> 
+	<div class="row">
+		<% @budget.each_with_index do |budgets, index| %>
+			<div class="col-lg-3 col-xs-6">
+			    <!-- small box -->
+			    <div class="small-box bg-red" style="border-radius:12px">
+				    <div class="inner">
+				      
+				      <h3 id="<%=  budgets['subject_id']%>">$<%=  budgets['budget']%></h3>
+				      <p style="font-size:25px"><%=  budgets['name']%></p>
+				      <p style="font-size:25px" id=<%= raw '"NRCs'+index.to_s+'"' %>> <%=  budgets['subject_id']%> </p>
+				    </div>
+				    <div class="icon">
+				      <i class="fa fa-line-chart"></i>
+				    </div>
+
+			    </div>
+		  	</div>
+	  	<% end %>
+	</div>
+	<div class="box">
+     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+	        <h3 class="box-title">Available Loan Types</h3>
+	        <div class="box-tools pull-right">
+	          <button type="button" class="btn btn-box-tool" onclick="minimize1()" data-widget="collapse"><i class="fa fa-minus"></i>
+	          </button>
+
+	        </div>
+     	</div>
+      	<!-- /.box-header -->
+    	<div class="box-body no-padding">
+	        <table class="table responsive">
+		        <thead>
+		         	<tr>
+			            <!-- <th>Id</th> -->
+			            <th name="type">Type</th>
+			            <th name="amount">Amount</th>
+			            <th name="limit">Up to</th>
+			            <th name="interest">Interest</th>
+			            <th name="fees">Fees</th>
+			            <th name="action">Action</th>
+		         	</tr>
+		        </thead>
+	        	<tbody>
+	          		<% @loans.each_with_index do |row, index| %>
+			         	<tr>
+				            <td style="display:none;"><%= row['id'] %></td>
+				            <td id="type"><%= row['type_name'] %></td>
+				            <td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id=<%=  "am"+row['id'].to_s %> value="0" min="0"></td>
+				            <td><%= row['amount'] %></td>
+				            <td><%= row['interest'] %> %</td>
+				            <td><%= row['fees'] %></td>
+
+				            <td><button type="button" onclick="seePlan(<%= row['id'] %>, <%= row['amount']%>, <%= row['interest']%>, <%= row['fees']%>)" class="badge bg-blue">See Plan</button></td>
+			         	</tr>
+	        		<% end %>
+	        	</tbody>
+	        </table>
+      	</div>
+      	
+      	<!-- /.box-body -->
+    </div>
+
+    <div id="infoDiv1" style="display: none;">
+    	<table class="table responsive" id="plans">
+	        <thead>
+	         	<tr>
+		            <!-- <th>Id</th> -->
+		            <th name="week">Week</th>
+		            <th name="date">Date</th>
+		            <th name="fee">Fee</th>
+	         	</tr>
+	        </thead>
+	    </table>
+	    <h5>*Loan payments start next week to approval. Actual schedule may vary.</h5>
+	    <br>
+
+	    <div class="box box-info" id="NRCpanel">
+	      <div class="box-header with-border" id="bHeader" style="background-color:#99b3ff;color:#fff">
+	        <div class="form-group">
+	            <div class="col-md-6" style="padding-top:2%">
+	            	<div class="row">
+	            		<div class="col-md-1">
+			            	<label style="padding-top:3%">NRC</label>
+			            </div>
+			            <div class="col-md-11">
+			            	<select id="nrc" class="form-control" style="padding-top:1%;width: 100%;height:34px" required>
+			            		<option value="" disabled selected hidden>Select NRC</option>
+			            		<% @budget.each_with_index do |budgets, index| %>
+			            			<option> <%=  budgets['subject_id']%> </option>
+			            		<% end %>
+			            	</select>
+			            </div>
+	            	</div>
+		        </div>
+		      	<div class="col-md-6" style="padding-bottom:0%">
+		            <div class="row" style="padding-top:2%">
+		              <button id="Release" type="button" onclick="request()" class="btn btn-primary btn-lg btn-block" style="width:100%">Request this loan</button>
+		            </div>        
+		        </div> 
+
+	        </div>
+	      </div>
+	    </div>
+    </div>
+
+    <% if @loans_status.length > 0 %>
+	    <div class="box">
+	     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+		        <h3 class="box-title">My Loans</h3>
+		        <div class="box-tools pull-right">
+		          <button type="button" class="btn btn-box-tool" onclick="minimize2()" data-widget="collapse"><i class="fa fa-minus"></i>
+		          </button>
+
+		        </div>
+	     	</div>
+	      	<!-- /.box-header -->
+	      	
+	    	<div class="box-body no-padding">
+		        <table class="table responsive">
+			        <thead>
+			         	<tr>
+				            <!-- <th>Id</th> -->
+				            <th name="NRC">NRC</th>
+				            <th name="type">Type</th>
+				            <th name="Amount">Amount</th>
+				            <th name="Current">Last Paid Fee</th>
+				            <th name="Status">Status</th>
+				            <th name="Schedule">Action</th>
+				            <th name="PayAll">Action 2</th>
+			         	</tr>
+			        </thead>
+		        	<tbody>
+		          		<% @loans_status.each_with_index do |row, index| %>
+				         	<tr>
+					            <td style="display:none;"><%= row['id'] %></td>
+					            <td><%= row['nrc'] %></td>
+					            <td><%= @loan_types[row['type_id']] %></td>
+					            <td><%= row['amount'] %></td>
+					            <td><%= row['current_fee'] %></td>
+					            <td><span class="<%= @loan_status_label[row['loan_stat']]["Class"] %>"> <%= @loan_status_label[row['loan_stat']]["Status"] %> </span></td>
+
+					            <% if row['loan_stat'] > 1 %>
+					            	<td><button type="button" onclick="seeSchedule(<%= row['starting_in'].strftime("%V").to_i %>, <%= row['starting_in'].strftime("%Y").to_i %>, <%= @loan_fees[row['type_id']]%>, <%= row['next_payment']%>)" class="badge bg-blue">Schedule</button></td>
+					            <% else %>
+					            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Schedule</button></td>
+					            <% end %>
+
+					            <% if row['loan_stat'] == 2 %>
+					            	<td><button type="button" onclick="payAll(<%= row['id'] %>, <%= row['nrc']%>, <%= row['type_id']%>, <%= @payment[index] %>)" class="badge bg-red">Pay All: <%= @payment[index] %></button></td>
+					            <% else %>
+					            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Pay All</button></td>
+					            <% end %>
+
+					            
+				         	</tr>
+		        		<% end %>
+		        	</tbody>
+		        </table>
+	      	</div>
+	      	
+	      	
+	      	<!-- /.box-body -->
+	    </div>
+
+
+	    <div id="infoDiv2" style="display: none;">
+	    	<table class="table responsive" id="plans2">
+		        <thead>
+		         	<tr>
+			            <!-- <th>Id</th> -->
+			            <th name="week">Week</th>
+			            <th name="date">Date</th>
+			            <th name="fee">Fee</th>
+		         	</tr>
+		        </thead>
+		    </table>
+
+		    <br>
+	    </div>
+    <% end %>
+
+</section>
+<script type="text/javascript">
+
+	function minimize1(){
+		$('#infoDiv1').hide(250);
+	}
+
+	function minimize2(){
+		$('#infoDiv2').hide(250);
+	}
+
+	table = $('#plans').DataTable( {
+    	"searching": false,
+    	"bLengthChange": false,
+    	"pageLength": 5
+  	} );
+
+  	table2 = $('#plans2').DataTable( {
+    	"searching": false,
+    	"bLengthChange": false,
+    	"pageLength": 5
+  	} );
+
+  	var loan_id;
+  	var amount;
+
+  	function seePlan(id,limit,interest,fees){
+  		var intper = interest/100;
+  		var amt = $('#am'+id).val();
+  		var cuota = Math.ceil(amt*(intper*Math.pow(1+intper,fees))/(Math.pow(1+intper,fees)-1));
+  		if(amt > limit){
+  			alert("Amount surpases the loan limit")
+  		}else{
+  			if(cuota*fees <= amt){
+  				alert("Amount is too low or invalid")
+  			}else{
+  				//$('#NRCpanel').css('visibility', 'visible');
+				$('#infoDiv1').show(250);
+				table.clear();
+				table.draw();
+
+				loan_id = id;
+				amount = $('#am'+id).val();
+				curDate = new Date();
+				var year = curDate.getFullYear();
+				var week = ISO8601_week_no(curDate)+1;
+				var newDate = getDateOfISOWeek(week,year)
+				
+				for(var i=0; i<fees; i++){
+					//table.row.add([week+i+1,String(getDateOfISOWeek(week+i+1,year)).split('GMT')[0],cuota]).draw(true);
+					
+					if(newDate.getDay() == 6){
+						week++;
+						newDate.setDate(newDate.getDate() + 2)
+					}
+					
+					table.row.add([week,String(newDate).split('GMT')[0],cuota]).draw(true);
+					newDate.setDate(newDate.getDate() + 1)
+				}
+  			}
+  		}		
+	}
+
+	function ISO8601_week_no(dt){
+	    var tdt = new Date(dt.valueOf());
+	    var dayn = (dt.getDay() + 6) % 7;
+	    tdt.setDate(tdt.getDate() - dayn + 3);
+	    var firstThursday = tdt.valueOf();
+	    tdt.setMonth(0, 1);
+	    if (tdt.getDay() !== 4){
+	    	tdt.setMonth(0, 1 + ((4 - tdt.getDay()) + 7) % 7);
+        }
+	    return 1 + Math.ceil((firstThursday - tdt) / 604800000);
+    }
+
+    function getDateOfISOWeek(w, y) {
+	    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+	    var dow = simple.getDay();
+	    var ISOweekStart = simple;
+	    if (dow <= 4)
+	        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+	    else
+	        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+	    return ISOweekStart;
+	}
+
+	function request(){
+		var nrc = $('#nrc').val();
+		console.log(nrc);
+		if(nrc == null){
+			alert("Select the NRC to make the request")
+		}else{
+			$.ajax({
+	          type: 'GET',
+	          url: 'newLoan',
+	          data: {amount:amount, loan_id:loan_id, nrc:nrc},
+	          success: function(){
+	          	console.log("Success!")
+	          	location.reload();
+	              //$('#transferS').show().delay(3500).fadeOut();
+
+	          },
+	          error: function(XMLHttpRequest, textStatus, errorThrown) {
+	          	alert("Please check your data");
+	             
+	          }
+	        });
+		}
+	}
+
+	function notAvailable(){
+		alert("Action not available for the current status of your loan")
+	}
+
+	function payAll(id,nrc,type_id, total){
+		str = $('#'+nrc).text();
+		newstr = str.substring(1,str.length);
+		subject_budget = parseInt(newstr);
+		if(subject_budget < total){
+			alert("You don't have enough to pay the loan")
+		}else{
+			//alert("You have enough to pay the loan")
+			
+			$.ajax({
+				type: 'GET',
+				url: 'payAll_Loan',
+				data: {id:id, nrc:nrc, type_id:type_id},
+				success: function(){
+					console.log("Success!")
+					location.reload();
+				  //$('#transferS').show().delay(3500).fadeOut();
+
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("There was a problem");
+				 
+				}
+			});
+			
+		}
+	}
+
+	function seeSchedule(weekInp, year, fees, cuota){
+		$('#infoDiv2').show(250);
+		table2.clear();
+		table2.draw();
+		var week2 = weekInp;
+		var newDate2 = getDateOfISOWeek(weekInp,year)
+		
+		for(var i=0; i<fees; i++){
+			if(newDate2.getDay() == 6){
+				week2++;
+				newDate2.setDate(newDate2.getDate() + 2)
+			}
+			
+			table2.row.add([week2,String(newDate2).split('GMT')[0],cuota]).draw(true);
+			newDate2.setDate(newDate2.getDate() + 1)
+		}
+	}
+</script>
