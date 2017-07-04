@@ -312,7 +312,7 @@ class DashboardController < ApplicationController
     end
   end
 
-  def historicalTransactions   
+  def historicalTransactions
     @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id);")
     #render :json => @dTransaction
   end
@@ -323,7 +323,9 @@ class DashboardController < ApplicationController
     else
       tipo = 'good'
     end
-      Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
+    # intercambiar, asi solo for tests
+    producto = Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
+    Notification.create!({recipient_id: params[:nrc], actor_id: current_user.id, action: "created", notifiable_id: producto.id, notifiable_type: tipo})
   end
 
   def newAuction

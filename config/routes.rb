@@ -57,6 +57,8 @@ Rails.application.routes.draw do
   as :user do
   	get 'dashboard/panel', :to => 'devise/registrations#edit', :as => :user_root
   end
+
+  resources :notifications
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
