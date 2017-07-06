@@ -43,6 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.4/js/dataTables.checkboxes.min.js"></script>
   <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.4/css/dataTables.checkboxes.css" rel="stylesheet" />
 
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -104,60 +105,24 @@ $(function() {
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the messages -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
-                        <%= image_tag('missing_pp.png',class:"img-circle",alt:"User Image") %>
-                        <% else %>
-                        <%= image_tag(current_user.avatar.url(:thumb),class:"img-circle",alt:"User Image") %>
-                        <% end %>
-                      </div>
-                      <!-- Message title and timestamp -->
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <!-- The message -->
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-                <!-- /.menu -->
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
-          <!-- /.messages-menu -->
-
           <!-- Notifications Menu -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu" data-behavior="notifications">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning" id="numNotif">10</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header" id="numNotifMsg">You have 10 notifications</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
-                  <li><!-- start notification -->
+                  <li id="addNotif"><!-- start notification -->
                     <a href="#">
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                    </a>
+                     <a href="#">
+                      <i class="fa fa-users text-aqua"></i> 10 new members joined today
                     </a>
                   </li>
                   <!-- end notification -->
@@ -403,6 +368,8 @@ $(function() {
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
 <script src="dist/js/demo.js"></script>
+
+<script scr="dist/js/notifications.js"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="plugins/chartjs/Chart.min.js"></script>
 
@@ -416,6 +383,36 @@ $(function() {
   	new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
 	}
     </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  notifications = $("[data-behavior='notifications']");
+
+  if (notifications.length > 0) {
+    setup()
+  }
+
+  function setup() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/notifications.json',
+        dataType: 'JSON',
+        success: function(data){
+          console.log("notificaciones",data)
+          items = $.map data, (notification)
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Please check your data");           
+        }
+      }); 
+
+  }
+
+} );
+    
+
+</script>
 
 </body>
 </html>

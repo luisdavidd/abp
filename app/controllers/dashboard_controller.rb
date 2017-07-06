@@ -323,9 +323,11 @@ class DashboardController < ApplicationController
     else
       tipo = 'good'
     end
-    # intercambiar, asi solo for tests
+    students = UserSubject.connection.select_all("SELECT user_id FROM user_subjects where subject_id="+params[:nrc]+";")
     producto = Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
-    Notification.create!({recipient_id: params[:nrc], actor_id: current_user.id, action: "created", notifiable_id: producto.id, notifiable_type: tipo})
+    students.each do |student|
+      Notification.create!({recipient_id: student["user_id"], actor_id: current_user.id, action: "created", notifiable_id: producto.id, notifiable_type: tipo})
+    end
   end
 
   def newAuction
