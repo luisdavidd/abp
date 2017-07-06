@@ -110,19 +110,16 @@ $(function() {
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning" id="numNotif">10</span>
+              <span class="label label-warning" id="numNotif">0</span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header" id="numNotifMsg">You have 10 notifications</li>
+              <li class="header" id="numNotifMsg">You have 0 notifications</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li id="addNotif"><!-- start notification -->
                     <a href="#">
                       <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
-                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 10 new members joined today
                     </a>
                   </li>
                   <!-- end notification -->
@@ -400,7 +397,15 @@ $(document).ready(function() {
         dataType: 'JSON',
         success: function(data){
           console.log("notificaciones",data)
-          items = $.map data, (notification)
+          //items = data.map("<a href='#'><i class='fa fa-users text-aqua'></i>"++"</a>");
+          items = data.map(function(x){
+            return "<a href='"+x.url+"'><i class='fa fa-users text-aqua'></i>"+x.msg+"</a>"
+          });
+          
+          $("#addNotif").html(items)
+          $("#numNotif").html(data.length)
+          $("#numNotifMsg").html("You have "+data.length+" notifications")
+
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Please check your data");           
