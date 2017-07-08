@@ -27,7 +27,56 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> 
 	    <!-- <script src="/js/bootstrap.min.js"></script> -->
 		
+	    <style>
 
+.topnav {
+  overflow: hidden;
+  background-color: #212f56;
+  padding-top:15px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child) {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+}
+</style>
 		<script>
 			$(document).ready(function(){
     
@@ -52,8 +101,7 @@
 						<!-- <div class="col-md-4"> -->
 							<div id="gtco-logo">
 								<a href="#">
-									<br>
-									<img src="images/LOGOACS.png" style="width:125px;height:50px">
+									<img src="images/LOGOACS.png" style="width:135px;height:60px">
 								</a>
 								<!-- <a href="#">
 								<script type="text/javascript" src="js/mousedirection.js"></script>
@@ -65,15 +113,14 @@
 							</div>
 						</div>
 
-						<div class="col-md-8 text-right menu-1">
+						<div class="topnav pull-right" id="MNU">
 						<!-- <div class="col-xs-8 text-right menu-1"> -->
-								<ul id="menu">
-									<li class="active" ><a href="#home">Home</a></li>
-									<li><a href="/users/sign_in">Sign In</a></li>
-									<li><a href="#about">About</a></li>
-									<li><a href="#project">Projects</a></li>
-									<li class="last"><a href="#contact">Contact</a></li>
-								</ul>
+							<a href="#home" style="font-weight:bold">Home</a>
+							<a href="/users/sign_in" style="font-weight:bold">Sign In</a>
+							<a href="#about" style="font-weight:bold">About</a>
+							<a href="#project" style="font-weight:bold">Projects</a>
+							<a href="#contact" style="font-weight:bold">Contact</a>
+							<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;
 						</div>
 					</div>
 				</div>
@@ -84,9 +131,9 @@
 				<div class="row">
 					<div class="col-lg-12 gallery">
 						<ul class="bxslider">
-							<li style="height:612px;margin-top:20px"><img src="images/norte1.jpg" style="width:100%;height:100%;background-repeat:no-repeat"></li>
-							<li style="height:612px;margin-top:20px"><img src="images/norte2.jpg" style="width:100%;height:100%;background-repeat:no-repeat" ></li>
-							<li style="height:612px;margin-top:20px"><img src="images/norte3.jpg" style="width:100%;height:100%;background-repeat:no-repeat" ></li>		
+							<li style="height:72vh"><img src="images/norte1.jpg" style="width:100%;height:100%;background-repeat:no-repeat"></li>
+							<li style="height:72vh"><img src="images/norte2.jpg" style="width:100%;height:100%;background-repeat:no-repeat" ></li>
+							<li style="height:72vh"><img src="images/norte3.jpg" style="width:100%;height:100%;background-repeat:no-repeat" ></li>		
 						</ul>
 
 						<!-- #camera_wrap_1 -->
@@ -284,7 +331,17 @@
 				</div>
 			</div>
 		</div>
-
+		<script>
+			function myFunction() {
+				console.log("Aquiiii por que si ")
+			    var x = document.getElementById("MNU");
+			    if (x.className === "topnav pull-right") {
+			        x.className += " responsive";
+			    } else {
+			        x.className = "topnav pull-right";
+			    }
+			}
+		</script>
 		<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8">
 		</script>
 		<script src="js/bootstrap.min.js"></script>
