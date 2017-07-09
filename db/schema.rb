@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170704001204) do
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "recipient_id"
     t.integer  "actor_id"
+    t.integer  "secondactor_id"
     t.datetime "read_at"
     t.string   "action"
     t.integer  "notifiable_id"

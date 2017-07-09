@@ -33,7 +33,7 @@ json.array! @notifications do |notification|
 				msg += "#{notification.notifiable.user_to} #{notification.notifiable.amount} bacs"
 				# No funcionara bien porque user_to es una id
 			else
-				msg += "the transaction from #{notification.recipient.name} to #{notification.notifiable.user_to}"
+				msg += "the transaction from #{notification.recipient.name} to #{notification.secondactor.name}"
 			end
 		end
 	end
