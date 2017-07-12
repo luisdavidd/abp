@@ -1,3 +1,6 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+
 <script type="text/javascript">
 $(function() {
   $.ajax({ 
@@ -98,34 +101,44 @@ $(function() {
 </div>
 
 <div class="row">
-	<div class="col-md-7">
-		<table class="table responsive" id="students">
-		    <thead>
-		     	<tr>
-		            <!-- <th>Id</th> -->
-		            <th name="check"></th>
-		            <th name="id">id</th>
-		            <th name="name">Name</th>
-		            <th name="last_name">Last Name</th>
-		            <th name="codigo">Code</th> 
-		            <th name="saldo">Budget</th> 
-		     	</tr>
-		    </thead>
-		</table>
+	<div class="col-lg-7">
+		<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<table class="table responsive" id="students">
+				    <thead>
+				     	<tr>
+				            <!-- <th>Id</th> -->
+				            <th name="check"></th>
+				            <th name="id">id</th>
+				            <th name="name">Name</th>
+				            <th name="last_name">Last Name</th>
+				            <th name="codigo">Code</th> 
+				            <th name="saldo">Budget</th> 
+				     	</tr>
+				    </thead>
+				</table>
+			</div>
+		</div>
+				
 	</div>
-	<div class="col-md-5">
-		<table class="table responsive" id="loans">
-		    <thead>
-		     	<tr>
-		            <!-- <th>Id</th> -->
-		            <th name="loan_name">Loan</th>
-		            <th name="amount">Amount</th>
-		            <th name="starting">Starting In</th>
-		            <th name="current">Current</th>
-		            <th name="status">Status</th>
-		     	</tr>
-		    </thead>
-		</table>
+	<div class="col-lg-5">
+		<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<table class="table responsive" id="loans">
+				    <thead>
+				     	<tr>
+				            <!-- <th>Id</th> -->
+				            <th name="loan_name">Loan</th>
+				            <th name="amount">Amount</th>
+				            <th name="starting">Starting In</th>
+				            <th name="current">Current</th>
+				            <th name="status">Status</th>
+				     	</tr>
+				    </thead>
+				</table>
+			</div>
+		</div>
+				
 	</div>
 		
 </div>
@@ -196,6 +209,7 @@ $(function() {
 	});
 
 	table = $('#students').DataTable( {
+		responsive: true,
 		columnDefs: [
 		  {
 		      "targets": [1],
@@ -214,6 +228,7 @@ $(function() {
 	} );
 
 	table2 = $('#loans').DataTable( {
+		responsive: true,
 		"searching": false,
     	"bLengthChange": false,
     	"pageLength": 10,

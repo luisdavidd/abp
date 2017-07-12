@@ -41,32 +41,29 @@ $(function() {
           </div>
           <div id="Inputs" style="visibility:hidden">
             <div class="col-md-4" style="padding-bottom:0%">
-              <label>Product Name</label>
-              <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Product">
               <div class="row">
-                <div class="col-md-4">
-                  <label style="padding-top:7%">Price</label>
-                </div>
-                <div class="col-md-4">
-                  <label style="padding-top:7%">Quantity</label>
-                </div>
-                
-                <div class="col-md-4">
-                  <label style="padding-top:7%;margin-left:30px">Type</label>
-                </div>
+                <label>Product Name</label>
+                <input id="ProdInput" type="text" class="form-control" style="width: 100%" placeholder="New Product">
               </div>
-              <div class="row">
-                <div class="col-md-4" style="padding-bottom:0%">
+              <div class="row" style="padding-top:1%">
+                <div class="col-md-3" style="padding-left:0%">
+                  <label >Price</label>
                   <input id="PriceInput" type="number" class="form-control" placeholder="Price" style="width:100%" required  min=0 step=10> 
                 </div>
-                <div class="col-md-2" style="padding-bottom:0%">
-                  <input id="QuantityToggle" type="checkbox"  data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
+                <div class="col-md-6">
+                  <label style="padding-top:0%">Quantity</label>
+                  <div class="row" style="">
+                    <div class="col-md-8" style="padding-right:0%">
+                      <input id="QuantityToggle" type="checkbox"  data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
+                    </div>
+                    <div class="col-md-4" style="padding-left:0%">
+                      <input disabled="true" id="QuantityInput" type="number" class="form-control" placeholder="Quantity" required min=1>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-2" style="padding-bottom:0%;margin-left:30px">
-                  <input disabled="true" id="QuantityInput" type="number" class="form-control" placeholder="Quantity" style="width:100%;" required min=1>
-                </div>
-                <div class="col-md-4" style="padding-bottom:0%;width:20%">
-                  <input id="TypeInput" type="checkbox"  data-toggle="toggle" data-on="Service" data-off="Good"> 
+                <div class="col-md-3" >
+                  <label style="">Type</label>
+                  <input id="TypeInput" type="checkbox"  data-toggle="toggle" data-on="Service" data-off="Good">
                 </div>
               </div><option></option>
             </div>
@@ -74,21 +71,15 @@ $(function() {
             <div class="col-md-4" style="padding-bottom:0%">
               <label style="padding-top:0%">Available Until:</label>
               <div class="row">
-                <div class="col-md-2" style="padding-bottom:0%">
+                <div class="col-md-4" style="padding-bottom:0%">
                   <input id="DateToggle" type="checkbox" data-toggle="toggle" data-on="Fixed" data-off="Unlimited">
                 </div>
-                <div class="col-md-4" style="padding-bottom:0%">
-                  <input disabled="true" id="DateInput" class="form-control" placeholder="Due date" style="width:140%;">
+                <div class="col-md-8" style="padding-bottom:0%">
+                  <input disabled="true" id="DateInput" class="form-control" placeholder="Due date" style="width:100%;">
                 </div>
               </div><option></option>
+              <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:100%">Release</button>
             </div>
-            <div class="col-md-4" style="padding-bottom:0%">
-              <div class="row">
-                <div class="col-md-4" style="padding-bottom:0%">
-                  <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="width:200%">Release</button>
-                </div> 
-              </div>        
-            </div> 
 
           </div>
         </div>
