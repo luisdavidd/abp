@@ -109,16 +109,6 @@ $(function() {
               </tbody>
             </table>
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
         </div>
         <!-- /.box --> 
         <div class="box">
@@ -148,16 +138,7 @@ $(function() {
               </tbody>
             </table>
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+          
         </div>
         <!-- /.box --> 
       </div>
@@ -174,7 +155,7 @@ $(function() {
           </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table class="table responsive">
+              <table class="table responsive" id="ARG">
                 <thead>
                   <tr>
                     <!-- <th>Id</th> -->
@@ -196,16 +177,6 @@ $(function() {
                 </tbody>
               </table>
             </div>
-            <!-- /.box-body -->
-          <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
-            </div>
         </div>
         <!-- /.box -->    
         <div class="box">
@@ -219,7 +190,7 @@ $(function() {
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
-              <table class="table responsive">
+              <table class="table responsive" id="ARS">
                 <thead>
                   <tr>
                     <!-- <th>Id</th> -->
@@ -240,16 +211,6 @@ $(function() {
                   <% end %>    
                 </tbody>
               </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="#">&laquo;</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">&raquo;</a></li>
-              </ul>
             </div>
         </div>
         <!-- /.box -->            
@@ -405,3 +366,39 @@ function reload(bandera, tabla) {
   });
 
 </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/paging.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+        $('#ARG').paging({limit:5});
+        $('#ARS').paging({limit:5});
+    });
+</script>
+<style type="text/css">
+  .paging-nav {
+    text-align: right;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+  }
+
+  .paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #f5f5ef;
+    color: #808080;
+    border-radius: 3px;
+    border-style: solid;
+    border-width:1px;
+    border-color: #d9d9d9;
+  }
+
+  .paging-nav .selected-page {
+    background: #e0e0d1;
+    font-weight: bold;
+  }
+
+</style>

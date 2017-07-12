@@ -98,8 +98,8 @@ $(function() {
     <div class="row">
       <div class="col-lg-6">
         <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Goods available</h3>
+          <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+            <h3 class="box-title">Available Goods</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -122,23 +122,15 @@ $(function() {
             </table>
           </div>
           <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+          
         </div>
       <!-- /.box --> 
       </div>
 
       <div class="col-lg-6">
         <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Services available</h3>
+          <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
+            <h3 class="box-title">Available Services</h3>
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -163,15 +155,7 @@ $(function() {
             </table>
           </div>
           <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+          
         </div>
       <!-- /.box --> 
       </div>
@@ -253,7 +237,11 @@ function reload(bandera, tabla) {
         cell.innerHTML= "<button type='button' onclick='deleteP("+rowCount+",table.id)' class='badge bg-red'>Delete</button>";
       }        
 
-    } // aqui termina success
+    }, // aqui termina success
+    complete: function(date){
+      //$('#g_availables').paging({limit:5});
+      //$('#s_availables').paging({limit:5});
+    }
   }); // aqui termina ajax
 }
 
@@ -274,7 +262,8 @@ function reload(bandera, tabla) {
       type: 'GET',
       url: 'delete_product',
       data: {id: data},
-      success: function(data){      }
+      success: function(data){      
+      }
     });      
        
  }
@@ -348,3 +337,39 @@ function reload(bandera, tabla) {
   });
 
 </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/paging.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+        //$('#g_availables').paging({limit:5});
+        //$('#s_availables').paging({limit:5});
+    });
+</script>
+<style type="text/css">
+  .paging-nav {
+    text-align: right;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+  }
+
+  .paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #f5f5ef;
+    color: #808080;
+    border-radius: 3px;
+    border-style: solid;
+    border-width:1px;
+    border-color: #d9d9d9;
+  }
+
+  .paging-nav .selected-page {
+    background: #e0e0d1;
+    font-weight: bold;
+  }
+
+</style>
