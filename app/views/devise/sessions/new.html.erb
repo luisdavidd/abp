@@ -2,14 +2,17 @@
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
-
-  <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
-
   <!-- Modernizr JS -->
-  <script src="/js/modernizr-2.6.2.min.js"></script>
-  <script type="text/javascript" src="/js/jquery.easing.1.3.js"></script> 
-  <link rel="stylesheet" href="/css/jqbtk.min.css">
+  <!-- Waypoints -->
+  <!-- Carousel -->
+  <!-- <script src="js/owl.carousel.min.js"></script>-->
+  <!-- countTo -->
+  <!-- Carousel -->
+  <!-- Main -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="/js/jqbtk.js"></script>
 
 </head>
 <script type="text/javascript">
@@ -51,70 +54,50 @@ document.onkeydown = function (event) {
 /////////////////////end/////////////////////// 
 </script>
 
-<html style="height:100%;margin:0px">
-  <body style="min-height: 99vh;;margin:0px">
-    
-    <nav class="gtco-nav" role="navigation" style="padding:5px 0;height:125px;background-color:rgb(33, 47, 86)"oncontextmenu="return false;" >
-      <div class="gtco-container">
-        <div class="row">
-          <div class="col-sm-4 col-xs-12">
-          <!-- <div class="col-md-4"> -->
-            <div id="gtco-logo">
-            </div>
-          </div>
+<html>
 
-          <div class="col-md-8 text menu-1">
+  <body style="margin:0px">
+    <div class="row" style="height:20vh;background-color:rgb(33, 47, 86);">
+      
           <!-- <div class="col-xs-8 text-right menu-1"> -->
-              <ul style="padding-top:20px;padding-left:10px">
-                <li style="color:white;font-size:40px">Virtual System</li>
+              <ul style="padding-top:3%;padding-left:0%">
+                <li style="color:white;font-size:6vh;text-align:center">Virtual System</li>
               </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div id="gtco-portfolio" class="gtco-section" style="background-color:#fff" oncontextmenu="return false;">
-      <center> 
-        <div class="row" style="padding:450px;background-color:#fff;align-content:center">
-
-          <div class="col-md-8">
-            <div class="login" style="left: 25vh" id="#login_form">
-              
-
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"login-form") do |f| %>
-                <div class="field">
-                  <%= f.email_field :email, autofocus: true,:required => true, class:"login-input", placeholder: :email %>
-                </div>
-
-                <div class="field">
-                  <input type="password" pattern="[0-9]{4}" class="login-input" name="user[password]" id="user_password" onkeydown="return false" maxlength=4 required onfocus ="validation()" autocomplete="off" placeholder="Password" oncontextmenu="return false;">                
-                </div><br>
-                <div class="actions">
-                  <%= f.submit "Log in",class: 'btn ',style:"float:right;background:#212f56;border:2px solid #212f56 !important;color:white" %>
-                </div>
-                <% if devise_mapping.rememberable? -%>
-                  <div class="login-form">
-                    <%= f.check_box :remember_me %>
-                    <%= f.label :remember_me %>
-                  </div>
-                <% end %>
-
-                
-              <% end %>
-
-              <div class="login-form">
-                <%= render "devise/shared/links" %>
-              </div>
-            </div>
-          </div>
           
+    </div> 
+    <div class="row" style="height:70vh;background-color:#fff;">
+        <div class="login" style="padding-top:5%;padding-bottom:10%;padding-right:10%;max-width:60vw" id="#login_form">
+          
+
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name), class:"login-form") do |f| %>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true,:required => true, class:"login-input", placeholder: :email %>
+            </div>
+
+            <div class="field">
+              <input type="password" pattern="[0-9]{4}" class="login-input" name="user[password]" id="user_password" onkeydown="return false" maxlength=4 required onfocus ="validation()" autocomplete="off" placeholder="Password" oncontextmenu="return false;">                
+            </div><br>
+            <div class="actions">
+              <%= f.submit "Log in",class: 'btn ',style:"float:right;background:#212f56;border:2px solid #212f56 !important;color:white" %>
+            </div>
+            <% if devise_mapping.rememberable? -%>
+              <div class="login-form">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+
+          <% end %>
+
+          <div class="login-form">
+            <%= render "devise/shared/links" %>
+          </div>
         </div>
-      </center>
     </div>
-    <div class="lineBlack" style="height:50px;position:absolute" oncontextmenu="return false;">
+    <div class="row" style="height:10vh;background-color:#000;" oncontextmenu="return false;">
       <div class="gtco-container">
           <div class="gtco-footer">
-            <p style="color:white;padding-top:20px;font-size:20px">&copy;Luis Díaz, Juan Gómez, Sorelys Sandoval</p>
+            <p style="color:white;padding-top:2%;font-size:3vh;text-align:center">&copy;Luis Díaz, Juan Gómez, Sorelys Sandoval</p>
           </div>
       </div>
     </div>
@@ -122,24 +105,7 @@ document.onkeydown = function (event) {
       
   </body>
 </html>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<!-- Waypoints -->
-<script src="/js/jquery.waypoints.min.js"></script>
-<!-- Carousel -->
-<!-- <script src="js/owl.carousel.min.js"></script>-->
-<!-- countTo -->
-<script src="/js/jquery.countTo.js"></script>
-<!-- Carousel -->
-<script src="/js/owl.carousel.min.js"></script>
-<!-- Magnific Popup -->
-<script src="/js/jquery.magnific-popup.min.js"></script>
-<script src="/js/magnific-popup-options.js"></script>
-<!-- Main -->
-<script src="/js/main.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="/js/jqbtk.js"></script>
 <script type="text/javascript">
   //var teclasOriginal = [[['7'],['8'],['9']],[['4'],['5'],['6']],[['1'],['2'],['3']],[['0'],['del']]];
   //var teclasRow = [['*','7'],['*','8'],['*','9'],['*','4'],['*','5'],['*','6'],['*','1'],['*','2'],['*','3'],['*','0']];
@@ -175,4 +141,4 @@ document.onkeydown = function (event) {
 
   //$('#login_form').reload(document.URL +  '#login_form');
 
-      </script>
+</script>
