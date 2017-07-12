@@ -4,6 +4,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
+
+
 <section class="content"> 
 	<div class="row">
 		<% @budget.each_with_index do |budgets, index| %>
@@ -24,166 +26,188 @@
 		  	</div>
 	  	<% end %>
 	</div>
-	<div class="box">
-     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
-	        <h3 class="box-title">Available Loan Types</h3>
-	        <div class="box-tools pull-right">
-	          <button type="button" class="btn btn-box-tool" onclick="minimize1()" data-widget="collapse"><i class="fa fa-minus"></i>
-	          </button>
+	<div class="row">
+		<div class="col-lg-12 col-xs-12">
+			<div class="box">
+		     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+			        <h3 class="box-title">Available Loan Types</h3>
+			        <div class="box-tools pull-right">
+			          <button type="button" class="btn btn-box-tool" onclick="minimize1()" data-widget="collapse"><i class="fa fa-minus"></i>
+			          </button>
 
-	        </div>
-     	</div>
-      	<!-- /.box-header -->
-    	<div class="box-body no-padding">
-	        <table class="table responsive">
-		        <thead>
-		         	<tr>
-			            <!-- <th>Id</th> -->
-			            <th name="type">Type</th>
-			            <th name="amount">Amount</th>
-			            <th name="limit">Up to</th>
-			            <th name="interest">Interest</th>
-			            <th name="fees">Fees</th>
-			            <th name="action">Action</th>
-		         	</tr>
-		        </thead>
-	        	<tbody>
-	          		<% @loans.each_with_index do |row, index| %>
-			         	<tr>
-				            <td style="display:none;"><%= row['id'] %></td>
-				            <td id="type"><%= row['type_name'] %></td>
-				            <td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id=<%=  "am"+row['id'].to_s %> value="0" min="0"></td>
-				            <td><%= row['amount'] %></td>
-				            <td><%= row['interest'] %> %</td>
-				            <td><%= row['fees'] %></td>
+			        </div>
+		     	</div>
+		      	<!-- /.box-header -->
+		    	<div class="box-body no-padding">
+			        <table class="table responsive">
+				        <thead>
+				         	<tr>
+					            <!-- <th>Id</th> -->
+					            <th name="type">Type</th>
+					            <th name="amount">Amount</th>
+					            <th name="limit">Up to</th>
+					            <th name="interest">Interest</th>
+					            <th name="fees">Fees</th>
+					            <th name="action">Action</th>
+				         	</tr>
+				        </thead>
+			        	<tbody>
+			          		<% @loans.each_with_index do |row, index| %>
+					         	<tr>
+						            <td style="display:none;"><%= row['id'] %></td>
+						            <td id="type"><%= row['type_name'] %></td>
+						            <td><input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id=<%=  "am"+row['id'].to_s %> value="0" min="0"></td>
+						            <td><%= row['amount'] %></td>
+						            <td><%= row['interest'] %> %</td>
+						            <td><%= row['fees'] %></td>
 
-				            <td><button type="button" onclick="seePlan(<%= row['id'] %>, <%= row['amount']%>, <%= row['interest']%>, <%= row['fees']%>)" class="badge bg-blue">See Plan</button></td>
-			         	</tr>
-	        		<% end %>
-	        	</tbody>
-	        </table>
-      	</div>
-      	
-      	<!-- /.box-body -->
-    </div>
-
-    <div id="infoDiv1" style="display: none;">
-    	<table class="table responsive" id="plans">
-	        <thead>
-	         	<tr>
-		            <!-- <th>Id</th> -->
-		            <th name="week">Week</th>
-		            <th name="date">Date</th>
-		            <th name="fee">Fee</th>
-	         	</tr>
-	        </thead>
-	    </table>
-	    <h5>*Loan payments start next week to approval. Actual schedule may vary.</h5>
-	    <br>
-
-	    <div class="box box-info" id="NRCpanel">
-	      <div class="box-header with-border" id="bHeader" style="background-color:#99b3ff;color:#fff">
-	        <div class="form-group">
-	            <div class="col-md-6" style="padding-top:2%">
-	            	<div class="row">
-	            		<div class="col-md-1">
-			            	<label style="padding-top:3%">NRC</label>
-			            </div>
-			            <div class="col-md-11">
-			            	<select id="nrc" class="form-control" style="padding-top:1%;width: 100%;height:34px" required>
-			            		<option value="" disabled selected hidden>Select NRC</option>
-			            		<% @budget.each_with_index do |budgets, index| %>
-			            			<option> <%=  budgets['subject_id']%> </option>
-			            		<% end %>
-			            	</select>
-			            </div>
-	            	</div>
-		        </div>
-		      	<div class="col-md-6" style="padding-bottom:0%">
-		            <div class="row" style="padding-top:2%">
-		              <button id="Release" type="button" onclick="request()" class="btn btn-primary btn-lg btn-block" style="width:100%">Request this loan</button>
-		            </div>        
-		        </div> 
-
-	        </div>
-	      </div>
-	    </div>
-    </div>
-
-    <% if @loans_status.length > 0 %>
-	    <div class="box">
-	     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
-		        <h3 class="box-title">My Loans</h3>
-		        <div class="box-tools pull-right">
-		          <button type="button" class="btn btn-box-tool" onclick="minimize2()" data-widget="collapse"><i class="fa fa-minus"></i>
-		          </button>
-
-		        </div>
-	     	</div>
-	      	<!-- /.box-header -->
-	      	
-	    	<div class="box-body no-padding">
-		        <table class="table responsive">
+						            <td><button type="button" onclick="seePlan(<%= row['id'] %>, <%= row['amount']%>, <%= row['interest']%>, <%= row['fees']%>)" class="badge bg-blue">See Plan</button></td>
+					         	</tr>
+			        		<% end %>
+			        	</tbody>
+			        </table>
+		      	</div>
+		      	
+		      	<!-- /.box-body -->
+		    </div>
+		</div>
+		
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-12 col-xs-12">
+			<div id="infoDiv1" style="display: none;">
+		    	<table class="table responsive" id="plans">
 			        <thead>
 			         	<tr>
 				            <!-- <th>Id</th> -->
-				            <th name="NRC">NRC</th>
-				            <th name="type">Type</th>
-				            <th name="Amount">Amount</th>
-				            <th name="Current">Last Paid Fee</th>
-				            <th name="Status">Status</th>
-				            <th name="Schedule">Action</th>
-				            <th name="PayAll">Action 2</th>
+				            <th name="week">Week</th>
+				            <th name="date">Date</th>
+				            <th name="fee">Fee</th>
 			         	</tr>
 			        </thead>
-		        	<tbody>
-		          		<% @loans_status.each_with_index do |row, index| %>
+			    </table>
+			    <h5>*Loan payments start next week to approval. Actual schedule may vary.</h5>
+			    <br>
+
+			    <div class="box box-info" id="NRCpanel">
+			      <div class="box-header with-border" id="bHeader" style="background-color:#99b3ff;color:#fff">
+			        <div class="form-group">
+			            <div class="col-md-6" style="padding-top:2%">
+			            	<div class="row">
+			            		<div class="col-md-1">
+					            	<label style="padding-top:3%">NRC</label>
+					            </div>
+					            <div class="col-md-11">
+					            	<select id="nrc" class="form-control" style="padding-top:1%;width: 100%;height:34px" required>
+					            		<option value="" disabled selected hidden>Select NRC</option>
+					            		<% @budget.each_with_index do |budgets, index| %>
+					            			<option> <%=  budgets['subject_id']%> </option>
+					            		<% end %>
+					            	</select>
+					            </div>
+			            	</div>
+				        </div>
+				      	<div class="col-md-6" style="padding-bottom:0%">
+				            <div class="row" style="padding-top:2%">
+				              <button id="Release" type="button" onclick="request()" class="btn btn-primary btn-lg btn-block" style="width:100%">Request this loan</button>
+				            </div>        
+				        </div> 
+
+			        </div>
+			      </div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+
+	
+		    
+
+    <% if @loans_status.length > 0 %>
+
+    	<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<div class="box">
+			     	<div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+				        <h3 class="box-title">My Loans</h3>
+				        <div class="box-tools pull-right">
+				          <button type="button" class="btn btn-box-tool" onclick="minimize2()" data-widget="collapse"><i class="fa fa-minus"></i>
+				          </button>
+
+				        </div>
+			     	</div>
+			      	<!-- /.box-header -->
+			      	
+			    	<div class="box-body no-padding">
+				        <table class="table responsive">
+					        <thead>
+					         	<tr>
+						            <!-- <th>Id</th> -->
+						            <th name="NRC">NRC</th>
+						            <th name="type">Type</th>
+						            <th name="Amount">Amount</th>
+						            <th name="Current">Last Paid Fee</th>
+						            <th name="Status">Status</th>
+						            <th name="Schedule">Action</th>
+						            <th name="PayAll">Action 2</th>
+					         	</tr>
+					        </thead>
+				        	<tbody>
+				          		<% @loans_status.each_with_index do |row, index| %>
+						         	<tr>
+							            <td style="display:none;"><%= row['id'] %></td>
+							            <td><%= row['nrc'] %></td>
+							            <td><%= @loan_types[row['type_id']] %></td>
+							            <td><%= row['amount'] %></td>
+							            <td><%= row['current_fee'] %></td>
+							            <td><span class="<%= @loan_status_label[row['loan_stat']]["Class"] %>"> <%= @loan_status_label[row['loan_stat']]["Status"] %> </span></td>
+
+							            <% if row['loan_stat'] > 1 %>
+							            	<td><button type="button" onclick="seeSchedule(<%= row['starting_in'].strftime("%V").to_i %>, <%= row['starting_in'].strftime("%Y").to_i %>, <%= @loan_fees[row['type_id']]%>, <%= row['next_payment']%>)" class="badge bg-blue">Schedule</button></td>
+							            <% else %>
+							            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Schedule</button></td>
+							            <% end %>
+
+							            <% if row['loan_stat'] == 2 %>
+							            	<td><button type="button" onclick="payAll(<%= row['id'] %>, <%= row['nrc']%>, <%= row['type_id']%>, <%= @payment[index] %>)" class="badge bg-red">Pay All: <%= @payment[index] %></button></td>
+							            <% else %>
+							            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Pay All</button></td>
+							            <% end %>
+
+							            
+						         	</tr>
+				        		<% end %>
+				        	</tbody>
+				        </table>
+			      	</div>
+			      	
+			      	
+			      	<!-- /.box-body -->
+			    </div>	
+			</div>
+		</div>
+			    
+		<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<div id="infoDiv2" style="display: none;">
+			    	<table class="table responsive" id="plans2">
+				        <thead>
 				         	<tr>
-					            <td style="display:none;"><%= row['id'] %></td>
-					            <td><%= row['nrc'] %></td>
-					            <td><%= @loan_types[row['type_id']] %></td>
-					            <td><%= row['amount'] %></td>
-					            <td><%= row['current_fee'] %></td>
-					            <td><span class="<%= @loan_status_label[row['loan_stat']]["Class"] %>"> <%= @loan_status_label[row['loan_stat']]["Status"] %> </span></td>
-
-					            <% if row['loan_stat'] > 1 %>
-					            	<td><button type="button" onclick="seeSchedule(<%= row['starting_in'].strftime("%V").to_i %>, <%= row['starting_in'].strftime("%Y").to_i %>, <%= @loan_fees[row['type_id']]%>, <%= row['next_payment']%>)" class="badge bg-blue">Schedule</button></td>
-					            <% else %>
-					            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Schedule</button></td>
-					            <% end %>
-
-					            <% if row['loan_stat'] == 2 %>
-					            	<td><button type="button" onclick="payAll(<%= row['id'] %>, <%= row['nrc']%>, <%= row['type_id']%>, <%= @payment[index] %>)" class="badge bg-red">Pay All: <%= @payment[index] %></button></td>
-					            <% else %>
-					            	<td><button type="button" onclick="notAvailable()" class="badge bg-gray">Pay All</button></td>
-					            <% end %>
-
-					            
+					            <!-- <th>Id</th> -->
+					            <th name="week">Week</th>
+					            <th name="date">Date</th>
+					            <th name="fee">Fee</th>
 				         	</tr>
-		        		<% end %>
-		        	</tbody>
-		        </table>
-	      	</div>
-	      	
-	      	
-	      	<!-- /.box-body -->
-	    </div>
+				        </thead>
+				    </table>
 
+				    <br>
+			    </div>
+			</div>
+		</div>
 
-	    <div id="infoDiv2" style="display: none;">
-	    	<table class="table responsive" id="plans2">
-		        <thead>
-		         	<tr>
-			            <!-- <th>Id</th> -->
-			            <th name="week">Week</th>
-			            <th name="date">Date</th>
-			            <th name="fee">Fee</th>
-		         	</tr>
-		        </thead>
-		    </table>
-
-		    <br>
-	    </div>
+			    
     <% end %>
 
 </section>

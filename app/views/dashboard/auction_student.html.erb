@@ -37,236 +37,262 @@ $(function() {
 	  	<% end %>
   	</div>
   	<div class="row">
-		<div class="col-lg-4 col-xs-6">
-		    <div class="box">
-		      <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
-		        <h3 class="box-title">Available Goods in Auction</h3>
-		        <div class="box-tools pull-right">
-		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-		          </button>
+		<div class="col-lg-4">
+			<div class="row">
+				<div class="col-lg-12 col-xs-12">
+					<div class="box">
+				      <div class="box-header" style="background-color:rgba(60, 141, 188, 0.52);font-weight:bold;">
+				        <h3 class="box-title">Available Goods in Auction</h3>
+				        <div class="box-tools pull-right">
+				          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+				          </button>
 
-		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-		        </div>
-		        
-		      </div>
-		      <!-- /.box-header -->
-		      <div class="box-body no-padding">
-		        <table class="table responsive" id="table2">
-		        <thead>
-		          <tr>
-		            <!-- <th>Id</th> -->
-		            <th name="nrc">NRC</th>
-		            <th name="concept">Concept</th>
-		            <th name="price">Price</th>
-		            <th name="available">Due date</th>
-		            <th name="action">Action</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-		          <% @shoptG.each do |shopT| %>
-		          	<% shopT.each do |minishopT| %>
-			          <tr>
-			            <td style="display:none;"><%= minishopT['id'] %></td>
-			            <td><%= minishopT['nrc'] %></td>
-			            <td id="nameE"><%= minishopT['name'] %></td>
-			            <td><%= minishopT['price'] %></td>
-			            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
-
-			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
-			          </tr>
-			        <% end %>
-		        <% end %>
-		        </tbody>
-		        </table>
-		      </div>
-		      <!-- /.box-body -->
-		      <div class="box-footer clearfix">
-		        <ul class="pagination pagination-sm no-margin pull-right">
-		          <li><a href="#">&laquo;</a></li>
-		          <li><a href="#">1</a></li>
-		          <li><a href="#">2</a></li>
-		          <li><a href="#">3</a></li>
-		          <li><a href="#">&raquo;</a></li>
-		        </ul>
-		      </div>
-		    </div>
-		    <!-- /.box -->
-		   	<div class="box">
-		      <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
-		        <h3 class="box-title">Available Services in Auction</h3>
-		        <div class="box-tools pull-right">
-		          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-		          </button>
-
-		          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-		        </div>
-		        
-		      </div>
-		      <!-- /.box-header -->
-		      <div class="box-body no-padding">
-		        <table class="table responsive" id="table3">
-		        <thead>
-		          <tr>
-		            <!-- <th>Id</th> -->
-		            <th name="nrc">NRC</th>
-		            <th name="concept">Concept</th>
-		            <th name="price">Price</th>
-		            <th name="available">Due date</th>
-		            <th name="action">Action</th>
-		          </tr>
-		        </thead>
-		        <tbody>
-		          <% @shoptS.each do |shopT| %>
-		          	<% shopT.each do |minishopT| %>
-			          <tr>
-			            <td style="display:none;"><%= minishopT['id'] %></td>
-			            <td><%= minishopT['nrc'] %></td>
-			            <td id="nameE"  ><%= minishopT['name'] %></td>
-			            <td><%= minishopT['price'] %></td>
-			            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
-
-			            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
-			          </tr>
-			        <% end %>
-		        <% end %>
-		        </tbody>
-		        </table>
-		      </div>
-		      <!-- /.box-body -->
-		      <div class="box-footer clearfix">
-		        <ul class="pagination pagination-sm no-margin pull-right">
-		          <li><a href="#">&laquo;</a></li>
-		          <li><a href="#">1</a></li>
-		          <li><a href="#">2</a></li>
-		          <li><a href="#">3</a></li>
-		          <li><a href="#">&raquo;</a></li>
-		        </ul>
-		      </div>
-		    </div>        
-		</div>
-		<div class="col-lg-3 col-xs-6">
-			<div class="box">
-				<div class="box-header" id="infoAuctHeader" style="font-weight:bold;color:white">
-			        <h3 class="box-title">Auction Info</h3>
-			        <div class="box-tools pull-right">
-			          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-			          </button>
-
-			          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-			        </div>
-		      	</div>
-		      	<div class="box-body no-padding">
-		      		<div class="box box-info" id="nDS" style="visibility: visible;border-top-color:#9e8d8b;width:85%;left:6.25%;margin-top:10px">
-					  <div class="box-header with-border" style="background-color:#9e8d8b;color:#fff">
-					    <h3 class="box-title" style="color:white;">No Data Selected</h3>
-					  </div>
-					</div>
-					<div class="box box-info" id="auctioning" style="display:none;border-top-color:#fff;width:85%;left:6.25%;margin-top:10px">
-						
-					</div>
-					<div class="box box-info" id="budIns" style="display:none;border-top-color:#dd4b39;width:85%;left:6.25%;margin-top:10px">
-					  <div class="box-header with-border" class="blink_me" style="background-color:#dd4b39;color:#fff">
-					    <h3 class="box-title" style="color:white;">Current budget insufficient</h3>
-					  </div>
-					</div>  
-		      	</div>
-			</div>
-		</div>
-		<div class="col-lg-4 col-xs-6">
-	    	<div class="box">
-	      		<div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
-	        		<h3 class="box-title">Goods Auctions Status</h3>
-	        		<div class="box-tools pull-right">
-	         			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          			</button>
-
-	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        		</div>
-	     		</div>
-	      		<!-- /.box-header -->
-	      		<div class="box-body no-padding">
-	        		<table class="table responsive">
-	        			<thead>
-				          <tr>
-				            <!-- <th>Id</th> -->
-				            <th name="element">Element</th>
-				            <th name="nrc">NRC</th>
-				            <th name="created_at">Due Date</th>
-				            <th name="status">Status</th>
-				          </tr>
-	        			</thead>
-				        <tbody>
-				         	<% @SIPG.each_with_index do |possST,indexTg| %>
-					          	<tr>
-						            <td><%= possST['name'] %></td>
-						            <td><%= possST['nrc'] %></td>
-						            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
-						            <td id="Tgstatus"><span class="<%= @statusG[indexTg][:class]%>"><%= @statusG[indexTg][:status]%></span></td>
-					          	</tr>
-				        	<% end %>
-				        </tbody>
-	        		</table>
-	      		</div>
-	      		<!-- /.box-body -->
-	     		<div class="box-footer clearfix">
-			        <ul class="pagination pagination-sm no-margin pull-right">
-			          <li><a href="#">&laquo;</a></li>
-			          <li><a href="#">1</a></li>
-			          <li><a href="#">2</a></li>
-			          <li><a href="#">3</a></li>
-			          <li><a href="#">&raquo;</a></li>
-			        </ul>
-	      		</div>
-	    	</div>
-	    	<!-- /.box -->    
-	    	<div class="box">
-	      		<div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
-	        		<h3 class="box-title">Services Auctions Status</h3>
-	        		<div class="box-tools pull-right">
-	          			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-	          			</button>
-	          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-	        		</div>
-	      		</div>
-	      		<!-- /.box-header -->
-	      		<div class="box-body no-padding">
-			        <table class="table responsive">
+				          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				        </div>
+				        
+				      </div>
+				      <!-- /.box-header -->
+				      <div class="box-body no-padding">
+				        <table class="table responsive" id="table2">
 				        <thead>
 				          <tr>
 				            <!-- <th>Id</th> -->
-				            <th name="name">Element</th>
 				            <th name="nrc">NRC</th>
-				            <th name="due_date">Due Date</th>
-				            <th name="status">Status</th>
+				            <th name="concept">Concept</th>
+				            <th name="price">Price</th>
+				            <th name="available">Due date</th>
+				            <th name="action">Action</th>
 				          </tr>
 				        </thead>
-			        	<tbody>
-			            	<% @SIPS.each_with_index do |possST,indexT| %>
+				        <tbody>
+				          <% @shoptG.each do |shopT| %>
+				          	<% shopT.each do |minishopT| %>
 					          <tr>
-					            <td><%= possST['name'] %></td>
-					            <td><%= possST['nrc'] %></td>
-					            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
-					            <td id="Tstatus" ><span class="<%= @statusS[indexT][:class]%>"><%= @statusS[indexT][:status]%></span></td>
+					            <td style="display:none;"><%= minishopT['id'] %></td>
+					            <td><%= minishopT['nrc'] %></td>
+					            <td id="nameE"><%= minishopT['name'] %></td>
+					            <td><%= minishopT['price'] %></td>
+					            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
+
+					            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
 					          </tr>
-			        		<% end %>
-			        	</tbody>
-			        </table>
-	      		</div>
-	      		<!-- /.box-body -->
-	      		<div class="box-footer clearfix">
-			        <ul class="pagination pagination-sm no-margin pull-right">
-			          <li><a href="#">&laquo;</a></li>
-			          <li><a href="#">1</a></li>
-			          <li><a href="#">2</a></li>
-			          <li><a href="#">3</a></li>
-			          <li><a href="#">&raquo;</a></li>
-			        </ul>
-	      		</div>
-	    	</div>
+					        <% end %>
+				        <% end %>
+				        </tbody>
+				        </table>
+				      </div>
+				      <!-- /.box-body -->
+				      <div class="box-footer clearfix">
+				        <ul class="pagination pagination-sm no-margin pull-right">
+				          <li><a href="#">&laquo;</a></li>
+				          <li><a href="#">1</a></li>
+				          <li><a href="#">2</a></li>
+				          <li><a href="#">3</a></li>
+				          <li><a href="#">&raquo;</a></li>
+				        </ul>
+				      </div>
+				    </div>
+				</div>
+			</div>
+				    
+		    <!-- /.box -->
+		    <div class="row">
+		    	<div class="col-lg-12 col-xs-12">
+		    		<div class="box">
+				      <div class="box-header" style="background-color:rgba(243, 156, 18, 0.58);font-weight:bold;">
+				        <h3 class="box-title">Available Services in Auction</h3>
+				        <div class="box-tools pull-right">
+				          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+				          </button>
+
+				          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+				        </div>
+				        
+				      </div>
+				      <!-- /.box-header -->
+				      <div class="box-body no-padding">
+				        <table class="table responsive" id="table3">
+				        <thead>
+				          <tr>
+				            <!-- <th>Id</th> -->
+				            <th name="nrc">NRC</th>
+				            <th name="concept">Concept</th>
+				            <th name="price">Price</th>
+				            <th name="available">Due date</th>
+				            <th name="action">Action</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+				          <% @shoptS.each do |shopT| %>
+				          	<% shopT.each do |minishopT| %>
+					          <tr>
+					            <td style="display:none;"><%= minishopT['id'] %></td>
+					            <td><%= minishopT['nrc'] %></td>
+					            <td id="nameE"  ><%= minishopT['name'] %></td>
+					            <td><%= minishopT['price'] %></td>
+					            <td><%= (minishopT['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
+
+					            <td><button type="button" onclick="joinA(<%= minishopT['id'] %>,<%= minishopT['price']%>,<%=minishopT['auctioneers_number']%>,<%= minishopT['nrc'] %>,'<%= minishopT['name'] %>')" class="badge bg-green">Bid</button></td>
+					          </tr>
+					        <% end %>
+				        <% end %>
+				        </tbody>
+				        </table>
+				      </div>
+				      <!-- /.box-body -->
+				      <div class="box-footer clearfix">
+				        <ul class="pagination pagination-sm no-margin pull-right">
+				          <li><a href="#">&laquo;</a></li>
+				          <li><a href="#">1</a></li>
+				          <li><a href="#">2</a></li>
+				          <li><a href="#">3</a></li>
+				          <li><a href="#">&raquo;</a></li>
+				        </ul>
+				      </div>
+				    </div>
+		    	</div>
+		    </div>
+				   	        
+		</div>
+		<div class="col-lg-3">
+			<div class="row">
+				<div class="col-lg-12 col-xs-12">
+					<div class="box">
+						<div class="box-header" id="infoAuctHeader" style="font-weight:bold;color:white">
+					        <h3 class="box-title">Auction Info</h3>
+					        <div class="box-tools pull-right">
+					          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+					          </button>
+
+					          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					        </div>
+				      	</div>
+				      	<div class="box-body no-padding">
+				      		<div class="box box-info" id="nDS" style="visibility: visible;border-top-color:#9e8d8b;width:85%;left:6.25%;margin-top:10px">
+							  <div class="box-header with-border" style="background-color:#9e8d8b;color:#fff">
+							    <h3 class="box-title" style="color:white;">No Data Selected</h3>
+							  </div>
+							</div>
+							<div class="box box-info" id="auctioning" style="display:none;border-top-color:#fff;width:85%;left:6.25%;margin-top:10px">
+								
+							</div>
+							<div class="box box-info" id="budIns" style="display:none;border-top-color:#dd4b39;width:85%;left:6.25%;margin-top:10px">
+							  <div class="box-header with-border" class="blink_me" style="background-color:#dd4b39;color:#fff">
+							    <h3 class="box-title" style="color:white;">Current budget insufficient</h3>
+							  </div>
+							</div>  
+				      	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="row">
+				<div class="col-lg-12 col-xs-12">
+					<div class="box">
+			      		<div class="box-header" style="background-color:#3c8dbc;color:white;font-weight:bold;">
+			        		<h3 class="box-title">Goods Auctions Status</h3>
+			        		<div class="box-tools pull-right">
+			         			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+			          			</button>
+
+			          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+			        		</div>
+			     		</div>
+			      		<!-- /.box-header -->
+			      		<div class="box-body no-padding">
+			        		<table class="table responsive">
+			        			<thead>
+						          <tr>
+						            <!-- <th>Id</th> -->
+						            <th name="element">Element</th>
+						            <th name="nrc">NRC</th>
+						            <th name="created_at">Due Date</th>
+						            <th name="status">Status</th>
+						          </tr>
+			        			</thead>
+						        <tbody>
+						         	<% @SIPG.each_with_index do |possST,indexTg| %>
+							          	<tr>
+								            <td><%= possST['name'] %></td>
+								            <td><%= possST['nrc'] %></td>
+								            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+								            <td id="Tgstatus"><span class="<%= @statusG[indexTg][:class]%>"><%= @statusG[indexTg][:status]%></span></td>
+							          	</tr>
+						        	<% end %>
+						        </tbody>
+			        		</table>
+			      		</div>
+			      		<!-- /.box-body -->
+			     		<div class="box-footer clearfix">
+					        <ul class="pagination pagination-sm no-margin pull-right">
+					          <li><a href="#">&laquo;</a></li>
+					          <li><a href="#">1</a></li>
+					          <li><a href="#">2</a></li>
+					          <li><a href="#">3</a></li>
+					          <li><a href="#">&raquo;</a></li>
+					        </ul>
+			      		</div>
+			    	</div>
+				</div>
+				
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-xs-12">
+					<div class="box">
+			      		<div class="box-header" style="background-color:#f39c12;color:white;font-weight:bold;">
+			        		<h3 class="box-title">Services Auctions Status</h3>
+			        		<div class="box-tools pull-right">
+			          			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+			          			</button>
+			          			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+			        		</div>
+			      		</div>
+			      		<!-- /.box-header -->
+			      		<div class="box-body no-padding">
+					        <table class="table responsive">
+						        <thead>
+						          <tr>
+						            <!-- <th>Id</th> -->
+						            <th name="name">Element</th>
+						            <th name="nrc">NRC</th>
+						            <th name="due_date">Due Date</th>
+						            <th name="status">Status</th>
+						          </tr>
+						        </thead>
+					        	<tbody>
+					            	<% @SIPS.each_with_index do |possST,indexT| %>
+							          <tr>
+							            <td><%= possST['name'] %></td>
+							            <td><%= possST['nrc'] %></td>
+							            <td><%= (possST['due_date'].to_time).strftime('%A %b %d %Y at %I:%M %Z %p ') %></td>
+							            <td id="Tstatus" ><span class="<%= @statusS[indexT][:class]%>"><%= @statusS[indexT][:status]%></span></td>
+							          </tr>
+					        		<% end %>
+					        	</tbody>
+					        </table>
+			      		</div>
+			      		<!-- /.box-body -->
+			      		<div class="box-footer clearfix">
+					        <ul class="pagination pagination-sm no-margin pull-right">
+					          <li><a href="#">&laquo;</a></li>
+					          <li><a href="#">1</a></li>
+					          <li><a href="#">2</a></li>
+					          <li><a href="#">3</a></li>
+					          <li><a href="#">&raquo;</a></li>
+					        </ul>
+			      		</div>
+			    	</div>
+				</div>
+				
+			</div>	
+	    	<!-- /.box -->    
+			    	
 	    	<!-- /.box -->            
 		</div>
 	</div>	
 </section>
+
 <script type="text/javascript">
 	$('#prodBought').delay(3000).fadeOut();
 </script>
