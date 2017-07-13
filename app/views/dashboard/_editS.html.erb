@@ -26,6 +26,63 @@ $(function() {
   }); //AJAX to energy calculation module
 });
 </script>
+
+
+<section class="content"> 
+<% if @pendings.length > 0 %>
+    <div class="box" id="pendingBox">
+      <div class="box-header" style="background-color:#ff944d;font-weight:bold;">
+          <h3 class="box-title">Pending Loans</h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" onclick="minimize2()" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+
+          </div>
+      </div>
+        <!-- /.box-header -->
+        
+      <div class="box-body no-padding">
+          <table class="table responsive" id="pendingTable">
+            <thead>
+              <tr>
+                  <!-- <th>Id</th> -->
+                  <th name="Subject">Subject</th>
+                  <th name="NRC">NRC</th>
+                  <th name="Student_from">Student from</th>
+                  <th name="Student_to">Student to</th>
+                  <th name="observations">Observations</th> 
+                  <th name="Amount">Amount</th>
+                  <th name="Date">Date</th>
+                  <th name="Approve">Action</th>
+                  <th name="Reject">Action 2</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% @pendings.each_with_index do |row, index| %>
+                <tr id="<%= 'Prow'+row[:transaction].id.to_s %>">
+                    <td style="display:none;"><%= row['id'] %></td>
+                    <td><%= row[:subject] %></td>
+                    <td><%= row[:transaction].nrc %></td>
+                    <td><%= row[:user_from] %></td>
+                    <td><%= row[:user_to] %></td>
+                    <td><%= row[:transaction].observations %></td>
+                    <td><%= row[:transaction].amount %></td>
+                    <td><%= row[:transaction].created_at.to_time.strftime('%A %b %d %Y at %I:%M %Z %p') %></td>
+                    <td><button type="button" onclick="ApproveReject(<%= row[:transaction].id %>, true)" class="badge bg-green">Approve</button></td>
+                    <td><button type="button" onclick="ApproveReject(<%= row[:transaction].id %>, false)" class="badge bg-red">Reject</button></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        
+        
+        <!-- /.box-body -->
+    </div>
+
+<% end %>
+
+
 <div class="row"> 
   <h2 style="align-self: center;"></h2>
   <div class="col-md-8" style="padding-left:25%" >
@@ -126,3 +183,66 @@ $(function() {
     </tr>
   </thead>
 </table>
+
+
+<script type="text/javascript">
+  var count = $('#pendingTable tr').length;
+  function ApproveReject(id,flag){
+    
+    $.ajax({
+      type: 'GET',
+      url: 'approve_reject_transfer',
+      data: {id:id, flag:flag},
+      success: function(){
+        count--;
+        console.log(count)
+        if(count > 1){
+          $('#Prow'+id).fadeOut();
+        }else{
+          $('#pendingBox').fadeOut();
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("There was a problem. Please try again or inform the admin.");
+       
+      }
+    });
+    
+
+  }
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/paging.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+        $('#pendingTable').paging({limit:5});
+    });
+</script>
+<style type="text/css">
+  .paging-nav {
+    text-align: right;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+  }
+
+  .paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #f5f5ef;
+    color: #808080;
+    border-radius: 3px;
+    border-style: solid;
+    border-width:1px;
+    border-color: #d9d9d9;
+  }
+
+  .paging-nav .selected-page {
+    background: #e0e0d1;
+    font-weight: bold;
+  }
+
+</style>

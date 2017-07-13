@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name %>,</h1>
+    <p>
+    	There is a new transaction request from <%= @pendings[:user_from] %> to  <%= @pendings[:user_to] %> for  <%= @pendings[:transaction].amount %> bacs.
+    	<br>
+    	Do you want to <a href="<%= @approve_url+'id=#{@pendings[:transaction].id}' %>" style="color: green">Approve</a> or <a href="<%= @reject_url+'id=#{@pendings[:transaction].id}' %>" style="color: red">Reject</a> it?
+
+    </p>
+
+    <p>Have a great day!</p>
+
+  </body>
+</html>

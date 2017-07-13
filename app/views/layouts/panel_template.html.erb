@@ -112,20 +112,17 @@ $(function() {
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning" id="numNotif">0</span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="width: 500px">
               <li class="header" id="numNotifMsg">You have 0 notifications</li>
               <li>
                 <!-- Inner Menu: contains the notifications -->
                 <ul class="menu">
                   <li id="addNotif"><!-- start notification -->
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                    </a>
                   </li>
                   <!-- end notification -->
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
+              <li class="footer"><a href="<%= dashboard_notifications_path %>" onclick="mark_all_as_read()">View all</a></li>
             </ul>
           </li>
           
@@ -382,40 +379,57 @@ $(function() {
     </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-  notifications = $("[data-behavior='notifications']");
-
-  if (notifications.length > 0) {
-    setup()
+    function mark_all_as_read() {
+      console.log("entrooo 2")
+      $.ajax({
+        type: 'GET',
+        url: '/notifications/mark_all_as_read'
+        //success: setup()
+      });
+      $("#numNotifMsg").html("You have 0 notifications")
+      $("#numNotif").html(0)
+  }
+    function mark_as_read(notif_id) {
+      $.ajax({
+        type: 'GET',
+        url: '/notifications/mark_as_read',
+        data: {id: notif_id}
+      });
   }
 
-  function setup() {
-
+    function setup() {
     $.ajax({
         type: 'GET',
         url: '/notifications.json',
         dataType: 'JSON',
         success: function(data){
-          console.log("notificaciones",data)
-          //items = data.map("<a href='#'><i class='fa fa-users text-aqua'></i>"++"</a>");
           items = data.map(function(x){
-            return "<a href='"+x.url+"'><i class='fa fa-users text-aqua'></i>"+x.msg+"</a>"
+            return "<a href='"+x.url+"' onclick='mark_as_read("+x.id+")'><i class='"+x.icon+"'></i>"+x.msg+"</a>"
           });
-          
           $("#addNotif").html(items)
           $("#numNotif").html(data.length)
-          $("#numNotifMsg").html("You have "+data.length+" notifications")
-
+          if (data.length > 0) {
+            $("#numNotifMsg").html("<b>You have "+data.length+" notifications <a onclick='mark_all_as_read()' style='float:right;'>Mark all as read</a></b>")
+          }
+          else {$("#numNotifMsg").html("You have 0 notifications")}
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Please check your data");           
         }
       }); 
-
   }
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  notifications = $("[data-behavior='notifications']");
+  //setInterval(function() {
+    if (notifications.length > 0) { setup() }
+  //}, 30000)
 
 } );
-    
+
+
 
 </script>
 

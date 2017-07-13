@@ -15,6 +15,21 @@ class DashboardController < ApplicationController
       @users = User.where(teacher: '0')
       @subJ = Subject.connection.select_all("SELECT name,created_at from subjects order by name;")
       # render 'studentsHandler'
+      nrcs = SubjectNrc.where(user_id: current_user.id) #subject.name and user.whatever
+      query = "( nrc= " + nrcs.first.nrc.to_s
+      nrcs.each do |nrc|
+        query += " or nrc=" + nrc.nrc.to_s
+      end
+      query += ") and auth=0 and user_id!=#{current_user.id} and user_to!=#{current_user.id}"
+      transactions = Transaction.where(query)
+      @pendings = []
+      transactions.each do |t|
+        subj = Subject.where(id: SubjectNrc.where(nrc: t.nrc).first.subject_id).first
+        user_to = User.where(id: t.user_to).first
+        user_from = User.where(id: t.user_id).first
+        @pendings.append({subject: subj.name, user_to: "#{user_to.name} #{user_to.last_name}", user_from: "#{user_from.name} #{user_from.last_name}", transaction: t})
+      end
+    
     else
       render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found 
     end
@@ -40,6 +55,24 @@ class DashboardController < ApplicationController
     @users = User.where(teacher: '0')
     render :json => @users
   end
+
+  def approve_reject_transfer
+  if params[:flag]=='true'
+    #puts 'Approve'
+    t = Transaction.update(params[:id], auth: 2)
+    UserSubject.connection.execute("Update user_subjects SET budget = budget-#{t.amount} WHERE(user_id=#{t.user_id} and subject_id=#{t.nrc});")
+    UserSubject.connection.execute("Update user_subjects SET budget = budget+#{t.amount} WHERE(user_id=#{t.user_to} and subject_id=#{t.nrc});")
+    User.connection.execute("Update users SET saldo=saldo-#{t.amount} WHERE id=#{t.user_id};")
+    User.connection.execute("Update users SET saldo=saldo+#{t.amount} WHERE id=#{t.user_to};")
+    Notification.create!({recipient_id: t.user_id, actor_id: current_user.id, action: "approved", secondactor_id: t.user_to, notifiable: t})
+    Notification.create!({recipient_id: t.user_to, actor_id: t.user_id, action: "tranfer", notifiable: t, secondactor_id: t.user_to})
+  else
+    #puts 'Reject'
+    t = Transaction.update(params[:id], auth: 1)
+    Notification.create!({recipient_id: t.user_id, actor_id: current_user.id, action: "rejected", secondactor_id: t.user_to, notifiable: t})
+    Notification.create!({recipient_id: t.user_to, actor_id: current_user.id, action: "rejected", secondactor_id: t.user_to, notifiable: t})
+  end
+end
 
   def editClasses
     #@out = SubjectNrc.joins(Subject.name) #funciona pero no une nada
@@ -182,14 +215,16 @@ class DashboardController < ApplicationController
   def approve_reject_loan
     if params[:flag]=='true'
       #puts 'Approve'
-      StatusLoan.update(params[:id], loan_stat: 2)
+      loan = StatusLoan.update(params[:id], loan_stat: 2)
       StatusLoan.update(params[:id], starting_in: DateTime.now.next_week)
       Transaction.create!({:user_id=>current_user.id, :user_to =>params[:student_id], :amount =>params[:amount], :observations =>params[:type_name], :nrc =>params[:nrc]})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+params[:student_id]+" and subject_id="+params[:nrc]+");")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+params[:student_id]+";")
+      Notification.create!({recipient_id: params[:student_id], actor_id: current_user.id, action: "approved", notifiable: loan, secondactor_id: params[:student_id]})
     else
       #puts 'Reject'
-      StatusLoan.update(params[:id], loan_stat: 1)
+      loan = StatusLoan.update(params[:id], loan_stat: 1)
+      Notification.create!({recipient_id: params[:student_id], actor_id: current_user.id, action: "rejected", notifiable: loan, secondactor_id: params[:student_id]})
     end
   end
 
@@ -199,6 +234,43 @@ class DashboardController < ApplicationController
   end
 
   # For everyone:
+  def notifications
+    notifications = Notification.where(recipient_id: current_user.id)
+    paths = {"Offer" => "shopping_student",
+    "Auction" => "auction_student",
+    "Transaction" => "historicalTransactions",
+    "StatusLoan_true" => "loans_teacher",
+    "StatusLoan_false" => "loans_student"
+    }
+    @info_array = []
+    notifications.each do |notification|
+      msg = "#{notification.actor.name} #{notification.actor.last_name} #{notification.action} ";
+      if notification.notifiable_type == "StatusLoan"
+        url = paths["#{notification.notifiable_type}_#{notification.recipient.teacher}"]
+        if notification.action == "wants to lend"
+          msg += "#{notification.notifiable.amount} bacs"
+        else
+          msg += "the loan for #{notification.notifiable.amount} bacs"
+        end
+      else
+        url = paths[notification.notifiable_type]
+        if notification.notifiable_type == "Offer" || notification.notifiable_type == "Auction"
+          msg += "#{notification.notifiable.name}"
+        else #if it is transaction
+          if notification.action == "tranfer"
+            msg += "you #{notification.notifiable.amount} bacs"
+          elsif notification.action == "wants to tranfer"
+            msg += "#{notification.notifiable.user_to} #{notification.notifiable.amount} bacs"
+            # No funcionara bien porque user_to es una id
+          else
+            msg += "the transaction from #{notification.recipient.name} #{notification.recipient.last_name} to #{notification.secondactor.name} #{notification.secondactor.last_name} for #{notification.notifiable.amount} bacs"
+          end
+        end
+      end
+      @info_array.append({:nrc => notification.notifiable.nrc,:date => notification.created_at, :msg => msg, :url => url})
+    end
+  end
+
   def panel
     if current_user.teacher
       @count = SubjectNrc.where(:user_id => current_user.id).count
@@ -334,9 +406,11 @@ class DashboardController < ApplicationController
  def newTransaction
     params[:student].each_with_index do |user, i|
     #user = params[:student]
-      Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
+      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "transfer", notifiable: t, secondactor_id: user})
+      #Ojoooo esta transferencia seguro tiene mensaje raro
     end
   end
 
@@ -354,7 +428,7 @@ class DashboardController < ApplicationController
     students = UserSubject.connection.select_all("SELECT user_id FROM user_subjects where subject_id="+params[:nrc]+";")
     producto = Offer.create!({:user_id=>current_user.id,:name =>params[:name], :quantity =>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :offer_type => tipo})
     students.each do |student|
-      Notification.create!({recipient_id: student["user_id"], actor_id: current_user.id, action: "added", notifiable: producto})
+      Notification.create!({recipient_id: student["user_id"], actor_id: current_user.id, action: "added", notifiable: producto, secondactor_id: student["user_id"]})
     end
   end
 
@@ -520,12 +594,11 @@ class DashboardController < ApplicationController
       where(u.user_id="+current_user.id.to_s+" and n.nrc = u.subject_id and n.subject_id = s.id and s.name = '"+params[:subject]+"');")
     nrc_u = nrc[0]['nrc'].to_s
     params[:student].each_with_index do |user, i|
-    #user = params[:student]
-      Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
-      UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
-      UserSubject.connection.execute("Update user_subjects SET budget = budget-"+params[:amount]+" WHERE(user_id="+current_user.id.to_s+" and subject_id="+nrc_u+");")
-      User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
-      User.connection.execute("Update users SET saldo=saldo-"+params[:amount]+" WHERE id="+current_user.id.to_s+";")
+      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      teacher = SubjectNrc.where(nrc: t.nrc).first.user_id
+      Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
+      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
+      UserMailer.transfer_request(current_user, t).deliver
     end
   end
 
@@ -624,7 +697,9 @@ class DashboardController < ApplicationController
     puts n
     feeVal= (params[:amount].to_i*(itr*((1+itr)**n))/(((1+itr)**n)-1)).ceil
     puts feeVal
-    StatusLoan.create!({:student_id=>current_user.id, :nrc=>params[:nrc], :loan_stat=>0,:type_id =>params[:loan_id], :amount =>params[:amount], :next_payment => feeVal})
+    loan = StatusLoan.create!({:student_id=>current_user.id, :nrc=>params[:nrc], :loan_stat=>0,:type_id =>params[:loan_id], :amount =>params[:amount], :next_payment => feeVal})
+    teacher = SubjectNrc.where(nrc: loan.nrc).first.user_id
+    Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to lend", secondactor_id: teacher, notifiable: loan})
   end
 
   def payAll_Loan
@@ -645,7 +720,7 @@ class DashboardController < ApplicationController
 
     StatusLoan.update(status_row['id'], loan_stat: 3)
     StatusLoan.update(status_row['id'], current_fee: loan_row['fees'])
-
+    Notification.create!({recipient_id: teacher, actor_id: current_user.id, secondactor_id: teacher, action: "paid", notifiable: loan})
   end
 
   private

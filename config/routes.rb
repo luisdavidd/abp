@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'dashboard/panel'
+  get 'dashboard/notifications'
   get 'dashboard/editp'
   get 'dashboard/get_myskin', to: 'dashboard#get_myskin'
   post 'dashboard/get_myskin'
@@ -43,6 +44,7 @@ Rails.application.routes.draw do
   get 'dashboard/student_historics'
   get 'dashboard/userTransactions', to: 'dashboard#userTransactions'
   get 'dashboard/transfer'
+  get 'dashboard/approve_reject_transfer'
   get 'dashboard/newProduct'
   get 'dashboard/newAuction'
   get 'dashboard/createnewClass'
@@ -61,7 +63,12 @@ Rails.application.routes.draw do
   	get 'dashboard/panel', :to => 'devise/registrations#edit', :as => :user_root
   end
 
-  resources :notifications
+  resources :notifications do
+    collection do
+      get :mark_as_read
+      get :mark_all_as_read
+    end
+  end
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "home#index"
