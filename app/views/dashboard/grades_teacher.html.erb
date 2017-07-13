@@ -7,6 +7,9 @@
 <link rel="stylesheet" href="plugins/select2/select2.min.css">
 <script src="plugins/select2/select2.full.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.dataTables.min.css">
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+
 <script type="text/javascript">
 $(function() {
   $.ajax({ 
@@ -17,6 +20,8 @@ $(function() {
       dictColors = [{'skin-red':'#dd4b39','skin-red-light':'#dd4b39','skin-black':'#fff','skin-black-light':'#fff','skin-blue':'#3c8dbc','skin-blue-light':'#3c8dbc','skin-purple':'#605ca8','skin-purple-light':'#605ca8','skin-green':'#00a65a','skin-green-light':'#00a65a','skin-yellow':'#f39c12','skin-yellow-light':'#f39c12'}]
       $('#bHeader').css('background-color',dictColors[0][data[0]['skin']]);
       $('#bInfo').css('border-top-color',dictColors[0][data[0]['skin']])
+      $('#CutHeader').css('background-color',dictColors[0][data[0]['skin']]);
+      $('#CutInfo').css('border-top-color',dictColors[0][data[0]['skin']])
     } 
   }); //AJAX to energy calculation module
 });
@@ -45,28 +50,64 @@ $(function() {
           </div>
           <div id="Inputs" style="visibility:hidden">
             <div class="col-md-5" style="padding-bottom:0%">
-              <label>Exam Products</label>
-              <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple"><option></option></select>
-              <label style="padding-top:2%">Lab Products</label>
-              <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple"><option></option></select>
+              <label>Select Group</label>
+              <select id="groups" class="form-control" style="width: 100%;height:34px" required><option></option></select>
+              <div class="row" style="padding-top:4%">
+                <div class="col-md-6" style="padding-bottom:0%">
+                  <button id="NewGroup" type="button" class="btn btn-primary btn-lg btn-block" onclick="showNew()" style="">New</button>
+                </div>
+                <div class="col-md-6" style="padding-bottom:0%">
+                  <button id="DeleteGroup" type="button" class="btn btn-primary btn-lg btn-block" onclick="DeleteGroup()" style="">Delete</button>
+                </div>
+              </div>
             </div>
-            <div class="col-md-1" style="padding-bottom:0%">
-              <label>Quantity</label>
+            <div class="col-md-2" style="padding-bottom:0%">
+              <label>Lab Items</label>
               <input id="ExamQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
-              <br>
+              <label>Exam Items</label>
               <input id="LabQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
             </div>            
-            <div class="col-md-1" style="padding-bottom:0%">
-              <label>Total Price</label>
+            <div class="col-md-2" style="padding-bottom:0%">
+              <label>Lab Total Price</label>
               <input id="ExamP" type="text" class="form-control" style="width: 100%" value="0" readonly>
-              <br>
+              <label>Exam Total Price</label>
               <input id="LabP" type="text" class="form-control" style="width: 100%" value="0" readonly>
             </div>
 
           </div>
         </div>
       </div>
-    </div> 
+    </div>
+
+    <div class="box box-info" id="CutInfo" style="display:none">
+      <div class="box-header with-border" id="CutHeader" style="color:#fff">
+        <div class="form-group">
+          <div class="col-md-2" style="padding-bottom:0%">
+            <label>Name</label>
+            <input id="GroupName" type="text" class="form-control" style="width: 100%" placeholder="New Auction"><option></option>
+          </div>
+          <div class="col-md-3" style="padding-bottom:0%">
+            <label>Exam Products</label>
+            <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple"><option></option></select>
+          </div>
+          <div class="col-md-1" style="padding-bottom:0%">
+            <label>E. Total</label>
+            <input id="ETotal" type="number" class="form-control" style="width: 100%" value="0">
+          </div>
+          <div class="col-md-3" style="padding-bottom:0%">
+            <label style="">Lab Products</label>
+            <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple"><option></option></select>
+          </div>
+          <div class="col-md-1" style="padding-bottom:0%">
+            <label>L. Total</label>
+            <input id="LTotal" type="number" class="form-control" style="width: 100%" value="0">
+          </div>          
+          <div class="col-md-2" style="padding-bottom:0%;padding-top:1%">
+            <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="" onclick="NewGroup()">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-lg-12">
@@ -76,7 +117,6 @@ $(function() {
               <th name="id"></th>
               <th name="name">Name</th>
               <th name="last_name">Last Name</th>
-              <th name="email">Email</th>
               <th name="saldo">Budget</th> 
               <th name="codigo">Code</th> 
               <th name="examP">Exam Products</th> 
@@ -95,6 +135,7 @@ $(function() {
 <script>
 var tableS
 tableS = $('#tablaS').DataTable( {
+    responsive: true,
     keys: true,
     pageLength: 50,
     columnDefs: [
@@ -162,7 +203,7 @@ var c_error = 0;
                 for(j = 0; j < stdNames[i_subj[k]][i_nrc[i]].length; j++){
                   if (stdIDs[i_subj[k]][i_nrc[i]][j]) {
                     s = stdNames[i_subj[k]][i_nrc[i]][j]
-                    tableS.row.add([stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[2],s[3],s[4],'',0,'',0 ]).draw(false);
+                    tableS.row.add([stdIDs[i_subj[k]][i_nrc[i]][j], s[0],s[1],s[3],s[4],'',0,'',0 ]).draw(false);
                     ids_students.push(stdIDs[i_subj[k]][i_nrc[i]][j])
                   }                
                 }
@@ -176,13 +217,21 @@ var c_error = 0;
           url: 'getGoods_at_NRC',
           data: {nrc: $('#nrc').select2('data')[0].text},
             success: function(data){
-              data_goods = []
+              data_goods = [];
+              group_list = [];
               console.log('data',data['products'])
-              data_students = data['b_products']
-              data_products = data['products']
+              data_students = data['b_products'];
+              data_products = data['products'];
+              groups_info = data['groups'];
+              data_groups = [];
+
               for(i = 0; i < data['products'].length; i++){
-                  data_goods.push({id: i, text: data['products'][i]['name']})
-                }
+                data_goods.push({id: i, text: data['products'][i]['name']})
+              }
+
+              for(j = 0; j < data['groups'].length; j++){
+                data_groups.push({id: j, text: data['groups'][j]['group_name']});
+              }
 
               $("#exam").html('<option></option>');
               $("#exam").select2({
@@ -193,6 +242,11 @@ var c_error = 0;
               $("#lab").select2({
                 data: data_goods,
                 placeholder: "Select the lab points"
+              });
+
+              $("#groups").select2({
+                data: data_groups,
+                placeholder: "Select the group"
               });
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -207,35 +261,76 @@ var c_error = 0;
           $("#Inputs").css('visibility', 'visible');
 
           $("#exam").change(function() { 
-                products_selected_id = []
-                products_selected_price = []
                 total = 0
                 entrada = $("#exam").val()
                 if (entrada==null) {entrada = []}
                 for (var i = 0; i < entrada.length; i++) {
-                  products_selected_id.push(data_products[entrada[i]]['id'])
-                  products_selected_price.push(data_products[entrada[i]]['price'])
                   total = total + data_products[entrada[i]]['price']
                 }
-                $("#ExamQ").val(entrada.length)
-                $("#ExamP").val(total)
-                calcular(ids_students, data_students, products_selected_id, products_selected_price, total, 6)
+
+                $("#ETotal").val(total)
+                
           });
 
-          $("#lab").change(function() { 
-                products_selected_id = []
-                products_selected_price = []
+          $("#lab").change(function() {
                 total = 0
                 entrada = $("#lab").val()
                 if (entrada==null) {entrada = []}
                 for (var i = 0; i < entrada.length; i++) {
-                  products_selected_id.push(data_products[entrada[i]]['id'])
-                  products_selected_price.push(data_products[entrada[i]]['price'])
                   total = total + data_products[entrada[i]]['price']
                 }
-                $("#LabQ").val(entrada.length)
-                $("#LabP").val(total)
-                calcular(ids_students, data_students, products_selected_id, products_selected_price, total, 8)
+
+                $("#LTotal").val(total)
+                //console.log(ids_students)
+          });
+
+          $("#groups").change(function() {
+                ind = $("#groups").val();
+                id = groups_info[ind]['id'];
+                console.log(groups_info[ind]['id'])
+                var totalL = 0;
+                var totalE = 0;
+                var Lproducts_selected_id = [];
+                var Lproducts_selected_price = [];
+                var Eproducts_selected_id = [];
+                var Eproducts_selected_price = [];
+                $.ajax({
+                  type: 'GET',
+                  url: 'getProducts_byGroup',
+                  data: {id:id},
+                  success: function(data){
+                    totalL = data['lab_total']
+                    totalE = data['exam_total']
+                    $("#LabP").val(totalL)
+                    $("#ExamP").val(totalE)
+
+                    if (data['lab_items']!=null) {
+                      for (var i = 0; i < data['lab_items'].length; i++) {
+                        Lproducts_selected_id.push(data['lab_items'][i]['id'])
+                        Lproducts_selected_price.push(data['lab_items'][i]['price'])
+                      }
+                      $("#LabQ").val(data['lab_items'].length)
+                    }else{
+                      $("#LabQ").val(0)
+                    }
+
+                    if (data['exam_items']!=null) {
+                      for (var i = 0; i < data['exam_items'].length; i++) {
+                        Eproducts_selected_id.push(data['exam_items'][i]['id'])
+                        Eproducts_selected_price.push(data['exam_items'][i]['price'])
+                      }
+                      $("#ExamQ").val(data['exam_items'].length)
+                    }else{
+                      $("#ExamQ").val(0)
+                    }
+
+                    calcular(ids_students, data_students, Lproducts_selected_id, Lproducts_selected_price, totalL, 7)
+                    calcular(ids_students, data_students, Eproducts_selected_id, Eproducts_selected_price, totalE, 5)
+                      
+                  }
+                });
+                
+                
           });
         });
 
@@ -274,5 +369,72 @@ function getRandomColor() {
   return color;
 }
 
+function showNew(){
+  $('#CutInfo').show();
+}
+
+function NewGroup(){
+  lab_items = $("#lab").val()
+  exam_items = $("#exam").val()
+  lab_items_list = [];
+  exam_items_list = [];
+  lab_total = 0
+  exam_total = 0
+  if(lab_items != null){
+    for (var i = 0; i < lab_items.length; i++) {
+      lab_items_list.push(data_products[lab_items[i]]['id'])
+      //data_products[entrada[i]]['price']
+      lab_total = lab_total + data_products[lab_items[i]]['price']
+    }
+  }
+  
+  if(exam_items != null){
+    for (var i = 0; i < exam_items.length; i++) {
+      exam_items_list.push(data_products[exam_items[i]]['id'])
+      //data_products[entrada[i]]['price']
+      exam_total = exam_total + data_products[exam_items[i]]['price']
+    }
+  }  
+
+  name = $('#GroupName').val();
+  nrc = $('#nrc').select2('data')[0].text;
+
+  $.ajax({
+    type: 'GET',
+    url: 'new_product_group',
+    data: {name:name, nrc:nrc, lab_items_list:lab_items_list, exam_items_list:exam_items_list, lab_total:lab_total, exam_total:exam_total},
+    success: function(data){
+      console.log("Exito")
+      location.reload();
+    }
+  });
+}
+
+function DeleteGroup(){
+  ind = $("#groups").val();
+  id = groups_info[ind]['id'];
+  console.log("el id es "+id)
+  $.ajax({
+    type: 'GET',
+    url: 'delete_group',
+    data: {id:id},
+    success: function(data){
+      location.reload();
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown) {
+    alert("An error has ocurred");
+    }
+  });
+}
+
 
 </script>
+<style type="text/css">
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
+</style>

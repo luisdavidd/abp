@@ -1,0 +1,2 @@
+class GroupItem < ApplicationRecord
+end

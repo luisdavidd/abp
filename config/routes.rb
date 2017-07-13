@@ -49,6 +49,9 @@ Rails.application.routes.draw do
   get 'dashboard/loans_teacher'
   get 'dashboard/approve_reject_loan'
   get 'dashboard/subject_loans'
+  get 'dashboard/getProducts_byGroup'
+  get 'dashboard/new_product_group'
+  get 'dashboard/delete_group'
 
   devise_for :users
   devise_scope :user do

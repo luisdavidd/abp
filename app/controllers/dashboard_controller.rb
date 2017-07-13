@@ -138,9 +138,37 @@ class DashboardController < ApplicationController
   end
 
   def getGoods_at_NRC
+    groups = ProductGroup.connection.select_all("SELECT * from product_groups where nrc = "+params[:nrc].to_s)
     b_products = Product.connection.select_all("SELECT * from products where (nrc="+params[:nrc].to_s+" AND product_type='good');") #Bought products
     products = Product.connection.select_all("SELECT * from offers where (nrc="+params[:nrc].to_s+" AND offer_type='good');")
-    render :json => {:products => products, :b_products => b_products}
+    render :json => {:products => products, :b_products => b_products, :groups => groups}
+  end
+
+  def getProducts_byGroup
+    lab_items = Product.connection.select_all("SELECT o.* from offers as o, product_groups as pg, group_items as g where pg.id = "+params[:id].to_s+" AND g.group_id = pg.id AND g.product_id = o.id AND g.product_type = 2") 
+    exam_items = Product.connection.select_all("SELECT o.* from offers as o, product_groups as pg, group_items as g where pg.id = "+params[:id].to_s+" AND g.group_id = pg.id AND g.product_id = o.id AND g.product_type = 1")
+    row = ProductGroup.find(params[:id])
+    render :json => {:lab_items => lab_items, :exam_items => exam_items, :lab_total => row['lab_total'], :exam_total => row['exam_total']}
+  end
+
+  def delete_group
+    ProductGroup.find(params[:id]).destroy
+    GroupItem.where(group_id: params[:id]).destroy_all
+  end
+
+  def new_product_group
+    p = ProductGroup.create!({:group_name=>params[:name], :nrc =>params[:nrc], :exam_total =>params[:exam_total], :lab_total =>params[:lab_total]})
+    id = p.id
+    if params[:lab_items_list] != nil 
+      for item in params[:lab_items_list]
+        GroupItem.create!({:group_id=> id, :product_id =>item, :product_type =>2})
+      end
+    end
+    if params[:exam_items_list] != nil 
+      for item in params[:exam_items_list]
+        GroupItem.create!({:group_id=> id, :product_id =>item, :product_type =>1})
+      end
+    end
   end
 
   def loans_teacher

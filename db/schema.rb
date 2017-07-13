@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704001204) do
+ActiveRecord::Schema.define(version: 20170713072852) do
 
   create_table "auctions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 20170704001204) do
     t.datetime "updated_at",                null: false
     t.index ["offer_id"], name: "index_comments_on_offer_id", using: :btree
     t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
+  create_table "group_items", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "group_id"
+    t.integer  "product_id"
+    t.integer  "product_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "loan_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -69,6 +77,15 @@ ActiveRecord::Schema.define(version: 20170704001204) do
     t.datetime "updated_at",                             null: false
     t.integer  "nrc",                                    null: false
     t.string   "offer_type", limit: 45, default: "good", null: false
+  end
+
+  create_table "product_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "group_name"
+    t.integer  "nrc"
+    t.integer  "exam_total"
+    t.integer  "lab_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
