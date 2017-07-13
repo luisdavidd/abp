@@ -12,7 +12,7 @@ class UserMailer < ApplicationMailer
 	    subj = Subject.where(id: SubjectNrc.where(nrc: t.nrc).first.subject_id).first
         user_to = User.where(id: t.user_to).first
         user_from = User.where(id: t.user_id).first
-        @pendings.append({subject: subj.name, user_to: "#{user_to.name} #{user_to.last_name}", user_from: "#{user_from.name} #{user_from.last_name}", transaction: t})
+        @pendings = {subject: subj.name, user_to: "#{user_to.name} #{user_to.last_name}", user_from: "#{user_from.name} #{user_from.last_name}", transaction: t}
         mail(to: @user.email, subject: 'New Transaction Request')
   	end
 end
