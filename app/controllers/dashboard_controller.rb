@@ -598,7 +598,7 @@ end
       teacher = SubjectNrc.where(nrc: t.nrc).first.user_id
       Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
       Notification.create!({recipient_id: user, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
-      UserMailer.transfer_request(User.where(id: teacher), t).deliver
+      UserMailer.transfer_request(User.where(id: teacher).first, t).deliver
     end
   end
 

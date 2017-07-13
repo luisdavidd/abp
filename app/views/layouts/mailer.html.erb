@@ -8,15 +8,6 @@
   </head>
 
   <body>
-    <h1>Welcome to ABP, <%= @user.name %></h1>
-    <p>
-      You have successfully signed up to ABP,
-      your username is: <%= @user.email %>.<br>
-      We temporarily assigned you this password: <%= @user.password %> . <br><br>
-      To login to the site, just follow this link: <%= @url %>.<br>
-      Remember you can change you password anytime you want.
-    </p>
-    <h2>Thanks for joining and have a great day!</h2>
     <%= yield %>
   </body>
 </html>
