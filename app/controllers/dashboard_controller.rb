@@ -406,7 +406,7 @@ end
  def newTransaction
     params[:student].each_with_index do |user, i|
     #user = params[:student]
-      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc], :auth => 1})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
       Notification.create!({recipient_id: user, actor_id: current_user.id, action: "transfer", notifiable: t, secondactor_id: user})
@@ -415,7 +415,7 @@ end
   end
 
   def historicalTransactions
-    @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id);")
+    @dTransaction = Transaction.connection.execute("SELECT uF.name,uF.last_name, uT.name,uT.last_name, t.amount, t.observations, t.created_at FROM users as uF, users uT, transactions as t where (t.user_id="+current_user.id.to_s+" or t.user_to="+current_user.id.to_s+") and (t.user_to=uT.id and t.user_id=uF.id) and t.auth !=0;")
     #render :json => @dTransaction
   end
 

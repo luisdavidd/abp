@@ -20,7 +20,7 @@ $(function() {
   <div class="row">
     <div class="box box-info" id="transferS" style="display:none;border-top-color:#dd4b39">
       <div class="box-header with-border" style="background-color:#dd4b39;color:#fff">
-        <h3 class="box-title" style="color:white;font-weight:bold;">Transfer succesfully made!!!</h3>
+        <h3 class="box-title" style="color:white;font-weight:bold;">Transfer succesfully requested!!!</h3>
       </div>
     </div>  
     <div class="col-md-4">
@@ -64,7 +64,7 @@ $(function() {
       </div>
       <div class="box box-info" id="transfmade" style="visibility: hidden;border-top-color:#dd4b39">
         <div class="box-header with-border" style="background-color:#dd4b39;color:#fff">
-          <h3 class="box-title" style="color:white;font-weight:bold;">Transfer sucessfully made!!!</h3>
+          <h3 class="box-title" style="color:white;font-weight:bold;">Transfer sucessfully requested!!!</h3>
         </div>
       </div>
     </div>
@@ -216,7 +216,7 @@ $(function() {
           data: {amount:amount, observations:observations, student: students_id, nrc:nrc, subject:subject},
           success: function(){
               valNew = budgets[$('#subject').val()] - selectedRows.length*parseInt(amount);
-              budgets[$('#subject').val()] = valNew;
+              //budgets[$('#subject').val()] = valNew;
               $('#budget').val(valNew);
               $('#transferS').show().delay(3500).fadeOut();
               table.rows( { selected: true } ).deselect();

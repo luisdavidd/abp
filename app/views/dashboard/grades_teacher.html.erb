@@ -84,7 +84,7 @@ $(function() {
         <div class="form-group">
           <div class="col-md-2" style="padding-bottom:0%">
             <label>Name</label>
-            <input id="GroupName" type="text" class="form-control" style="width: 100%" placeholder="New Auction"><option></option>
+            <input id="GroupName" type="text" class="form-control" style="width: 100%" placeholder="Group Name"><option></option>
           </div>
           <div class="col-md-3" style="padding-bottom:0%">
             <label>Exam Products</label>
@@ -355,6 +355,7 @@ function calcular(stdIDs, data_students, products_selected_id, products_selected
       str = String(tableS.cell(fila,i_column+1).data())
       bono = Number(str.split('">').pop().split('<').shift())
       bono = bono + products_selected_price[indice_producto]*(5/total)
+      bono = bono.toFixed(2);
       tableS.cell(fila,i_column+1).data('<font color="green">' + bono + '</font>');
     }
   }  

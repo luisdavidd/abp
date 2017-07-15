@@ -7,8 +7,9 @@ class UserMailer < ApplicationMailer
 
   	def transfer_request(user, t)
 	    @user = user	    
-	    @approve_url = "acssolutions.ddns.net/dashboard/approve_reject_transfer?flag=true"
-	    @reject_url = "acssolutions.ddns.net/dashboard/approve_reject_transfer?flag=false"
+	    @approve_url = "acssolutions.ddns.net/dashboard/approve_reject_transfer?flag=true&id="+t.id.to_s
+	    @reject_url = "acssolutions.ddns.net/dashboard/approve_reject_transfer?flag=false&id="+t.id.to_s
+	    @url_normal = "acssolutions.ddns.net/dashboard/studentsHandler"
 	    subj = Subject.where(id: SubjectNrc.where(nrc: t.nrc).first.subject_id).first
         user_to = User.where(id: t.user_to).first
         user_from = User.where(id: t.user_id).first
