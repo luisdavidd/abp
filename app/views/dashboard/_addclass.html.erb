@@ -39,6 +39,24 @@
             </div>
           </div>
         </div>
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title">Database Reset</h3></div>
+          <div class="panel-body"> 
+            <div class="form-group">
+              <label>This will erase every user, class, product, auction and transaction in the database.</label>
+            </div>
+            <div class="col-xs-3" style="padding-left:0px">
+              <button class="btn btn-default" onclick="destroyDB()" style="height:37px">Reset Database</button>  
+            </div>
+            <div class="col-md-5">
+              <div class="box box-info" id="masterReset" style="visibility:hidden;border-top-color:#dd4b39;height:35px">
+                <div class="box-header with-border" style="background-color:#dd4b39;color:#fff;height:35px;padding-top:5px">
+                  <h3 class="box-title" style="color:white;font-weight:bold;">Master reset</h3>
+                </div>
+              </div> 
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-md-6">
         <div class="box">
@@ -110,20 +128,12 @@
   }
 
   function deleteC(param1,param2){
-    console.log(param1)
-    console.log(param2)
-    table = document.getElementById("classesCreat")
-    data = param1
-    table.deleteRow(param2);
-    var rowCount = table.rows.length;
-    for (var i = param2; i < rowCount.length+1; i++) {
-      table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteC("+i+",table.id)' class='badge bg-red'>Delete</button>"
-    }
+    
     $.ajax({
       type: 'GET',
-      url: 'delete_class',
-      data: {id: data},
-      success: function(data){      
+      url: 'delete_everything',
+      success: function(data){
+        window.location.reload();    
       }
     });      
        

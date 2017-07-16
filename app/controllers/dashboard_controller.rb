@@ -117,11 +117,36 @@ end
     Product.where(nrc: nrc).destroy_all
     StatusLoan.where(nrc: nrc).destroy_all
 
+    ProductGroup.where(nrc: nrc).find_each do |row|
+      GroupItem.where(group_id: row['id']).destroy_all
+    end
+
+    ProductGroup.where(nrc: nrc).destroy_all
+
     UserSubject.where(subject_id: nrc).find_each do |row|
       User.connection.execute("Update users SET saldo=saldo-"+row['budget'].to_s+" WHERE id="+row['user_id'].to_s+";")
     end
 
     UserSubject.where(subject_id: nrc).destroy_all
+
+  end
+
+  def delete_everything
+
+    User.where(superadmin: 0).destroy_all
+
+    SubjectNrc.destroy_all
+    Auction.destroy_all
+    Offer.destroy_all
+    Product.destroy_all
+    StatusLoan.destroy_all
+    UserSubject.destroy_all
+
+    Notification.destroy_all
+    Transaction.destroy_all
+    Subject.destroy_all
+    ProductGroup.destroy_all
+    GroupItem.destroy_all
 
   end
 
@@ -634,7 +659,7 @@ end
       where(u.user_id="+current_user.id.to_s+" and n.nrc = u.subject_id and n.subject_id = s.id and s.name = '"+params[:subject]+"');")
     nrc_u = nrc[0]['nrc'].to_s
     params[:student].each_with_index do |user, i|
-      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc]})
+      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc], :auth => 0})
       teacher = SubjectNrc.where(nrc: t.nrc).first.user_id
       Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
       Notification.create!({recipient_id: user, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
@@ -759,8 +784,8 @@ end
     User.connection.execute("Update users SET saldo=saldo-"+pay.to_s+" WHERE id="+current_user.id.to_s+";")
 
     StatusLoan.update(status_row['id'], loan_stat: 3)
-    StatusLoan.update(status_row['id'], current_fee: loan_row['fees'])
-    Notification.create!({recipient_id: teacher, actor_id: current_user.id, secondactor_id: teacher, action: "paid", notifiable: loan})
+    loan = StatusLoan.update(status_row['id'], current_fee: loan_row['fees'])
+    Notification.create!({recipient_id: teacher[0]['user_id'], actor_id: current_user.id, secondactor_id: teacher[0]['user_id'], action: "paid", notifiable: loan})
   end
 
   private
