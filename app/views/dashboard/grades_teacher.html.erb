@@ -42,7 +42,7 @@ $(function() {
     <div class="box box-info" id="bInfo">
       <div class="box-header with-border" id="bHeader" style="color:#fff">
         <div class="form-group">
-          <div class="col-md-3" style="padding-bottom:0%">
+          <div class="col-md-4" style="padding-bottom:0%">
             <label>Subject</label>
             <select id="subject" class="form-control"  style="width: 100%;height:34px;" required><option></option></select>
             <label style="padding-top:2%">NRC</label>
@@ -61,19 +61,20 @@ $(function() {
                 </div>
               </div>
             </div>
+            <div class="col-md-3" style="padding-bottom:0%">
+              <label>Items Quantity</label>
+              <input id="ExamQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
+              <label>Total Price</label>
+              <input id="ExamP" type="text" class="form-control" style="width: 100%" value="0" readonly>
+            </div>     
+            <!--
             <div class="col-md-2" style="padding-bottom:0%">
               <label>Lab Items</label>
-              <input id="ExamQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
-              <label>Exam Items</label>
               <input id="LabQ" type="text" class="form-control" style="width: 100%" value="0" readonly>
-            </div>            
-            <div class="col-md-2" style="padding-bottom:0%">
               <label>Lab Total Price</label>
-              <input id="ExamP" type="text" class="form-control" style="width: 100%" value="0" readonly>
-              <label>Exam Total Price</label>
               <input id="LabP" type="text" class="form-control" style="width: 100%" value="0" readonly>
             </div>
-
+            -->
           </div>
         </div>
       </div>
@@ -82,26 +83,30 @@ $(function() {
     <div class="box box-info" id="CutInfo" style="display:none">
       <div class="box-header with-border" id="CutHeader" style="color:#fff">
         <div class="form-group">
-          <div class="col-md-2" style="padding-bottom:0%">
+          <div class="col-md-3" style="padding-bottom:0%">
             <label>Name</label>
             <input id="GroupName" type="text" class="form-control" style="width: 100%" placeholder="Group Name"><option></option>
           </div>
-          <div class="col-md-3" style="padding-bottom:0%">
-            <label>Exam Products</label>
+          <div class="col-md-5" style="padding-bottom:0%">
+            <label>Products</label>
             <select id="exam" class="form-control"  style="width: 100%;height:34px" multiple="multiple"><option></option></select>
           </div>
-          <div class="col-md-1" style="padding-bottom:0%">
-            <label>E. Total</label>
+          <div class="col-md-2" style="padding-bottom:0%">
+            <label>Total</label>
             <input id="ETotal" type="number" class="form-control" style="width: 100%" value="0">
           </div>
+          <!--
           <div class="col-md-3" style="padding-bottom:0%">
             <label style="">Lab Products</label>
             <select id="lab" class="form-control" style="width: 100%;height:34px" multiple="multiple"><option></option></select>
           </div>
+          -->
+          <!--
           <div class="col-md-1" style="padding-bottom:0%">
             <label>L. Total</label>
             <input id="LTotal" type="number" class="form-control" style="width: 100%" value="0">
-          </div>          
+          </div> 
+          -->         
           <div class="col-md-2" style="padding-bottom:0%;padding-top:1%">
             <button id="Release" type="button" class="btn btn-primary btn-lg btn-block" style="" onclick="NewGroup()">Create</button>
           </div>
@@ -119,8 +124,8 @@ $(function() {
               <th name="last_name">Last Name</th>
               <th name="saldo">Budget</th> 
               <th name="codigo">Code</th> 
-              <th name="examP">Exam Products</th> 
-              <th name="examC">Exam Grade</th> 
+              <th name="examP">Products</th> 
+              <th name="examC">Grade</th> 
               <th name="labP">Lab Products</th> 
               <th name="labC">Lab Grade</th> 
             </tr>
@@ -142,8 +147,16 @@ tableS = $('#tablaS').DataTable( {
         {
             "targets": [0],
             "visible": false,
+        },
+        {
+            "targets": [7],
+            "visible": false,
+        },
+        {
+            "targets": [8],
+            "visible": false,
         }
-    ]
+  ]
 } );
 var c_error = 0;
  $.ajax({
