@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   get 'dashboard/new_product_group'
   get 'dashboard/delete_group'
   get 'dashboard/delete_class'
+  get 'dashboard/deleteNRC'
+  
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'

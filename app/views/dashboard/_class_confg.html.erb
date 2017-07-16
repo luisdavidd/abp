@@ -76,7 +76,7 @@ table
           table.keys.disable();
           }
         }else{
-          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          var pos = currCell.index().row*4 + currCell.index().column + 1;
           table.cell( ':eq('+pos+')' ).focus();
         }
 
@@ -122,7 +122,7 @@ table
             }
           });
           // PASAR A SIGUIENTE CELDA
-          var pos = currCell.index().row*5 + currCell.index().column + 1;
+          var pos = currCell.index().row*4 + currCell.index().column + 1;
           table.cell( ':eq('+pos+')' ).focus();
     }     
  }
@@ -169,6 +169,31 @@ $('#addRow').on( 'click', function () {
     }); 
   } );
 
+  $('#deleteRow').on( 'click', function () {
+    //nrc = $("#nrc").val();
+    var pos = parseInt(currCell.selector.rows.substr(4,1))*4 + currCell.index().column;
+          
+    nrc = parseInt(table.cell( ':eq('+pos+')' ).data())
+    //console.log(column)
+    //console.log(nrc)
+    
+    $.ajax({
+      type: 'GET',
+      url: 'deleteNRC',
+      data: ({nrc: nrc}),
+      success: function(data){
+
+        // Recargue apenas se envíe (temporalmete, es para borrar el FORM y el problemilla con NRC)
+          window.location.reload();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("Please check your data");
+         
+      }
+    });
+  } );
+
+
 
   setTimeout(function(){
     $('#noticia').remove();
@@ -201,6 +226,9 @@ $('#addRow').on( 'click', function () {
             </div>
             <div class="col-xs-3" style="padding-left:0px">
               <button id="addRow" class="btn btn-default" style="height:37px">Add Course</button>  
+            </div>
+            <div class="col-xs-3" style="padding-left:0px">
+              <button id="deleteRow" class="btn btn-default" style="height:37px">Delete Course</button>   
             </div>
             <div class="col-md-5">
               <div class="box box-info" id="cCreat" style="visibility:hidden;border-top-color:#dd4b39;height:35px">

@@ -109,6 +109,22 @@ end
 
   end
 
+  def deleteNRC
+    nrc = params['nrc']
+    SubjectNrc.where(nrc: nrc).destroy_all
+    Auction.where(nrc: nrc).destroy_all
+    Offer.where(nrc: nrc).destroy_all
+    Product.where(nrc: nrc).destroy_all
+    StatusLoan.where(nrc: nrc).destroy_all
+
+    UserSubject.where(subject_id: nrc).find_each do |row|
+      User.connection.execute("Update users SET saldo=saldo-"+row['budget'].to_s+" WHERE id="+row['user_id'].to_s+";")
+    end
+
+    UserSubject.where(subject_id: nrc).destroy_all
+
+  end
+
   def update_class
     @class =  SubjectNrc.where({ :id => params[:index]})
     @user_class = UserSubject.connection.execute("UPDATE `user_subjects` SET `subject_id` = "+params[:new]+" WHERE `subject_id` = "+@class.first.nrc.to_s+";")
