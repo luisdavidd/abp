@@ -1,8 +1,8 @@
 class UserMailer < ApplicationMailer
 	def welcome_email(user)
 	    @user = user
-	    @url  = 'http://acssolutions.ddns.net/users/sign_in'
-	    mail(to: @user.email, subject: 'Welcome to ABP')
+	    @url  = 'acssolutions.ddns.net/users/sign_in'
+	    mail(to: @user.email, subject: 'Welcome to ACS')
   	end
 
   	def transfer_request(user, t)

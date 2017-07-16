@@ -1,4 +1,6 @@
 <script src="plugins/select2/select2.full.min.js"></script>
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 var names=[]; var id_names = []; var data2 = [];
@@ -138,6 +140,7 @@ $('#addRow').on( 'click', function () {
     var ext = file.value.match(/\.([^\.]+)$/)[1];
     if(ext=='csv'){
     $('#readlist').append('<input type="hidden" name="nrc" value="'+nrc+'" /> ');
+    $('#readlist').append('<input type="hidden" name="email" value="'+$('#EmailToggle').prop('checked')+'" /> ');
     $('#readlist').submit();
     $("#cCreat").css('visibility', 'visible');
     $("#cCreat").show().delay(3000).fadeOut();
@@ -152,7 +155,7 @@ $('#addRow').on( 'click', function () {
     $.ajax({
       type: 'GET',
       url: 'addClasses',
-      data: ({subject_id: subject_id, NRC: nrc}),
+      data: ({subject_id: subject_id, NRC: nrc,email:$('#EmailToggle').prop('checked')}),
       success: function(data){
         table.row.add([subject_id,$("#subject").select2("data")[0]['text'] ,data['id'],nrc]).draw(false);
 
@@ -219,8 +222,6 @@ $('#addRow').on( 'click', function () {
               <input type="number" class="form-control" id="nrc"><br>
               <label>List of students</label>
               <%= form_tag dashboard_import_path, :id => 'readlist',multipart: true do %>
-              <!-- <label for="filechoose" class="btn btn-default">Import File</label> -->
-              <!-- <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv', :style=>"visibility:hidden;" %> -->
                 <%= file_field_tag :file ,:id=>'filechoose',accept: '.csv'%><br>
               <% end %>
             </div>
@@ -229,6 +230,9 @@ $('#addRow').on( 'click', function () {
             </div>
             <div class="col-xs-3" style="padding-left:0px">
               <button id="deleteRow" class="btn btn-default" style="height:37px">Delete Course</button>   
+            </div>
+            <div class="col-xs-5" style="padding-left:0px">
+              <input id="EmailToggle" type="checkbox"  data-toggle="toggle" data-on="Send Emails" data-off="Dont send" style="padding-left:10px">
             </div>
             <div class="col-md-5">
               <div class="box box-info" id="cCreat" style="visibility:hidden;border-top-color:#dd4b39;height:35px">
@@ -257,8 +261,3 @@ $('#addRow').on( 'click', function () {
   </div>
 </div>
 
-
-<!-- <div class="alert-success alert-dismissible fade in" >
-  <button type="button" class="close" data-dismiss="alert" id="noticia" style="visibility: hidden;"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <%= flash[:notice] %>
-</div> -->

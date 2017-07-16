@@ -409,7 +409,12 @@ end
         user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+@user.id.to_s+","+nrc.to_s+",now(),now())")
         
         flash[:notice] = "Users successfully created."
-        #UserMailer.welcome_email(@user).deliver
+        if(params[:email]=="true")
+          UserMailer.welcome_email(@user).deliver
+        else
+         
+        end
+        
       end # end if !product.nil?
     end # end CSV.foreach
   end
