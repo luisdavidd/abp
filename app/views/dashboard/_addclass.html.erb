@@ -52,18 +52,20 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body no-padding">
-            <table class="table responsive">
+            <table class="table responsive" id="classesCreat">
               <thead>
                 <tr>
                   <th name="subject">Subject</th>
                   <th name="created_at">Created at</th>
+                  <th name="action">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <% @subJ.each do |enroll| %>
+                <% @subJ.each_with_index do |enroll,index| %>
                   <tr>
                     <td><%= enroll['name'] %></td>
                     <td><%= enroll['created_at'].to_time.strftime('%b %d %Y at %I:%M %Z %p') %></td>    
+                    <td><button type="button" onclick="deleteC(<%= enroll['id']%>,<%= index %>)" class="badge bg-red">Delete</button></td>
                   </tr>
                 <% end %>
               </tbody>
@@ -105,6 +107,27 @@
         alert("some error");
         }
     });
+  }
+
+  function deleteC(param1,param2){
+    console.log(param1)
+    console.log(param2)
+    table = document.getElementById("classesCreat")
+    data = param1
+    table.deleteRow(param2);
+    var rowCount = table.rows.length;
+    for (var i = param2; i < rowCount.length+1; i++) {
+      table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteC("+i+",table.id)' class='badge bg-red'>Delete</button>"
+    }
+    $.ajax({
+      type: 'GET',
+      url: 'delete_class',
+      data: {id: data},
+      success: function(data){      
+      }
+    });      
+       
+ 
   }
   
 </script>

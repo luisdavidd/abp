@@ -2,6 +2,20 @@ class DashboardController < ApplicationController
   require 'csv'
   before_action :authenticate_user!
   layout 'panel_template'
+  def delete_class
+    @subjectsTD = SubjectNrc.where(subject_id:params[:id])
+    @subjectsTD.each do |subjy|
+      UserSubject.connection.execute("DELETE FROM user_subjects where subject_id="+subjy["nrc"].to_s+";")
+      Auction.connection.execute("DELETE from auctions where nrc="+subjy["nrc"].to_s+";")
+      Offer.where(nrc:subjy["nrc"].to_s).destroy_all
+      Product.where(nrc:subjy["nrc"].to_s).destroy_all
+      Transaction.where(nrc:subjy["nrc"].to_s).destroy_all
+    end
+    @subjectsTD.each do |subjy|
+      SubjectNrc.connection.execute("DELETE FROM user_subjects where nrc="+subjy["nrc"].to_s+";")
+    end
+    Subject.connection.execute("DELETE FROM subjects where id='"+params[:id]+"';")
+  end
 
   def delete_product
     Offer.connection.execute("DELETE FROM offers WHERE id='"+params[:id]+"';")
@@ -13,7 +27,7 @@ class DashboardController < ApplicationController
   def studentsHandler
     if current_user.teacher
       @users = User.where(teacher: '0')
-      @subJ = Subject.connection.select_all("SELECT name,created_at from subjects order by name;")
+      @subJ = Subject.connection.select_all("SELECT id,name,created_at from subjects order by name;")
       # render 'studentsHandler'
       nrcs = SubjectNrc.where(user_id: current_user.id) #subject.name and user.whatever
       query = "( nrc= " + nrcs.first.nrc.to_s
