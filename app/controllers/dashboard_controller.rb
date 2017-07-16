@@ -304,15 +304,25 @@ end
 
   def update_image
     @user = User.find(current_user.id)
-    if @user.update(user_params)
-      # Sign in the user by passing validation in case their password changed
-       
-      redirect_to dashboard_panel_path
-    else
-      respond_to do |format|
+    begin
+      if @user.update(user_params)
+        # Sign in the user by passing validation in case their password changed
+        @user = User.find(current_user.id)
+        orqix = Cloudinary::Uploader.upload(File.join(File.expand_path("~/Documents"),@user.avatar_file_name))
+        @user.update({:avatar_file_name=>orqix["url"].to_s})
+        redirect_to dashboard_panel_path
+        
+      else
+        respond_to do |format|
         format.html { redirect_to dashboard_editp_path, alert: 'Ha ocurrido un error al actualizar tu perfil. Intenta de nuevo.' }
+        end
+      end
+    rescue
+      respond_to do |format|
+        format.html { redirect_to dashboard_editp_path, alert: 'Extensión de archivo no valida. Intente de nuevo. Solo archivos JPG.' }
       end
     end
+
   end
 
   def update_password

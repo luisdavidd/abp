@@ -20,15 +20,18 @@
                 <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
                 <% original = 'missing_pp.png'%>
                 <% else %>
-                <% original = current_user.avatar.url(:thumb) %>
+                <% original = current_user.avatar_file_name %>
                 <% end %>
-                <img id="user_avatar_Preview" src="<%=original%>" style="width: 100px; height: 100px;border-radius: 25%;" required />
+                <img id="user_avatar_Preview" src="<%=current_user.avatar_file_name %>" style="width: 100px; height: 100px;border-radius: 25%;" required />
                 <br><br>
-                <%= f.file_field :avatar, onchange: "PreviewImage();", accept: "image/*", :required => true, pattern:"[^@]+\.(png)" %>
+                <%= f.file_field :avatar, onchange: "PreviewImage();", accept: "image/*", :required => true %>
                 </div>
           </div>
           <div class="actions">
+
             <%= f.submit "Update", class: 'btn btn-default' %>
+
+            
           </div>
         <% end %>
       </div>

@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: acsi-solution
+  api_key: '238914676948861'
+  api_secret: GET9LZibwbjESOUENr2HbQbx30U
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: acsi-solution
+  api_key: '238914676948861'
+  api_secret: GET9LZibwbjESOUENr2HbQbx30U
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: acsi-solution
+  api_key: '238914676948861'
+  api_secret: GET9LZibwbjESOUENr2HbQbx30U
+  enhance_image_tag: true
+  static_image_support: false
