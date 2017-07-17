@@ -134,7 +134,7 @@ $(function() {
               <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
               <%= image_tag('missing_pp.png',class:"user-image",alt:"User Image") %>
               <% else %>
-              <%= image_tag(current_user.avatar_file_name,class:"user-image",alt:"User Image") %>
+              <%= image_tag('https://s3-us-west-2.amazonaws.com/acsprojb/users/avatars/000/000/'+current_user.id.to_s.rjust(3,'0')+'/thumb/'+current_user.avatar_file_name,class:"user-image",alt:"User Image") %>
               <% end %>
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs"><%= current_user.name+' '+current_user.last_name%></span>
@@ -145,7 +145,7 @@ $(function() {
                 <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
                 <%= image_tag('missing_pp.png',class:"img-circle",alt:"User Image") %>
                 <% else %>
-                <%= image_tag(current_user.avatar_file_name,class:"img-circle",alt:"User Image") %>
+                <%= image_tag('https://s3-us-west-2.amazonaws.com/acsprojb/users/avatars/000/000/'+current_user.id.to_s.rjust(3,'0')+'/thumb/'+current_user.avatar_file_name,class:"img-circle",alt:"User Image") %>
                 <% end %>
 
                 <!-- <p>
@@ -207,7 +207,7 @@ $(function() {
           <% if current_user.avatar.url(:thumb)=='/images/thumb/missing.png' %>
           <%= image_tag('missing_pp.png',class:"img-circle",alt:"User Image") %>
           <% else %>
-          <%= image_tag(current_user.avatar_file_name,class:"img-circle",alt:"User Image") %>
+          <%= image_tag('https://s3-us-west-2.amazonaws.com/acsprojb/users/avatars/000/000/'+current_user.id.to_s.rjust(3,'0')+'/thumb/'+current_user.avatar_file_name,class:"img-circle",alt:"User Image") %>
           <% end %>
         </div>
         <div class="pull-left info">

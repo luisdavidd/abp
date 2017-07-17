@@ -1,0 +1,10 @@
+# Amazon Web Services - S3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "acsprojb",
+      :access_key_id => "AKIAIUOJQDRECFJZSQ3A",
+      :secret_access_key => "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"
+    },
+    :s3_region => 'us-west-2'
+  }

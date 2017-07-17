@@ -46,15 +46,26 @@ Rails.application.configure do
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'acssolutions.ddns.net' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      user_name: "luisdavidd@uninorte.edu.co",
-      password: "David180895",
+      user_name: "acssolutionsbaq@gmail.com",
+      password: "AcsSol2017",
       address: "smtp.gmail.com",
-      :domain => 'localhost:3000',
+      :domain => 'acssolutions.ddns.net',
       port: 587,
       authentication: "plain",
       enable_starttls_auto: true,
+  }
+
+ # Amazon Web Services - S3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "acsprojb",
+      :access_key_id => "AKIAIUOJQDRECFJZSQ3A",
+      :secret_access_key => "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"
+    },
+    :s3_region => 'us-west-2'
   }
 end

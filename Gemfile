@@ -36,7 +36,8 @@ gem 'bootstrap', '~> 4.0.0.alpha4'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'paperclip', '~> 4.1'
+gem 'aws-sdk', '~> 2.3'
+gem 'paperclip', '>=5.0'
 gem 'cloudinary'
 gem 'whenever', :require => false
 group :development, :test do
