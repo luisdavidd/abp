@@ -26,6 +26,14 @@
             <div class="form-group">
               <label>Subject</label>
               <input id="nameClass" class="form-control select2"  style="width: 100%;"><option></option></select>
+              <label>Teacher</label>
+              <select id="teacher_select" class="form-control select2"  style="width: 100%;">
+                <option></option>
+                <% @all_teachers.each_with_index do |row, index| %>
+                  <option value="<%= row['id']%>"> <%= row['name'].to_s + " " +row['last_name'].to_s %> </option>
+                <% end %>
+                
+              </select>
             </div>
             <div class="col-xs-3" style="padding-left:0px">
               <button class="btn btn-default" onclick="createClass()" style="height:37px">Add Class</button>  
@@ -57,9 +65,47 @@
             </div>
           </div>
         </div>
+
+        <div class="box" id="pendingBox">
+          <div class="box-header" style="background-color:#ffffff;font-weight:bold;">
+              <h3 class="box-title">Teachers</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+
+              </div>
+          </div>
+            <!-- /.box-header -->
+            
+          <div class="box-body no-padding">
+              <table class="table responsive" id="TeacherTable">
+                <thead>
+                  <tr>
+                      <!-- <th>Id</th> -->
+                      <th name="Student">Student</th>
+                      <th name="Subject">Subject</th>
+                      <th name="Date">Since</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% @teacher_list.each_with_index do |row, index| %>
+                    <tr>
+                        <td><%= row['name'].to_s + " " +row['last_name'].to_s %></td>
+                        <td><%= row['sname'] %></td>
+                        <td><%= row['created_at'] %></td>
+                        
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            
+            
+            <!-- /.box-body -->
+        </div>
       </div>
       <div class="col-md-6">
-        <div class="box">
+        <div class="box" id="classesBox">
           <div class="box-header">
             <h3 class="box-title">Classes available</h3>
             <div class="box-tools pull-right">
@@ -80,7 +126,7 @@
               </thead>
               <tbody>
                 <% @subJ.each_with_index do |enroll,index| %>
-                  <tr>
+                  <tr id="<%= 'Prow'+index.to_s %>">
                     <td><%= enroll['name'] %></td>
                     <td><%= enroll['created_at'].to_time.strftime('%b %d %Y at %I:%M %Z %p') %></td>    
                     <td><button type="button" onclick="deleteC(<%= enroll['id']%>,<%= index %>)" class="badge bg-red">Delete</button></td>
@@ -90,54 +136,194 @@
             </table>
           </div>
           <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading"><h3 class="panel-title">Invite Teacher</h3></div>
+          <div class="panel-body"> 
+            <div class="form-group">
+              <input id="teacherName" class="form-control select2"  style="width: 100%;" placeholder="teacher_mail@uninorte.edu.co"><option></option></select>
+            </div>
+            <div class="col-xs-3" style="padding-left:0px">
+              <button class="btn btn-default" onclick="sendMail()" style="height:37px">Send Email</button>  
+            </div>
+            <div class="col-md-5">
+              <div class="box box-info" id="masterReset" style="visibility:hidden;border-top-color:#dd4b39;height:35px">
+                <div class="box-header with-border" style="background-color:#dd4b39;color:#fff;height:35px;padding-top:5px">
+                  <h3 class="box-title" style="color:white;font-weight:bold;">Invite Teacher</h3>
+                </div>
+              </div> 
+            </div>
           </div>
+        </div>
+
+        <div class="box" id="pendingBox">
+          <div class="box-header" style="background-color:#ffffff;font-weight:bold;">
+              <h3 class="box-title">NRCs</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+
+              </div>
+          </div>
+            <!-- /.box-header -->
+            
+          <div class="box-body no-padding">
+              <table class="table responsive" id="NRCTable">
+                <thead>
+                  <tr>
+                      <!-- <th>Id</th> -->
+                      <th name="Student">NRC</th>
+                      <th name="Subject">Subject</th>
+                      <th name="Date">Created At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% @nrc_list.each_with_index do |row, index| %>
+                    <tr>
+                        <td><%= row['nrc'] %></td>
+                        <td><%= row['name'] %></td>
+                        <td><%= row['created_at'] %></td>
+                        
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            
+            
+            <!-- /.box-body -->
         </div>
       </div>
     </div>
   </div>
 </section>
 <script type="text/javascript">
+
+  tableT = $('#TeacherTable').DataTable( {
+      pageLength: 5
+  } );
+
+  tableN = $('#NRCTable').DataTable( {
+      pageLength: 5
+  } );
+
   function createClass(){
-    console.log($("#nameClass").val()) 
+    //console.log($("#nameClass").val())
+    //console.log($("#teacher_select").val())
+
     $.ajax({
         type: 'GET',
         url: 'createnewClass',
-        data: ({className: $("#nameClass").val()}),
+        data: ({className: $("#nameClass").val(), teacherID: $("#teacher_select").val()}),
         success: function(data){
           console.log(data)
-          if(data==null){
-
+          if(data==0){
+            alert("Subject already exist");
           }else{
-            console.log('Aquiiiii')
+            //console.log('Aquiiiii')
             $("#cCreated").css('visibility', 'visible');
             $("#cCreated").show().delay(3000).fadeOut();  
           }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
-        alert("some error");
+          //alert("An error has ocurred");
+          location.reload();
         }
     });
+
   }
 
   function deleteC(param1,param2){
-    
+    var count = $('#classesCreat tr').length;
+    data = param1
+    /*
+    table = document.getElementById("classesCreat")
+    table.deleteRow(param2);
+    var rowCount = table.rows.length;
+    for (var i = param2; i < rowCount.length+1; i++) {
+      table.rows[i].cells[4].innerHTML = "<button type='button' onclick='deleteC("+i+",table.id)' class='badge bg-red'>Delete</button>"
+    }
+    */
+    $.ajax({
+      type: 'GET',
+      url: 'delete_class',
+      data: {id: data},
+      success: function(data){
+        count--;
+        console.log(count)
+        if(count > 1){
+          $('#Prow'+param2).fadeOut();
+        }else{
+          $('#classesBox').fadeOut();
+        }      
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("There was a problem. Please try again or inform the admin.");
+       
+      }
+    });
+
+       
+ 
+  }
+
+  function destroyDB(){
     $.ajax({
       type: 'GET',
       url: 'delete_everything',
       success: function(data){
         window.location.reload();    
       }
-    });      
+    });     
        
- 
   }
+
+  function sendMail(){
+    $.ajax({
+      type: 'GET',
+      url: 'delete_everything',
+      success: function(data){
+        window.location.reload();    
+      }
+    });     
+       
+  }
+    
   
 </script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="/js/paging.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+        $('#classesCreat').paging({limit:5});
+    });
+</script>
+<style type="text/css">
+  .paging-nav {
+    text-align: right;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 8px;
+  }
+
+  .paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #f5f5ef;
+    color: #808080;
+    border-radius: 3px;
+    border-style: solid;
+    border-width:1px;
+    border-color: #d9d9d9;
+  }
+
+  .paging-nav .selected-page {
+    background: #e0e0d1;
+    font-weight: bold;
+  }
+
+</style>

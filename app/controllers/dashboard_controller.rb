@@ -28,9 +28,16 @@ class DashboardController < ApplicationController
     Notifications.where({notifiable_id: params[:id], notifiable_type: "Auction"}).destroy_all
     #Notifications.where(:notifiable_id => params[:id] and :notifiable_type => "Auction").destroy_all
   end
+
   # Only for Professors
   def studentsHandler
     if current_user.teacher
+      #For Super User
+      @all_teachers = User.where(teacher: '1')
+      @teacher_list = Subject.connection.select_all("SELECT u.name, u.last_name, u.created_at, s.name as sname from users as u, subjects as s where u.teacher = 1 and s.user_id = u.id")
+      @nrc_list = Subject.connection.select_all("SELECT sn.nrc, s.name, sn.created_at from subject_nrcs as sn, subjects as s where sn.subject_id = s.id order by sn.nrc")
+
+
       @users = User.where(teacher: '0')
       @subJ = Subject.connection.select_all("SELECT id,name,created_at from subjects order by name;")
       # render 'studentsHandler'
@@ -61,13 +68,14 @@ class DashboardController < ApplicationController
 
   def createnewClass
     @verifEC = Subject.connection.select_all("SELECT LCASE(name) from subjects where (LCASE(name)='"+params[:className].to_s.downcase+"');")
-    @ccCreate = 0
+    #@ccCreate = 0
+    flag = 0
     if(@verifEC.count == 0)
-      @ccCreate = Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+current_user.id.to_s+");")
-    else
-      
+      #@ccCreate = Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+params[:teacherID].to_s+");")
+      Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+params[:teacherID].to_s+");")
+      flag = 1      
     end
-    render :json => @ccCreate
+    render :json => flag
   end
 
   def editStudents
