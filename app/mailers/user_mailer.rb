@@ -4,7 +4,11 @@ class UserMailer < ApplicationMailer
 	    @url  = 'acssolutions.ddns.net/users/sign_in'
 	    mail(to: @user.email, subject: 'Welcome to ACS')
   	end
-
+  	def assign_password(user)
+  		@user = user
+	    @url  = 'http://acssolutions.ddns.net/users/password/new'
+	    mail(to: @user.email, subject: 'Welcome to ACS')
+  	end
   	def transfer_request(user, t)
 	    @user = user	    
 	    @approve_url = "acssolutions.ddns.net/dashboard/approve_reject_transfer?flag=true&id="+t.id.to_s

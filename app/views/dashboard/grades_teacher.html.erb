@@ -314,6 +314,7 @@ var c_error = 0;
                   success: function(data){
                     totalL = data['lab_total']
                     totalE = data['exam_total']
+                    console.log(totalE)
                     $("#LabP").val(totalL)
                     $("#ExamP").val(totalE)
 
@@ -393,12 +394,13 @@ function NewGroup(){
   lab_items_list = [];
   exam_items_list = [];
   lab_total = 0
-  exam_total = 0
+  exam_total = $("#ETotal").val();
+  
   if(lab_items != null){
     for (var i = 0; i < lab_items.length; i++) {
       lab_items_list.push(data_products[lab_items[i]]['id'])
       //data_products[entrada[i]]['price']
-      lab_total = lab_total + data_products[lab_items[i]]['price']
+      //lab_total = lab_total + data_products[lab_items[i]]['price']
     }
   }
   
@@ -406,12 +408,13 @@ function NewGroup(){
     for (var i = 0; i < exam_items.length; i++) {
       exam_items_list.push(data_products[exam_items[i]]['id'])
       //data_products[entrada[i]]['price']
-      exam_total = exam_total + data_products[exam_items[i]]['price']
+      //exam_total = exam_total + data_products[exam_items[i]]['price']
     }
-  }  
+  }
 
   name = $('#GroupName').val();
   nrc = $('#nrc').select2('data')[0].text;
+
 
   $.ajax({
     type: 'GET',

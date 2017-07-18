@@ -174,7 +174,7 @@ $('#addRow').on( 'click', function () {
 
   $('#deleteRow').on( 'click', function () {
     //nrc = $("#nrc").val();
-    var pos = parseInt(currCell.selector.rows.substr(4,1))*4 + currCell.index().column;
+    var pos = parseInt(currCell.selector.rows.substr(4,1))*4 + 3;
           
     nrc = parseInt(table.cell( ':eq('+pos+')' ).data())
     //console.log(column)
@@ -231,7 +231,7 @@ $('#addRow').on( 'click', function () {
             <div class="col-xs-3" style="padding-left:0px">
               <button id="deleteRow" class="btn btn-default" style="height:37px">Delete Course</button>   
             </div>
-            <div class="col-xs-5" style="padding-left:0px">
+            <div class="col-xs-5" style="padding-left:3%">
               <input id="EmailToggle" type="checkbox"  data-toggle="toggle" data-on="Send Emails" data-off="Dont send" style="padding-left:10px">
             </div>
             <div class="col-md-5">

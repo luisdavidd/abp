@@ -308,9 +308,9 @@ end
       if notification.notifiable_type == "StatusLoan"
         url = paths["#{notification.notifiable_type}_#{notification.recipient.teacher}"]
         if notification.action == "wants to lend"
-          msg += "#{notification.notifiable.amount} bacs"
+          msg += "$#{notification.notifiable.amount}"
         else
-          msg += "the loan for #{notification.notifiable.amount} bacs"
+          msg += "the loan for $#{notification.notifiable.amount}"
         end
       else
         url = paths[notification.notifiable_type]
@@ -318,12 +318,12 @@ end
           msg += "#{notification.notifiable.name}"
         else #if it is transaction
           if notification.action == "tranfer"
-            msg += "you #{notification.notifiable.amount} bacs"
+            msg += "you $#{notification.notifiable.amount}"
           elsif notification.action == "wants to tranfer"
-            msg += "#{notification.notifiable.user_to} #{notification.notifiable.amount} bacs"
+            msg += "#{notification.notifiable.user_to} $#{notification.notifiable.amount}"
             # No funcionara bien porque user_to es una id
           else
-            msg += "the transaction from #{notification.recipient.name} #{notification.recipient.last_name} to #{notification.secondactor.name} #{notification.secondactor.last_name} for #{notification.notifiable.amount} bacs"
+            msg += "the transaction from #{notification.recipient.name} #{notification.recipient.last_name} to #{notification.secondactor.name} #{notification.secondactor.last_name} for $#{notification.notifiable.amount}"
           end
         end
       end
@@ -399,7 +399,11 @@ end
         else
           user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+student.first.id.to_s+","+nrc.to_s+",now(),now())")
         end
-      else
+        if(params[:email]=="true")
+            UserMailer.assign_password(student.first).deliver
+        else
+        end
+     else
         generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
         @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"]+'@uninorte.edu.co', :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass})
         user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+@user.id.to_s+","+nrc.to_s+",now(),now())")

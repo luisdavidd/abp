@@ -18,8 +18,8 @@ iconos = {"wants to transfer" => "fa fa-exchange text-aqua",
 # Christian added Parcial 1 - Punto 1 (auction)?
 
 # Juan wants to tranfer Luis 400 bacs
-# Christian aproved the transaction from Juan to Luis for 400 bacs  
-# Christian denied the transaction from Juan to Luis for 400 bacs 
+# Christian aproved the transaction from Juan to Luis for $400  
+# Christian denied the transaction from Juan to Luis for $400 
 json.array! @notifications do |notification|
 	json.id notification.id
 	json.icon iconos["#{notification.action}"]
@@ -27,9 +27,9 @@ json.array! @notifications do |notification|
 	if notification.notifiable_type == "StatusLoan"
 		json.url paths["#{notification.notifiable_type}_#{notification.recipient.teacher}"]
 		if notification.action == "wants to lend"
-			msg += "#{notification.notifiable.amount} bacs"
+			msg += "$#{notification.notifiable.amount}"
 		else
-			msg += "the loan for #{notification.notifiable.amount} bacs"
+			msg += "the loan for $#{notification.notifiable.amount}"
 		end
 	else
 		json.url paths[notification.notifiable_type]
@@ -37,9 +37,9 @@ json.array! @notifications do |notification|
 			msg += "#{notification.notifiable.name}"
 		else #if it is a transaction
 			if notification.action == "tranfer"
-				msg += "you #{notification.notifiable.amount} bacs"
+				msg += "you $#{notification.notifiable.amount}"
 			elsif notification.action == "wants to tranfer"
-				msg += "#{notification.notifiable.user_to} #{notification.notifiable.amount} bacs"
+				msg += "#{notification.notifiable.user_to} $#{notification.notifiable.amount}"
 			else
 				msg += "the transaction from #{notification.recipient.name} to #{notification.secondactor.name}"
 			end
