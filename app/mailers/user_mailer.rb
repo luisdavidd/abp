@@ -1,13 +1,14 @@
 class UserMailer < ApplicationMailer
+	include Devise::Mailers::Helpers
 	def welcome_email(user)
 	    @user = user
 	    @url  = 'acssolutions.ddns.net/users/sign_in'
 	    mail(to: @user.email, subject: 'Welcome to ACS')
   	end
-  	def assign_password(user)
-  		@user = user
-	    @url  = 'http://acssolutions.ddns.net/users/password/new'
-	    mail(to: @user.email, subject: 'Welcome to ACS')
+  	def assign_password(resource, opts={})
+  		@resource = resource
+    	@token    = @resource.reset_password_token
+	    mail(to: @resource.email, subject: 'Welcome to ACS')
   	end
   	def transfer_request(user, t)
 	    @user = user	    

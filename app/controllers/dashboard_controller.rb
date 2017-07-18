@@ -400,7 +400,7 @@ end
           user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+student.first.id.to_s+","+nrc.to_s+",now(),now())")
         end
         if(params[:email]=="true")
-            UserMailer.assign_password(student.first).deliver
+          student.first.send_reset_password_instructions
         else
         end
      else
