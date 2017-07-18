@@ -78,6 +78,18 @@ class DashboardController < ApplicationController
     render :json => flag
   end
 
+  def send_invitation
+    if User.exists?(email: params['mail'])
+      render :json => {:mensaje => "This mail is already occupied."}
+    else
+      UserMailer.invite_teacher(params['mail']).deliver
+      render :json => {:mensaje => "The invitation mail has been send"}
+    end
+    
+    
+
+  end
+
   def editStudents
     @users = User.where(teacher: '0')
     render :json => @users
@@ -413,7 +425,7 @@ end
         end
      else
         generated_pass = rand(9999).to_s.center(4, rand(9).to_s)
-        @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"]+'@uninorte.edu.co', :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass})
+        @user = User.create!({:name=>student_hash["Name"], :last_name =>student_hash["Last name"], :email =>student_hash["Email"]+'@uninorte.edu.co', :saldo =>'0', :codigo =>student_hash["Codigo"], :password => generated_pass, :teacher => '0'})
         user_subject = UserSubject.connection.execute("INSERT INTO user_subjects (user_id,subject_id,created_at,updated_at) VALUES("+@user.id.to_s+","+nrc.to_s+",now(),now())")
         
         flash[:notice] = "Users successfully created."

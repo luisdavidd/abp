@@ -57,7 +57,9 @@ Rails.application.routes.draw do
   get 'dashboard/delete_class'
   get 'dashboard/deleteNRC'
   get 'users/getpassword'
-  devise_for :users
+  get 'dashboard/send_invitation'
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end

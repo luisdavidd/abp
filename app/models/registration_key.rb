@@ -1,0 +1,2 @@
+class RegistrationKey < ApplicationRecord
+end

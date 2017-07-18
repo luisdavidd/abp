@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style>
+    /* Email styles need to be inline */
+  </style>
+</head>
+
+<body>
+  <h1>Welcome to ACS, </h1>
+  <p>
+    You have been invited to join as a teacher.<br><br>
+    Please follow this link to complete the sign up: <%= @url %>.<br>
+    This link will expire after one use.
+  </p>
+  <h2>Have a great day!</h2>
+  <%= yield %>
+</body>
+</html>

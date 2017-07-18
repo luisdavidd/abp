@@ -21,4 +21,11 @@ class UserMailer < ApplicationMailer
         @pendings = {subject: subj.name, user_to: "#{user_to.name} #{user_to.last_name}", user_from: "#{user_from.name} #{user_from.last_name}", transaction: t}
         mail(to: @user.email, subject: 'New Transaction Request')
   	end
+
+  	def invite_teacher(mail)
+  		token = [*('a'..'z'),*('0'..'9')].shuffle[0,16].join
+  		RegistrationKey.create!({:validations=>token})
+  		@url = "http://acssolutions.ddns.net/users/sign_up?token="+token
+  		mail(to: mail, subject: 'Teacher Invitation')
+  	end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713072852) do
+ActiveRecord::Schema.define(version: 20170718214619) do
 
   create_table "auctions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -99,6 +99,12 @@ ActiveRecord::Schema.define(version: 20170713072852) do
     t.index ["offer_id"], name: "fk_products_1_idx", using: :btree
   end
 
+  create_table "registration_keys", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "validations"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "status_loans", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "student_id"
     t.integer  "nrc"
@@ -106,10 +112,10 @@ ActiveRecord::Schema.define(version: 20170713072852) do
     t.integer  "type_id"
     t.integer  "amount"
     t.integer  "next_payment"
-    t.integer  "current_fee"
+    t.integer  "current_fee",  default: 0
     t.datetime "starting_in"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "subject_nrcs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -135,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170713072852) do
     t.float    "amount",       limit: 24,                null: false
     t.text     "observations", limit: 65535
     t.integer  "nrc"
-    t.integer  "auth",                       default: 0, null: false
+    t.integer  "auth",                       default: 2, null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
