@@ -36,9 +36,9 @@ json.array! @notifications do |notification|
 		if notification.notifiable_type == "Offer" || notification.notifiable_type == "Auction"
 			msg += "#{notification.notifiable.name}"
 		else #if it is a transaction
-			if notification.action == "tranfer"
+			if notification.action == "transferred"
 				msg += "you $#{notification.notifiable.amount}"
-			elsif notification.action == "wants to tranfer"
+			elsif notification.action == "wants to transfer"
 				msg += "#{notification.notifiable.user_to} $#{notification.notifiable.amount}"
 			else
 				msg += "the transaction from #{notification.recipient.name} to #{notification.secondactor.name}"

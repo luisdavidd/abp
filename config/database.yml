@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: abp_production
-  username: abp
-  password: <%= ENV['ABP_DATABASE_PASSWORD'] %>
+  database: abp_db
+  # username: acsadmin
+  # password: <%= ENV['ABP_DATABASE_PASSWORD'] %>

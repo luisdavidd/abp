@@ -42,11 +42,16 @@ class DashboardController < ApplicationController
       @subJ = Subject.connection.select_all("SELECT id,name,created_at from subjects order by name;")
       # render 'studentsHandler'
       nrcs = SubjectNrc.where(user_id: current_user.id) #subject.name and user.whatever
-      query = "( nrc= " + nrcs.first.nrc.to_s
-      nrcs.each do |nrc|
-        query += " or nrc=" + nrc.nrc.to_s
+      if nrcs.first != nil
+        query = "auth=0 and user_id!=#{current_user.id} and user_to!=#{current_user.id} and (nrc= " + nrcs.first.nrc.to_s
+        nrcs.each do |nrc|
+          query += " or nrc=" + nrc.nrc.to_s
+        end
+        query += ")"
+      else
+        query="id=0"
       end
-      query += ") and auth=0 and user_id!=#{current_user.id} and user_to!=#{current_user.id}"
+
       transactions = Transaction.where(query)
       @pendings = []
       transactions.each do |t|
@@ -104,7 +109,7 @@ class DashboardController < ApplicationController
     User.connection.execute("Update users SET saldo=saldo-#{t.amount} WHERE id=#{t.user_id};")
     User.connection.execute("Update users SET saldo=saldo+#{t.amount} WHERE id=#{t.user_to};")
     Notification.create!({recipient_id: t.user_id, actor_id: current_user.id, action: "approved", secondactor_id: t.user_to, notifiable: t})
-    Notification.create!({recipient_id: t.user_to, actor_id: t.user_id, action: "tranfer", notifiable: t, secondactor_id: t.user_to})
+    Notification.create!({recipient_id: t.user_to, actor_id: t.user_id, action: "transferred", notifiable: t, secondactor_id: t.user_to})
   else
     #puts 'Reject'
     t = Transaction.update(params[:id], auth: 1)
@@ -337,9 +342,9 @@ end
         if notification.notifiable_type == "Offer" || notification.notifiable_type == "Auction"
           msg += "#{notification.notifiable.name}"
         else #if it is transaction
-          if notification.action == "tranfer"
+          if notification.action == "transferred"
             msg += "you $#{notification.notifiable.amount}"
-          elsif notification.action == "wants to tranfer"
+          elsif notification.action == "wants to transfer"
             msg += "#{notification.notifiable.user_to} $#{notification.notifiable.amount}"
             # No funcionara bien porque user_to es una id
           else
@@ -496,10 +501,10 @@ end
  def newTransaction
     params[:student].each_with_index do |user, i|
     #user = params[:student]
-      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc], :auth => 1})
+      t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc], :auth => 2})
       UserSubject.connection.execute("Update user_subjects SET budget = budget+"+params[:amount]+" WHERE(user_id="+user+" and subject_id="+params[:nrc]+");")
       User.connection.execute("Update users SET saldo=saldo+"+params[:amount]+" WHERE id="+user+";")
-      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "transfer", notifiable: t, secondactor_id: user})
+      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "transferred", notifiable: t, secondactor_id: user})
       #Ojoooo esta transferencia seguro tiene mensaje raro
     end
   end
@@ -686,8 +691,8 @@ end
     params[:student].each_with_index do |user, i|
       t = Transaction.create!({:user_id=>current_user.id, :user_to =>user, :amount =>params[:amount], :observations =>params[:observations], :nrc =>params[:nrc], :auth => 0})
       teacher = SubjectNrc.where(nrc: t.nrc).first.user_id
-      Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
-      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "wants to tranfer", secondactor_id: user, notifiable: t})
+      Notification.create!({recipient_id: teacher, actor_id: current_user.id, action: "wants to transfer", secondactor_id: user, notifiable: t})
+      Notification.create!({recipient_id: user, actor_id: current_user.id, action: "wants to transfer", secondactor_id: user, notifiable: t})
       UserMailer.transfer_request(User.where(id: teacher).first, t).deliver
     end
   end
