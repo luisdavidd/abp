@@ -51,7 +51,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       user_name: "acssolutionsbaq@gmail.com",
-      password: "AcsSol2017",
+      password: ENV['PASSEMAIREC'],
       address: "smtp.gmail.com",
       :domain => 'acssolutions.ddns.net',
       port: 587,
@@ -64,8 +64,8 @@ Rails.application.configure do
     :storage => :s3,
     :s3_credentials => {
       :bucket => "acsprojb",
-      :access_key_id => "AKIAIUOJQDRECFJZSQ3A",
-      :secret_access_key => "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"
+      :access_key_id => ENV['ACCKEYID'] ,
+      :secret_access_key => ENV['SECACCKEYID']
     },
     :s3_region => 'us-west-2'
   }
