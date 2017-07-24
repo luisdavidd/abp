@@ -19,14 +19,12 @@ class DashboardController < ApplicationController
 
   def delete_product
     Offer.connection.execute("DELETE FROM offers WHERE id='"+params[:id]+"';")
-    Notifications.where({notifiable_id: params[:id], notifiable_type: "Offer"}).destroy_all
-    #Notifications.where(:notifiable_id => params[:id] and :notifiable_type => "Offer").destroy_all
+    Notification.where({notifiable_id: params[:id], notifiable_type: "Offer"}).destroy_all
   end
 
   def delete_auction
     Auction.connection.execute("DELETE FROM auctions WHERE id='"+params[:id]+"';")
-    Notifications.where({notifiable_id: params[:id], notifiable_type: "Auction"}).destroy_all
-    #Notifications.where(:notifiable_id => params[:id] and :notifiable_type => "Auction").destroy_all
+    Notification.where({notifiable_id: params[:id], notifiable_type: "Auction"}).destroy_all
   end
 
   # Only for Professors

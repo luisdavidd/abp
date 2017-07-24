@@ -54,10 +54,44 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
+
+    # Raises error for missing translations
+  # config.action_view.raise_on_missing_translations = true
+  config.time_zone = 'Bogota'
+  config.active_record.default_timezone = :local 
+  # Use an evented file watcher to asynchronously detect changes in source code,
+  # routes, locales, etc. This feature depends on the listen gem.
+  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { :host => 'acssolutions.ddns.net' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      user_name: "acssolutionsbaq@gmail.com",
+      password: ENV['PASSEMAIREC'],
+      address: "smtp.gmail.com",
+      :domain => 'acssolutions.ddns.net',
+      port: 587,
+      authentication: "plain",
+      enable_starttls_auto: true,
+  }
+
+ # Amazon Web Services - S3
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :s3_credentials => {
+      :bucket => "acsprojb",
+      :access_key_id => ENV['ACCKEYID'] ,
+      :secret_access_key => ENV['SECACCKEYID']
+    },
+    :s3_region => 'us-west-2'
+  }
+
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "abp_#{Rails.env}"
   config.action_mailer.perform_caching = false
-
+  
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
