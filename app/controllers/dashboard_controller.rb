@@ -533,7 +533,11 @@ end
     else
       tipo = 'good'
     end
-      Auction.create!({:user_id=>current_user.id,:name =>params[:name], :auctioneers_number=>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :auction_type => tipo})
+      auction = Auction.create!({:user_id=>current_user.id,:name =>params[:name], :auctioneers_number=>params[:quantity], :price =>params[:price], :due_date =>params[:due], :nrc =>params[:nrc], :auction_type => tipo})
+      students = UserSubject.connection.select_all("SELECT user_id FROM user_subjects where subject_id="+params[:nrc]+";")
+      students.each do |student|
+        Notification.create!({recipient_id: student["user_id"], actor_id: current_user.id, action: "added", notifiable: auction, secondactor_id: student["user_id"]})
+      end
   end
 
   def getBudget
