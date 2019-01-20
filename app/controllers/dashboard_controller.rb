@@ -75,7 +75,7 @@ class DashboardController < ApplicationController
     flag = 0
     if(@verifEC.count == 0)
       #@ccCreate = Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+params[:teacherID].to_s+");")
-      Subject.connection.select_all("INSERT INTO subjects (name,user_id) VALUES('"+params[:className].to_s+"',"+params[:teacherID].to_s+");")
+      Subject.connection.select_all("INSERT INTO subjects (name,user_id,created_at,updated_at) VALUES('"+params[:className].to_s+"',"+params[:teacherID].to_s+", now(),now());")
       flag = 1      
     end
     render :json => flag
