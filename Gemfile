@@ -47,7 +47,8 @@ group :development, :test do
 end
 
 group :production do
-  gem 'pg'
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '>= 0.3.18', '< 0.5'
   gem 'rails_12factor'
 end
 
