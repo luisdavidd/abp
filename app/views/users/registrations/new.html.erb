@@ -67,6 +67,10 @@
               <%= f.password_field :password_confirmation, autocomplete: "off", class:"login-input", placeholder: "Repeat password" %>
             </div>
 
+            <div class="field" style="visibility: hidden">
+              <%= f.number_field :teacher, autocomplete: "off", class:"login-input", value: 1 %>
+            </div>
+
             <div class="actions">
               <%= f.submit "Sign up", class:"login-btn" %>
             </div>
