@@ -9,10 +9,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def verify_token
     if params[:token] == nil
-      redirect_to "acssolutions.ddns.net"
+      redirect_to "academic-coin-system.herokuapp.com"
     else
       if not RegistrationKey.exists?(validations: params[:token])
-        redirect_to "acssolutions.ddns.net"
+        redirect_to "academic-coin-system.herokuapp.com"
       else
         RegistrationKey.where(validations: params[:token]).destroy_all
       end

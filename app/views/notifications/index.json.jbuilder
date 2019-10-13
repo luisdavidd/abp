@@ -20,6 +20,9 @@ iconos = {"wants to transfer" => "fa fa-exchange text-aqua",
 # Juan wants to tranfer Luis 400 bacs
 # Christian aproved the transaction from Juan to Luis for $400  
 # Christian denied the transaction from Juan to Luis for $400 
+
+#"notifiable" is a polymorphic reference to either the Transactions or the Offers database table.
+
 json.array! @notifications do |notification|
 	json.id notification.id
 	json.icon iconos["#{notification.action}"]
