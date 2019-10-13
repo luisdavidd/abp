@@ -176,6 +176,9 @@ end
     ProductGroup.destroy_all
     GroupItem.destroy_all
 
+    Comment.destroy_all
+    RegistrationKey.destroy_all
+
   end
 
   def update_class
