@@ -8,6 +8,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def verify_token
+    if user_signed_in?
+      current_user.sign_out
+    end
+    
     if params[:token] == nil
       redirect_to "academic-coin-system.herokuapp.com"
     else
